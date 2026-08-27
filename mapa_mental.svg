@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" height="100%">
+  <!-- Definiciones -->
+  <defs>
+    <!-- Sombra elegante para dar volumen -->
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.15" />
+    </filter>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Gradientes Vibrantes -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+
+    <linearGradient id="gradCenter" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+
+    <linearGradient id="gradCausas" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c2410c" />
+      <stop offset="100%" stop-color="#fb923c" />
+    </linearGradient>
+
+    <linearGradient id="gradEfectos" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#be123c" />
+      <stop offset="100%" stop-color="#fb7185" />
+    </linearGradient>
+
+    <linearGradient id="gradContexto" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#047857" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+
+    <linearGradient id="gradSolucion" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6d28d9" />
+      <stop offset="100%" stop-color="#a78bfa" />
+    </linearGradient>
+
+    <!-- Patrón de cuadrícula (Dot Grid) para el fondo -->
+    <pattern id="dotGrid" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#94a3b8" opacity="0.3" />
+    </pattern>
+  </defs>
+
+  <!-- Fondo de la imagen -->
+  <rect width="1200" height="800" fill="url(#bgGradient)" />
+  <rect width="1200" height="800" fill="url(#dotGrid)" />
+
+  <!-- ==================== LÍNEAS CONECTORAS (Curvas Bezier) ==================== -->
+  <g fill="none" stroke-width="4" opacity="0.4">
+    <!-- Centro a Causas (Naranja) -->
+    <g stroke="url(#gradCausas)">
+      <path d="M 410 400 C 350 400 350 210 330 210" />
+      <path d="M 260 210 C 240 210 240 120 235 120" />
+      <path d="M 260 210 L 235 210" />
+      <path d="M 260 210 C 240 210 240 300 235 300" />
+    </g>
+
+    <!-- Centro a Efectos (Rojo) -->
+    <g stroke="url(#gradEfectos)">
+      <path d="M 410 400 C 350 400 350 590 330 590" />
+      <path d="M 260 590 C 240 590 240 520 235 520" />
+      <path d="M 260 590 C 240 590 240 660 235 660" />
+    </g>
+
+    <!-- Centro a Contexto (Verde) -->
+    <g stroke="url(#gradContexto)">
+      <path d="M 790 400 C 850 400 850 210 870 210" />
+      <path d="M 940 210 C 960 210 960 140 965 140" />
+      <path d="M 940 210 C 960 210 960 280 965 280" />
+    </g>
+
+    <!-- Centro a Solución (Morado) -->
+    <g stroke="url(#gradSolucion)">
+      <path d="M 790 400 C 850 400 850 590 850 590" />
+      <path d="M 940 590 C 960 590 960 500 965 500" />
+      <path d="M 940 590 L 965 590" />
+      <path d="M 940 590 C 960 590 960 680 965 680" />
+    </g>
+  </g>
+
+
+  <!-- ==================== NODOS CON ICONOS ==================== -->
+  <g font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+    
+    <!-- 1. CAUSAS RAÍZ -->
+    <!-- Nodo Principal Causas -->
+    <rect x="260" y="190" width="140" height="40" rx="20" fill="url(#gradCausas)" filter="url(#shadow)" />
+    <!-- Icono Raíz -->
+    <path d="M275 210 A 5 5 0 0 1 280 205 L 285 205 A 5 5 0 0 1 290 210 A 5 5 0 0 1 285 215 L 280 215 A 5 5 0 0 1 275 210" fill="none" stroke="#fff" stroke-width="2"/>
+    <text x="300" y="215" fill="#fff" font-size="14" font-weight="bold">Causas Raíz</text>
+    
+    <!-- Sub-nodos Causas -->
+    <rect x="25" y="95" width="210" height="50" rx="10" fill="#ffffff" filter="url(#shadow)"/>
+    <rect x="25" y="95" width="5" height="50" fill="#f97316" />
+    <!-- Icono Pago -->
+    <path d="M40 110 h15 v10 h-15 z M38 115 h19" fill="none" stroke="#f97316" stroke-width="2"/>
+    <text x="65" y="115" fill="#334155" font-size="13" font-weight="600">Cobro y validación</text>
+    <text x="65" y="132" fill="#64748b" font-size="11">de pagos manuales</text>
+
+    <rect x="25" y="185" width="210" height="50" rx="10" fill="#ffffff" filter="url(#shadow)"/>
+    <rect x="25" y="185" width="5" height="50" fill="#f97316" />
+    <!-- Icono Caja/Inventario -->
+    <path d="M40 195 l10 -5 l10 5 v10 l-10 5 l-10 -5 z M50 190 v10 M40 195 l10 5 M60 195 l-10 5" fill="none" stroke="#f97316" stroke-width="2"/>
+    <text x="75" y="205" fill="#334155" font-size="13" font-weight="600">Rotación de cocas</text>
+    <text x="75" y="222" fill="#64748b" font-size="11">e inventario sin control</text>
+
+    <rect x="25" y="275" width="210" height="50" rx="10" fill="#ffffff" filter="url(#shadow)"/>
+    <rect x="25" y="275" width="5" height="50" fill="#f97316" />
+    <!-- Icono Mapa -->
+    <path d="M45 285 a5 5 0 0 0 -5 5 c0 5 5 10 5 10 c0 0 5 -5 5 -10 a5 5 0 0 0 -5 -5 z" fill="none" stroke="#f97316" stroke-width="2"/>
+    <circle cx="45" cy="290" r="1.5" fill="#f97316"/>
+    <text x="65" y="295" fill="#334155" font-size="13" font-weight="600">Logística y cobertura</text>
+    <text x="65" y="312" fill="#64748b" font-size="11">sin georreferenciación</text>
+
+
+    <!-- 2. EFECTOS -->
+    <!-- Nodo Principal Efectos -->
+    <rect x="260" y="570" width="140" height="40" rx="20" fill="url(#gradEfectos)" filter="url(#shadow)" />
+    <!-- Icono Alerta -->
+    <path d="M285 580 l-6 10 h12 z m0 12 v2" fill="none" stroke="#fff" stroke-width="2"/>
+    <text x="305" y="595" fill="#fff" font-size="14" font-weight="bold">Efectos</text>
+    
+    <!-- Sub-nodos Efectos -->
+    <rect x="25" y="495" width="210" height="50" rx="10" fill="#ffffff" filter="url(#shadow)"/>
+    <rect x="25" y="495" width="5" height="50" fill="#e11d48" />
+    <!-- Icono Reloj/Demora -->
+    <circle cx="45" cy="520" r="8" fill="none" stroke="#e11d48" stroke-width="2"/>
+    <path d="M45 515 v5 l4 3" fill="none" stroke="#e11d48" stroke-width="2"/>
+    <text x="65" y="515" fill="#334155" font-size="13" font-weight="600">Errores y demoras</text>
+    <text x="65" y="532" fill="#64748b" font-size="11">operativas diarias</text>
+
+    <rect x="25" y="635" width="210" height="50" rx="10" fill="#ffffff" filter="url(#shadow)"/>
+    <rect x="25" y="635" width="5" height="50" fill="#e11d48" />
+    <!-- Icono Pérdida -->
+    <path d="M35 660 l5 -5 l5 5 l8 -8 M53 652 h-4 M53 652 v4" fill="none" stroke="#e11d48" stroke-width="2"/>
+    <text x="65" y="655" fill="#334155" font-size="13" font-weight="600">Pérdida de ventas</text>
+    <text x="65" y="672" fill="#64748b" font-size="11">y cancelación de clientes</text>
+
+
+    <!-- 3. CONTEXTO -->
+    <!-- Nodo Principal Contexto -->
+    <rect x="800" y="190" width="140" height="40" rx="20" fill="url(#gradContexto)" filter="url(#shadow)" />
+    <!-- Icono Info/Libro -->
+    <circle cx="825" cy="210" r="8" fill="none" stroke="#fff" stroke-width="2"/>
+    <path d="M825 206 v1 m0 3 v4" fill="none" stroke="#fff" stroke-width="2"/>
+    <text x="845" y="215" fill="#fff" font-size="14" font-weight="bold">Contexto</text>
+    
+    <!-- Sub-nodos Contexto -->
+    <rect x="965" y="115" width="210" height="50" rx="10" fill="#ffffff" filter="url(#shadow)"/>
+    <rect x="1170" y="115" width="5" height="50" fill="#10b981" />
+    <!-- Icono Empresa -->
+    <path d="M975 145 v-15 h10 v15 h-10 M985 145 v-10 h8 v10" fill="none" stroke="#10b981" stroke-width="2"/>
+    <text x="1005" y="135" fill="#334155" font-size="13" font-weight="600">Mipyme con baja</text>
+    <text x="1005" y="152" fill="#64748b" font-size="11">madurez digital</text>
+
+    <rect x="965" y="255" width="210" height="50" rx="10" fill="#ffffff" filter="url(#shadow)"/>
+    <rect x="1170" y="255" width="5" height="50" fill="#10b981" />
+    <!-- Icono Excel/Chat -->
+    <rect x="975" y="265" width="14" height="18" rx="2" fill="none" stroke="#10b981" stroke-width="2"/>
+    <path d="M978 270 h8 M978 274 h8" stroke="#10b981" stroke-width="1.5"/>
+    <text x="1005" y="275" fill="#334155" font-size="13" font-weight="600">Uso 100% empírico</text>
+    <text x="1005" y="292" fill="#64748b" font-size="11">de WhatsApp y Excel</text>
+
+
+    <!-- 4. SOLUCIÓN -->
+    <!-- Nodo Principal Solución -->
+    <rect x="760" y="570" width="180" height="40" rx="20" fill="url(#gradSolucion)" filter="url(#shadow)" />
+    <!-- Icono Bombilla -->
+    <path d="M780 590 a6 6 0 1 1 12 0 c0 3 -3 4 -3 6 h-6 c0 -2 -3 -3 -3 -6 z M783 598 h6" fill="none" stroke="#fff" stroke-width="2"/>
+    <text x="810" y="595" fill="#fff" font-size="14" font-weight="bold">Solución Propuesta</text>
+    
+    <!-- Sub-nodos Solución -->
+    <rect x="965" y="475" width="210" height="50" rx="10" fill="#ffffff" filter="url(#shadow)"/>
+    <rect x="1170" y="475" width="5" height="50" fill="#8b5cf6" />
+    <!-- Icono PC/Móvil -->
+    <rect x="975" y="485" width="16" height="12" rx="1" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+    <path d="M973 499 h20" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="1005" y="495" fill="#334155" font-size="13" font-weight="600">Proyecto JackSoft</text>
+    <text x="1005" y="512" fill="#64748b" font-size="11">(Sistema Web y Móvil)</text>
+
+    <rect x="965" y="565" width="210" height="50" rx="10" fill="#ffffff" filter="url(#shadow)"/>
+    <rect x="1170" y="565" width="5" height="50" fill="#8b5cf6" />
+    <!-- Icono Engranaje -->
+    <circle cx="985" cy="590" r="5" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+    <path d="M985 582 v-2 M985 600 v-2 M977 590 h-2 M995 590 h-2" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="1005" y="585" fill="#334155" font-size="13" font-weight="600">Automatización de pagos</text>
+    <text x="1005" y="602" fill="#64748b" font-size="11">y logística de entregas</text>
+
+    <rect x="965" y="655" width="210" height="50" rx="10" fill="#ffffff" filter="url(#shadow)"/>
+    <rect x="1170" y="655" width="5" height="50" fill="#8b5cf6" />
+    <!-- Icono Base de datos -->
+    <ellipse cx="985" cy="665" rx="7" ry="3" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+    <path d="M978 665 v10 a7 3 0 0 0 14 0 v-10 M978 670 a7 3 0 0 0 14 0" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="1005" y="675" fill="#334155" font-size="13" font-weight="600">Gestión unificada</text>
+    <text x="1005" y="692" fill="#64748b" font-size="11">de la información</text>
+
+
+    <!-- NODO CENTRAL PRINCIPAL -->
+    <!-- Brillo Detrás -->
+    <rect x="400" y="340" width="400" height="120" rx="20" fill="url(#gradCenter)" opacity="0.3" filter="url(#glow)"/>
+    <!-- Caja Central -->
+    <rect x="410" y="350" width="380" height="100" rx="15" fill="url(#gradCenter)" filter="url(#shadow)" />
+    
+    <!-- Icono de Problema en el centro -->
+    <g transform="translate(425, 380)">
+      <circle cx="15" cy="15" r="15" fill="#bae6fd" opacity="0.2" />
+      <path d="M15 5 l-10 20 h20 z M15 12 v6 M15 22 v2" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- Textos alineados a la izquierda (evita colapso con el ícono) -->
+    <text x="470" y="390" fill="#ffffff" font-size="20" font-weight="bold">Operación manual e ineficiente</text>
+    <text x="470" y="415" fill="#bae6fd" font-size="15" font-weight="500">Carencia de un Sistema Centralizado</text>
+    <text x="470" y="435" fill="#93c5fd" font-size="13" font-style="italic">Problema Central</text>
+
+  </g>
+</svg>

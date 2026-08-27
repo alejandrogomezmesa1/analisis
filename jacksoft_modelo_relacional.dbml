@@ -1,0 +1,920 @@
+// JACKSOFT — Modelo Relacional
+// Cliente: La Coca de Jacks SAS
+// Generado a partir de la Ficha de Proyecto (sección Alcance), ficha 3312824
+// ----------------------------------------------------------------------------
+// Convenciones:
+//  - PK subrogada (integer, increment) en todas las tablas.
+//  - "estado" en vez de borrado físico (ningún subproceso permite eliminar,
+//    solo inactivar) => se conserva trazabilidad.
+//  - created_at / updated_at para auditoría en tablas transaccionales.
+//  - Toda relación muchos-a-muchos se resuelve con tabla intermedia explícita
+//    (rol_permisos, insumo_proveedores, compra_detalle,
+//    ficha_tecnica_detalle, orden_produccion_detalle, ruta_clientes).
+// ============================================================================
+
+
+// ---------------------------------------------------------------------------
+// ENUMS
+// ---------------------------------------------------------------------------
+
+Enum estado_general {
+  activo
+  inactivo
+}
+
+Enum estado_registro {
+  pendiente
+  aprobado
+  rechazado
+}
+
+Enum estado_preparacion {
+  pendiente
+  terminada
+}
+
+Enum estado_suscripcion {
+  pendiente
+  activa
+  cancelada
+  vencida
+}
+
+Enum tipo_venta {
+  nueva
+  renovacion
+  reingreso
+}
+
+Enum tipo_menu {
+  estandar
+  pollo
+  cerdo
+}
+
+Enum modalidad_entrega {
+  fija
+  hibrida
+}
+
+Enum tipo_plan {
+  semanal
+  quincenal
+  mensual
+}
+
+Enum estado_compra {
+  pendiente
+  aprobada
+  anulada
+}
+
+Enum estado_orden_produccion {
+  planificada
+  en_preparacion
+  finalizada
+  cancelada
+}
+
+Enum estado_entrega {
+  pendiente
+  en_ruta
+  entregado
+  no_entregado
+}
+
+Enum tipo_reportante {
+  cliente
+  domiciliario
+}
+
+Enum estado_incidencia {
+  abierta
+  en_gestion
+  resuelta
+}
+
+Enum dia_semana {
+  lunes
+  martes
+  miercoles
+  jueves
+  viernes
+}
+
+
+// ============================================================================
+// PROCESO DE CONFIGURACIÓN
+// ============================================================================
+
+Table roles {
+  id integer [pk, increment]
+  nombre varchar [not null, unique]
+  estado estado_general [not null, default: 'activo']
+
+  Note: 'Subproceso de roles. No se elimina un rol asignado a usuarios activos.'
+}
+
+Table permisos {
+  id integer [pk, increment]
+  nombre varchar [not null]
+  modulo varchar [not null]
+  accion varchar [not null]
+  estado estado_general [not null, default: 'activo']
+
+  indexes {
+    (modulo, accion) [unique]
+  }
+
+  Note: 'Subproceso de permisos: acciones disponibles por módulo.'
+}
+
+// Tabla intermedia: un rol tiene muchos permisos y un permiso puede estar
+// asociado a muchos roles.
+Table rol_permisos {
+  id integer [pk, increment]
+  rol_id integer [not null]
+  permiso_id integer [not null]
+
+  indexes {
+    (rol_id, permiso_id) [unique]
+  }
+}
+
+
+// ============================================================================
+// PROCESO DE USUARIOS
+// ============================================================================
+
+Table usuarios {
+  id integer [pk, increment]
+  rol_id integer [not null]
+  nombre_completo varchar [not null]
+  documento varchar [not null, unique]
+  correo varchar [not null, unique]
+  password varchar [not null]
+  telefono varchar
+  estado estado_general [not null, default: 'pendiente']
+
+  indexes {
+    correo
+    documento
+  }
+
+  Note: 'Cuentas del panel administrativo (backoffice): admin, cocina, etc.'
+}
+
+// Bitácora de accesos: soporta autenticación, bloqueo por intentos fallidos
+// y auditoría (subproceso de gestión de acceso, web y mobile).
+Table accesos {
+  id integer [pk, increment]
+  usuario_id integer
+  cliente_id integer
+  empleado_id integer
+  fecha_hora timestamp [default: `now()`]
+  ip varchar
+  resultado varchar [not null, note: 'exitoso / fallido']
+  intentos_fallidos_consecutivos integer [default: 0]
+
+  Note: 'Registra login de usuarios backoffice, clientes (app) y domiciliarios (app). Solo una de las tres FK debe tener valor.'
+}
+
+
+// ============================================================================
+// PROCESO DE COMPRAS
+// ============================================================================
+
+Table categorias_insumos {
+  id integer [pk, increment]
+  nombre varchar [not null, unique]
+  estado estado_general [not null, default: 'activo']
+}
+
+Table insumos {
+  id integer [pk, increment]
+  categoria_id integer [not null]
+  nombre varchar [not null]
+  unidad_medida varchar [not null]
+  cantidad_disponible decimal [not null, default: 0]
+  stock_minimo decimal [not null, default: 0]
+  precio_unitario_referencia decimal [not null, note: 'último precio de compra, informativo; el precio real por proveedor vive en insumo_proveedores']
+  estado estado_general [not null, default: 'activo']
+  created_at timestamp [default: `now()`]
+  updated_at timestamp
+
+  indexes {
+    nombre
+    categoria_id
+  }
+
+  Note: 'Control de existencias; alertas de stock cuando cantidad_disponible < stock_minimo. Un insumo puede tener varios proveedores (ver insumo_proveedores).'
+}
+
+// Tabla intermedia: un insumo puede ser suministrado por varios proveedores
+// (para poder comprarlo a otro si el habitual se queda sin stock), y un
+// proveedor suministra muchos insumos distintos. Cada combinación guarda su
+// propio precio y condiciones, porque varían según el proveedor.
+Table insumo_proveedores {
+  id integer [pk, increment]
+  insumo_id integer [not null]
+  proveedor_id integer [not null]
+  precio_unitario decimal [not null]
+  tiempo_entrega_dias integer
+  es_proveedor_principal boolean [not null, default: false]
+  estado estado_general [not null, default: 'activo']
+  created_at timestamp [default: `now()`]
+
+  indexes {
+    (insumo_id, proveedor_id) [unique]
+  }
+
+  Note: 'es_proveedor_principal marca la opción preferida; las demás quedan disponibles como respaldo ante desabastecimiento.'
+}
+
+Table categorias_preparaciones {
+  id integer [pk, increment]
+  nombre varchar [not null, unique]
+  estado estado_general [not null, default: 'activo']
+}
+
+Table preparaciones {
+  id integer [pk, increment]
+  categoria_id integer [not null]
+  nombre varchar [not null]
+  descripcion varchar
+  estado estado_general [not null, default: 'activo']
+
+  Note: 'Componentes individuales que se cocinan (ej. Arroz blanco, Filete de pollo, Sopa de guineo).'
+}
+
+Table menus {
+  id integer [pk, increment]
+  nombre varchar [not null]
+  fecha date [not null, unique]
+  estado estado_general [not null, default: 'activo']
+
+  Note: 'Representa el menú completo de un día específico.'
+}
+
+Table menu_preparaciones {
+  id integer [pk, increment]
+  menu_id integer [not null]
+  preparacion_id integer [not null]
+
+  indexes {
+    (menu_id, preparacion_id) [unique]
+  }
+
+  Note: 'Relaciona un menú con las preparaciones que lo componen (ej. Menú Lunes = Sopa + Arroz + Pollo).'
+}
+
+Table proveedores {
+  id integer [pk, increment]
+  nombre varchar [not null]
+  documento varchar [not null, unique]
+  contacto varchar
+  direccion varchar
+  estado estado_general [not null, default: 'activo']
+  created_at timestamp [default: `now()`]
+}
+
+Table compras {
+  id integer [pk, increment]
+  proveedor_id integer [not null]
+  fecha_compra date [not null]
+  valor_total decimal [not null, default: 0]
+  estado estado_compra [not null, default: 'pendiente']
+  created_at timestamp [default: `now()`]
+
+  indexes {
+    fecha_compra
+    proveedor_id
+  }
+}
+
+// Tabla intermedia: una compra incluye muchos insumos, y un insumo aparece
+// en muchas compras distintas.
+Table compra_detalle {
+  id integer [pk, increment]
+  compra_id integer [not null]
+  insumo_id integer [not null]
+  cantidad decimal [not null]
+  precio_unitario decimal [not null]
+  subtotal decimal [not null]
+
+  indexes {
+    (compra_id, insumo_id) [unique]
+  }
+
+  Note: 'insumo_id debe tener una fila activa en insumo_proveedores para el proveedor_id de la compra (regla de negocio, no forzada por FK).'
+}
+
+
+// ============================================================================
+// PROCESO DE PRODUCCIÓN
+// ============================================================================
+
+Table empleados {
+  id integer [pk, increment]
+  nombre_completo varchar [not null]
+  documento varchar [not null, unique]
+  cargo varchar [not null, note: 'cocina / domiciliario / administrador']
+  telefono varchar
+  correo varchar
+  fecha_ingreso date [not null]
+  estado estado_general [not null, default: 'activo']
+
+  indexes {
+    cargo
+  }
+}
+
+Table fichas_tecnicas {
+  id integer [pk, increment]
+  preparacion_id integer [not null]
+  tiempo_preparacion_min integer
+  procedimiento text
+  numero_porciones integer [not null, default: 1]
+  costo_unitario_estimado decimal
+  estado estado_general [not null, default: 'activo']
+
+  Note: 'Define cómo se cocina una preparación específica. No se elimina si tiene órdenes activas.'
+}
+
+// Tabla intermedia: una ficha técnica usa muchos insumos, y un insumo se usa
+// en muchas fichas técnicas (con cantidad exacta requerida en cada una).
+Table ficha_tecnica_detalle {
+  id integer [pk, increment]
+  ficha_tecnica_id integer [not null]
+  insumo_id integer [not null]
+  cantidad_requerida decimal [not null]
+
+  indexes {
+    (ficha_tecnica_id, insumo_id) [unique]
+  }
+}
+
+Table ordenes_produccion {
+  id integer [pk, increment]
+  fecha_produccion date [not null]
+  menu_id integer [not null]
+  empleado_responsable_id integer [not null]
+  estado estado_orden_produccion [not null, default: 'planificada']
+  created_at timestamp [default: `now()`]
+
+  indexes {
+    fecha_produccion
+    estado
+  }
+
+  Note: 'Orden global del día para la cocina. Cruza clientes activos con el menú de la fecha.'
+}
+
+Table orden_produccion_detalle {
+  id integer [pk, increment]
+  orden_produccion_id integer [not null]
+  preparacion_id integer [not null]
+  cantidad_requerida integer [not null]
+  cantidad_producida integer [default: 0]
+  hora_terminacion timestamp
+  estado estado_preparacion [not null, default: 'pendiente']
+
+  indexes {
+    (orden_produccion_id, preparacion_id) [unique]
+  }
+
+  Note: 'Desglose de la orden (Planeado) y control de terminación (Ejecutado) en tiempo real.'
+}
+
+
+
+// ============================================================================
+// PROCESO DE SERVICIOS
+// ============================================================================
+
+Table categorias_servicios {
+  id integer [pk, increment]
+  nombre varchar [not null, unique]
+  estado estado_general [not null, default: 'activo']
+}
+
+Table servicios {
+  id integer [pk, increment]
+  categoria_id integer [not null]
+  nombre varchar [not null]
+  tipo_plan tipo_plan [not null]
+  descripcion varchar
+  valor decimal [not null]
+  duracion_dias integer [not null]
+  estado estado_general [not null, default: 'activo']
+
+  Note: 'Planes de suscripción disponibles (Semanal / Quincenal / Mensual).'
+}
+
+Table calendario {
+  id integer [pk, increment]
+  fecha date [not null, unique]
+  es_habil boolean [not null, default: true]
+  es_festivo boolean [not null, default: false]
+  descripcion varchar
+
+  indexes {
+    fecha
+  }
+
+  Note: 'Calendario operativo. Si hay festivos en el ciclo del plan, se descuenta el valor de ese día para no posponer entregas a la siguiente semana.'
+}
+
+
+// ============================================================================
+// PROCESO DE VENTAS (SUSCRIPCIONES)
+// ============================================================================
+
+Table zonas_cobertura {
+  id integer [pk, increment]
+  nombre varchar [not null, unique]
+  poligono text [not null, note: 'GeoJSON del polígono trazado por el administrador']
+  estado estado_general [not null, default: 'activo']
+}
+
+Table clientes {
+  id integer [pk, increment]
+  nombre_completo varchar [not null]
+  documento varchar [not null, unique]
+  telefono varchar [not null]
+  correo varchar [not null, unique]
+  modalidad_entrega modalidad_entrega [not null, default: 'fija']
+  restricciones_alimentarias varchar
+  tiene_cocas_propias boolean [not null, default: false]
+  password varchar [not null, note: 'acceso a la app móvil del cliente']
+  estado estado_general [not null, default: 'activo']
+
+  indexes {
+    documento
+    correo
+  }
+}
+
+// Un cliente Fija tiene 1 registro; un cliente Híbrida tiene hasta 5
+// (uno por día hábil). Se separa de "clientes" para evitar grupos repetitivos
+// (2FN) y porque cada dirección requiere su propia geolocalización y zona.
+Table direcciones_cliente {
+  id integer [pk, increment]
+  cliente_id integer [not null]
+  zona_cobertura_id integer [not null]
+  dia_semana dia_semana [note: 'solo aplica si modalidad = hibrida; null = dirección única (fija)']
+  direccion varchar [not null]
+  latitud decimal
+  longitud decimal
+  estado estado_general [not null, default: 'activo']
+
+  indexes {
+    (cliente_id, dia_semana) [unique]
+  }
+
+  Note: 'La venta se bloquea si la dirección no geocodifica dentro de una zona_cobertura activa.'
+}
+
+Table suscripciones {
+  id integer [pk, increment]
+  cliente_id integer [not null]
+  servicio_id integer [not null]
+  tipo_menu tipo_menu [not null, default: 'estandar']
+  tipo_venta tipo_venta [not null]
+  fecha_inicio date
+  fecha_vencimiento date
+  valor_plan decimal [not null]
+  recargo_menu_personalizado decimal [not null, default: 0]
+  cobro_cocas decimal [not null, default: 0]
+  valor_total decimal [not null]
+  estado estado_suscripcion [not null, default: 'pendiente']
+
+
+  indexes {
+    estado
+    cliente_id
+    fecha_vencimiento
+  }
+
+  Note: 'Ciclo de vida: Pendiente -> Activa -> Vencida/Cancelada. Nueva cobra $70.000 de cocas; Renovación/Reingreso normalmente no.'
+}
+
+Table pagos {
+  id integer [pk, increment]
+  suscripcion_id integer [not null]
+  valor decimal [not null]
+  comprobante_url varchar [not null]
+  estado estado_registro [not null, default: 'pendiente']
+  fecha_pago timestamp [not null]
+  validado_por_usuario_id integer
+  fecha_validacion timestamp
+
+  indexes {
+    estado
+    suscripcion_id
+  }
+
+  Note: 'Validación manual del comprobante por un administrador (usuarios).'
+}
+
+
+// ============================================================================
+// PROCESO DE LOGÍSTICA (Servicios Web / Mobile domiciliario)
+// ============================================================================
+
+Table rutas {
+  id integer [pk, increment]
+  zona_cobertura_id integer [not null]
+  domiciliario_id integer [not null]
+  fecha date [not null]
+  estado estado_general [not null, default: 'activo']
+
+  indexes {
+    (fecha, domiciliario_id)
+  }
+
+  Note: 'domiciliario_id referencia a empleados (cargo = domiciliario).'
+}
+
+// Tabla intermedia: una ruta tiene muchas paradas (clientes/suscripciones),
+// y una suscripción es visitada en muchas rutas a lo largo del tiempo
+// (una por día de entrega).
+
+Table ruta_clientes {
+  id integer [pk, increment]
+  ruta_id integer [not null]
+  suscripcion_id integer [not null]
+  orden_entrega integer
+  estado_entrega varchar [not null, default: 'pendiente']
+  hora_entrega timestamp
+  cocas_entregadas integer [default: 0]
+  cocas_recogidas integer [default: 0]
+
+  indexes {
+    (ruta_id, suscripcion_id) [unique]
+  }
+
+  Note: 'Registra la rotación diaria de cocas por parada de entrega.'
+}
+
+Table geolocalizacion_domiciliarios {
+  id integer [pk, increment]
+  ruta_id integer [not null]
+  domiciliario_id integer [not null]
+  latitud decimal [not null]
+  longitud decimal [not null]
+  hora_ubicacion timestamp [default: `now()`]
+
+  indexes {
+    ruta_id
+  }
+
+  Note: 'Trazas de ubicación en tiempo real enviadas desde la app del domiciliario. Alto volumen: candidata a purga/archivado periódico.'
+}
+
+Table incidencias {
+  id integer [pk, increment]
+  tipo_reportante tipo_reportante [not null]
+  cliente_id integer
+  domiciliario_id integer
+  ruta_cliente_id integer
+  tipo_incidencia varchar [not null, note: 'coca_defectuosa / ausencia / direccion_incorrecta / calidad']
+  descripcion text
+  foto_url varchar
+  estado estado_incidencia [not null, default: 'abierta']
+  respuesta text
+  fecha_creacion timestamp [default: `now()`]
+  fecha_resolucion timestamp
+
+  indexes {
+    estado
+    tipo_incidencia
+  }
+
+  Note: 'reportado por cliente o domiciliario según tipo_reportante; ruta_cliente_id es opcional (contexto de la entrega).'
+}
+
+Table suspensiones_entrega {
+  id integer [pk, increment]
+  suscripcion_id integer [not null]
+  fecha_suspendida date [not null]
+  motivo varchar
+  fecha_solicitud timestamp [default: `now()`]
+  estado estado_registro [not null, default: 'aprobado']
+
+  indexes {
+    (suscripcion_id, fecha_suspendida) [unique]
+  }
+
+  Note: 'No genera devolución monetaria ni extiende la fecha de vencimiento. El cliente asume la pérdida del día por suspensión voluntaria.'
+}
+
+
+// ============================================================================
+// NOTA — PROCESO DE MEDICIÓN Y DESEMPEÑO (DASHBOARD)
+// ============================================================================
+// El Dashboard es 100% de lectura: consolida y agrega datos de compras,
+// producción, servicios, ventas y logística ya modelados arriba (KPIs de
+// ventas, producción, logística y analítica gerencial). No requiere tablas
+// propias; se implementa con vistas/consultas agregadas sobre este modelo.
+
+
+// ============================================================================
+// RELACIONES (REFERENCIAS)
+// ============================================================================
+
+// --- Configuración ---
+Ref: rol_permisos.rol_id > roles.id
+Ref: rol_permisos.permiso_id > permisos.id
+
+// --- Usuarios ---
+Ref: usuarios.rol_id > roles.id
+Ref: accesos.usuario_id > usuarios.id
+Ref: accesos.cliente_id > clientes.id
+Ref: accesos.empleado_id > empleados.id
+
+// --- Compras ---
+Ref: insumos.categoria_id > categorias_insumos.id
+Ref: insumo_proveedores.insumo_id > insumos.id
+Ref: insumo_proveedores.proveedor_id > proveedores.id
+Ref: preparaciones.categoria_id > categorias_preparaciones.id
+Ref: compras.proveedor_id > proveedores.id
+Ref: compra_detalle.compra_id > compras.id
+Ref: compra_detalle.insumo_id > insumos.id
+
+// --- Producción ---
+Ref: fichas_tecnicas.preparacion_id > preparaciones.id
+Ref: ficha_tecnica_detalle.ficha_tecnica_id > fichas_tecnicas.id
+Ref: ficha_tecnica_detalle.insumo_id > insumos.id
+Ref: ordenes_produccion.menu_id > menus.id
+Ref: ordenes_produccion.empleado_responsable_id > empleados.id
+Ref: menu_preparaciones.menu_id > menus.id
+Ref: menu_preparaciones.preparacion_id > preparaciones.id
+Ref: orden_produccion_detalle.orden_produccion_id > ordenes_produccion.id
+Ref: orden_produccion_detalle.preparacion_id > preparaciones.id
+
+// --- Servicios ---
+Ref: servicios.categoria_id > categorias_servicios.id
+
+// --- Ventas / Suscripciones ---
+Ref: direcciones_cliente.cliente_id > clientes.id
+Ref: direcciones_cliente.zona_cobertura_id > zonas_cobertura.id
+Ref: suscripciones.cliente_id > clientes.id
+Ref: suscripciones.servicio_id > servicios.id
+Ref: pagos.suscripcion_id > suscripciones.id
+Ref: pagos.validado_por_usuario_id > usuarios.id
+
+// --- Logística ---
+Ref: rutas.zona_cobertura_id > zonas_cobertura.id
+Ref: rutas.domiciliario_id > empleados.id
+Ref: ruta_clientes.ruta_id > rutas.id
+Ref: ruta_clientes.suscripcion_id > suscripciones.id
+Ref: geolocalizacion_domiciliarios.ruta_id > rutas.id
+Ref: geolocalizacion_domiciliarios.domiciliario_id > empleados.id
+Ref: incidencias.cliente_id > clientes.id
+Ref: incidencias.domiciliario_id > empleados.id
+Ref: incidencias.ruta_cliente_id > ruta_clientes.id
+Ref: suspensiones_entrega.suscripcion_id > suscripciones.id
+
+
+// ============================================================================
+// DATOS DE EJEMPLO (Records) — para poblar el diagrama y poder analizarlo
+// ============================================================================
+// Van en orden de dependencia (tabla "padre" antes que la tabla que la
+// referencia), igual que en la plantilla de dbdiagram.io. Son pocos
+// registros por tabla, solo para validar visualmente que las relaciones
+// y los datos tienen sentido de negocio.
+
+// --- Configuración ---
+Records roles(id, nombre, estado) {
+  1, 'Administrador', 'activo'
+  2, 'Cocina', 'activo'
+  3, 'Domiciliario', 'activo'
+}
+
+Records permisos(id, nombre, modulo, accion, estado) {
+  1, 'Crear usuarios', 'usuarios', 'crear', 'activo'
+  2, 'Editar compras', 'compras', 'editar', 'activo'
+  3, 'Consultar producción', 'produccion', 'consultar', 'activo'
+}
+
+Records rol_permisos(rol_id, permiso_id) {
+  1, 1
+  1, 2
+  1, 3
+  2, 3
+}
+
+// --- Usuarios ---
+Records usuarios(id, rol_id, nombre_completo, documento, correo, estado) {
+  1, 1, 'Laura Restrepo', '1000111222', 'laura@lacocadejacks.com', 'activo'
+  2, 2, 'Andrés Zapata', '1000333444', 'andres@lacocadejacks.com', 'activo'
+}
+
+Records accesos(id, usuario_id, fecha_hora, resultado, intentos_fallidos_consecutivos) {
+  1, 1, '2026-08-10 08:00:00', 'exitoso', 0
+  2, 2, '2026-08-10 06:30:00', 'exitoso', 0
+}
+
+// --- Compras ---
+Records categorias_insumos(id, nombre, estado) {
+  1, 'Proteínas', 'activo'
+  2, 'Verduras', 'activo'
+}
+
+Records insumos(id, categoria_id, nombre, unidad_medida, cantidad_disponible, stock_minimo, precio_unitario_referencia, estado) {
+  1, 1, 'Pollo', 'kg', 50, 10, 9000, 'activo'
+  2, 1, 'Cerdo', 'kg', 40, 10, 11000, 'activo'
+  3, 2, 'Cebolla', 'kg', 30, 5, 2500, 'activo'
+}
+
+Records categorias_preparaciones(id, nombre, estado) {
+  1, 'Bases (Arroz, Sopas)', 'activo'
+  2, 'Proteínas', 'activo'
+}
+
+Records preparaciones(id, categoria_id, nombre, descripcion, estado) {
+  1, 1, 'Arroz Blanco', 'Porción estándar de arroz', 'activo'
+  2, 1, 'Sopa de Guineo', 'Sopa tradicional', 'activo'
+  3, 2, 'Pollo a la plancha', 'Filete de pechuga', 'activo'
+}
+
+Records menus(id, nombre, fecha, estado) {
+  1, 'Menú Lunes', '2026-08-10', 'activo'
+}
+
+Records menu_preparaciones(id, menu_id, preparacion_id) {
+  1, 1, 1
+  2, 1, 2
+  3, 1, 3
+}
+
+
+
+Records proveedores(id, nombre, documento, contacto, direccion, estado) {
+  1, 'Carnes El Rancho', '900111222-1', '3001112233', 'Cra 50 #10-20', 'activo'
+  2, 'Distribuidora Avícola JR', '900333444-2', '3002223344', 'Cra 60 #15-30', 'activo'
+  3, 'Central Mayorista Verde', '900555666-3', '3003334455', 'Cll 80 #40-10', 'activo'
+}
+
+Records insumo_proveedores(id, insumo_id, proveedor_id, precio_unitario, es_proveedor_principal, estado) {
+  1, 1, 2, 9000, true, 'activo'
+  2, 1, 1, 9300, false, 'activo'
+  3, 2, 1, 11000, true, 'activo'
+  4, 3, 3, 2500, true, 'activo'
+}
+
+Records compras(id, proveedor_id, fecha_compra, valor_total, estado) {
+  1, 2, '2026-08-01', 450000, 'aprobada'
+}
+
+Records compra_detalle(id, compra_id, insumo_id, cantidad, precio_unitario, subtotal) {
+  1, 1, 1, 50, 9000, 450000
+}
+
+// --- Producción ---
+Records empleados(id, nombre_completo, documento, cargo, telefono, fecha_ingreso, estado) {
+  1, 'Camila Restrepo', '1010101010', 'Cocina', '3011112222', '2025-01-15', 'activo'
+  2, 'Jhon Alexander Ruiz', '1020202020', 'Domiciliario', '3022223333', '2025-03-01', 'activo'
+}
+
+Records fichas_tecnicas(id, preparacion_id, tiempo_preparacion_min, numero_porciones, costo_unitario_estimado, estado) {
+  1, 3, 40, 10, 35000, 'activo'
+}
+
+Records ficha_tecnica_detalle(id, ficha_tecnica_id, insumo_id, cantidad_requerida) {
+  1, 1, 1, 2.5
+  2, 1, 3, 0.5
+}
+
+Records ordenes_produccion(id, fecha_produccion, menu_id, empleado_responsable_id, estado) {
+  1, '2026-08-10', 1, 1, 'finalizada'
+}
+
+Records orden_produccion_detalle(id, orden_produccion_id, preparacion_id, cantidad_requerida, cantidad_producida, hora_terminacion, estado) {
+  1, 1, 1, 50, 50, '2026-08-10 10:00:00', 'terminada'
+  2, 1, 2, 50, 50, '2026-08-10 10:30:00', 'terminada'
+  3, 1, 3, 25, 0, null, 'pendiente'
+}
+
+// --- Servicios ---
+Records categorias_servicios(id, nombre, estado) {
+  1, 'Planes de suscripción', 'activo'
+}
+
+Records servicios(id, categoria_id, nombre, tipo_plan, valor, duracion_dias, estado) {
+  1, 1, 'Plan Semanal', 'semanal', 65000, 5, 'activo'
+  2, 1, 'Plan Mensual', 'mensual', 260000, 20, 'activo'
+}
+
+Records calendario(id, fecha, es_habil, es_festivo, descripcion) {
+  1, '2026-08-10', true, false, 'Lunes hábil'
+  2, '2026-08-17', false, true, 'Traslado Batalla de Boyacá'
+}
+
+// --- Ventas / Suscripciones ---
+Records zonas_cobertura(id, nombre, estado) {
+  1, 'El Poblado', 'activo'
+  2, 'Laureles', 'activo'
+}
+
+Records clientes(id, nombre_completo, documento, telefono, correo, modalidad_entrega, restricciones_alimentarias, tiene_cocas_propias, estado) {
+  1, 'Mariana Vélez', '1030303030', '3033334444', 'mariana@example.com', 'fija', 'Ninguna', false, 'activo'
+  2, 'Carlos Herrera', '1040404040', '3044445555', 'carlos@example.com', 'hibrida', 'Alergia a mariscos', true, 'activo'
+}
+
+Records direcciones_cliente(id, cliente_id, zona_cobertura_id, dia_semana, direccion, estado) {
+  1, 1, 1, null, 'Cra 43A #10-20 Apto 501', 'activo'
+  2, 2, 2, 'lunes', 'Cll 70 #65-10', 'activo'
+  3, 2, 1, 'martes', 'Cra 43A #5-40 Oficina 302', 'activo'
+}
+
+Records suscripciones(id, cliente_id, servicio_id, tipo_menu, tipo_venta, fecha_inicio, fecha_vencimiento, valor_plan, recargo_menu_personalizado, cobro_cocas, valor_total, estado) {
+  1, 1, 1, 'estandar', 'nueva', '2026-08-10', '2026-08-14', 65000, 0, 70000, 135000, 'activa'
+  2, 2, 2, 'pollo', 'nueva', null, null, 260000, 10000, 70000, 340000, 'pendiente'
+}
+
+Records pagos(id, suscripcion_id, valor, comprobante_url, estado, fecha_pago, validado_por_usuario_id) {
+  1, 1, 135000, 'https://storage.jacksoft.com/comprobantes/1.jpg', 'aprobado', '2026-08-09 18:30:00', 1
+  2, 2, 340000, 'https://storage.jacksoft.com/comprobantes/2.jpg', 'pendiente', '2026-08-10 08:00:00', null
+}
+
+// --- Logística ---
+Records rutas(id, zona_cobertura_id, domiciliario_id, fecha, estado) {
+  1, 1, 2, '2026-08-10', 'activo'
+}
+
+Records ruta_clientes(id, ruta_id, suscripcion_id, orden_entrega, estado_entrega, hora_entrega, cocas_entregadas, cocas_recogidas) {
+  1, 1, 1, 1, 'entregado', '2026-08-10 12:15:00', 1, 1
+}
+
+Records geolocalizacion_domiciliarios(id, ruta_id, domiciliario_id, latitud, longitud, hora_ubicacion) {
+  1, 1, 2, 6.2087, -75.5679, '2026-08-10 11:50:00'
+  2, 1, 2, 6.2090, -75.5650, '2026-08-10 12:00:00'
+}
+
+Records incidencias(id, tipo_reportante, cliente_id, tipo_incidencia, descripcion, estado) {
+  1, 'cliente', 2, 'direccion_incorrecta', 'La dirección registrada no coincide con el barrio', 'abierta'
+}
+
+Records suspensiones_entrega(id, suscripcion_id, fecha_suspendida, motivo, estado) {
+  1, 1, '2026-08-12', 'Viaje de trabajo', 'aprobado'
+}
+
+// ============================================================================
+// AGRUPACIONES DE SUBPROCESOS (TableGroups para visualización)
+// ============================================================================
+
+TableGroup Configuracion {
+  roles
+  permisos
+  rol_permisos
+}
+
+TableGroup Usuarios {
+  usuarios
+  accesos
+}
+
+TableGroup Compras {
+  categorias_insumos
+  insumos
+  proveedores
+  insumo_proveedores
+  compras
+  compra_detalle
+}
+
+TableGroup Produccion {
+  empleados
+  categorias_preparaciones
+  preparaciones
+  menus
+  menu_preparaciones
+  fichas_tecnicas
+  ficha_tecnica_detalle
+  ordenes_produccion
+  orden_produccion_detalle
+}
+
+TableGroup Servicios {
+  categorias_servicios
+  servicios
+  calendario
+}
+
+TableGroup Suscripciones {
+  zonas_cobertura
+  clientes
+  direcciones_cliente
+  suscripciones
+  pagos
+}
+
+TableGroup Logistica {
+  rutas
+  ruta_clientes
+  geolocalizacion_domiciliarios
+  incidencias
+  suspensiones_entrega
+}

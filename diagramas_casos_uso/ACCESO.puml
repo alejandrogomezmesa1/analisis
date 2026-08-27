@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam nodesep 40
+skinparam ranksep 60
+
+actor "Admin" as admin
+
+package "ACCESO" {
+  usecase "Acceso al sistema" as UC_Hub
+  usecase "Consultar estado de la cuenta" as UC_Central
+  usecase "Iniciar sesión" as UC_Search
+  usecase "Validar credenciales" as UC_R1
+  usecase "Recuperar / restablecer  contraseña" as UC_R2
+  usecase "Cerrar sesión" as UC_R3
+}
+
+admin -right-> UC_Hub
+UC_Hub -right-> UC_Central : <<include>>
+UC_Search -up-> UC_Hub : <<extends>>
+UC_Search -up-> UC_Central : <<include>>
+UC_R1 -left-> UC_Central : <<extends>>
+UC_R2 -left-> UC_Central : <<extends>>
+UC_R3 -left-> UC_Central : <<extends>>
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam nodesep 40
+skinparam ranksep 60
+
+actor "Admin" as admin
+
+package "RUTA Y DOMICILIARIOS" {
+  usecase "Gestión de rutas y domiciliarios" as UC_Hub
+  usecase "Listar rutas" as UC_Central
+  usecase "Crear ruta" as UC_Create
+  usecase "Filtrar / consultar por zona, rutas, domiciliario y estado" as UC_Search
+  usecase "Consultar clientes activos georreferenciados" as UC_R1
+  usecase "Visualizar zonas de cobertura" as UC_R2
+  usecase "Agrupar clientes por zona" as UC_R3
+  usecase "Ver detalle de ruta" as UC_R4
+  usecase "Editar ruta" as UC_R5
+  usecase "Eliminar ruta" as UC_R6
+  usecase "Asignar domiciliario a ruta" as UC_R7
+  usecase "Reasignar domiciliario" as UC_R8
+  usecase "Consultar clientes asociados a ruta" as UC_R9
+  usecase "Consultar domiciliario asociado" as UC_R10
+  usecase "Habilitar y deshabilitar entregas hibridas" as UC_R11
+}
+
+admin -right-> UC_Hub
+UC_Hub -right-> UC_Central : <<include>>
+UC_Create -down-> UC_Hub : <<extends>>
+UC_Create -down-> UC_Central : <<include>>
+UC_Search -up-> UC_Hub : <<extends>>
+UC_Search -up-> UC_Central : <<include>>
+UC_R1 -left-> UC_Central : <<extends>>
+UC_R2 -left-> UC_Central : <<extends>>
+UC_R3 -left-> UC_Central : <<extends>>
+UC_R4 -left-> UC_Central : <<extends>>
+UC_R5 -left-> UC_Central : <<extends>>
+UC_R6 -left-> UC_Central : <<extends>>
+UC_R7 -left-> UC_Central : <<extends>>
+UC_R8 -left-> UC_Central : <<extends>>
+UC_R9 -left-> UC_Central : <<extends>>
+UC_R10 -left-> UC_Central : <<extends>>
+UC_R11 -left-> UC_Central : <<extends>>
+@enduml

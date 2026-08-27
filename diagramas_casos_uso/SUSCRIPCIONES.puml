@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam nodesep 40
+skinparam ranksep 60
+
+actor "Admin" as admin
+
+package "SUSCRIPCIONES" {
+  usecase "Gestión de suscripciones" as UC_Hub
+  usecase "Listar suscripciones" as UC_Central
+  usecase "Cotizar suscripción" as UC_Create
+  usecase "Registrar suscripción" as UC_R1
+  usecase "Ver detalle de suscripción" as UC_R2
+  usecase "Editar suscripción" as UC_R3
+  usecase "Administrar estado de suscripción" as UC_R4
+  usecase "Registrar plan semanal" as UC_R5
+  usecase "Registrar plan quincenal" as UC_R6
+  usecase "Registrar plan mensual" as UC_R7
+  usecase "Seleccionar menú estándar" as UC_R8
+  usecase "Seleccionar menú personalizado" as UC_R9
+  usecase "Aplicar recargo por menú personalizado" as UC_R10
+  usecase "Calcular fecha de inicio" as UC_R11
+  usecase "Calcular fecha de vencimiento" as UC_R12
+  usecase "Registrar comprobante de transferencia" as UC_R13
+  usecase "Consultar comprobante de pago" as UC_R14
+  usecase "Gestionar estado Pendiente" as UC_R15
+  usecase "Gestionar estado Activa" as UC_R16
+  usecase "Gestionar estado Cancelada" as UC_R17
+  usecase "Gestionar estado Vencida" as UC_R18
+  usecase "Registrar venta nueva" as UC_R19
+  usecase "Aplicar cobro de cocas en venta nueva" as UC_R20
+  usecase "Registrar renovación" as UC_R21
+  usecase "Registrar reingreso" as UC_R22
+  usecase "Recuperar historial del cliente" as UC_R23
+  usecase "Recuperar restricciones alimentarias" as UC_R24
+  usecase "Exonerar cobro de cocas en renovación" as UC_R25
+  usecase "Exonerar cobro de cocas en reingreso" as UC_R26
+  usecase "Validar cobertura de la dirección" as UC_R27
+  usecase "Validar capacidad de producción" as UC_R28
+}
+
+admin -right-> UC_Hub
+UC_Hub -right-> UC_Central : <<include>>
+UC_Create -down-> UC_Hub : <<extends>>
+UC_Create -down-> UC_Central : <<include>>
+UC_R1 -left-> UC_Central : <<extends>>
+UC_R2 -left-> UC_Central : <<extends>>
+UC_R3 -left-> UC_Central : <<extends>>
+UC_R4 -left-> UC_Central : <<extends>>
+UC_R5 -left-> UC_Central : <<extends>>
+UC_R6 -left-> UC_Central : <<extends>>
+UC_R7 -left-> UC_Central : <<extends>>
+UC_R8 -left-> UC_Central : <<extends>>
+UC_R9 -left-> UC_Central : <<extends>>
+UC_R10 -left-> UC_Central : <<extends>>
+UC_R11 -left-> UC_Central : <<extends>>
+UC_R12 -left-> UC_Central : <<extends>>
+UC_R13 -left-> UC_Central : <<extends>>
+UC_R14 -left-> UC_Central : <<extends>>
+UC_R15 -left-> UC_Central : <<extends>>
+UC_R16 -left-> UC_Central : <<extends>>
+UC_R17 -left-> UC_Central : <<extends>>
+UC_R18 -left-> UC_Central : <<extends>>
+UC_R19 -left-> UC_Central : <<extends>>
+UC_R20 -left-> UC_Central : <<extends>>
+UC_R21 -left-> UC_Central : <<extends>>
+UC_R22 -left-> UC_Central : <<extends>>
+UC_R23 -left-> UC_Central : <<extends>>
+UC_R24 -left-> UC_Central : <<extends>>
+UC_R25 -left-> UC_Central : <<extends>>
+UC_R26 -left-> UC_Central : <<extends>>
+UC_R27 -left-> UC_Central : <<extends>>
+UC_R28 -left-> UC_Central : <<extends>>
+@enduml

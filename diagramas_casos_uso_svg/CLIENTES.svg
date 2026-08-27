@@ -1,0 +1,116 @@
+<svg width="950" height="895" viewBox="0 0 950 895" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#333333" />
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #ffffff; }
+    .box { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+    .actor { fill: none; stroke: #333333; stroke-width: 2; }
+    .actor-text { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #333333; text-anchor: middle; }
+    .title { font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #111111; text-anchor: middle; }
+    .oval { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+    .uc-text { font-family: Arial, sans-serif; font-size: 12px; fill: #222222; text-anchor: middle; dominant-baseline: middle; }
+    .solid-line { stroke: #333333; stroke-width: 1.5; }
+    .dashed-line { stroke: #555555; stroke-width: 1.2; stroke-dasharray: 4,4; marker-end: url(#arrow); }
+    .rel-text { font-family: Arial, sans-serif; font-size: 11px; fill: #444444; text-anchor: middle; dominant-baseline: middle; }
+  </style>
+  <rect width="100%" height="100%" class="bg" />
+
+  <rect x="160" y="30" width="760" height="835" class="box" />
+  <text x="540.0" y="65" class="title">CLIENTES</text>
+  <circle cx="70" cy="412.5" r="18" class="actor" />
+  <line x1="70" y1="430.5" x2="70" y2="472.5" class="actor" />
+  <line x1="45" y1="442.5" x2="95" y2="442.5" class="actor" />
+  <line x1="70" y1="472.5" x2="50" y2="507.5" class="actor" />
+  <line x1="70" y1="472.5" x2="90" y2="507.5" class="actor" />
+  <text x="70" y="527.5" class="actor-text">Admin</text>
+  <ellipse cx="280" cy="447.5" rx="80" ry="28" class="oval" />
+  <text x="280" y="447.5" class="uc-text">Gestión de clientes</text>
+  <ellipse cx="520" cy="447.5" rx="90" ry="28" class="oval" />
+  <text x="520" y="447.5" class="uc-text">Listar clientes</text>
+  <line x1="100" y1="447.5" x2="200" y2="447.5" class="solid-line" />
+  <line x1="360" y1="447.5" x2="430" y2="447.5" class="dashed-line" />
+  <text x="400.0" y="437.5" class="rel-text">&lt;&lt;include&gt;&gt;</text>
+  <ellipse cx="520" cy="110" rx="85" ry="25" class="oval" />
+  <text x="520" y="110.0" class="uc-text">Crear cliente</text>
+  <line x1="460" y1="130" x2="320" y2="422.5" class="dashed-line" />
+  <text x="390.0" y="268.75" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <line x1="520" y1="135" x2="520" y2="419.5" class="dashed-line" />
+  <text x="555" y="278.75" class="rel-text">&lt;&lt;include&gt;&gt;</text>
+  <ellipse cx="520" cy="785" rx="105" ry="28" class="oval" />
+  <text x="520" y="765.5" class="uc-text">Filtrar / consultar</text>
+  <text x="520" y="778.5" class="uc-text">clientes por nombre,</text>
+  <text x="520" y="791.5" class="uc-text">documento, dirección,</text>
+  <text x="520" y="804.5" class="uc-text">estado</text>
+  <line x1="460" y1="765" x2="320" y2="472.5" class="dashed-line" />
+  <text x="390.0" y="626.25" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <line x1="520" y1="760" x2="520" y2="475.5" class="dashed-line" />
+  <text x="555" y="616.25" class="rel-text">&lt;&lt;include&gt;&gt;</text>
+  <ellipse cx="770" cy="110.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="103.5" class="uc-text">Ver detalle del</text>
+  <text x="770" y="116.5" class="uc-text">cliente</text>
+  <line x1="685" y1="110.0" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="178.25" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="166.25" rx="85" ry="25" class="oval" />
+  <text x="770" y="166.25" class="uc-text">Editar cliente</text>
+  <line x1="685" y1="166.25" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="222.125" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="222.5" rx="85" ry="25" class="oval" />
+  <text x="770" y="216.0" class="uc-text">Registrar dirección de</text>
+  <text x="770" y="229.0" class="uc-text">entrega</text>
+  <line x1="685" y1="222.5" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="266.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="278.75" rx="85" ry="25" class="oval" />
+  <text x="770" y="272.25" class="uc-text">Registrar modalidad de</text>
+  <text x="770" y="285.25" class="uc-text">entrega</text>
+  <line x1="685" y1="278.75" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="309.875" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="335.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="335.0" class="uc-text">Registrar teléfono</text>
+  <line x1="685" y1="335.0" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="353.75" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="391.25" rx="85" ry="25" class="oval" />
+  <text x="770" y="384.75" class="uc-text">Registrar correo</text>
+  <text x="770" y="397.75" class="uc-text">electrónico</text>
+  <line x1="685" y1="391.25" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="397.625" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="447.5" rx="85" ry="25" class="oval" />
+  <text x="770" y="434.5" class="uc-text">Registrar</text>
+  <text x="770" y="447.5" class="uc-text">restricciones</text>
+  <text x="770" y="460.5" class="uc-text">alimentarias</text>
+  <line x1="685" y1="447.5" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="441.5" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="503.75" rx="85" ry="25" class="oval" />
+  <text x="770" y="497.25" class="uc-text">Registrar alergias</text>
+  <text x="770" y="510.25" class="uc-text">alimentarias</text>
+  <line x1="685" y1="503.75" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="485.375" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="560.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="553.5" class="uc-text">Consultar</text>
+  <text x="770" y="566.5" class="uc-text">suscripciones asociadas</text>
+  <line x1="685" y1="560.0" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="529.25" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="616.25" rx="85" ry="25" class="oval" />
+  <text x="770" y="609.75" class="uc-text">Consultar historial de</text>
+  <text x="770" y="622.75" class="uc-text">pagos</text>
+  <line x1="685" y1="616.25" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="573.125" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="672.5" rx="85" ry="25" class="oval" />
+  <text x="770" y="666.0" class="uc-text">Generar reporte de</text>
+  <text x="770" y="679.0" class="uc-text">clientes activos</text>
+  <line x1="685" y1="672.5" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="617.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="728.75" rx="85" ry="25" class="oval" />
+  <text x="770" y="722.25" class="uc-text">Generar reporte por</text>
+  <text x="770" y="735.25" class="uc-text">zona de cobertura</text>
+  <line x1="685" y1="728.75" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="660.875" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="785.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="778.5" class="uc-text">Generar reporte por</text>
+  <text x="770" y="791.5" class="uc-text">tipo de plan</text>
+  <line x1="685" y1="785.0" x2="610" y2="447.5" class="dashed-line" />
+  <text x="668.5" y="704.75" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+</svg>

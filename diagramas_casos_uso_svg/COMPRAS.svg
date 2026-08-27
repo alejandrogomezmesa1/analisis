@@ -1,0 +1,83 @@
+<svg width="950" height="650" viewBox="0 0 950 650" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#333333" />
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #ffffff; }
+    .box { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+    .actor { fill: none; stroke: #333333; stroke-width: 2; }
+    .actor-text { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #333333; text-anchor: middle; }
+    .title { font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #111111; text-anchor: middle; }
+    .oval { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+    .uc-text { font-family: Arial, sans-serif; font-size: 12px; fill: #222222; text-anchor: middle; dominant-baseline: middle; }
+    .solid-line { stroke: #333333; stroke-width: 1.5; }
+    .dashed-line { stroke: #555555; stroke-width: 1.2; stroke-dasharray: 4,4; marker-end: url(#arrow); }
+    .rel-text { font-family: Arial, sans-serif; font-size: 11px; fill: #444444; text-anchor: middle; dominant-baseline: middle; }
+  </style>
+  <rect width="100%" height="100%" class="bg" />
+
+  <rect x="160" y="30" width="760" height="590" class="box" />
+  <text x="540.0" y="65" class="title">COMPRAS</text>
+  <circle cx="70" cy="290.0" r="18" class="actor" />
+  <line x1="70" y1="308.0" x2="70" y2="350.0" class="actor" />
+  <line x1="45" y1="320.0" x2="95" y2="320.0" class="actor" />
+  <line x1="70" y1="350.0" x2="50" y2="385.0" class="actor" />
+  <line x1="70" y1="350.0" x2="90" y2="385.0" class="actor" />
+  <text x="70" y="405.0" class="actor-text">Admin</text>
+  <ellipse cx="280" cy="325.0" rx="80" ry="28" class="oval" />
+  <text x="280" y="325.0" class="uc-text">Gestión de compras</text>
+  <ellipse cx="520" cy="325.0" rx="90" ry="28" class="oval" />
+  <text x="520" y="325.0" class="uc-text">Listar compras</text>
+  <line x1="100" y1="325.0" x2="200" y2="325.0" class="solid-line" />
+  <line x1="360" y1="325.0" x2="430" y2="325.0" class="dashed-line" />
+  <text x="400.0" y="315.0" class="rel-text">&lt;&lt;include&gt;&gt;</text>
+  <ellipse cx="520" cy="110" rx="85" ry="25" class="oval" />
+  <text x="520" y="110.0" class="uc-text">Crear compra</text>
+  <line x1="460" y1="130" x2="320" y2="300.0" class="dashed-line" />
+  <text x="390.0" y="207.5" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <line x1="520" y1="135" x2="520" y2="297.0" class="dashed-line" />
+  <text x="555" y="217.5" class="rel-text">&lt;&lt;include&gt;&gt;</text>
+  <ellipse cx="520" cy="540" rx="105" ry="28" class="oval" />
+  <text x="520" y="527.0" class="uc-text">Filtrar / consultar</text>
+  <text x="520" y="540.0" class="uc-text">compras por proveedor,</text>
+  <text x="520" y="553.0" class="uc-text">fecha, insumo, estado</text>
+  <line x1="460" y1="520" x2="320" y2="350.0" class="dashed-line" />
+  <text x="390.0" y="442.5" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <line x1="520" y1="515" x2="520" y2="353.0" class="dashed-line" />
+  <text x="555" y="432.5" class="rel-text">&lt;&lt;include&gt;&gt;</text>
+  <ellipse cx="770" cy="110.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="110.0" class="uc-text">Ver detalle de compra</text>
+  <line x1="685" y1="110.0" x2="610" y2="325.0" class="dashed-line" />
+  <text x="668.5" y="151.3" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="181.66666666666669" rx="85" ry="25" class="oval" />
+  <text x="770" y="181.66666666666669" class="uc-text">Editar compra</text>
+  <line x1="685" y1="181.66666666666669" x2="610" y2="325.0" class="dashed-line" />
+  <text x="668.5" y="207.20000000000002" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="253.33333333333334" rx="85" ry="25" class="oval" />
+  <text x="770" y="246.83333333333334" class="uc-text">Cambiar estado de</text>
+  <text x="770" y="259.83333333333337" class="uc-text">compra</text>
+  <line x1="685" y1="253.33333333333334" x2="610" y2="325.0" class="dashed-line" />
+  <text x="668.5" y="263.1" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="325.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="325.0" class="uc-text">Anular compra</text>
+  <line x1="685" y1="325.0" x2="610" y2="325.0" class="dashed-line" />
+  <text x="668.5" y="319.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="396.6666666666667" rx="85" ry="25" class="oval" />
+  <text x="770" y="390.1666666666667" class="uc-text">Generar reporte de</text>
+  <text x="770" y="403.1666666666667" class="uc-text">compras por período</text>
+  <line x1="685" y1="396.6666666666667" x2="610" y2="325.0" class="dashed-line" />
+  <text x="668.5" y="374.90000000000003" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="468.33333333333337" rx="85" ry="25" class="oval" />
+  <text x="770" y="461.83333333333337" class="uc-text">Generar reporte de</text>
+  <text x="770" y="474.83333333333337" class="uc-text">compras por proveedor</text>
+  <line x1="685" y1="468.33333333333337" x2="610" y2="325.0" class="dashed-line" />
+  <text x="668.5" y="430.8" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="540.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="533.5" class="uc-text">Generar reporte de</text>
+  <text x="770" y="546.5" class="uc-text">compras por insumo</text>
+  <line x1="685" y1="540.0" x2="610" y2="325.0" class="dashed-line" />
+  <text x="668.5" y="486.7" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+</svg>

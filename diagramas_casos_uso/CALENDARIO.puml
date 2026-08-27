@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam nodesep 40
+skinparam ranksep 60
+
+actor "Admin" as admin
+
+package "CALENDARIO" {
+  usecase "Gestión de calendario" as UC_Hub
+  usecase "Listar calendario operativo" as UC_Central
+  usecase "Parametrizar calendario operativo" as UC_Create
+  usecase "Identificar días hábiles" as UC_R1
+  usecase "Registrar días festivos nacionales" as UC_R2
+  usecase "Identificar jornadas no operativas" as UC_R3
+  usecase "Cruzar agenda con suscripciones activas" as UC_R4
+  usecase "Programar producción diaria" as UC_R5
+  usecase "Calcular días de servicio" as UC_R6
+  usecase "Calcular fechas de vencimiento" as UC_R7
+  usecase "Generar información para liquidación proporcional" as UC_R8
+}
+
+admin -right-> UC_Hub
+UC_Hub -right-> UC_Central : <<include>>
+UC_Create -down-> UC_Hub : <<extends>>
+UC_Create -down-> UC_Central : <<include>>
+UC_R1 -left-> UC_Central : <<extends>>
+UC_R2 -left-> UC_Central : <<extends>>
+UC_R3 -left-> UC_Central : <<extends>>
+UC_R4 -left-> UC_Central : <<extends>>
+UC_R5 -left-> UC_Central : <<extends>>
+UC_R6 -left-> UC_Central : <<extends>>
+UC_R7 -left-> UC_Central : <<extends>>
+UC_R8 -left-> UC_Central : <<extends>>
+@enduml

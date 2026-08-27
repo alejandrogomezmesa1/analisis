@@ -1,0 +1,33 @@
+Nombre de la Rúbrica: HV Investigacion Objetivos
+
+================================================================================
+CRITERIO | ESCALA: Cumple | ESCALA: No cumple
+================================================================================
+
+1. Estructura objetivo general
+- Cumple (20 puntos): El objetivo general cumple con la estructura de redacción propuesta
+- No cumple (0 puntos): El objetivo general no cumple con la estructura de redacción propuesta
+
+2. Estructura objetivos específicos
+- Cumple (20 puntos): Los objetivos específicos cumple con la estructura de redacción propuesta
+- No cumple (0 puntos): Los objetivos específicos no cumplen con la estructura de redacción propuesta
+
+3. Alcance Objetivos
+- Cumple (10 puntos): El objetivo general contiene a los objetivos específicos dentro de su alcance
+- No cumple (0 puntos): El objetivo general no contiene a los objetivos específicos dentro de su alcance
+
+4. Secuencia Objetivos
+- Cumple (10 puntos): Los objetivos específicos describen una estructura secuencial para llegar al objetivo general
+- No cumple (0 puntos): Los objetivos específicos no describen una estructura secuencial para llegar al objetivo general
+
+5. Hipótesis investigación
+- Cumple (20 puntos): La hipótesis de investigación se presenta como una afirmación verificable dentro del alcance propuesto
+- No cumple (0 puntos): La hipótesis de investigación no se presenta como una afirmación verificable dentro del alcance propuesto
+
+6. Variables de investigación
+- Cumple (10 puntos): La hipótesis de investigación da cuenta de las variables a indagar para lograr el objetivo
+- No cumple (0 puntos): La hipótesis de investigación no da cuenta de las variables a indagar para lograr el objetivo
+
+7. Puntualidad Entrega
+- Cumple (10 puntos): El trabajo se entrega de forma oportuna, cumpliendo con los tiempos propuestos en el plan de trabajo
+- No cumple (0 puntos): El trabajo no se entrega de forma oportuna, incumpliendo con los tiempos propuestos en el plan de trabajo

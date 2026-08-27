@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam nodesep 40
+skinparam ranksep 60
+
+actor "Admin" as admin
+
+package "USUARIOS" {
+  usecase "Gestión de usuarios" as UC_Hub
+  usecase "Listar usuarios" as UC_Central
+  usecase "Crear usuario" as UC_Create
+  usecase "Ver detalle de usuario" as UC_R1
+  usecase "Editar usuario" as UC_R2
+  usecase "Cambiar estado de usuario" as UC_R3
+  usecase "Generar reportes de usuarios activos e inactivos" as UC_R4
+  usecase "Eliminar usuario" as UC_R5
+}
+
+admin -right-> UC_Hub
+UC_Hub -right-> UC_Central : <<include>>
+UC_Create -down-> UC_Hub : <<extends>>
+UC_Create -down-> UC_Central : <<include>>
+UC_R1 -left-> UC_Central : <<extends>>
+UC_R2 -left-> UC_Central : <<extends>>
+UC_R3 -left-> UC_Central : <<extends>>
+UC_R4 -left-> UC_Central : <<extends>>
+UC_R5 -left-> UC_Central : <<extends>>
+@enduml

@@ -1,0 +1,107 @@
+<svg width="950" height="785" viewBox="0 0 950 785" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#333333" />
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #ffffff; }
+    .box { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+    .actor { fill: none; stroke: #333333; stroke-width: 2; }
+    .actor-text { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #333333; text-anchor: middle; }
+    .title { font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #111111; text-anchor: middle; }
+    .oval { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+    .uc-text { font-family: Arial, sans-serif; font-size: 12px; fill: #222222; text-anchor: middle; dominant-baseline: middle; }
+    .solid-line { stroke: #333333; stroke-width: 1.5; }
+    .dashed-line { stroke: #555555; stroke-width: 1.2; stroke-dasharray: 4,4; marker-end: url(#arrow); }
+    .rel-text { font-family: Arial, sans-serif; font-size: 11px; fill: #444444; text-anchor: middle; dominant-baseline: middle; }
+  </style>
+  <rect width="100%" height="100%" class="bg" />
+
+  <rect x="160" y="30" width="760" height="725" class="box" />
+  <text x="540.0" y="65" class="title">FICHA TECNICA PRODUCTO</text>
+  <circle cx="70" cy="357.5" r="18" class="actor" />
+  <line x1="70" y1="375.5" x2="70" y2="417.5" class="actor" />
+  <line x1="45" y1="387.5" x2="95" y2="387.5" class="actor" />
+  <line x1="70" y1="417.5" x2="50" y2="452.5" class="actor" />
+  <line x1="70" y1="417.5" x2="90" y2="452.5" class="actor" />
+  <text x="70" y="472.5" class="actor-text">Admin</text>
+  <ellipse cx="280" cy="392.5" rx="80" ry="28" class="oval" />
+  <text x="280" y="386.0" class="uc-text">Gestión de fichas</text>
+  <text x="280" y="399.0" class="uc-text">técnicas</text>
+  <ellipse cx="520" cy="392.5" rx="90" ry="28" class="oval" />
+  <text x="520" y="392.5" class="uc-text">Listar fichas técnicas</text>
+  <line x1="100" y1="392.5" x2="200" y2="392.5" class="solid-line" />
+  <line x1="360" y1="392.5" x2="430" y2="392.5" class="dashed-line" />
+  <text x="400.0" y="382.5" class="rel-text">&lt;&lt;include&gt;&gt;</text>
+  <ellipse cx="520" cy="110" rx="85" ry="25" class="oval" />
+  <text x="520" y="110.0" class="uc-text">Crear ficha técnica</text>
+  <line x1="460" y1="130" x2="320" y2="367.5" class="dashed-line" />
+  <text x="390.0" y="241.25" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <line x1="520" y1="135" x2="520" y2="364.5" class="dashed-line" />
+  <text x="555" y="251.25" class="rel-text">&lt;&lt;include&gt;&gt;</text>
+  <ellipse cx="520" cy="675" rx="105" ry="28" class="oval" />
+  <text x="520" y="662.0" class="uc-text">Filtrar / consultar</text>
+  <text x="520" y="675.0" class="uc-text">fichas por producto,</text>
+  <text x="520" y="688.0" class="uc-text">insumo, estado</text>
+  <line x1="460" y1="655" x2="320" y2="417.5" class="dashed-line" />
+  <text x="390.0" y="543.75" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <line x1="520" y1="650" x2="520" y2="420.5" class="dashed-line" />
+  <text x="555" y="533.75" class="rel-text">&lt;&lt;include&gt;&gt;</text>
+  <ellipse cx="770" cy="110.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="103.5" class="uc-text">Ver detalle de ficha</text>
+  <text x="770" y="116.5" class="uc-text">técnica</text>
+  <line x1="685" y1="110.0" x2="610" y2="392.5" class="dashed-line" />
+  <text x="668.5" y="166.15" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="166.5" rx="85" ry="25" class="oval" />
+  <text x="770" y="166.5" class="uc-text">Editar ficha técnica</text>
+  <line x1="685" y1="166.5" x2="610" y2="392.5" class="dashed-line" />
+  <text x="668.5" y="210.22" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="223.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="216.5" class="uc-text">Cambiar estado de la</text>
+  <text x="770" y="229.5" class="uc-text">ficha tecnica</text>
+  <line x1="685" y1="223.0" x2="610" y2="392.5" class="dashed-line" />
+  <text x="668.5" y="254.29000000000002" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="279.5" rx="85" ry="25" class="oval" />
+  <text x="770" y="273.0" class="uc-text">Registrar insumos</text>
+  <text x="770" y="286.0" class="uc-text">requeridos</text>
+  <line x1="685" y1="279.5" x2="610" y2="392.5" class="dashed-line" />
+  <text x="668.5" y="298.36" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="336.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="329.5" class="uc-text">Registrar cantidades</text>
+  <text x="770" y="342.5" class="uc-text">exactas de insumos</text>
+  <line x1="685" y1="336.0" x2="610" y2="392.5" class="dashed-line" />
+  <text x="668.5" y="342.43" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="392.5" rx="85" ry="25" class="oval" />
+  <text x="770" y="386.0" class="uc-text">Registrar tiempo</text>
+  <text x="770" y="399.0" class="uc-text">estimado de preparación</text>
+  <line x1="685" y1="392.5" x2="610" y2="392.5" class="dashed-line" />
+  <text x="668.5" y="386.5" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="449.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="436.0" class="uc-text">Registrar</text>
+  <text x="770" y="449.0" class="uc-text">procedimiento de</text>
+  <text x="770" y="462.0" class="uc-text">elaboración</text>
+  <line x1="685" y1="449.0" x2="610" y2="392.5" class="dashed-line" />
+  <text x="668.5" y="430.57" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="505.5" rx="85" ry="25" class="oval" />
+  <text x="770" y="499.0" class="uc-text">Registrar número de</text>
+  <text x="770" y="512.0" class="uc-text">porciones</text>
+  <line x1="685" y1="505.5" x2="610" y2="392.5" class="dashed-line" />
+  <text x="668.5" y="474.64" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="562.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="555.5" class="uc-text">Consultar costo</text>
+  <text x="770" y="568.5" class="uc-text">unitario estimado</text>
+  <line x1="685" y1="562.0" x2="610" y2="392.5" class="dashed-line" />
+  <text x="668.5" y="518.71" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="618.5" rx="85" ry="25" class="oval" />
+  <text x="770" y="612.0" class="uc-text">Generar reporte de</text>
+  <text x="770" y="625.0" class="uc-text">fichas técnicas</text>
+  <line x1="685" y1="618.5" x2="610" y2="392.5" class="dashed-line" />
+  <text x="668.5" y="562.78" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="675.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="668.5" class="uc-text">Generar reporte de</text>
+  <text x="770" y="681.5" class="uc-text">costo unitario estimado</text>
+  <line x1="685" y1="675.0" x2="610" y2="392.5" class="dashed-line" />
+  <text x="668.5" y="606.85" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+</svg>

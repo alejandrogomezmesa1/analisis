@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam nodesep 40
+skinparam ranksep 60
+
+actor "Admin" as admin
+
+package "CATEGORIA PRODUCTOS" {
+  usecase "Gestión de categoria productos" as UC_Hub
+  usecase "Listar categorías de productos" as UC_Central
+  usecase "Crear categoría de producto" as UC_Create
+  usecase "Filtrar / consultar categorías por nombre, estado" as UC_Search
+  usecase "Ver detalle de categoría" as UC_R1
+  usecase "Editar categoría" as UC_R2
+  usecase "Cambiar estado de la categoria del producto" as UC_R3
+}
+
+admin -right-> UC_Hub
+UC_Hub -right-> UC_Central : <<include>>
+UC_Create -down-> UC_Hub : <<extends>>
+UC_Create -down-> UC_Central : <<include>>
+UC_Search -up-> UC_Hub : <<extends>>
+UC_Search -up-> UC_Central : <<include>>
+UC_R1 -left-> UC_Central : <<extends>>
+UC_R2 -left-> UC_Central : <<extends>>
+UC_R3 -left-> UC_Central : <<extends>>
+@enduml

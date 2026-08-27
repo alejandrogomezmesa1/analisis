@@ -1,0 +1,178 @@
+<svg width="950" height="1720" viewBox="0 0 950 1720" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#333333" />
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #ffffff; }
+    .box { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+    .actor { fill: none; stroke: #333333; stroke-width: 2; }
+    .actor-text { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #333333; text-anchor: middle; }
+    .title { font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #111111; text-anchor: middle; }
+    .oval { fill: #ffffff; stroke: #333333; stroke-width: 1.5; }
+    .uc-text { font-family: Arial, sans-serif; font-size: 12px; fill: #222222; text-anchor: middle; dominant-baseline: middle; }
+    .solid-line { stroke: #333333; stroke-width: 1.5; }
+    .dashed-line { stroke: #555555; stroke-width: 1.2; stroke-dasharray: 4,4; marker-end: url(#arrow); }
+    .rel-text { font-family: Arial, sans-serif; font-size: 11px; fill: #444444; text-anchor: middle; dominant-baseline: middle; }
+  </style>
+  <rect width="100%" height="100%" class="bg" />
+
+  <rect x="160" y="30" width="760" height="1660" class="box" />
+  <text x="540.0" y="65" class="title">SUSCRIPCIONES</text>
+  <circle cx="70" cy="825.0" r="18" class="actor" />
+  <line x1="70" y1="843.0" x2="70" y2="885.0" class="actor" />
+  <line x1="45" y1="855.0" x2="95" y2="855.0" class="actor" />
+  <line x1="70" y1="885.0" x2="50" y2="920.0" class="actor" />
+  <line x1="70" y1="885.0" x2="90" y2="920.0" class="actor" />
+  <text x="70" y="940.0" class="actor-text">Admin</text>
+  <ellipse cx="280" cy="860.0" rx="80" ry="28" class="oval" />
+  <text x="280" y="853.5" class="uc-text">Gestión de</text>
+  <text x="280" y="866.5" class="uc-text">suscripciones</text>
+  <ellipse cx="520" cy="860.0" rx="90" ry="28" class="oval" />
+  <text x="520" y="860.0" class="uc-text">Listar suscripciones</text>
+  <line x1="100" y1="860.0" x2="200" y2="860.0" class="solid-line" />
+  <line x1="360" y1="860.0" x2="430" y2="860.0" class="dashed-line" />
+  <text x="400.0" y="850.0" class="rel-text">&lt;&lt;include&gt;&gt;</text>
+  <ellipse cx="520" cy="110" rx="85" ry="25" class="oval" />
+  <text x="520" y="110.0" class="uc-text">Cotizar suscripción</text>
+  <line x1="460" y1="130" x2="320" y2="835.0" class="dashed-line" />
+  <text x="390.0" y="475.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <line x1="520" y1="135" x2="520" y2="832.0" class="dashed-line" />
+  <text x="555" y="485.0" class="rel-text">&lt;&lt;include&gt;&gt;</text>
+  <ellipse cx="770" cy="110.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="110.0" class="uc-text">Registrar suscripción</text>
+  <line x1="685" y1="110.0" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="269.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="165.55555555555554" rx="85" ry="25" class="oval" />
+  <text x="770" y="159.05555555555554" class="uc-text">Ver detalle de</text>
+  <text x="770" y="172.05555555555554" class="uc-text">suscripción</text>
+  <line x1="685" y1="165.55555555555554" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="312.3333333333333" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="221.11111111111111" rx="85" ry="25" class="oval" />
+  <text x="770" y="221.11111111111111" class="uc-text">Editar suscripción</text>
+  <line x1="685" y1="221.11111111111111" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="355.6666666666667" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="276.6666666666667" rx="85" ry="25" class="oval" />
+  <text x="770" y="270.1666666666667" class="uc-text">Administrar estado de</text>
+  <text x="770" y="283.1666666666667" class="uc-text">suscripción</text>
+  <line x1="685" y1="276.6666666666667" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="399.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="332.22222222222223" rx="85" ry="25" class="oval" />
+  <text x="770" y="332.22222222222223" class="uc-text">Registrar plan semanal</text>
+  <line x1="685" y1="332.22222222222223" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="442.33333333333337" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="387.77777777777777" rx="85" ry="25" class="oval" />
+  <text x="770" y="381.27777777777777" class="uc-text">Registrar plan</text>
+  <text x="770" y="394.27777777777777" class="uc-text">quincenal</text>
+  <line x1="685" y1="387.77777777777777" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="485.66666666666663" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="443.33333333333337" rx="85" ry="25" class="oval" />
+  <text x="770" y="443.33333333333337" class="uc-text">Registrar plan mensual</text>
+  <line x1="685" y1="443.33333333333337" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="529.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="498.8888888888889" rx="85" ry="25" class="oval" />
+  <text x="770" y="492.3888888888889" class="uc-text">Seleccionar menú</text>
+  <text x="770" y="505.3888888888889" class="uc-text">estándar</text>
+  <line x1="685" y1="498.8888888888889" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="572.3333333333334" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="554.4444444444445" rx="85" ry="25" class="oval" />
+  <text x="770" y="547.9444444444445" class="uc-text">Seleccionar menú</text>
+  <text x="770" y="560.9444444444445" class="uc-text">personalizado</text>
+  <line x1="685" y1="554.4444444444445" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="615.6666666666666" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="610.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="603.5" class="uc-text">Aplicar recargo por</text>
+  <text x="770" y="616.5" class="uc-text">menú personalizado</text>
+  <line x1="685" y1="610.0" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="659.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="665.5555555555555" rx="85" ry="25" class="oval" />
+  <text x="770" y="659.0555555555555" class="uc-text">Calcular fecha de</text>
+  <text x="770" y="672.0555555555555" class="uc-text">inicio</text>
+  <line x1="685" y1="665.5555555555555" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="702.3333333333334" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="721.1111111111111" rx="85" ry="25" class="oval" />
+  <text x="770" y="714.6111111111111" class="uc-text">Calcular fecha de</text>
+  <text x="770" y="727.6111111111111" class="uc-text">vencimiento</text>
+  <line x1="685" y1="721.1111111111111" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="745.6666666666666" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="776.6666666666667" rx="85" ry="25" class="oval" />
+  <text x="770" y="770.1666666666667" class="uc-text">Registrar comprobante</text>
+  <text x="770" y="783.1666666666667" class="uc-text">de transferencia</text>
+  <line x1="685" y1="776.6666666666667" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="789.0000000000001" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="832.2222222222223" rx="85" ry="25" class="oval" />
+  <text x="770" y="825.7222222222223" class="uc-text">Consultar comprobante</text>
+  <text x="770" y="838.7222222222223" class="uc-text">de pago</text>
+  <line x1="685" y1="832.2222222222223" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="832.3333333333334" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="887.7777777777778" rx="85" ry="25" class="oval" />
+  <text x="770" y="881.2777777777778" class="uc-text">Gestionar estado</text>
+  <text x="770" y="894.2777777777778" class="uc-text">Pendiente</text>
+  <line x1="685" y1="887.7777777777778" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="875.6666666666667" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="943.3333333333334" rx="85" ry="25" class="oval" />
+  <text x="770" y="936.8333333333334" class="uc-text">Gestionar estado</text>
+  <text x="770" y="949.8333333333334" class="uc-text">Activa</text>
+  <line x1="685" y1="943.3333333333334" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="919.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="998.8888888888889" rx="85" ry="25" class="oval" />
+  <text x="770" y="992.3888888888889" class="uc-text">Gestionar estado</text>
+  <text x="770" y="1005.3888888888889" class="uc-text">Cancelada</text>
+  <line x1="685" y1="998.8888888888889" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="962.3333333333334" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="1054.4444444444443" rx="85" ry="25" class="oval" />
+  <text x="770" y="1047.9444444444443" class="uc-text">Gestionar estado</text>
+  <text x="770" y="1060.9444444444443" class="uc-text">Vencida</text>
+  <line x1="685" y1="1054.4444444444443" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="1005.6666666666666" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="1110.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="1110.0" class="uc-text">Registrar venta nueva</text>
+  <line x1="685" y1="1110.0" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="1049.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="1165.5555555555557" rx="85" ry="25" class="oval" />
+  <text x="770" y="1159.0555555555557" class="uc-text">Aplicar cobro de cocas</text>
+  <text x="770" y="1172.0555555555557" class="uc-text">en venta nueva</text>
+  <line x1="685" y1="1165.5555555555557" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="1092.3333333333335" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="1221.111111111111" rx="85" ry="25" class="oval" />
+  <text x="770" y="1221.111111111111" class="uc-text">Registrar renovación</text>
+  <line x1="685" y1="1221.111111111111" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="1135.6666666666667" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="1276.6666666666667" rx="85" ry="25" class="oval" />
+  <text x="770" y="1276.6666666666667" class="uc-text">Registrar reingreso</text>
+  <line x1="685" y1="1276.6666666666667" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="1179.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="1332.2222222222222" rx="85" ry="25" class="oval" />
+  <text x="770" y="1325.7222222222222" class="uc-text">Recuperar historial</text>
+  <text x="770" y="1338.7222222222222" class="uc-text">del cliente</text>
+  <line x1="685" y1="1332.2222222222222" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="1222.3333333333333" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="1387.7777777777778" rx="85" ry="25" class="oval" />
+  <text x="770" y="1374.7777777777778" class="uc-text">Recuperar</text>
+  <text x="770" y="1387.7777777777778" class="uc-text">restricciones</text>
+  <text x="770" y="1400.7777777777778" class="uc-text">alimentarias</text>
+  <line x1="685" y1="1387.7777777777778" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="1265.6666666666667" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="1443.3333333333335" rx="85" ry="25" class="oval" />
+  <text x="770" y="1436.8333333333335" class="uc-text">Exonerar cobro de</text>
+  <text x="770" y="1449.8333333333335" class="uc-text">cocas en renovación</text>
+  <line x1="685" y1="1443.3333333333335" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="1309.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="1498.888888888889" rx="85" ry="25" class="oval" />
+  <text x="770" y="1492.388888888889" class="uc-text">Exonerar cobro de</text>
+  <text x="770" y="1505.388888888889" class="uc-text">cocas en reingreso</text>
+  <line x1="685" y1="1498.888888888889" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="1352.3333333333333" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="1554.4444444444446" rx="85" ry="25" class="oval" />
+  <text x="770" y="1547.9444444444446" class="uc-text">Validar cobertura de</text>
+  <text x="770" y="1560.9444444444446" class="uc-text">la dirección</text>
+  <line x1="685" y1="1554.4444444444446" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="1395.6666666666667" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+  <ellipse cx="770" cy="1610.0" rx="85" ry="25" class="oval" />
+  <text x="770" y="1603.5" class="uc-text">Validar capacidad de</text>
+  <text x="770" y="1616.5" class="uc-text">producción</text>
+  <line x1="685" y1="1610.0" x2="610" y2="860.0" class="dashed-line" />
+  <text x="668.5" y="1439.0" class="rel-text">&lt;&lt;extends&gt;&gt;</text>
+</svg>

@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam nodesep 40
+skinparam ranksep 60
+
+actor "Admin" as admin
+
+package "COMPRAS" {
+  usecase "Gestión de compras" as UC_Hub
+  usecase "Listar compras" as UC_Central
+  usecase "Crear compra" as UC_Create
+  usecase "Filtrar / consultar compras por proveedor, fecha, insumo, estado" as UC_Search
+  usecase "Ver detalle de compra" as UC_R1
+  usecase "Editar compra" as UC_R2
+  usecase "Cambiar estado de compra" as UC_R3
+  usecase "Anular compra" as UC_R4
+  usecase "Generar reporte de compras por período" as UC_R5
+  usecase "Generar reporte de compras por proveedor" as UC_R6
+  usecase "Generar reporte de compras por insumo" as UC_R7
+}
+
+admin -right-> UC_Hub
+UC_Hub -right-> UC_Central : <<include>>
+UC_Create -down-> UC_Hub : <<extends>>
+UC_Create -down-> UC_Central : <<include>>
+UC_Search -up-> UC_Hub : <<extends>>
+UC_Search -up-> UC_Central : <<include>>
+UC_R1 -left-> UC_Central : <<extends>>
+UC_R2 -left-> UC_Central : <<extends>>
+UC_R3 -left-> UC_Central : <<extends>>
+UC_R4 -left-> UC_Central : <<extends>>
+UC_R5 -left-> UC_Central : <<extends>>
+UC_R6 -left-> UC_Central : <<extends>>
+UC_R7 -left-> UC_Central : <<extends>>
+@enduml
