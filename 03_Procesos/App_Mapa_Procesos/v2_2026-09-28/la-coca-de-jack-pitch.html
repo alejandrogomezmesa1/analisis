@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Coca de Jack — Pitch Comercial</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f0d;
+    --bg2: #141512;
+    --card: #1a1b18;
+    --card2: #1f2019;
+    --orange: #e85d26;
+    --green: #3ecb8a;
+    --text: #f0ede6;
+    --muted: #7a7970;
+    --border: rgba(255,255,255,0.07);
+    --orange-dim: rgba(232,93,38,0.12);
+    --green-dim: rgba(62,203,138,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    padding-bottom: 4rem;
+  }
+
+  /* Sticky Glassmorphic Navbar for Standalone Page */
+  .standalone-nav {
+    max-width: 1200px;
+    margin: 20px auto 0;
+    padding: 1rem 2rem;
+    background: rgba(20, 21, 18, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 20px;
+    z-index: 1000;
+  }
+
+  .standalone-nav a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .standalone-nav a:hover {
+    color: #fff;
+    transform: translateX(-2px);
+  }
+
+  .standalone-nav span.tag {
+    font-size: 0.75rem;
+    background: var(--green-dim);
+    color: var(--green);
+    border: 1px solid rgba(62, 203, 138, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 30px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* SLIDE BASE (RESPONSIVE FLUID LAYOUT) */
+  .slide {
+    width: 95%;
+    max-width: 1200px;
+    min-height: 650px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 40px auto;
+    padding: 60px 80px;
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    background: var(--bg2);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    page-break-after: always;
+    break-after: page;
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: #0e0f0d; padding-bottom: 0; }
+    .standalone-nav { display: none; }
+    .slide {
+      width: 100vw;
+      min-height: 100vh;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      margin: 0;
+      page-break-after: always;
+      break-after: page;
+    }
+    .no-print { display: none; }
+  }
+
+  /* BACKGROUND GRADIENT ACCENT */
+  .slide::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(62,203,138,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  .slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  /* TYPOGRAPHY */
+  .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 30px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text);
+    max-width: 800px;
+    margin-bottom: 0;
+  }
+
+  h1 .accent { color: var(--orange); }
+  h1 .green { color: var(--green); }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 20px;
+    max-width: 700px;
+  }
+
+  .body-text {
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    line-height: 1.65;
+    color: #a8a49a;
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 28px 0;
+  }
+
+  /* BADGE */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .badge-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(232,93,38,0.25); }
+  .badge-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(62,203,138,0.25); }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 28px;
+  }
+
+  .card-orange {
+    background: var(--orange-dim);
+    border: 1px solid rgba(232,93,38,0.2);
+    border-radius: 16px;
+    padding: 24px 28px;
+  }
+
+  .card-green {
+    background: var(--green-dim);
+    border: 1px solid rgba(62,203,138,0.2);
+    border-radius: 16px;
+    padding: 24px 28px;
+  }
+
+  /* STAT GRID */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 24px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.3;
+  }
+
+  /* FEATURE LIST */
+  .feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .feature-icon-chat { background: #2a2f2e; }
+  .feature-icon-user { background: #252433; }
+  .feature-icon-panel { background: #1e2827; }
+
+  .feature-text strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .feature-text span {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  /* BEFORE/AFTER GRID */
+  .ba-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .ba-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .ba-text {
+    font-size: 15px;
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  /* LAYOUT HELPERS */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  /* IMAGE CONTAINERS */
+  .img-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border);
+  }
+
+  .img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(14,15,13,0.5) 0%, transparent 60%);
+  }
+
+  /* FOOTER META */
+  .footer-meta {
+    margin-top: auto;
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-meta span {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* QUOTE BLOCK */
+  .quote-block {
+    border-left: 3px solid var(--orange);
+    padding: 14px 20px;
+    background: var(--orange-dim);
+    border-radius: 0 12px 12px 0;
+    margin: 20px 0;
+  }
+
+  .quote-block p {
+    font-size: 15px;
+    font-style: italic;
+    color: #c4bfb5;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* PRINT BUTTON */
+  .print-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--green);
+    color: #0e0f0d;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 100;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 32px rgba(62,203,138,0.3);
+    transition: all 0.2s ease;
+  }
+  .print-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(62,203,138,0.4);
+  }
+
+  /* RESPONSIVE BREAKPOINTS */
+  @media (max-width: 1024px) {
+    .two-col {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .standalone-nav {
+      top: 10px;
+      margin: 10px 10px 0;
+      padding: 0.8rem 1.2rem;
+    }
+    .slide {
+      padding: 40px 24px;
+      min-height: auto;
+      margin: 24px auto;
+      border-radius: 18px;
+    }
+    .stat-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .ba-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .footer-meta {
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Standalone Nav -->
+<nav class="standalone-nav no-print">
+  <a href="index.html">
+    <span>← Volver al Portal</span>
+  </a>
+  <span class="tag">Pitch Comercial</span>
+</nav>
+
+<!-- ===================== SLIDE 1: PORTADA ===================== -->
+<div class="slide">
+  <!-- BG image with overlay -->
+  <div style="position:absolute; inset:0; z-index:0; pointer-events:none;">
+    <img
+      src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80&auto=format&fit=crop"
+      alt=""
+      style="width:100%; height:100%; object-fit:cover; opacity:0.04; filter:grayscale(60%);"
+      onerror="this.style.display='none'"
+    >
+    <div style="position:absolute; inset:0; background: linear-gradient(120deg, var(--bg) 55%, transparent 100%);"></div>
+  </div>
+
+  <div style="position:relative; z-index:1; display:flex; flex-direction:column; height:100%;">
+    <div class="eyebrow">La Coca de Jack &nbsp;·&nbsp; Propuesta Tecnológica</div>
+
+    <h1>
+      Responder audios<br>todo el día no es<br>servicio al cliente.<br>
+      <span class="accent">Es tiempo que<br>se pierde.</span>
+    </h1>
+
+    <div class="divider" style="margin-top:40px; max-width:560px;"></div>
+
+    <p class="body-text">
+      Una plataforma digital que atiende a tus suscriptores automáticamente, para que tú te concentres en lo que importa: <span style="color:var(--green); font-weight:500;">hacer crecer el negocio.</span>
+    </p>
+
+    <div class="footer-meta">
+      <span>Preparado para La Coca de Jack</span>
+      <span>ADSO SENA</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SLIDE 2: EL PROBLEMA ===================== -->
+<div class="slide">
+  <div class="two-col" style="position:relative; z-index:1; height:100%;">
+    <div style="display:flex; flex-direction:column; height:100%;">
+      <div class="badge badge-orange">El Problema</div>
+
+      <h2>900 clientes, un solo buzón — y siempre las mismas preguntas</h2>
+
+      <p class="body-text">
+        El negocio creció, pero la atención al cliente no. Hoy, el equipo responde mensajes con audios de más de un minuto, todo el día, sobre las mismas dudas.
+      </p>
+
+      <div class="quote-block">
+        <p>Clientes sin respuesta a tiempo, cancelaciones silenciosas, y una bandeja de entrada saturada que ya nadie puede controlar.</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-number">900</div>
+          <div class="stat-label">suscriptores activos hoy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">+1 min</div>
+          <div class="stat-label">por audio manual promedio</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">preguntas repetitivas</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image -->
+    <div>
+      <div class="img-wrap" style="height:350px;">
+        <img
+          src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&q=80&auto=format&fit=crop"
+          alt="Mensajes de WhatsApp"
+          style="width:100%; height:100%; object-fit:cover; filter:saturate(0.5); opacity:0.75;"
+          onerror="this.style.display='none'; this.parentElement.style.background='var(--card)';"
+        >
+        <div class="img-overlay"></div>
+        <!-- Notification bubbles overlay -->
+        <div style="position:absolute; bottom:20px; left:20px; right:20px; display:flex; flex-direction:column; gap:8px;">
+          <div style="background:rgba(14,15,13,0.92); border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:12px; color:#a8a49a; display:flex; align-items:center; gap:8px;">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0;"></span>
+            "¿Cuándo llega mi pedido de la semana?"
+          </div>
+          <div style="background:rgba(14,15,13,0.92); border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:12px; color:#a8a49a; display:flex; align-items:center; gap:8px;">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0;"></span>
+            "Necesito cambiar mi dirección de entrega"
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-meta">
+    <span>La Coca de Jack · Problema Operativo</span>
+    <span>Slide 02</span>
+  </div>
+</div>
+
+<!-- ===================== SLIDE 3: LA SOLUCIÓN ===================== -->
+<div class="slide">
+  <div class="two-col" style="position:relative; z-index:1; height:100%;">
+    <div style="display:flex; flex-direction:column; height:100%;">
+      <div class="badge badge-green">La Solución</div>
+
+      <h2>Una plataforma que atiende, gestiona y libera tiempo</h2>
+
+      <p class="body-text">
+        Automatización a la medida para La Coca de Jacks. Tus clientes resuelven sus dudas de inmediato. Tu equipo solo interviene en novedades excepcionales.
+      </p>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-icon feature-icon-chat">💬</div>
+          <div class="feature-text">
+            <strong>Respuestas automáticas</strong>
+            <span>Atención 24/7 de preguntas frecuentes: menús, horarios, precios y confirmaciones.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon feature-icon-user">👤</div>
+          <div class="feature-text">
+            <strong>Portal del suscriptor</strong>
+            <span>Autogestión de direcciones, suspensiones de servicio o renovación de planes por el propio usuario.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon feature-icon-panel">📊</div>
+          <div class="feature-text">
+            <strong>Panel de control operacional</strong>
+            <span>Control de porciones para cocina y ordenamiento automático de rutas de reparto en moto.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UI Mockup -->
+    <div>
+      <div style="background:var(--card); border:1px solid var(--border); border-radius:20px; overflow:hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
+        <!-- Mock header -->
+        <div style="background:#141512; padding:12px 18px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#28c840;"></div>
+          <span style="margin-left:8px;font-size:10px;color:var(--muted);">Portal Cliente — JackSoft</span>
+        </div>
+        <!-- Mock UI body -->
+        <div style="padding:20px;">
+          <!-- Chat messages -->
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+            <div style="display:flex;gap:8px;align-items:flex-start;">
+              <div style="width:24px;height:24px;border-radius:50%;background:var(--orange-dim);border:1px solid rgba(232,93,38,0.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;">👤</div>
+              <div style="background:#1f2019;border-radius:4px 10px 10px 10px;padding:8px 12px;font-size:12px;color:#a8a49a;">¿Cuándo llega mi pedido?</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:flex-start;flex-direction:row-reverse;">
+              <div style="width:24px;height:24px;border-radius:50%;background:var(--green-dim);border:1px solid rgba(62,203,138,0.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;">🤖</div>
+              <div style="background:var(--green-dim);border:1px solid rgba(62,203,138,0.15);border-radius:10px 4px 10px 10px;padding:8px 12px;font-size:12px;color:var(--green);max-width:220px;">Tu pedido está programado para el <strong>jueves entre 2-5 PM</strong>.</div>
+            </div>
+          </div>
+          <!-- CTA button mock -->
+          <div style="background:var(--green);color:#0e0f0d;border-radius:8px;padding:10px;text-align:center;font-size:12px;font-weight:600;">Actualizar Suscripción →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-meta">
+    <span>La Coca de Jack · Propuesta de Solución</span>
+    <span>Slide 03</span>
+  </div>
+</div>
+
+<!-- ===================== SLIDE 4: EL IMPACTO ===================== -->
+<div class="slide">
+  <div style="position:relative; z-index:1; display:flex; flex-direction:column; height:100%;">
+    <div class="badge badge-green">El Impacto</div>
+
+    <h2>De apagar incendios a operar con control</h2>
+
+    <div class="ba-grid">
+      <div class="card-orange">
+        <div class="ba-label">Operación Actual (Manual)</div>
+        <p class="ba-text" style="color: #e07050;">
+          Audios manuales constantes, retrasos en respuesta a clientes, errores en sumas de cocina y mermas, rutas de reparto a ojo de motorizados.
+        </p>
+      </div>
+      <div class="card-green">
+        <div class="ba-label">Operación con JackSoft</div>
+        <p class="ba-text" style="color: var(--green);">
+          Respuestas automáticas inmediatas, validación inteligente de comprobantes de pago, producción exacta calculada, y rutas ordenadas por zonas.
+        </p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="two-col" style="gap:40px;">
+      <p style="font-size:15px; color:#a8a49a; font-weight:300; line-height:1.65;">
+        Con 900 suscriptores la carga ya es crítica. Al crecer a 1,500, será imposible de gestionar a mano. <span style="color:var(--green); font-weight:500;">Este es el momento de sentar la infraestructura correcta.</span>
+      </p>
+
+      <!-- Metrics representation -->
+      <div style="display:flex; gap:16px;">
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:16px 20px; flex:1; text-align:center;">
+          <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--orange); margin-bottom:4px;">900</div>
+          <div style="font-size:11px; color:var(--muted); margin-bottom:8px;">Límite Operativo Manual</div>
+          <div style="height:4px; background:#2a2520; border-radius:4px; overflow:hidden;">
+            <div style="height:100%; width:90%; background:var(--orange);"></div>
+          </div>
+        </div>
+        <div style="background:var(--card); border:1px solid rgba(62,203,138,0.2); border-radius:16px; padding:16px 20px; flex:1; text-align:center;">
+          <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--green); margin-bottom:4px;">1,500+</div>
+          <div style="font-size:11px; color:var(--muted); margin-bottom:8px;">Capacidad con Automatización</div>
+          <div style="height:4px; background:#1a2a22; border-radius:4px; overflow:hidden;">
+            <div style="height:100%; width:50%; background:var(--green);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-meta">
+    <span>La Coca de Jack · Retorno de Inversión</span>
+    <span>Slide 04</span>
+  </div>
+</div>
+
+<!-- ===================== SLIDE 5: SIGUIENTE PASO ===================== -->
+<div class="slide">
+  <div style="position:relative; z-index:1; display:flex; flex-direction:column; height:100%;">
+    <div class="badge badge-green">Siguiente Paso</div>
+
+    <h2>Dos semanas de diseño antes de construir</h2>
+
+    <p class="body-text" style="margin-bottom:30px;">
+      Antes de iniciar la programación, analizaremos tu operación para definir flujos exactos de pedidos y reglas logísticas de entrega.
+    </p>
+
+    <!-- Process Cards -->
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-bottom:30px;">
+      <div style="background:var(--card); border:1px solid rgba(62,203,138,0.2); border-radius:16px; padding:20px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--green-dim);border:1px solid rgba(62,203,138,0.3);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--green);margin-bottom:12px;">1</div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Descubrimiento</div>
+        <p style="font-size:12px;color:var(--muted);line-height:1.5;">Levantamiento de flujos operativos y de atención actuales.</p>
+        <div style="margin-top:10px;font-size:10px;color:var(--green);font-weight:600;">Semana 1</div>
+      </div>
+
+      <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--muted);margin-bottom:12px;">2</div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Propuesta Técnica</div>
+        <p style="font-size:12px;color:var(--muted);line-height:1.5;">Modelado de base de datos, arquitectura y prototipos visuales.</p>
+        <div style="margin-top:10px;font-size:10px;color:var(--muted);font-weight:600;">Semana 2</div>
+      </div>
+
+      <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px;">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--muted);margin-bottom:12px;">3</div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Desarrollo</div>
+        <p style="font-size:12px;color:var(--muted);line-height:1.5;">Construcción e implementación iterativa de la plataforma.</p>
+        <div style="margin-top:10px;font-size:10px;color:var(--muted);font-weight:600;">Semanas 3–8</div>
+      </div>
+    </div>
+
+    <div class="card-green" style="display:flex; align-items:center; gap:16px; padding:18px 24px;">
+      <div style="font-size:24px; flex-shrink:0;">📋</div>
+      <div style="font-size:13px; color:#a8a49a; line-height:1.4;">
+        <strong style="color:var(--green); display:block; margin-bottom:2px;">Fase de descubrimiento — Sin compromisos previos</strong>
+        Se entrega un plan detallado de arquitectura, requerimientos y cotización exacta para la toma de decisiones.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-meta">
+    <span>La Coca de Jack · Hoja de Ruta</span>
+    <span>Slide 05</span>
+  </div>
+</div>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ Imprimir Diapositivas</button>
+
+</body>
+</html>

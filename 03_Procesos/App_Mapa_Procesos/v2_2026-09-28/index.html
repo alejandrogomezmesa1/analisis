@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JackSoft & La Coca de Jacks · Mapa de Procesos y Talleres ADSO</title>
+    <meta name="description" content="Portal de desarrollo del proyecto JackSoft para la empresa La Coca de Jacks. Mapa de procesos interactivo y talleres de ingeniería de requisitos.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Sticky Glassmorphic Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <a href="#" class="nav-logo">
+                <span class="logo-dot"></span>
+                JackSoft
+            </a>
+            <ul class="nav-links">
+                <li><a href="#inicio" class="active">Inicio</a></li>
+                <li><a href="#pitch">Propuesta (Pitch)</a></li>
+                <li><a href="#mapa-procesos">Mapa de Procesos</a></li>
+                <li><a href="#talleres">Talleres y Documentos</a></li>
+                <li><a href="#equipo">Proyecto y Ficha</a></li>
+            </ul>
+            <div class="nav-badge">SENA ADSO</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="inicio" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge-tag">ADSO · Ficha 3312824</div>
+            <h1>Gestión & Procesos de <span class="highlight">La Coca de Jacks</span></h1>
+            <p class="subtitle">Desarrollo e implementación del aplicativo <strong>JackSoft</strong> para optimizar la logística, facturación y control de viandas a domicilio en Medellín.</p>
+            
+            <div class="hero-actions">
+                <a href="#mapa-procesos" class="cta-button">Ver Mapa de Procesos</a>
+                <a href="#talleres" class="cta-secondary">Explorar Talleres</a>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-num">3</span>
+                    <span class="stat-lbl">Talleres / Entregables</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">12</span>
+                    <span class="stat-lbl">Subprocesos Identificados</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">100%</span>
+                    <span class="stat-lbl">Código Limpio Vanilla</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg"></div>
+    </header>
+
+    <main class="container">
+        
+        
+        <!-- SECTION: PITCH SLIDESHOW -->
+        <section id="pitch" class="section-block">
+            <div class="section-header">
+                <span class="section-tag">Presentación Comercial</span>
+                <h2>Pitch del Proyecto</h2>
+                <p>Nuestra propuesta tecnológica para resolver la gestión de clientes y logística de La Coca de Jacks.</p>
+            </div>
+
+            <div class="pitch-slider-wrapper">
+                <div class="pitch-slider-container" id="pitch-slider-container">
+                    <!-- Slide 1 -->
+                    <div class="pitch-slide active" data-slide="0">
+                        <div class="slide-content-wrap">
+                            <span class="slide-eyebrow">La Coca de Jack · Propuesta Tecnológica</span>
+                            <h3>Responder audios todo el día no es servicio al cliente. <span class="highlight-orange">Es tiempo que se pierde.</span></h3>
+                            <div class="slide-divider"></div>
+                            <p class="slide-text">Una plataforma digital que atiende a tus suscriptores automáticamente, para que tú te concentres en lo que importa: <span class="highlight-green">hacer crecer el negocio.</span></p>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="pitch-slide" data-slide="1">
+                        <div class="slide-content-wrap">
+                            <span class="slide-badge badge-orange">El Problema</span>
+                            <h3>900 clientes, un solo buzón — y siempre las mismas preguntas</h3>
+                            <p class="slide-text">El negocio creció, pero la atención al cliente sigue siendo artesanal. Se envían decenas de audios diarios explicando menús, precios y rutas, saturando la operación.</p>
+                            <div class="slide-quote">
+                                <p>"Clientes sin respuesta a tiempo, cancelaciones silenciosas, y una bandeja de entrada saturada que ya nadie puede controlar."</p>
+                            </div>
+                            <div class="slide-stats">
+                                <div class="slide-stat-item">
+                                    <div class="stat-number-val">900</div>
+                                    <div class="stat-number-lbl">suscriptores activos hoy</div>
+                                </div>
+                                <div class="slide-stat-item">
+                                    <div class="stat-number-val">+1 min</div>
+                                    <div class="stat-number-lbl">por audio manual promedio</div>
+                                </div>
+                                <div class="slide-stat-item">
+                                    <div class="stat-number-val">∞</div>
+                                    <div class="stat-number-lbl">preguntas repetidas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="pitch-slide" data-slide="2">
+                        <div class="slide-content-wrap">
+                            <span class="slide-badge badge-green">La Solución</span>
+                            <h3>Una plataforma que atiende, gestiona y libera tiempo</h3>
+                            <p class="slide-text">Automatización a la medida para La Coca de Jacks. Tus clientes resuelven sus dudas de inmediato y se gestionan de forma autónoma.</p>
+                            <div class="slide-features">
+                                <div class="slide-feature-row">
+                                    <span class="feature-icon-em">💬</span>
+                                    <div class="feature-text-block">
+                                        <strong>Respuestas automáticas</strong>
+                                        <span>Atención 24/7 de preguntas frecuentes: menús, horarios, precios y confirmaciones.</span>
+                                    </div>
+                                </div>
+                                <div class="slide-feature-row">
+                                    <span class="feature-icon-em">👤</span>
+                                    <div class="feature-text-block">
+                                        <strong>Portal del suscriptor</strong>
+                                        <span>Autogestión de direcciones, suspensiones de servicio o renovación de planes.</span>
+                                    </div>
+                                </div>
+                                <div class="slide-feature-row">
+                                    <span class="feature-icon-em">📊</span>
+                                    <div class="feature-text-block">
+                                        <strong>Panel de control operacional</strong>
+                                        <span>Control de porciones para cocina y ordenamiento automático de rutas de reparto.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="pitch-slide" data-slide="3">
+                        <div class="slide-content-wrap">
+                            <span class="slide-badge badge-green">El Impacto</span>
+                            <h3>De apagar incendios a operar con control</h3>
+                            <div class="slide-impact-grid">
+                                <div class="impact-col before">
+                                    <div class="impact-label">Operación Actual (Manual)</div>
+                                    <p>Audios manuales constantes, retrasos en respuesta, errores en sumas de cocina y rutas de reparto estructuradas a ojo de motorizados.</p>
+                                </div>
+                                <div class="impact-col after">
+                                    <div class="impact-label">Operación con JackSoft</div>
+                                    <p>Respuestas automáticas inmediatas, validación de comprobantes, producción exacta calculada, y rutas ordenadas por zonas.</p>
+                                </div>
+                            </div>
+                            <p class="slide-text-small">Con 900 suscriptores la carga ya es crítica. Al crecer a 1,500, será imposible de gestionar a mano.</p>
+                        </div>
+                    </div>
+                    <!-- Slide 5 -->
+                    <div class="pitch-slide" data-slide="4">
+                        <div class="slide-content-wrap">
+                            <span class="slide-badge badge-green">Siguiente Paso</span>
+                            <h3>Dos semanas de diseño antes de construir</h3>
+                            <p class="slide-text">Antes de iniciar la programación, analizaremos tu operación para definir flujos exactos de pedidos y reglas logísticas de entrega.</p>
+                            <div class="slide-steps-grid">
+                                <div class="step-card-item">
+                                    <div class="step-num-badge">1</div>
+                                    <strong>Descubrimiento</strong>
+                                    <span>Mapeo de flujos operativos (Semana 1)</span>
+                                </div>
+                                <div class="step-card-item">
+                                    <div class="step-num-badge">2</div>
+                                    <strong>Propuesta Técnica</strong>
+                                    <span>Modelado de base de datos y prototipos (Semana 2)</span>
+                                </div>
+                                <div class="step-card-item">
+                                    <div class="step-num-badge">3</div>
+                                    <strong>Desarrollo</strong>
+                                    <span>Construcción iterativa (Semanas 3–8)</span>
+                                </div>
+                            </div>
+                            <div class="slide-notice-box">
+                                <span>Fase de descubrimiento — Sin compromisos previos. Al final obtienes el diseño técnico completo.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide Controls -->
+                <div class="pitch-slider-controls">
+                    <button id="btn-pitch-prev" class="slider-btn" title="Diapositiva Anterior">🡄</button>
+                    <div class="pitch-controls-center">
+                        <div class="pitch-slider-dots" id="pitch-slider-dots">
+                            <span class="slider-dot active" data-index="0"></span>
+                            <span class="slider-dot" data-index="1"></span>
+                            <span class="slider-dot" data-index="2"></span>
+                            <span class="slider-dot" data-index="3"></span>
+                            <span class="slider-dot" data-index="4"></span>
+                        </div>
+                        <button id="btn-pitch-play-pause" class="slider-btn play-pause-btn" title="Pausar Reproducción">⏸️</button>
+                    </div>
+                    <button id="btn-pitch-next" class="slider-btn" title="Diapositiva Siguiente">🡆</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: INTERACTIVE PROCESS MAP -->
+        <section id="mapa-procesos" class="section-block">
+            <div class="section-header">
+                <span class="section-tag">Mapa del Negocio</span>
+                <h2>Mapa de Procesos</h2>
+                <p>Haz clic en cualquier bloque del diagrama interactivo del SENA para explorar en detalle cada proceso de la empresa.</p>
+            </div>
+
+            <div class="process-explorer-layout">
+                <!-- SVG Viewer Card -->
+                <div class="svg-viewer-card">
+                    <div class="svg-viewer-header">
+                        <div class="svg-indicator">
+                            <span class="pulse-dot"></span>
+                            <span>Diagrama SVG Interactivo</span>
+                        </div>
+                        <div class="svg-controls">
+                            <button id="btn-zoom-in" title="Acercar">＋</button>
+                            <button id="btn-zoom-out" title="Alejar">－</button>
+                            <button id="btn-reset" title="Restablecer">⟲</button>
+                        </div>
+                    </div>
+                    <div class="svg-viewport" id="svg-viewport">
+                        <div class="svg-zoom-wrapper" id="svg-zoom-wrapper">
+                            <svg width="100%" viewBox="0 0 680 745" role="img" xmlns="http://www.w3.org/2000/svg" id="interactive-map">
+                              <title>Mapa de procesos – La Coca de Jacks</title>
+                              <desc>Mapa de procesos estilo SENA con tres niveles: procesos estratégicos, misionales y de soporte.</desc>
+                              <defs>
+                                <style>
+                                  .clickable-process {
+                                    cursor: pointer;
+                                  }
+                                  .clickable-process rect {
+                                    transition: all 0.2s ease-in-out;
+                                  }
+                                  .clickable-process:hover rect {
+                                    stroke: #c8205f !important;
+                                    stroke-width: 1.5px !important;
+                                    filter: drop-shadow(0 4px 10px rgba(200, 32, 95, 0.25)) !important;
+                                  }
+                                  .clickable-process.active rect {
+                                    stroke: #f19f36 !important;
+                                    stroke-width: 2px !important;
+                                    filter: drop-shadow(0 4px 12px rgba(241, 159, 54, 0.4)) !important;
+                                  }
+                                  /* Remove pointer events on text/sub-elements to make group clicks robust */
+                                  .clickable-process text, .clickable-process g {
+                                    pointer-events: none;
+                                  }
+                                </style>
+                              </defs>
+
+                              <!-- Background Canvas -->
+                              <rect width="100%" height="100%" fill="#ffffff" />
+
+                              <!-- ===== ENCABEZADO / BRANDING ===== -->
+                              <text x="60" y="38" font-weight="700" font-size="9" fill="#666666" font-family="'Outfit', sans-serif">SENA ADSO · FICHA 3312824</text>
+                              <text x="60" y="50" font-size="8" font-weight="600" fill="#999999" font-family="'Outfit', sans-serif">PROYECTO JACKSOFT</text>
+
+                              <text x="340" y="38" text-anchor="middle" font-weight="800" font-size="18" fill="#c8205f" font-family="'Outfit', sans-serif" letter-spacing="0.5">LA COCA DE JACKS</text>
+                              <text x="340" y="52" text-anchor="middle" font-size="8" font-weight="600" fill="#f19f36" font-family="'Outfit', sans-serif" letter-spacing="1">TE COCINAMOS · EMPACAMOS · LLEVAMOS</text>
+
+                              <text x="620" y="38" text-anchor="end" font-weight="700" font-size="9.5" fill="#333333" font-family="'Outfit', sans-serif" letter-spacing="0.5">MAPA DE PROCESOS</text>
+                              <text x="620" y="50" text-anchor="end" font-size="8" font-weight="600" fill="#f19f36" font-family="'Outfit', sans-serif">MEDELLÍN, COLOMBIA</text>
+
+                              <!-- Accent top line -->
+                              <line x1="20" y1="75" x2="660" y2="75" stroke="#f19f36" stroke-width="2" stroke-linecap="round" />
+
+                              <!-- ===== CLIENTE: ENTRADA Y SALIDA (COLUMNAS LATERALES CON TEXTO COMPLETO) ===== -->
+                              <!-- Columna Izquierda: ENTRADAS -->
+                              <rect x="20" y="120" width="30" height="600" fill="#f19f36" rx="4" />
+                              <text x="35" y="420" text-anchor="middle" transform="rotate(-90 35 420)" fill="#ffffff" font-weight="700" font-size="7.2" font-family="'Outfit', sans-serif" letter-spacing="0.2">ENTRADAS · Necesidades y expectativas del cliente · Confirmación viernes · Pago verificado (Nequi) · Lista de clientes · Insumos de proveedores</text>
+
+                              <!-- Columna Derecha: SALIDAS -->
+                              <rect x="630" y="120" width="30" height="600" fill="#f19f36" rx="4" />
+                              <text x="645" y="420" text-anchor="middle" transform="rotate(90 645 420)" fill="#ffffff" font-weight="700" font-size="7.2" font-family="'Outfit', sans-serif" letter-spacing="0.2">SALIDAS · Satisfacción del cliente · Almuerzo entregado y cliente notificado · Recolección de envase vacío · Pedido semanal</text>
+
+
+                              <!-- ===== NIVEL 1: PROCESOS ESTRATÉGICOS (TOP CONTAINER) ===== -->
+                              <rect x="60" y="120" width="560" height="130" rx="6" fill="none" stroke="#f19f36" stroke-width="1.5" />
+                              <text x="70" y="112" font-weight="700" font-size="9" fill="#f19f36" font-family="'Outfit', sans-serif" letter-spacing="1">PROCESOS ESTRATÉGICOS</text>
+
+                              <!-- Proceso Inteligencia de Negocio -->
+                              <g id="proc-inteligencia" class="clickable-process" data-process="inteligencia">
+                                <rect x="85" y="135" width="150" height="100" rx="6" fill="#c8205f" />
+                                <text x="160" y="156" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">GESTIÓN DE</text>
+                                <text x="160" y="169" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">INTELIGENCIA DE</text>
+                                <text x="160" y="182" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">NEGOCIO</text>
+                                <line x1="105" y1="193" x2="215" y2="193" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                                <text x="160" y="210" text-anchor="middle" fill="#ffccd5" font-size="7.5" font-family="'Outfit', sans-serif">Churn · costo/plato · KPIs</text>
+                              </g>
+
+                              <!-- Proceso Gestión de Menús -->
+                              <g id="proc-menus" class="clickable-process" data-process="menus">
+                                <rect x="265" y="135" width="150" height="100" rx="6" fill="#c8205f" />
+                                <text x="340" y="156" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">GESTIÓN DE</text>
+                                <text x="340" y="169" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">PLANIFICACIÓN Y</text>
+                                <text x="340" y="182" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">MENÚ SEMANAL</text>
+                                <line x1="285" y1="193" x2="395" y2="193" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                                <text x="340" y="210" text-anchor="middle" fill="#ffccd5" font-size="7.5" font-family="'Outfit', sans-serif">Menús rotativos · Regla 3-1-1</text>
+                              </g>
+
+                              <!-- Proceso Gestión de Cupos -->
+                              <g id="proc-cupos" class="clickable-process" data-process="cupos">
+                                <rect x="445" y="135" width="150" height="100" rx="6" fill="#c8205f" />
+                                <text x="520" y="156" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">GESTIÓN DE</text>
+                                <text x="520" y="169" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">CUPOS Y CAPACIDAD</text>
+                                <text x="520" y="182" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">OPERATIVA</text>
+                                <line x1="465" y1="193" x2="575" y2="193" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                                <text x="520" y="210" text-anchor="middle" fill="#ffccd5" font-size="7.5" font-family="'Outfit', sans-serif">Cupos límite · Contratación</text>
+                              </g>
+
+
+                              <!-- ===== FLECHAS ESTRATÉGICAS HACIA MISIONALES ===== -->
+                              <!-- Flecha Izquierda -->
+                              <polygon points="210,250 290,250 290,265 305,265 250,282 195,265 210,265" fill="#ffffff" stroke="#c8205f" stroke-width="1.5" />
+                              <text x="250" y="259" text-anchor="middle" font-size="6.5" font-weight="700" fill="#c8205f" font-family="'Outfit', sans-serif">MICROPROCESOS</text>
+                              <text x="250" y="269" text-anchor="middle" font-size="6.5" font-weight="700" fill="#c8205f" font-family="'Outfit', sans-serif">ESTRATÉGICOS</text>
+
+                              <!-- Flecha Derecha -->
+                              <polygon points="390,250 470,250 470,265 485,265 430,282 375,265 390,265" fill="#ffffff" stroke="#c8205f" stroke-width="1.5" />
+                              <text x="430" y="259" text-anchor="middle" font-size="6.5" font-weight="700" fill="#c8205f" font-family="'Outfit', sans-serif">MICROPROCESOS</text>
+                              <text x="430" y="269" text-anchor="middle" font-size="6.5" font-weight="700" fill="#c8205f" font-family="'Outfit', sans-serif">DE EVALUACIÓN</text>
+
+
+                              <!-- ===== NIVEL 2: PROCESOS MISIONALES / OPERATIVOS (CHEVRONS) ===== -->
+                              <text x="70" y="296" font-weight="700" font-size="9" fill="#c8205f" font-family="'Outfit', sans-serif" letter-spacing="1">PROCESOS MISIONALES / OPERATIVOS</text>
+
+                              <!-- Chevron 1: Comercialización y Ventas -->
+                              <g id="group-chevron-1">
+                                <path d="M 70 305 L 225 305 L 240 405 L 225 505 L 70 505 L 85 405 Z" fill="#ffffff" stroke="#c8205f" stroke-width="1.5" />
+                                
+                                <!-- Proceso Clientes y Captación -->
+                                <g id="proc-clientes" class="clickable-process" data-process="clientes">
+                                  <rect x="90" y="315" width="130" height="75" rx="6" fill="#fff9fa" stroke="#f5d6dd" stroke-width="1" />
+                                  <!-- Label Box -->
+                                  <rect x="125" y="322" width="60" height="12" rx="3" fill="#c62828" />
+                                  <text x="155" y="331" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="6.5" font-family="'Outfit', sans-serif">MISIONAL</text>
+                                  <!-- Title -->
+                                  <text x="155" y="354" text-anchor="middle" fill="#c8205f" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">Gestión de</text>
+                                  <text x="155" y="366" text-anchor="middle" fill="#c8205f" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">Clientes y Captación</text>
+                                  <!-- Sub -->
+                                  <text x="155" y="380" text-anchor="middle" fill="#555555" font-size="7" font-family="'Outfit', sans-serif">Landing · WhatsApp · CRM</text>
+                                </g>
+
+                                <!-- Proceso Confirmación y Pago -->
+                                <g id="proc-confirmacion" class="clickable-process" data-process="confirmacion">
+                                  <rect x="90" y="415" width="130" height="75" rx="6" fill="#fff9fa" stroke="#f5d6dd" stroke-width="1" />
+                                  <!-- Label Box -->
+                                  <rect x="125" y="422" width="60" height="12" rx="3" fill="#c62828" />
+                                  <text x="155" y="431" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="6.5" font-family="'Outfit', sans-serif">MISIONAL</text>
+                                  <!-- Title -->
+                                  <text x="155" y="454" text-anchor="middle" fill="#c8205f" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">Gestión de</text>
+                                  <text x="155" y="466" text-anchor="middle" fill="#c8205f" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">Confirmación y Pago</text>
+                                  <!-- Sub -->
+                                  <text x="155" y="480" text-anchor="middle" fill="#555555" font-size="7" font-family="'Outfit', sans-serif">Viernes 10 pm · Nequi</text>
+                                </g>
+                              </g>
+
+                              <!-- Chevron 2: Preparación y Cocina -->
+                              <g id="group-chevron-2">
+                                <path d="M 245 305 L 400 305 L 415 405 L 400 505 L 245 505 L 260 405 Z" fill="#ffffff" stroke="#c8205f" stroke-width="1.5" />
+
+                                <!-- Proceso Producción y Empaque -->
+                                <g id="proc-produccion" class="clickable-process" data-process="produccion">
+                                  <rect x="265" y="315" width="130" height="75" rx="6" fill="#fff9fa" stroke="#f5d6dd" stroke-width="1" />
+                                  <!-- Label Box -->
+                                  <rect x="300" y="322" width="60" height="12" rx="3" fill="#c62828" />
+                                  <text x="330" y="331" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="6.5" font-family="'Outfit', sans-serif">MISIONAL</text>
+                                  <!-- Title -->
+                                  <text x="330" y="354" text-anchor="middle" fill="#c8205f" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">Gestión de</text>
+                                  <text x="330" y="366" text-anchor="middle" fill="#c8205f" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">Producción y Empaque</text>
+                                  <!-- Sub -->
+                                  <text x="330" y="380" text-anchor="middle" fill="#555555" font-size="7" font-family="'Outfit', sans-serif">Noche anterior · Cocas</text>
+                                </g>
+
+                                <!-- Proceso Entregas y Logística -->
+                                <g id="proc-entregas" class="clickable-process" data-process="entregas">
+                                  <rect x="265" y="415" width="130" height="75" rx="6" fill="#fff9fa" stroke="#f5d6dd" stroke-width="1" />
+                                  <!-- Label Box -->
+                                  <rect x="300" y="422" width="60" height="12" rx="3" fill="#c62828" />
+                                  <text x="330" y="431" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="6.5" font-family="'Outfit', sans-serif">MISIONAL</text>
+                                  <!-- Title -->
+                                  <text x="330" y="454" text-anchor="middle" fill="#c8205f" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">Gestión de</text>
+                                  <text x="330" y="466" text-anchor="middle" fill="#c8205f" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">Entregas y Logística</text>
+                                  <!-- Sub -->
+                                  <text x="330" y="480" text-anchor="middle" fill="#555555" font-size="7" font-family="'Outfit', sans-serif">Moto · Ventana horaria</text>
+                                </g>
+                              </g>
+
+                              <!-- Chevron 3: Calidad y Post-Venta -->
+                              <g id="group-chevron-3">
+                                <path d="M 420 305 L 575 305 L 590 405 L 575 505 L 420 505 L 435 405 Z" fill="#ffffff" stroke="#c8205f" stroke-width="1.5" />
+
+                                <!-- Proceso Envases y Retorno -->
+                                <g id="proc-envases" class="clickable-process" data-process="envases">
+                                  <rect x="440" y="315" width="130" height="75" rx="6" fill="#fff9fa" stroke="#f5d6dd" stroke-width="1" />
+                                  <!-- Label Box -->
+                                  <rect x="475" y="322" width="60" height="12" rx="3" fill="#c62828" />
+                                  <text x="505" y="331" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="6.5" font-family="'Outfit', sans-serif">MISIONAL</text>
+                                  <!-- Title -->
+                                  <text x="505" y="354" text-anchor="middle" fill="#c8205f" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">Gestión de</text>
+                                  <text x="505" y="366" text-anchor="middle" fill="#c8205f" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">Envases y Retorno</text>
+                                  <!-- Sub -->
+                                  <text x="505" y="380" text-anchor="middle" fill="#555555" font-size="7" font-family="'Outfit', sans-serif">Vidrio · Higienización</text>
+                                </g>
+
+                                <!-- Proceso Novedades y Servicio -->
+                                <g id="proc-novedades" class="clickable-process" data-process="novedades">
+                                  <rect x="440" y="415" width="130" height="75" rx="6" fill="#fff9fa" stroke="#f5d6dd" stroke-width="1" />
+                                  <!-- Label Box -->
+                                  <rect x="475" y="422" width="60" height="12" rx="3" fill="#c62828" />
+                                  <text x="505" y="431" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="6.5" font-family="'Outfit', sans-serif">MISIONAL</text>
+                                  <!-- Title -->
+                                  <text x="505" y="454" text-anchor="middle" fill="#c8205f" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">Gestión de</text>
+                                  <text x="505" y="466" text-anchor="middle" fill="#c8205f" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">Novedades y Servicio</text>
+                                  <!-- Sub -->
+                                  <text x="505" y="480" text-anchor="middle" fill="#555555" font-size="7" font-family="'Outfit', sans-serif">Incidencias · Soporte</text>
+                                </g>
+                              </g>
+
+
+                              <!-- ===== FLECHA DE APOYO DESDE SOPORTE ===== -->
+                              <polygon points="300,590 380,590 380,565 395,565 340,535 285,565 300,565" fill="#ffffff" stroke="#f19f36" stroke-width="1.5" />
+                              <text x="340" y="574" text-anchor="middle" font-size="6.5" font-weight="700" fill="#f19f36" font-family="'Outfit', sans-serif">MICROPROCESOS DE</text>
+                              <text x="340" y="584" text-anchor="middle" font-size="6.5" font-weight="700" fill="#f19f36" font-family="'Outfit', sans-serif">APOYO</text>
+
+
+                              <!-- ===== NIVEL 3: PROCESOS DE SOPORTE / APOYO (BOTTOM CONTAINER) ===== -->
+                              <rect x="60" y="590" width="560" height="130" rx="6" fill="none" stroke="#f19f36" stroke-width="1.5" />
+                              <text x="70" y="732" font-weight="700" font-size="9" fill="#f19f36" font-family="'Outfit', sans-serif" letter-spacing="1">PROCESOS DE SOPORTE / APOYO</text>
+
+                              <!-- Proceso Gestión Financiera -->
+                              <g id="proc-financiera" class="clickable-process" data-process="financiera">
+                                <rect x="85" y="605" width="150" height="100" rx="6" fill="#c8205f" />
+                                <text x="160" y="628" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">GESTIÓN</text>
+                                <text x="160" y="641" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">FINANCIERA Y</text>
+                                <text x="160" y="654" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">COMPRAS</text>
+                                <line x1="105" y1="668" x2="215" y2="668" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                                <text x="160" y="683" text-anchor="middle" fill="#ffccd5" font-size="7.5" font-family="'Outfit', sans-serif">Caja · Central Mayorista</text>
+                              </g>
+
+                              <!-- Proceso Gestión de Comunicaciones -->
+                              <g id="proc-comunicaciones" class="clickable-process" data-process="comunicaciones">
+                                <rect x="265" y="605" width="150" height="100" rx="6" fill="#c8205f" />
+                                <text x="340" y="628" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">GESTIÓN DE</text>
+                                <text x="340" y="641" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">COMUNICACIONES Y</text>
+                                <text x="340" y="654" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">NOTIFICACIONES</text>
+                                <line x1="285" y1="668" x2="395" y2="668" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                                <text x="340" y="683" text-anchor="middle" fill="#ffccd5" font-size="7.5" font-family="'Outfit', sans-serif">Grupos de difusión · Alertas</text>
+                              </g>
+
+                              <!-- Proceso Evaluación y Mejora -->
+                              <g id="proc-evaluacion" class="clickable-process" data-process="evaluacion">
+                                <rect x="445" y="605" width="150" height="100" rx="6" fill="#c8205f" />
+                                <text x="520" y="628" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">GESTIÓN DE</text>
+                                <text x="520" y="641" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">EVALUACIÓN Y</text>
+                                <text x="520" y="654" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="9.5" font-family="'Outfit', sans-serif">MEJORA CONTINUA</text>
+                                <line x1="465" y1="668" x2="575" y2="668" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                                <text x="520" y="683" text-anchor="middle" fill="#ffccd5" font-size="7.5" font-family="'Outfit', sans-serif">Auditoría · Tiempos · Merma</text>
+                              </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process Details Card -->
+                <div class="process-details-card" id="process-details-container">
+                    <div class="details-placeholder" id="details-placeholder">
+                        <div class="placeholder-icon">🖱️</div>
+                        <h4>Explorador de Procesos</h4>
+                        <p>Haz clic en cualquier caja de proceso en el diagrama para ver sus objetivos, entradas, salidas y responsables en este panel.</p>
+                    </div>
+                    
+                    <div class="details-content hidden" id="details-content">
+                        <div class="details-badge" id="details-type">Proceso Estratégico</div>
+                        <h3 id="details-title">Nombre del Proceso</h3>
+                        
+                        <div class="details-section">
+                            <h5>🎯 Objetivo / Descripción</h5>
+                            <p id="details-desc">Descripción del proceso seleccionado.</p>
+                        </div>
+
+                        <div class="details-section">
+                            <h5>📥 Entradas Principales</h5>
+                            <p id="details-inputs">Entradas y requerimientos iniciales.</p>
+                        </div>
+
+                        <div class="details-section">
+                            <h5>📤 Salidas / Resultados</h5>
+                            <p id="details-outputs">Entregables y valor generado.</p>
+                        </div>
+
+                        <div class="details-section">
+                            <h5>⚡ Indicadores Clave (KPIs)</h5>
+                            <ul class="kpi-list" id="details-kpis">
+                                <li>KPI 1</li>
+                                <li>KPI 2</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: WORKSHOPS & DOCUMENTATION -->
+        <section id="talleres" class="section-block">
+            <div class="section-header">
+                <span class="section-tag">Biblioteca Digital</span>
+                <h2>Talleres y Documentación</h2>
+                <p>Explora y descarga los entregables del programa ADSO relacionados con el análisis de requerimientos del sistema JackSoft.</p>
+            </div>
+
+            <div class="docs-grid">
+                <!-- Doc 1: Ficha Proyecto -->
+                <div class="doc-card">
+                    <div class="doc-badge badge-sena">Ficha Técnica</div>
+                    <div class="doc-icon">📁</div>
+                    <h4>Ficha del Proyecto JackSoft</h4>
+                    <p>Ficha de caracterización de JackSoft para la empresa La Coca de Jacks. Detalla aprendices, instructores, ficha y cliente.</p>
+                    <div class="doc-actions">
+                        <button class="btn-preview" onclick="openDocPreview('ficha')">👁️ Ver Contenido</button>
+                        <div class="btn-group-download">
+                            <a href="Formato_Ficha_Proyecto_jackSoft.docx" class="btn-download word" download title="Descargar Word">Word</a>
+                            <a href="Formato_Ficha_Proyecto_jackSoft.docx.pdf" class="btn-download pdf" download title="Descargar PDF">PDF</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doc 2: Que son los requisitos -->
+                <div class="doc-card">
+                    <div class="doc-badge badge-req">Conceptos</div>
+                    <div class="doc-icon">📝</div>
+                    <h4>Conceptos de Ingeniería de Requisitos</h4>
+                    <p>Definición de requisitos funcionales y no funcionales, técnicas de recolección (elicitación), análisis, MoSCoW y validación.</p>
+                    <div class="doc-actions">
+                        <button class="btn-preview" onclick="openDocPreview('requisitos')">👁️ Ver Contenido</button>
+                        <div class="btn-group-download">
+                            <a href="¿Qué son los requisitos_.docx" class="btn-download word" download title="Descargar Word">Word</a>
+                            <a href="¿Qué son los requisitos_.docx.pdf" class="btn-download pdf" download title="Descargar PDF">PDF</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doc 3: Por que es importante conocer en detalle -->
+                <div class="doc-card">
+                    <div class="doc-badge badge-comm">Metodología</div>
+                    <div class="doc-icon">💬</div>
+                    <h4>Elicitación y Comunicación con Cliente</h4>
+                    <p>Estudio de la comunicación eficaz, técnica del espejo, reducción de costos en diseño y dinámicas ágiles de trabajo en equipo.</p>
+                    <div class="doc-actions">
+                        <button class="btn-preview" onclick="openDocPreview('comunicacion')">👁️ Ver Contenido</button>
+                        <div class="btn-group-download">
+                            <a href="Por qué es importante conocer en detalle.docx" class="btn-download word" download title="Descargar Word">Word</a>
+                            <a href="Por qué es importante conocer en detalle.docx.pdf" class="btn-download pdf" download title="Descargar PDF">PDF</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doc 4: Pitch de Negocio -->
+                <div class="doc-card">
+                    <div class="doc-badge badge-sena">Propuesta</div>
+                    <div class="doc-icon">📢</div>
+                    <h4>Pitch Comercial y Propuesta de Valor</h4>
+                    <p>Presentación ejecutiva de JackSoft para La Coca de Jacks. Explica el problema de negocio, la solución y el plan de trabajo.</p>
+                    <div class="doc-actions">
+                        <a href="#pitch" class="btn-preview" style="text-align: center; text-decoration: none; display: block; line-height: 2.2;">👁️ Ver Pitch (Slider)</a>
+                        <div class="btn-group-download" style="grid-template-columns: 1fr;">
+                            <a href="la-coca-de-jack-pitch.html" target="_blank" class="btn-download word" style="background: rgba(0, 158, 122, 0.1); color: var(--accent-sena); border: 1px solid rgba(0, 158, 122, 0.2);" title="Abrir Presentación Completa">Presentación Completa ↗</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: SENA PROJECT & TEAM -->
+        <section id="equipo" class="section-block">
+            <div class="section-header">
+                <span class="section-tag">Desarrolladores</span>
+                <h2>Información del Proyecto</h2>
+                <p>Tecnología en Análisis y Desarrollo de Software (ADSO) · Centro de Formación SENA</p>
+            </div>
+
+            <div class="team-layout">
+                <!-- Left: Card Info -->
+                <div class="project-info-card">
+                    <div class="project-info-header">
+                        <div class="sena-logo-text">SENA</div>
+                        <h3>ADSO · Ficha 3312824</h3>
+                    </div>
+                    <div class="project-info-body">
+                        <div class="info-row">
+                            <span class="info-label">Aplicativo:</span>
+                            <span class="info-val">JackSoft</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Sector:</span>
+                            <span class="info-val">Economía Popular</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Cliente:</span>
+                            <span class="info-val">La Coca de Jacks SAS (Richard Ortiz)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Instructor Titular:</span>
+                            <span class="info-val">Newton Willard Pomare</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Grid of Apprentices -->
+                <div class="apprentices-grid">
+                    <div class="apprentice-card">
+                        <div class="app-avatar">AG</div>
+                        <div class="app-info">
+                            <h4>Alejandro Gomez Mesa</h4>
+                            <p>Aprendiz ADSO</p>
+                            <span class="app-email">alejandrogomezmesa1@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="apprentice-card">
+                        <div class="app-avatar">OM</div>
+                        <div class="app-info">
+                            <h4>Omar David Meneses Verona</h4>
+                            <p>Aprendiz ADSO</p>
+                            <span class="app-email">ODMV36335917@soy.sena.edu.co</span>
+                        </div>
+                    </div>
+                    <div class="apprentice-card">
+                        <div class="app-avatar">EC</div>
+                        <div class="app-info">
+                            <h4>Erick Santiago Camargo</h4>
+                            <p>Aprendiz ADSO</p>
+                            <span class="app-email">camargosantiago78@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="apprentice-card">
+                        <div class="app-avatar">LM</div>
+                        <div class="app-info">
+                            <h4>Luis Gabriel Mesa</h4>
+                            <p>Aprendiz ADSO</p>
+                            <span class="app-email">mesluis702@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="apprentice-card">
+                        <div class="app-avatar">SM</div>
+                        <div class="app-info">
+                            <h4>Samuel Morales Marin</h4>
+                            <p>Aprendiz ADSO</p>
+                            <span class="app-email">samuelmarinmorales@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <h2>La Coca de Jacks & JackSoft</h2>
+            <p class="footer-tagline">"Te cocinamos, empacamos y llevamos el almuerzo hasta tu puerta de trabajo"</p>
+            <div class="contact-info">
+                <p>📍 Calle 28a #65a-24, Medellín</p>
+                <p>📞 311 643 7887</p>
+                <p>✉️ lacocadejacksmed@gmail.com</p>
+            </div>
+            <p class="copyright">© 2026 ADSO Ficha 3312824. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- DOCUMENT PREVIEW MODAL -->
+    <div id="preview-modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div>
+                    <span class="modal-tag" id="modal-doc-tag">Documento</span>
+                    <h3 id="modal-doc-title">Vista Previa de Documento</h3>
+                </div>
+                <button class="modal-close" onclick="closeDocPreview()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-doc-content">
+                <!-- Populated dynamically via Javascript -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-close-modal" onclick="closeDocPreview()">Cerrar Vista Previa</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+
+
+
+REGIONAL ANTIOQUIA
+CENTRO DE SERVICIOS Y GESTIÓN EMPRESARIAL
+
+
+
+
+
+TECNOLOGÍA EN NOMBRE DEL PROGRAMA DE FORMACIÓN
+
+
+
+
+
+
+
+Presentado por:
+Nombre completo del Aprendiz
+Torcuato Terencio Toro Taso
+Nombre completo del Aprendiz
+
+
+
+
+Medellín, 2025
+
+
+REGIONAL ANTIOQUIA
+CENTRO DE SERVICIOS Y GESTIÓN EMPRESARIAL
+
+
+
+TECNOLOGÍA EN NOMBRE DEL PROGRAMA DE FORMACIÓN
+
+
+
+
+Orientar investigación formativa según referentes técnicos (240201064)
+
+Instructor: Jennifer Andrea Londoño Gallego
+
+
+
+Nombre del trabajo (Ej.: Informe de Práctica 1 de la Guía de Aprendizaje 1)
+
+
+Presentado por:
+Nombre completo del Aprendiz – Tipo.ID. Numero ID
+Nombre completo del Aprendiz – Tipo.ID. Numero ID
+Nombre completo del Aprendiz – Tipo.ID. Numero ID
+
+Grupo de formación: Número de la ficha
+
+
+
+
+MEDELLÍN, 2025
+	•	PRESENTACIÓN DEL PROYECTO
+	•	Título o nombre del proyecto
+	•	Autores
+	•	Resumen del proyecto
+	•	Palabras claves
+
+	•	INTRODUCCIÓN
+	•	Contexto y planteamiento del problema
+El sector de la micro, pequeña y mediana empresa (mipyme) representa una parte fundamental de la generación de empleo y de la actividad productiva en Colombia; sin embargo, este segmento empresarial continúa caracterizándose por bajos niveles de productividad, escaso desarrollo tecnológico y una alta proporción de operaciones informales o parcialmente formalizadas (Torres-Medina & Márquez, 2021). En este contexto se ubica La Coca de Jacks S.A.S., empresa con domicilio en la calle 27 # 65 B - 40 del municipio de Medellín, Antioquia, dedicada a la prestación de un servicio integral de alimentación por suscripción enfocado en la entrega de almuerzos caseros listos para el consumo.
+El modelo comercial de la empresa se fundamenta en planes de suscripción semanal, quincenal o mensual, mediante los cuales el cliente recibe un almuerzo diario de lunes a viernes en su domicilio o lugar de trabajo, en lugar de adquirir comidas individuales. Este enfoque es coherente con la tendencia observada en distintos sectores —incluido el de alimentación— hacia modelos de negocio por suscripción, en los que el pago periódico y recurrente sustituye a la compra puntual, generando ingresos más predecibles para el negocio y comodidad para el cliente (Elósegui, 2025). No obstante, la operación logística y transaccional que sostiene este modelo —el manejo de los recipientes reutilizables denominados "cocas", la validación de pagos por transferencia bancaria y la asignación de zonas de cobertura geográfica— se ejecuta actualmente de manera manual, sin apoyo de un sistema de información centralizado.
+Diversos estudios señalan que, si bien la transformación digital constituye una oportunidad relevante para que las mipymes colombianas mejoren su competitividad, el grado de madurez digital de estas empresas continúa siendo bajo, en especial en tecnologías de gestión de procesos como los sistemas ERP o de georreferenciación, siendo la falta de recursos financieros, técnicos y de conocimiento las principales barreras identificadas (Sarmiento Suárez et al., 2024). En la misma línea, el Plan Nacional de Desarrollo 2022-2026 reconoce la transformación digital como una herramienta prioritaria para dinamizar la productividad y fortalecer la denominada economía popular, sector en el que se enmarca la operación de La Coca de Jacks S.A.S. (Cámara Colombiana de Comercio Electrónico [CCCE], 2023).
+Actualmente, la totalidad del ciclo operativo de la empresa —registro y venta de planes, validación de comprobantes de pago, planeación de la producción diaria en cocina, despacho y entrega, y consolidación de la información del negocio— se apoya en chats de WhatsApp, registros manuales y hojas de cálculo de Excel sin ningún grado de integración entre sí. Esta situación motiva el desarrollo del proyecto JackSoft, un sistema web y móvil orientado a automatizar la gestión de usuarios, compras, producción, servicios, ventas y logística de la compañía, de acuerdo con sus reglas de negocio (JackSoft, 2026).
+Para la identificación y el ordenamiento de las causas y los efectos del problema central del proyecto se aplicó la técnica del árbol de problemas, herramienta propuesta dentro de la Metodología de Marco Lógico, que permite representar de forma jerárquica las relaciones de causalidad entre un problema central, sus causas (raíces) y sus efectos (ramas), a partir del análisis participativo de la situación estudiada (Ortegón et al., 2005). De manera complementaria, se utilizó el método de las 6 preguntas o Kipling (What, Why, When, Where, Who, How) para delimitar el qué, el porqué, el cuándo, el dónde, el quién y el cómo del proyecto antes de construir el árbol de problemas (Kipling, 1902), lo que permitió precisar que el proyecto consiste en una aplicación web y móvil que gestiona suscripciones, cocas, pagos y entregas, motivada por la operación manual actual, desarrollada por sprints y delimitada inicialmente a la cobertura geográfica de Medellín (JackSoft, 2026).
+	•	5W1H o 5 Por qué
+
+	•	Árbol de problema
+
+	•	Pregunta problematizadora
+2.4.1 Causas raíz del problema
+El análisis documental de la ficha de proyecto y el levantamiento de información con el cliente permitieron identificar tres causas raíz que originan la situación problemática de la empresa (JackSoft, 2026):
+	•	Cobro y validación de pagos manuales: la empresa no cuenta con una pasarela de pago automatizada, por lo que cada comprobante de transferencia bancaria debe ser revisado y validado manualmente por el administrador antes de activar una suscripción.
+	•	Rotación de cocas e inventario sin control: no existe un mecanismo de seguimiento al ciclo de rotación de los recipientes ni un cálculo automatizado de los cupos disponibles de producción diaria, lo que impide conocer con precisión cuántos juegos de cocas están en poder de cada cliente.
+	•	Logística y cobertura sin georreferenciación: la definición de zonas de cobertura y la agrupación de pedidos por sector se realizan de forma empírica, sin apoyo de polígonos geográficos ni de un mecanismo que gestione automáticamente el desplazamiento de fechas en días festivos.
+2.4.2 Problema central
+Estas tres causas convergen en un problema central identificado como la operación manual e ineficiente de La Coca de Jacks (JackSoft, 2026). Dicha condición se evidencia en que la totalidad de los procesos de la empresa —registro de clientes, validación de pagos, planeación de producción, despacho de pedidos y consolidación de información financiera y operativa— dependen de chats de WhatsApp, archivos de Excel y la memoria del personal, sin que exista un registro unificado que permita conocer en tiempo real el número de clientes activos, los ingresos del período, el costo de producción por almuerzo o el desempeño de los repartidores (JackSoft, 2026).
+2..4.3 Efectos del problema
+A partir del problema central se desprenden dos efectos directos, cada uno derivado de un conjunto específico de causas (JackSoft, 2026):
+	•	Errores y demoras operativas: originadas en la validación lenta de los pagos —que retrasa la activación de suscripciones desde varias horas hasta días— y en los errores en el manejo de las cocas, que dificultan la reposición de recipientes perdidos o dañados y pueden interrumpir el ciclo diario de rotación.
+	•	Pérdida de ventas y clientes: derivada de las ventas fuera de la zona de cobertura habilitada y de la activación tardía de los planes contratados, situaciones que deterioran la experiencia del cliente, incrementan los costos operativos por desplazamientos ineficientes y motivan la cancelación de suscripciones.
+Este flujo de causas, problema central y efectos se documenta de manera gráfica en la Figura 1, correspondiente al modelo de árbol de problemas elaborado para el proyecto JackSoft (JackSoft, 2026).
+Figura 1. Modelo de árbol de problemas — Operación manual e ineficiente de La Coca de Jacks (JackSoft, 2026)
+2.4.4 Pregunta problematizadora
+¿Cómo puede el diseño e implementación de un sistema de información web y móvil optimizar la gestión operativa de La Coca de Jacks S.A.S. —específicamente en la validación de pagos, control de inventarios, georreferenciación y planificación de la producción— para mitigar las deficiencias actuales, reducir los errores operativos y disminuir la pérdida de clientes?
+
+Esta pregunta orienta el desarrollo del proyecto JackSoft hacia la construcción de un sistema que, mediante la automatización de la validación de pagos, el control de la rotación de cocas, la georreferenciación de zonas de cobertura y la gestión integrada de la información, permita resolver el problema central diagnosticado y sus efectos asociados (JackSoft, 2026; Ortegón et al., 2005).
+Referencias
+Cámara Colombiana de Comercio Electrónico. (2023, 10 de julio). Hacia la transformación digital de las MiPymes en Colombia. https://ccce.org.co/noticias/hacia-la-transformacion-digital-de-las-mipymes-en-colombia/
+Elósegui, T. (2025). Modelos de negocio basados en suscripción para pymes. Guía de Marketing para Pymes. https://tristanelosegui.com/modelos-de-negocio-basados-en-suscripcion-para-pymes/
+JackSoft. (2026). Ficha de proyecto JackSoft — La Coca de Jacks S.A.S. [Documento interno no publicado]. Servicio Nacional de Aprendizaje (SENA), Programa de Tecnología en Análisis y Desarrollo de Software.
+Kipling, R. (1902). The Elephant's Child. En Just So Stories for Little Children. Macmillan.
+Ortegón, E., Pacheco, J. F., & Prieto, A. (2005). Metodología del marco lógico para la planificación, el seguimiento y la evaluación de proyectos y programas. Comisión Económica para América Latina y el Caribe (CEPAL) / Instituto Latinoamericano y del Caribe de Planificación Económica y Social (ILPES). https://repositorio.cepal.org/handle/11362/5607
+Sarmiento Suárez, J. E., Gutiérrez Navas, E. B., & Ramírez Montañez, J. C. (2024). Oportunidades y desafíos para la digitalización de las mipymes en Colombia. Revista Pensamiento y Gestión, (57), 128–154. https://rcientificas.uninorte.edu.co/index.php/pensamiento/article/view/16513
+Torres-Medina, F., & Márquez, F. J. (2021). Sector mipyme en Colombia: entre la informalidad y la formalización. Revista de Economía & Administración, 17(2). https://revistas.uao.edu.co/ojs/index.php/REYA/article/view/321
+	•	
+
+	•	REFERENTES TEÓRICOS
+3.1 Marco teórico
+3.2 Mapa Mental
+
+	•	OBJETIVOS E HIPÓTESIS
+	•	Objetivo general
+	•	Objetivos específicos
+	•	Árbol de objetivos
+	•	Hipótesis de investigación
+	•	Variables de investigación
+
+	•	DISEÑO METODOLÓGICO
+	•	Enfoque y Tipo de investigación
+	•	Muestra poblacional
+	•	Técnicas de recolección de información
+	•	Proceso de investigación
+
+	•	RESULTADOS
+	•	Gráficas de resultados
+	•	Análisis de resultados
+
+	•	CONCLUSIONES
+
+	•	REFERENCIAS BIBLIOGRÁFICAS

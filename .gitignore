@@ -1,1 +1,13 @@
 .DS_Store
+
+# Carpetas con su propio repositorio git (se versionan aparte)
+05_Casos_de_Uso/
+03_Procesos/App_Mapa_Procesos/v1_2026-06-16/
+06_Gestion_de_Proyecto_Scrum/Presentacion_Artefactos/v1_2026-07-27/
+09_Backups_y_Archivos_Zips/Legacy_JackSoft_Raw/Presentación Scrum - Artefactos/Artefactos/
+
+# Copia generada por 00_Contexto_Versiones/actualizar_vigente.py
+00_Documentacion_Vigente/
+
+# Archivos temporales de herramientas
+.playwright-mcp/
