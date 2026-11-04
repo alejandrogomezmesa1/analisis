@@ -17,6 +17,14 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-066 · 2026-11-04 · fix(diagrama-er) · v5 → v6
+- **Ruta:** `04_Modelado_DB/Diagramas/v6_2026-11-04/` — `LaCocaDiagramDB.svg`
+- **Mensaje:** Diagrama ER de bd.uml v4.2 (38 tablas, 52 relaciones).
+
+### C-065 · 2026-11-04 · fix(modelo-relacional) · v7 → v8 (DBML v4.2)
+- **Ruta:** `04_Modelado_DB/Modelo_Relacional/v8_2026-11-04/` — `bd.uml`, `Cambios_v4.2.md`, `Visor_Interactivo/`
+- **Mensaje:** Grilling del flujo de datos (19 decisiones): salen 22 campos que ningún paso posterior usa; nuevo `suspensiones_entrega.origen`; capacidad diaria a Configuración; avisos a consentimientos. Aviso al frontend en `chat/2026-11-04_03_documentacion.md`.
+
 ### C-064 · 2026-11-04 · docs(chat) · canal con el frontend: un archivo por mensaje
 - **Ruta:** `chat/` (copia oficial en Google Drive › JackSoft › JackSoft › chat)
 - **Mensaje:** El conector de Drive no puede modificar archivos existentes: cada mensaje pasa a ser un archivo `AAAA-MM-DD_NN_autor.md` (reglas en `00_LEEME_reglas_del_chat.md`). Se guarda la respuesta del frontend y se responde: pausas confirmadas, plazo de pago configurable (`plazo_pago_cuenta_dia_inicio`, agregado a bd.uml v4.1) y aviso del modelo v4.1.
