@@ -113,3 +113,53 @@ Ficha v9, Tablero Kanban v7 (Story Mapping: "Gestionar suscripciones con pago ve
 
 ---
 <!-- Responde debajo de esta línea -->
+
+## 2026-11-03 — frontend
+
+> Desde ahora escribo directamente en este archivo: tengo la carpeta `chat` sincronizada con Google Drive para escritorio. Este mensaje es el mismo de `respuesta_frontend_2026-11-03.md`, que subí antes como archivo aparte cuando aún no podía editar este. Ese archivo ya se puede borrar.
+
+### Respuesta a tu mensaje del 2026-11-03
+
+Gracias, quedó todo claro. Ya apliqué en el frontend las secciones 1 a 5 de tu mensaje (commit `80cc273` del repo del frontend). Lint sin advertencias, 132 pruebas unitarias y las pruebas de punta a punta pasan.
+
+### 1. Checklist (tu sección 5)
+
+| Punto | Estado | Cómo quedó |
+|---|---|---|
+| Festivos | Hecho | El plan es un ciclo de lunes a viernes (5, 10 o 20 días). Cada festivo del ciclo se descuenta (`precio ÷ días`, $15.000) y la fecha final no se mueve. La suscripción trae `cycleStart`, `endDate`, `holidays`, `holidayDiscount`, `billableDays`, `cocasFee` y `amount`. |
+| Corte | Hecho | Sábado 12:00 m. por defecto, de `dia_corte_suscripcion` y `hora_corte_suscripcion`. |
+| Pago tardío | Hecho | Quité "N días hábiles después de pagar". Renovación y reingreso pueden "Empezar y pagar después" (en el asistente y al registrar la venta en el panel): quedan `activa` con `pagoPendiente` y `fechaLimitePago`. La venta nueva paga antes (409 `PAY_FIRST`). En Suscripciones hay un filtro "Pagos vencidos" con tres acciones: dar más plazo, suspender las entregas que faltan o cancelar. Además, el cliente ve en su cuenta el aviso con la fecha límite y sube ahí el comprobante. |
+| Pausas | Hecho | Hasta las 5:00 p. m. del día anterior (`hora_limite_suspension`). Ya no hay 48 h. |
+| Kit de cocas | Hecho | Sale de `cobro_cocas` (se edita en Configuración). La web, el asistente, los términos y los cobros lo leen de ahí. |
+| Estados | Hecho | Suscripción con `cancelada`. Incidencias con los 8 códigos (`ausencia_cliente`…`otro`): se guarda el código y se muestra el nombre. Las bases guardadas se migran solas. Compras, entregas, líneas de producción y la publicación semanal ya coincidían. |
+| Alergias | Hecho | Campo de texto libre (`profile.allergies`) en el registro del asistente, en el perfil del cliente y en el alta del cliente desde el panel. |
+| Proveedores | Ya estaba | Solo por categoría de insumos. No hay precio por insumo y proveedor. |
+| Mapas | Hecho | No se guarda ningún punto de Mapbox, ni el de la búsqueda ni el marcado en el mapa. El punto solo valida la zona en el momento y `center` se guarda en `null`. |
+| Usuarios | Hecho | Quité cargo y fecha de ingreso: el personal se distingue por su rol. |
+| Juegos de cocas y kárdex | Pendiente | Lo dejo para después, como dijiste. |
+
+Mapeo de claves para el backend: `corte {weekday, hour, minute}` ↔ `dia_corte_suscripcion` y `hora_corte_suscripcion`; `inicioSinPago {activo, diasHabiles}` ↔ `inicio_sin_pago_activo` y `dias_habiles_plazo_pago`; `pausa {hour, minute}` ↔ `hora_limite_suspension`; `cobroCocas` ↔ `cobro_cocas`; `entregasHibridas` ↔ `modalidad_hibrida_activa`. Está documentado en `docs/05-diagramas/arquitectura/guia-backend.md` (sección 6) y en `contrato-api.md`.
+
+Rutas nuevas: `POST /admin/subscriptions/:id/extender-plazo` `{ fecha }`, `/suspender-entregas` y `/cancelar` `{ reason }`. Además, `payLater` en `POST /subscriptions` y `POST /admin/subscriptions`.
+
+### 2. Decisiones que tomé al aplicar (confirma si alguna no es así)
+
+1. **Las pausas no mueven la fecha final.** Antes el frontend agregaba el día pausado al final del plan. Lo cambié porque `suspensiones_entrega` dice "sin devolución ni prórroga" y porque la fecha final ya no se mueve por festivos. Actualicé los términos (versión del 3-nov-2026) y la web.
+2. **El plazo de pago cuenta el primer almuerzo.** Con 3 días hábiles, un plan que empieza el lunes vence el miércoles al final del día. Si debía ser el jueves (3 días *después* del inicio), es un cambio de una línea.
+3. **Una suscripción aprobada tarde pasa al ciclo siguiente.** Si se aprueba cuando su ciclo ya empezó, pasa al lunes siguiente y se recalcula el descuento por festivos, para no partir el ciclo.
+4. **Suspender por pago no cuenta como pausa del cliente.** Esas entregas llevan `suspendedFor: 'pago'`, el cliente no las puede reanudar, y vuelven a programarse al aprobar el pago o al dar más plazo.
+5. **`tipo_venta` lo calcula el servidor.** Es `renovacion` si el cliente tiene un plan activo, `reingreso` si tuvo uno antes y `nueva` en otro caso.
+
+### 3. Sobre tus preguntas abiertas
+
+| # | Pregunta | Respuesta del frontend |
+|---|---|---|
+| 1 | Servicio de geocodificación | Lo decide el backend. El frontend ya no envía coordenadas para guardar. Una opción es la geocodificación **permanente** de Mapbox (`permanent=true`, de pago), cuya licencia sí permite almacenar el resultado. Las otras son geocodificar con otro proveedor que lo permita, o no guardar coordenadas y trabajar solo con la zona. |
+| 2 | ¿Avisar al cliente antes de que decida el administrador? | El frontend ya muestra el aviso en la cuenta: "Paga tu plan hasta el …" y, si vence, "Tu plazo de pago venció". El aviso por WhatsApp o correo lo tiene que mandar el backend. Propongo uno el día anterior al vencimiento y otro al vencer. Si lo aprueban, no cambia nada en el frontend. |
+
+### Pendientes
+
+| # | Pregunta | De | Estado |
+|---|---|---|---|
+| 3 | El `bd.uml` de `V2 › 03/11/2026 › Modelado` todavía es el **v3.6**: el encabezado dice v3.6 y no aparecen `consentimientos`, `menus_semana` ni `proveedor_categorias`. ¿Puedes subir el v3.7 para copiarlo a `docs/bd.uml`? | frontend | abierta |
+| 4 | Confirmar las decisiones 1 (las pausas no mueven la fecha final) y 2 (el plazo cuenta el primer almuerzo) de la sección 2. | frontend | abierta |

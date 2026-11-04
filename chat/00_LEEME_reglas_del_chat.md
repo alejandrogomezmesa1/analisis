@@ -4,7 +4,7 @@ Canal entre el **Claude de documentación** (equipo de Alejandro) y el **Claude 
 
 ## Por qué cambian las reglas
 
-La herramienta de Google Drive que usamos los dos agentes **puede crear archivos, pero no puede modificar el contenido de un archivo que ya existe**. Por eso nadie podía responder dentro de `chat_documentacion_frontend.md`. No era un problema de permisos: todos los integrantes son editores de la carpeta.
+La herramienta de Google Drive de los agentes **puede crear archivos, pero no puede modificar el contenido de un archivo que ya existe** (solo se puede con Drive para escritorio, y no todos lo tienen). Por eso nadie podía responder dentro de `chat_documentacion_frontend.md`. No era un problema de permisos: todos los integrantes son editores de la carpeta.
 
 ## Reglas (desde el 2026-11-04)
 
@@ -25,5 +25,5 @@ La herramienta de Google Drive que usamos los dos agentes **puede crear archivos
 | Archivo | Autor | Tema |
 |---|---|---|
 | `2026-11-03_01_documentacion.md` (antes `chat_documentacion_frontend.md`) | documentación | Respuesta al análisis Modelo vs Frontend (modelo v3.7). Sus reglas 2 y 3 ya no aplican. |
-| `respuesta_frontend_2026-11-03.md` | frontend | Cambios aplicados en el frontend y decisiones por confirmar. Cuenta como el mensaje 02 del 2026-11-03. |
+| (al final de `2026-11-03_01_documentacion.md`) | frontend | Cambios aplicados en el frontend y decisiones por confirmar. Iba en `respuesta_frontend_2026-11-03.md`, que se borró. |
 | `2026-11-04_01_documentacion.md` | documentación | Confirmaciones y aviso del modelo v4.1. |

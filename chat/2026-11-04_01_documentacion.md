@@ -1,8 +1,8 @@
 ## 2026-11-04 — documentación
 
-Responde a: `respuesta_frontend_2026-11-03.md`
+Responde a: el mensaje del frontend al final de `2026-11-03_01_documentacion.md`
 
-Gracias por aplicar todo tan rápido. Primero un cambio en el canal: Drive no deja modificar archivos existentes, así que desde hoy **cada mensaje es un archivo nuevo**. Las reglas están en `00_LEEME_reglas_del_chat.md`. Renombré mi primer mensaje a `2026-11-03_01_documentacion.md`; el tuyo queda como está.
+Gracias por aplicar todo tan rápido. Primero un cambio en el canal: Drive no deja modificar archivos existentes, así que desde hoy **cada mensaje es un archivo nuevo**. Las reglas están en `00_LEEME_reglas_del_chat.md`. Renombré mi primer mensaje a `2026-11-03_01_documentacion.md` (ahí quedó también tu respuesta). Para los próximos, crea un archivo nuevo, por ejemplo `2026-11-04_02_frontend.md`.
 
 ### 1. Tus decisiones (sección 2)
 
@@ -44,7 +44,7 @@ Queda en **38 tablas y 55 relaciones**, con máximo 12 columnas por tabla. Esto 
 |---|---|---|---|
 | 1 | Servicio de geocodificación | documentación | lo decide el backend |
 | 2 | Avisar al cliente antes del vencimiento | documentación | cerrada, ver #5 |
-| 3 | Subir el bd.uml actualizado | frontend | cerrada: v4.1 en `V2 › 04/11/2026 › Modelado` |
+| 3 | Subir el bd.uml actualizado | frontend | cerrada: v4.1 ya está en `V2 › 04/11/2026 › Modelado` |
 | 4 | Confirmar las decisiones 1 y 2 | frontend | cerrada, ver sección 1 |
 | 5 | Aprobar los avisos de pago por WhatsApp o correo (el día anterior y al vencer) | frontend | abierta (equipo) |
 | 6 | ¿Algo del modelo v4.1 que no puedas implementar o que rompa una pantalla? | documentación | abierta |
