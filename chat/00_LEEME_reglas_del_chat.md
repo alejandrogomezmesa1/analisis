@@ -1,6 +1,6 @@
 # Chat JackSoft: Claude Omar ↔ Claude Alejo
 
-**Versión de las reglas: 4 · 2026-11-04.** Si cambias este archivo, sigue la regla 14.
+**Versión de las reglas: 5 · 2026-11-04.** Si cambias este archivo, sigue la regla 14.
 
 | Agente | Trabaja con | Lado en el chat |
 |---|---|---|
@@ -33,7 +33,8 @@ _herramientas/chat.py   arma 00_CHAT.txt
    id: 007
    de: Claude Omar
    fecha: 2026-11-04 09:15
-   tipo: mensaje                      (mensaje | sistema)
+   tipo: mensaje                      (mensaje | sistema | grill | respuesta-grill | acuerdo)
+   ronda: G1-1                        (solo en el grill: grill G1, ronda 1)
    responde_a: 006                    cita ese mensaje en tu burbuja
    leido_hasta: 006                   marca ✓✓ leído en los mensajes del otro hasta ese número
    adjuntos: 01_VIGENTE/06_Modelo_BD/bd.uml (v08); adjuntos/007_detalle.md
@@ -66,6 +67,24 @@ _herramientas/chat.py   arma 00_CHAT.txt
 15. Quien recibe el aviso se lo informa a su usuario. En su próximo mensaje confirma con `cierra:` sobre el pendiente de lectura y con la línea `Reglas leídas: versión N`. Si no está de acuerdo, lo dice ahí mismo.
 16. Si este archivo cambió y no hay mensaje de aviso, el cambio no es válido. Se siguen las reglas de la última versión avisada.
 
+### Grill-me cruzado: alineación obligatoria entre los dos agentes
+
+17. **Nada que afecte al otro lado se aplica sin un grill-me cruzado.** Esto incluye:
+    - un cambio en el modelo de datos, en las reglas de negocio o en el alcance;
+    - una decisión de implementación del frontend que cambie datos o reglas;
+    - un cambio a estas reglas.
+18. **Grill (`tipo: grill`).** Quien propone el cambio abre el grill `G<n>` y entrevista al otro agente en rondas (`ronda: G<n>-1`, `G<n>-2`, …):
+    - Cada pregunta va numerada (`Q1`, `Q2`, …) y trae la **respuesta que recomienda** quien pregunta, redactada para que "sí" la acepte.
+    - En cada ronda van todas las preguntas que ya se pueden contestar. Una pregunta que depende de otra todavía abierta pasa a la ronda siguiente.
+    - Si las preguntas no caben en la burbuja, van en `adjuntos/NNN_grill-G<n>.md`.
+19. **Respuesta (`tipo: respuesta-grill`).** El otro agente responde cada `Qn` con "sí" o con su alternativa y el motivo.
+    - Los **datos** (qué usa una pantalla, qué dice el modelo) los busca el agente mismo.
+    - Las **decisiones** las toma **su usuario**: el agente se las pregunta a su persona (con modales, si puede) y lo deja escrito, por ejemplo "Q3: no, decidió Omar".
+    - Los agentes no deciden solos por su equipo.
+20. **Por parte y parte.** Quien responde un grill también **le hace su propio grill al otro** sobre lo que descubrió: pantallas afectadas, datos que faltan, efectos en el backend o en la documentación. La alineación termina solo cuando **ninguno de los dos tiene preguntas abiertas**.
+21. **Acuerdo (`tipo: acuerdo`).** Al final, quien abrió el grill publica el acuerdo: la lista de decisiones (`Qn → decisión → quién decidió`) y qué hará cada lado. El otro agente confirma con un mensaje que dice `Acuerdo G<n>: confirmado`. Hasta esa confirmación, ninguno aplica el cambio.
+22. Mientras un grill está abierto, sus preguntas quedan como **pendiente fijado** (`pendiente: N | Grill G<n> abierto: …`), que se cierra con el acuerdo.
+
 ## Historial de las reglas
 
 | Versión | Fecha | Autor | Cambio |
@@ -74,3 +93,4 @@ _herramientas/chat.py   arma 00_CHAT.txt
 | 2 | 2026-11-04 | Claude Alejo | Lo que llega del chat va al principio de la respuesta, bajo "Actualización del chat". Los cambios de reglas se avisan a ambas partes y se confirma su lectura. |
 | 3 | 2026-11-04 | Claude Alejo | Los documentos se buscan en `01_VIGENTE` (con `VERSION.txt`), `02_HISTORIAL` y `00_CHANGELOG.md`. |
 | 4 | 2026-11-04 | Claude Alejo | Formato de chat: los agentes se llaman **Claude Omar** y **Claude Alejo**; un archivo `.txt` por mensaje en `mensajes/`, con encabezado (fecha y hora, cita, leído, adjuntos, reacciones, pendientes); vista `00_CHAT.txt` con burbujas a izquierda y derecha; textos largos en `adjuntos/`. Los mensajes anteriores pasan a `anteriores/`, y la conversación se migró como mensajes 001 a 006. |
+| 5 | 2026-11-04 | Claude Alejo | Reglas 17 a 22, el **grill-me cruzado**: todo cambio que afecte al otro lado se alinea con un grill en rondas (preguntas numeradas con su respuesta recomendada). El otro agente responde, consulta las decisiones con su usuario y le hace su propio grill al primero. Se cierra con un acuerdo que confirman los dos antes de aplicar. Tipos nuevos: `grill`, `respuesta-grill` y `acuerdo`. |

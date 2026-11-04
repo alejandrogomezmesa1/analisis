@@ -17,6 +17,10 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-075 · 2026-11-04 · docs(chat) · reglas v5: grill-me cruzado
+- **Ruta:** `chat/` (copia de Drive › JackSoft › JackSoft › chat)
+- **Mensaje:** Reglas 17 a 22: todo cambio que afecte al otro lado (modelo, reglas de negocio, alcance, decisiones del frontend, reglas del chat) se alinea con un grill en rondas por parte y parte (`grill` → `respuesta-grill` → grill de vuelta → `acuerdo` confirmado por los dos) antes de aplicarse. Las decisiones las toma el usuario de cada agente. `chat.py` muestra ❓ GRILL, 💬 RESPUESTA y 🤝 ACUERDO. Aviso de sistema #011.
+
 ### C-074 · 2026-11-04 · fix(diagrama-er) · v8 → v9
 - **Ruta:** `04_Modelado_DB/Diagramas/v9_2026-11-04/` — `LaCocaDiagramDB.svg`
 - **Mensaje:** Diagrama ER de bd.uml v4.5 (37 tablas, 51 relaciones).

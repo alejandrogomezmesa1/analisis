@@ -14,7 +14,8 @@ Formato de un mensaje (encabezado, una línea en blanco o '---', y el texto):
     id: 008
     de: Claude Alejo                 (Claude Omar | Claude Alejo)
     fecha: 2026-11-04 03:20          (hora de Colombia, 24 h)
-    tipo: mensaje                    (mensaje | sistema)
+    tipo: mensaje                    (mensaje | sistema | grill | respuesta-grill | acuerdo)
+    ronda: G1-1                      (solo en grill y respuesta-grill: grill G1, ronda 1)
     responde_a: 006                  (opcional: cita ese mensaje)
     leido_hasta: 006                 (opcional: último mensaje del otro que ya leíste → ✓✓)
     adjuntos: 01_VIGENTE/06_Modelo_BD/bd.uml (v08); adjuntos/008_detalle.md
@@ -106,7 +107,9 @@ def burbuja(m, msgs, todos):
     otro = DER if m["de"] == IZQ else IZQ
     lec = [x for x in msgs if x["de"] == otro and x.get("leido_hasta") and int(x["leido_hasta"]) >= m["id"]]
     estado = f"✓✓ leído {lec[0]['dt']:%H:%M}" if lec else "✓ enviado"
-    titulo = f"─ {m['de']} "
+    etiqueta = {"grill": " · ❓ GRILL", "respuesta-grill": " · 💬 RESPUESTA"}.get(m["tipo"], "")
+    if etiqueta and m.get("ronda"): etiqueta += f" {m['ronda']}"
+    titulo = f"─ {m['de']}{etiqueta} "
     num = f" #{m['id']:03d} ─"
     top = "╭" + titulo + "─" * (BURBUJA - 2 - w(titulo) - w(num)) + num + "╮"
     pie_i, pie_d = f"─ {m['dt']:%H:%M} ", f" {estado} ─"
@@ -121,7 +124,8 @@ def burbuja(m, msgs, todos):
     return [s + f for f in filas]
 
 def sistema(m):
-    t = f" ⚙ {m['de']} · {m['dt']:%H:%M} · #{m['id']:03d} "
+    icono = "🤝 ACUERDO" if m["tipo"] == "acuerdo" else "⚙"
+    t = f" {icono} {m['de']} · {m['dt']:%H:%M} · #{m['id']:03d} "
     out = [("─" * ((ANCHO - w(t)) // 2) + t).ljust(0) + "─" * (ANCHO - (ANCHO - w(t)) // 2 - w(t))]
     for l in envolver(m["cuerpo"], ANCHO - 20):
         out.append(" " * max(0, (ANCHO - w(l)) // 2) + l)
@@ -163,7 +167,7 @@ def generar():
             dia = m["dt"].date()
             t = f" {DIAS[dia.weekday()]} {dia.day} de {MESES[dia.month - 1]} de {dia.year} "
             L += ["", t.center(ANCHO, "·"), ""]
-        L += (sistema(m) if m["tipo"] == "sistema" else burbuja(m, msgs, todos)) + [""]
+        L += (sistema(m) if m["tipo"] in ("sistema", "acuerdo") else burbuja(m, msgs, todos)) + [""]
     ult = msgs[-1] if msgs else None
     if ult:
         espera = IZQ if ult["de"] == DER else DER
