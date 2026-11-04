@@ -18,7 +18,7 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 ---
 
 ### C-059 · 2026-11-03 · docs(notas+chat) · ajuste con el frontend
-- **Ruta:** notas de Obsidian (RN, diccionario, MOC, índice) y `chat/2026-11-03_modelo-v3.7_para_frontend.md`
+- **Ruta:** notas de Obsidian (RN, diccionario, MOC, índice) y `chat/chat_documentacion_frontend.md (copia oficial en Google Drive › JackSoft › JackSoft › chat)`
 - **Mensaje:** RN-05 y RN de corte semanal reescritas; precios, kit, pagos, pausas y zonas actualizados. Nueva carpeta `chat/` con el mensaje para el agente del frontend: decisiones, estados, campos nuevos, claves de configuración y checklist de cambios.
 
 ### C-058 · 2026-11-03 · fix(manual-tecnico) · v4 → v5
