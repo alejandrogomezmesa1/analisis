@@ -17,6 +17,14 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-061 · 2026-11-04 · fix(diagrama-er) · v3 → v4
+- **Ruta:** `04_Modelado_DB/Diagramas/v4_2026-11-04/` — `LaCocaDiagramDB.svg`
+- **Mensaje:** Diagrama ER de bd.uml v4.0 agrupado por los 11 procesos en orden del flujo.
+
+### C-060 · 2026-11-04 · fix(modelo-relacional) · v5 → v6 (DBML v4.0, entregable)
+- **Ruta:** `04_Modelado_DB/Modelo_Relacional/v6_2026-11-04/` — `bd.uml`, `Cambios_v4.0.md`, `Visor_Interactivo/modelo_la_coca_v4.html`
+- **Mensaje:** Máximo 12 columnas por tabla: 46 campos eliminados (técnicos, redundantes o calculados) con su motivo en `Cambios_v4.0.md`. Incidencias con un solo `reportado_por_usuario_id`. TableGroups por proceso en orden del flujo. Visor interactivo con relaciones animadas y notas por tabla: https://claude.ai/artifact/61mqHjLZm1YSZAVvvoqy8t
+
 ### C-059 · 2026-11-03 · docs(notas+chat) · ajuste con el frontend
 - **Ruta:** notas de Obsidian (RN, diccionario, MOC, índice) y `chat/chat_documentacion_frontend.md (copia oficial en Google Drive › JackSoft › JackSoft › chat)`
 - **Mensaje:** RN-05 y RN de corte semanal reescritas; precios, kit, pagos, pausas y zonas actualizados. Nueva carpeta `chat/` con el mensaje para el agente del frontend: decisiones, estados, campos nuevos, claves de configuración y checklist de cambios.
