@@ -17,6 +17,14 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-063 · 2026-11-04 · fix(diagrama-er) · v4 → v5
+- **Ruta:** `04_Modelado_DB/Diagramas/v5_2026-11-04/` — `LaCocaDiagramDB.svg`
+- **Mensaje:** Diagrama ER de bd.uml v4.1 (38 tablas, 55 relaciones).
+
+### C-062 · 2026-11-04 · fix(modelo-relacional) · v6 → v7 (DBML v4.1)
+- **Ruta:** `04_Modelado_DB/Modelo_Relacional/v7_2026-11-04/` — `bd.uml`, `Cambios_v4.1.md`, `Visor_Interactivo/`
+- **Mensaje:** Notas de revisión del visor: se eliminan historial_configuraciones, tipos_recipiente (la categoría del producto es la coca) y menu_alternativas (integrada en menu_items con restriccion y reemplaza_item_id). Se mantienen juegos_cocas y recipientes.
+
 ### C-061 · 2026-11-04 · fix(diagrama-er) · v3 → v4
 - **Ruta:** `04_Modelado_DB/Diagramas/v4_2026-11-04/` — `LaCocaDiagramDB.svg`
 - **Mensaje:** Diagrama ER de bd.uml v4.0 agrupado por los 11 procesos en orden del flujo.
