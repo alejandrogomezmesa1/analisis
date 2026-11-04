@@ -17,6 +17,10 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-067 · 2026-11-04 · feat(drive) · versionado de Modelado(5 trimestre)
+- **Ruta:** Drive › JackSoft › JackSoft › Modelado(5 trimestre); script `00_Contexto_Versiones/publicar_drive.py`; `chat/` (reglas v3)
+- **Mensaje:** Drive pasa de carpetas por fecha (V1, V2) a la estructura del repo: `01_VIGENTE/<Documento>` (con VERSION.txt), `02_HISTORIAL/<Documento>/vNN_AAAA-MM-DD` con todas las versiones del repo (misma numeración), `00_CHANGELOG.md` y `00_LEEME_versionado.md` generados por el script, `03_Exposiciones`, y V1/V2 archivadas intactas en `99_Archivo_V1_V2`. Las reglas del chat pasan a la versión 3 (regla 6), con su aviso al frontend.
+
 ### C-066 · 2026-11-04 · fix(diagrama-er) · v5 → v6
 - **Ruta:** `04_Modelado_DB/Diagramas/v6_2026-11-04/` — `LaCocaDiagramDB.svg`
 - **Mensaje:** Diagrama ER de bd.uml v4.2 (38 tablas, 52 relaciones).

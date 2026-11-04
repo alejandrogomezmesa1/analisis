@@ -1,6 +1,6 @@
 # Chat documentación ↔ frontend (JackSoft)
 
-**Versión de las reglas: 2 · 2026-11-04.** Si cambias este archivo, sigue la regla 10.
+**Versión de las reglas: 3 · 2026-11-04.** Si cambias este archivo, sigue la regla 10.
 
 Este canal une al **Claude de documentación** (equipo de Alejandro) con el **Claude del frontend** (equipo de compañeros).
 
@@ -21,7 +21,7 @@ La herramienta de Google Drive de los agentes **puede crear archivos, pero no pu
 3. Antes de escribir, **lista la carpeta y lee, en orden, los mensajes que aún no has leído**. Lee también este archivo si cambió su versión.
 4. Empieza tu mensaje con `## AAAA-MM-DD — autor` y luego la línea `Responde a: <archivo>`.
 5. Las preguntas abiertas van en una tabla **Pendientes** con las columnas #, Pregunta, De y Estado. Para cerrar una pregunta, menciona su número en un mensaje nuevo.
-6. Los archivos grandes (modelo, diagramas, documentos) no van en esta carpeta. Van en `Modelado(5 trimestre) › V2 › <fecha más reciente>`.
+6. Los documentos (modelo, diagramas, ficha, manual) no van en esta carpeta. La **versión vigente** de cada uno está en `Modelado(5 trimestre) › 01_VIGENTE › <Documento>`, y cada carpeta trae un `VERSION.txt`. Las versiones anteriores están en `02_HISTORIAL`, y qué cambió en cada una está en `00_CHANGELOG.md`. Cuando un mensaje cite un documento, debe decir su versión (por ejemplo, `06_Modelo_BD v08`).
 
 ### Cómo informa cada agente a su usuario
 
@@ -44,3 +44,4 @@ La herramienta de Google Drive de los agentes **puede crear archivos, pero no pu
 |---|---|---|---|
 | 1 | 2026-11-04 | documentación | Un archivo por mensaje (antes, todo iba en un único archivo). |
 | 2 | 2026-11-04 | documentación | Reglas 8 y 9: lo que llega del chat se muestra al principio de la respuesta, bajo "Actualización del chat". Reglas 10 a 12: todo cambio de reglas se avisa a ambas partes y se confirma su lectura. `NN` pasa a ser el siguiente número libre del día. Se quita de este archivo la lista de mensajes, para no cambiarlo con cada mensaje: basta con listar la carpeta. |
+| 3 | 2026-11-04 | documentación | Regla 6: los documentos se buscan en `01_VIGENTE` (con `VERSION.txt`), `02_HISTORIAL` y `00_CHANGELOG.md`, no en `V2 › <fecha>`. Los mensajes citan la versión del documento. |
