@@ -17,6 +17,10 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-076 · 2026-11-04 · docs(chat) · reglas v6: grill interactivo
+- **Ruta:** `chat/` (copia de Drive › JackSoft › JackSoft › chat)
+- **Mensaje:** Las preguntas del grill van en formato de cuestionario (`Qn | título | pregunta`, de 2 a 4 opciones, la recomendada con `*`). `chat.py preguntas <id>` las convierte en JSON para AskUserQuestion, y quien recibe el grill se las muestra a su usuario como preguntas interactivas, nunca en texto plano. Las respuestas se escriben `Rn | opción | decidió <persona>`. Aviso de sistema #012.
+
 ### C-075 · 2026-11-04 · docs(chat) · reglas v5: grill-me cruzado
 - **Ruta:** `chat/` (copia de Drive › JackSoft › JackSoft › chat)
 - **Mensaje:** Reglas 17 a 22: todo cambio que afecte al otro lado (modelo, reglas de negocio, alcance, decisiones del frontend, reglas del chat) se alinea con un grill en rondas por parte y parte (`grill` → `respuesta-grill` → grill de vuelta → `acuerdo` confirmado por los dos) antes de aplicarse. Las decisiones las toma el usuario de cada agente. `chat.py` muestra ❓ GRILL, 💬 RESPUESTA y 🤝 ACUERDO. Aviso de sistema #011.

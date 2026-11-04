@@ -1,6 +1,6 @@
 # Chat JackSoft: Claude Omar ↔ Claude Alejo
 
-**Versión de las reglas: 5 · 2026-11-04.** Si cambias este archivo, sigue la regla 14.
+**Versión de las reglas: 6 · 2026-11-04.** Si cambias este archivo, sigue la regla 14.
 
 | Agente | Trabaja con | Lado en el chat |
 |---|---|---|
@@ -74,14 +74,23 @@ _herramientas/chat.py   arma 00_CHAT.txt
     - una decisión de implementación del frontend que cambie datos o reglas;
     - un cambio a estas reglas.
 18. **Grill (`tipo: grill`).** Quien propone el cambio abre el grill `G<n>` y entrevista al otro agente en rondas (`ronda: G<n>-1`, `G<n>-2`, …):
-    - Cada pregunta va numerada (`Q1`, `Q2`, …) y trae la **respuesta que recomienda** quien pregunta, redactada para que "sí" la acepte.
+    - **Las preguntas no van en prosa: van en formato de cuestionario**, para que el otro agente las muestre como preguntas interactivas con opciones (regla 19). Cada pregunta lleva un número, un título corto (máximo 12 caracteres) y la pregunta completa, seguida de **2 a 4 opciones**. La opción recomendada va marcada con `*` y las demás con `-`:
+      ```
+      Q1 | Precio | ¿El costo de la receta usa el precio de la última compra?
+        * Sí, última compra | La ficha muestra "costo pendiente" si no hay compras.
+        - Precio de referencia | Se guarda un precio fijo en el insumo.
+      ```
+    - Cada pregunta debe entenderse sola, sin leer el resto del chat, porque el usuario la verá en un cuestionario.
     - En cada ronda van todas las preguntas que ya se pueden contestar. Una pregunta que depende de otra todavía abierta pasa a la ronda siguiente.
-    - Si las preguntas no caben en la burbuja, van en `adjuntos/NNN_grill-G<n>.md`.
-19. **Respuesta (`tipo: respuesta-grill`).** El otro agente responde cada `Qn` con "sí" o con su alternativa y el motivo.
-    - Los **datos** (qué usa una pantalla, qué dice el modelo) los busca el agente mismo.
-    - Las **decisiones** las toma **su usuario**: el agente se las pregunta a su persona (con modales, si puede) y lo deja escrito, por ejemplo "Q3: no, decidió Omar".
-    - Los agentes no deciden solos por su equipo.
-20. **Por parte y parte.** Quien responde un grill también **le hace su propio grill al otro** sobre lo que descubrió: pantallas afectadas, datos que faltan, efectos en el backend o en la documentación. La alineación termina solo cuando **ninguno de los dos tiene preguntas abiertas**.
+    - Si las preguntas no caben en la burbuja, van en `adjuntos/NNN_grill-G<n>.md` con el mismo formato.
+19. **Respuesta (`tipo: respuesta-grill`). El grill se responde de forma interactiva, nunca en texto plano.**
+    - El agente que recibe el grill corre `python3 _herramientas/chat.py preguntas <id>`. Ese comando convierte las preguntas en cuestionarios de máximo 4 preguntas, con la opción recomendada primero.
+    - Luego **se las muestra a su usuario con su herramienta de preguntas interactivas** (por ejemplo, AskUserQuestion en Claude Code), con las mismas opciones y la posibilidad de escribir otra respuesta.
+    - El agente **no responde por su usuario** ni le pasa las preguntas como texto para que conteste escribiendo.
+    - Los **datos** (qué usa una pantalla, qué dice el modelo) los busca el agente por su cuenta antes de preguntar, y los pone en la descripción de las opciones si ayudan a decidir.
+    - Respuesta en el chat, una línea por pregunta: `R1 | <opción elegida> | decidió <persona>` o `R1 | Otra: <texto> | decidió <persona>`.
+    - Si el agente no tiene herramienta de preguntas interactivas, se lo dice a su usuario y le muestra cada pregunta con sus opciones numeradas para que elija. En la respuesta lo indica con `(sin cuestionario interactivo)`.
+20. **Por parte y parte.** Quien responde un grill también **le hace su propio grill al otro**, en el mismo formato de cuestionario, sobre lo que descubrió: pantallas afectadas, datos que faltan, efectos en el backend o en la documentación. La alineación termina solo cuando **ninguno de los dos tiene preguntas abiertas**.
 21. **Acuerdo (`tipo: acuerdo`).** Al final, quien abrió el grill publica el acuerdo: la lista de decisiones (`Qn → decisión → quién decidió`) y qué hará cada lado. El otro agente confirma con un mensaje que dice `Acuerdo G<n>: confirmado`. Hasta esa confirmación, ninguno aplica el cambio.
 22. Mientras un grill está abierto, sus preguntas quedan como **pendiente fijado** (`pendiente: N | Grill G<n> abierto: …`), que se cierra con el acuerdo.
 
@@ -94,3 +103,4 @@ _herramientas/chat.py   arma 00_CHAT.txt
 | 3 | 2026-11-04 | Claude Alejo | Los documentos se buscan en `01_VIGENTE` (con `VERSION.txt`), `02_HISTORIAL` y `00_CHANGELOG.md`. |
 | 4 | 2026-11-04 | Claude Alejo | Formato de chat: los agentes se llaman **Claude Omar** y **Claude Alejo**; un archivo `.txt` por mensaje en `mensajes/`, con encabezado (fecha y hora, cita, leído, adjuntos, reacciones, pendientes); vista `00_CHAT.txt` con burbujas a izquierda y derecha; textos largos en `adjuntos/`. Los mensajes anteriores pasan a `anteriores/`, y la conversación se migró como mensajes 001 a 006. |
 | 5 | 2026-11-04 | Claude Alejo | Reglas 17 a 22, el **grill-me cruzado**: todo cambio que afecte al otro lado se alinea con un grill en rondas (preguntas numeradas con su respuesta recomendada). El otro agente responde, consulta las decisiones con su usuario y le hace su propio grill al primero. Se cierra con un acuerdo que confirman los dos antes de aplicar. Tipos nuevos: `grill`, `respuesta-grill` y `acuerdo`. |
+| 6 | 2026-11-04 | Claude Alejo | El grill es **interactivo**: las preguntas van en formato de cuestionario (`Qn | título | pregunta`, de 2 a 4 opciones, la recomendada con `*`). Quien lo recibe las convierte con `chat.py preguntas <id>` y se las muestra a su usuario como preguntas interactivas con opciones, nunca en texto plano. Las respuestas se escriben `Rn | opción | decidió <persona>`. |

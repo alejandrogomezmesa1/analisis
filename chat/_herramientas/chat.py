@@ -24,6 +24,20 @@ Formato de un mensaje (encabezado, una línea en blanco o '---', y el texto):
     cierra: 7                        (opcional, se puede repetir: quita el pendiente fijado)
     ---
     Texto del mensaje. Corto, como en un chat; lo largo va en adjuntos/.
+
+Preguntas de un grill (para mostrarlas como cuestionario interactivo, con opciones):
+
+    Q1 | Precio | ¿El costo de la receta usa el precio de la última compra?
+      * Sí, última compra | La ficha muestra "costo pendiente" si no hay compras.     (* = recomendada)
+      - Precio de referencia | Se guarda un precio fijo en el insumo.
+
+    python3 _herramientas/chat.py preguntas 012     imprime en JSON las preguntas del mensaje 012, listas
+                                                    para AskUserQuestion (o la herramienta equivalente):
+                                                    de 1 a 4 preguntas por cuestionario y de 2 a 4 opciones,
+                                                    con la recomendada primero y marcada "(Recomendado)".
+Respuesta (respuesta-grill), una línea por pregunta:
+    R1 | Sí, última compra | decidió Omar
+    R2 | Otra: <texto libre> | decidió Omar
 """
 import os, re, sys, textwrap, unicodedata, datetime
 
@@ -183,6 +197,33 @@ def siguiente(autor):
     print(f"mensajes/{n:03d}_{ahora:%Y-%m-%d_%H%M}_{slug}.txt\n")
     print(f"id: {n:03d}\nde: {autor}\nfecha: {ahora:%Y-%m-%d %H:%M}\ntipo: mensaje\nresponde_a: \nleido_hasta: \n---\n")
 
+def preguntas(num):
+    """Convierte las preguntas Qn de un grill en cuestionarios interactivos (JSON)."""
+    import json
+    f = next((x for x in os.listdir(MSG) if x.startswith(f"{int(num):03d}_")), None)
+    if not f: raise SystemExit(f"No existe el mensaje {num}")
+    m = leer(os.path.join(MSG, f))
+    texto = m["cuerpo"]
+    for a in m["adjuntos"]:
+        ruta = os.path.join(BASE, a.split(" (")[0].strip())
+        if os.path.isfile(ruta) and ruta.endswith(".md"): texto += "\n" + open(ruta, encoding="utf-8").read()
+    qs, actual, errores = [], None, []
+    for line in texto.splitlines():
+        mq = re.match(r"\s*Q(\d+)\s*\|\s*([^|]+?)\s*\|\s*(.+?)\s*$", line)
+        mo = re.match(r"\s*([*-])\s*([^|]+?)\s*(?:\|\s*(.+?))?\s*$", line)
+        if mq:
+            actual = {"id": f"Q{mq.group(1)}", "header": mq.group(2)[:12], "question": mq.group(3), "multiSelect": False, "options": []}
+            qs.append(actual)
+        elif mo and actual is not None:
+            rec = mo.group(1) == "*"
+            op = {"label": mo.group(2) + (" (Recomendado)" if rec else ""), "description": mo.group(3) or ""}
+            actual["options"].insert(0, op) if rec else actual["options"].append(op)
+    for q in qs:
+        if not 2 <= len(q["options"]) <= 4: errores.append(f"{q['id']}: tiene {len(q['options'])} opciones (deben ser de 2 a 4)")
+    lotes = [qs[i:i + 4] for i in range(0, len(qs), 4)]
+    print(json.dumps({"mensaje": m["id"], "ronda": m.get("ronda"), "de": m["de"], "cuestionarios": lotes, "errores": errores}, ensure_ascii=False, indent=1))
+
 if __name__ == "__main__":
     if len(sys.argv) > 2 and sys.argv[1] == "siguiente": siguiente(sys.argv[2])
+    elif len(sys.argv) > 2 and sys.argv[1] == "preguntas": preguntas(sys.argv[2])
     else: generar()
