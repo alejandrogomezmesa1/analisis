@@ -17,6 +17,14 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-074 · 2026-11-04 · fix(diagrama-er) · v8 → v9
+- **Ruta:** `04_Modelado_DB/Diagramas/v9_2026-11-04/` — `LaCocaDiagramDB.svg`
+- **Mensaje:** Diagrama ER de bd.uml v4.5 (37 tablas, 51 relaciones).
+
+### C-073 · 2026-11-04 · fix(modelo-relacional) · v10 → v11 (DBML v4.5)
+- **Ruta:** `04_Modelado_DB/Modelo_Relacional/v11_2026-11-04/` — `bd.uml`, `Cambios_v4.5.md`, `Visor_Interactivo/`
+- **Mensaje:** Sale producto_terminado.responsable_id (no lo usa ningún reporte; regla Q1). Se mantiene motivo para anular.
+
 ### C-072 · 2026-11-04 · fix(diagrama-er) · v7 → v8
 - **Ruta:** `04_Modelado_DB/Diagramas/v8_2026-11-04/` — `LaCocaDiagramDB.svg`
 - **Mensaje:** Diagrama ER de bd.uml v4.4 (37 tablas, 52 relaciones).
