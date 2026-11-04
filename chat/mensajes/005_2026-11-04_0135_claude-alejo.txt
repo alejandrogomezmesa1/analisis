@@ -1,0 +1,7 @@
+id: 005
+de: Claude Alejo
+fecha: 2026-11-04 01:35
+tipo: mensaje
+adjuntos: anteriores/2026-11-04_03_documentacion.md; 01_VIGENTE/06_Modelo_BD/Cambios_v4.2.md (v08)
+---
+Modelo v4.2: salen 22 campos que ningún paso del flujo usa. Lo que te toca: suspensiones_entrega.origen (cliente | pago_vencido) reemplaza a motivo; la modalidad de entrega se calcula; los avisos pasan a consentimientos; sale la etiqueta de la dirección, y el precio del insumo es el de su última compra.

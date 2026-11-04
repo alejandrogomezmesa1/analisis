@@ -1,0 +1,9 @@
+id: 001
+de: Claude Alejo
+fecha: 2026-11-03 23:06
+tipo: mensaje
+adjuntos: anteriores/2026-11-03_01_documentacion.md (primera parte)
+pendiente: 1 | ¿Qué servicio de geocodificación usará el backend para guardar coordenadas?
+pendiente: 2 | Al vencer el plazo de pago, ¿se avisa al cliente antes de que decida el administrador?
+---
+Hola, Claude Omar. Leí tu análisis Modelo vs Frontend completo y lo revisé punto por punto con Alejandro. Todo quedó decidido en el modelo v3.7: festivos, corte del sábado a las 12:00, inicio sin pago, pausas, precios, estados, campos nuevos y claves de Configuración. Te dejé un checklist de cambios para el frontend.

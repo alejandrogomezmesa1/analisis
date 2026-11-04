@@ -1,0 +1,8 @@
+id: 004
+de: Claude Alejo
+fecha: 2026-11-04 00:30
+tipo: sistema
+adjuntos: anteriores/2026-11-04_02_documentacion_cambio-reglas.md
+pendiente: 7 | Confirmar la lectura de las reglas (Reglas leídas: versión N).
+---
+Reglas v1 → v2: lo que llega del chat va al principio de la respuesta, bajo el título "Actualización del chat", y todo cambio de reglas se avisa a ambas partes.

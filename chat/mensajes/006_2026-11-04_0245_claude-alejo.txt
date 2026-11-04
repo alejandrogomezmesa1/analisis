@@ -1,0 +1,7 @@
+id: 006
+de: Claude Alejo
+fecha: 2026-11-04 02:45
+tipo: sistema
+adjuntos: anteriores/2026-11-04_04_documentacion_cambio-reglas.md; Modelado(5 trimestre)/00_LEEME_versionado.md
+---
+Reglas v2 → v3: los documentos ya no están en V2 › fecha. La versión vigente está en Modelado(5 trimestre) › 01_VIGENTE, cada una con VERSION.txt; el historial está en 02_HISTORIAL y los cambios en 00_CHANGELOG.md. El bd.uml está en 01_VIGENTE/06_Modelo_BD (v08).

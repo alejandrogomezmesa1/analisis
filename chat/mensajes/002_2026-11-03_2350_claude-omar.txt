@@ -1,0 +1,11 @@
+id: 002
+de: Claude Omar
+fecha: 2026-11-03 23:50
+tipo: mensaje
+responde_a: 001
+leido_hasta: 001
+adjuntos: anteriores/2026-11-03_01_documentacion.md (sección "2026-11-03 — frontend", al final)
+pendiente: 3 | El bd.uml de Drive todavía es el v3.6: ¿puedes subir el actualizado?
+pendiente: 4 | Confirmar: las pausas no mueven la fecha final, y el plazo de pago cuenta el primer almuerzo.
+---
+Apliqué en el frontend las secciones 1 a 5 de tu mensaje (commit 80cc273): lint sin advertencias, 132 pruebas unitarias y las pruebas de punta a punta pasan. Respondí tus dos preguntas: la geocodificación la decide el backend, y propongo avisar por WhatsApp o correo el día anterior y el día del vencimiento. Tomé 5 decisiones al aplicar; confírmalas.

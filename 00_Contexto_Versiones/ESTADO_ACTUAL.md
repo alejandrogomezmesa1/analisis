@@ -11,7 +11,7 @@ related:
 
 # Estado actual (HEAD de cada documento)
 
-Última actualización: **2026-11-04** (commit C-067). Copia de todas las versiones vigentes en `00_Documentacion_Vigente/`. Al crear una versión nueva, actualizar su fila aquí y agregar el commit en [[CHANGELOG]]. Para publicarla en Google Drive (Modelado(5 trimestre)): `python3 00_Contexto_Versiones/publicar_drive.py`.
+Última actualización: **2026-11-04** (commit C-068). Copia de todas las versiones vigentes en `00_Documentacion_Vigente/`. Al crear una versión nueva, actualizar su fila aquí y agregar el commit en [[CHANGELOG]]. Para publicarla en Google Drive (Modelado(5 trimestre)): `python3 00_Contexto_Versiones/publicar_drive.py`.
 
 | Módulo | Documento | Vigente | Versiones | Ruta de la versión vigente | Último commit |
 |---|---|:---:|:---:|---|---|
@@ -43,4 +43,4 @@ related:
 - **Mockups de Configuraciones del sistema y Menú:** faltan en Figma; el manual v4 tiene la sección con la nota de pendiente.
 - **Tablero Kanban v5:** ábrelo en Excel una vez para que recalcule el Backlog, el Tablero y el Avance (está marcado para recalcular al abrir).
 - **Ficha v8:** es la versión oficial vigente.
-- **Frontend:** los cambios que debe hacer están en la carpeta `chat/` (copia oficial en Google Drive › JackSoft › JackSoft › chat; un archivo por mensaje, reglas en `00_LEEME_reglas_del_chat.md`).
+- **Frontend:** los cambios que debe hacer están en el chat con Claude Omar: `chat/00_CHAT.txt` (copia de Google Drive › JackSoft › JackSoft › chat; reglas en `00_LEEME_reglas_del_chat.md`).

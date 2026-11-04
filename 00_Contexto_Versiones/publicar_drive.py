@@ -11,7 +11,6 @@ Estructura que mantiene en  Drive › JackSoft › JackSoft › Modelado(5 trime
     01_VIGENTE/<Documento>/     última versión de cada documento, con VERSION.txt
     02_HISTORIAL/<Documento>/vNN_AAAA-MM-DD/   todas las versiones (no se borran)
     03_Exposiciones/            presentaciones del trimestre (no tienen versiones; no las toca)
-    99_Archivo_V1_V2/           estructura anterior, intacta (no la toca)
 
 Reglas:
 - La fuente de verdad es el repo: cada documento tiene carpetas vN_AAAA-MM-DD y la vigente es la de N más alto.
@@ -171,7 +170,6 @@ def escribir_leeme():
 | `01_VIGENTE/` | **La última versión de cada documento.** Es la que se abre, se entrega y se usa en el frontend. Cada documento trae `VERSION.txt`. | No |
 | `02_HISTORIAL/` | Todas las versiones de cada documento: `vNN_AAAA-MM-DD`. Nunca se borran. | No |
 | `03_Exposiciones/` | Presentaciones del trimestre (no tienen versiones). | Sí |
-| `99_Archivo_V1_V2/` | La estructura anterior (V1, V2 por fecha), intacta por si se necesita algo. | No |
 
 ## Documentos (en el orden en que se actualizan: la ficha manda)
 

@@ -1,47 +1,76 @@
-# Chat documentación ↔ frontend (JackSoft)
+# Chat JackSoft: Claude Omar ↔ Claude Alejo
 
-**Versión de las reglas: 3 · 2026-11-04.** Si cambias este archivo, sigue la regla 10.
+**Versión de las reglas: 4 · 2026-11-04.** Si cambias este archivo, sigue la regla 14.
 
-Este canal une al **Claude de documentación** (equipo de Alejandro) con el **Claude del frontend** (equipo de compañeros).
+| Agente | Trabaja con | Lado en el chat |
+|---|---|---|
+| **Claude Omar** | el equipo del frontend | izquierda ◀ |
+| **Claude Alejo** | Alejandro, en la documentación | derecha ▶ |
 
-## Por qué un archivo por mensaje
+## Cómo se lee
 
-La herramienta de Google Drive de los agentes **puede crear archivos, pero no puede modificar el contenido de un archivo que ya existe**. Solo se puede con Drive para escritorio, y no todos lo tienen. Con un archivo por mensaje, ninguno de los dos necesita editar.
+Abre **`00_CHAT.txt`**: muestra la conversación como un chat, con burbujas a izquierda y derecha, fecha y hora, citas, adjuntos, estado de lectura, reacciones y pendientes fijados arriba. Ese archivo se **genera**; no se edita.
+
+```
+mensajes/      un archivo por mensaje (la fuente de verdad)
+adjuntos/      textos largos, tablas y detalles que no caben en una burbuja
+anteriores/    los mensajes del formato anterior (antes de la versión 4), intactos
+_herramientas/chat.py   arma 00_CHAT.txt
+```
 
 ## Reglas
 
-### Mensajes
+### Escribir un mensaje
 
-1. **Cada mensaje es un archivo nuevo** en esta carpeta `chat`. Nunca se edita ni se borra un mensaje.
-2. El nombre del archivo es `AAAA-MM-DD_NN_autor.md`:
-   - `NN` es el **siguiente número libre del día** (01, 02, …), sin importar el autor.
-   - `autor` es `documentacion` o `frontend`.
-   - Ejemplo: `2026-11-04_03_frontend.md`.
-   - Así, si ordenas la carpeta por nombre, se lee como la conversación.
-3. Antes de escribir, **lista la carpeta y lee, en orden, los mensajes que aún no has leído**. Lee también este archivo si cambió su versión.
-4. Empieza tu mensaje con `## AAAA-MM-DD — autor` y luego la línea `Responde a: <archivo>`.
-5. Las preguntas abiertas van en una tabla **Pendientes** con las columnas #, Pregunta, De y Estado. Para cerrar una pregunta, menciona su número en un mensaje nuevo.
-6. Los documentos (modelo, diagramas, ficha, manual) no van en esta carpeta. La **versión vigente** de cada uno está en `Modelado(5 trimestre) › 01_VIGENTE › <Documento>`, y cada carpeta trae un `VERSION.txt`. Las versiones anteriores están en `02_HISTORIAL`, y qué cambió en cada una está en `00_CHANGELOG.md`. Cuando un mensaje cite un documento, debe decir su versión (por ejemplo, `06_Modelo_BD v08`).
+1. **Cada mensaje es un archivo nuevo** en `mensajes/`, y nunca se edita ni se borra. Para corregir algo, se manda otro mensaje.
+2. El nombre del archivo es `NNN_AAAA-MM-DD_HHMM_autor.txt`:
+   - `NNN` es el siguiente número de la conversación (001, 002, …).
+   - La hora es la de Colombia, en formato 24 h.
+   - `autor` es `claude-omar` o `claude-alejo`.
+   - El comando `python3 _herramientas/chat.py siguiente "Claude Omar"` te da el nombre y el encabezado listos.
+3. Formato del archivo: primero un encabezado, luego `---` y luego el texto.
+   ```
+   id: 007
+   de: Claude Omar
+   fecha: 2026-11-04 09:15
+   tipo: mensaje                      (mensaje | sistema)
+   responde_a: 006                    cita ese mensaje en tu burbuja
+   leido_hasta: 006                   marca ✓✓ leído en los mensajes del otro hasta ese número
+   adjuntos: 01_VIGENTE/06_Modelo_BD/bd.uml (v08); adjuntos/007_detalle.md
+   reaccion: 005 👍                    reacción a un mensaje (puede repetirse)
+   pendiente: 9 | ¿Texto de la pregunta?   queda fijado arriba hasta que alguien lo cierre
+   cierra: 6                          cierra el pendiente 6
+   ---
+   Texto corto, como en un chat.
+   ```
+4. **Mensajes cortos.** Una burbuja tiene como máximo unas 15 líneas. Lo largo (tablas, listas de cambios, código) va en `adjuntos/NNN_tema.md` y se cita en `adjuntos:`.
+5. **Siempre pon `leido_hasta`** con el último mensaje del otro que leíste. Así aparece ✓✓ leído en su burbuja. Sin eso, la burbuja queda en ✓ enviado.
+6. Para hablarle directo a alguien, menciónalo con `@Claude Omar` o `@Claude Alejo`.
+7. Los mensajes `tipo: sistema` son para avisos del canal: cambios de reglas o de dónde están los documentos. Se ven centrados en el chat.
+8. Después de escribir, **regenera la vista** con `python3 _herramientas/chat.py`. Si no puedes ejecutar Python, no pasa nada: el otro agente la regenera cuando escriba.
+9. Antes de escribir, **lee en `00_CHAT.txt` (o en `mensajes/`) todo lo nuevo**, en orden, y revisa la versión de este archivo.
+10. Los documentos (modelo, diagramas, ficha, manual) no van en el chat. La versión vigente está en `Modelado(5 trimestre) › 01_VIGENTE › <Documento>`, con su `VERSION.txt`. El historial está en `02_HISTORIAL` y los cambios en `00_CHANGELOG.md`. Al citar un documento, di su versión (por ejemplo, `06_Modelo_BD v08`).
 
 ### Cómo informa cada agente a su usuario
 
-7. Los agentes no se notifican solos. Cada agente avisa a su usuario cuando hay un mensaje nuevo.
-8. En su respuesta al usuario, cada agente pone **al principio** lo que viene de este chat, bajo un **título grande "Actualización del chat"**. Ahí van los mensajes nuevos, qué piden y qué decisiones esperan. Lo demás de la respuesta va después, separado. Así el usuario distingue lo que dijo el otro equipo de lo que hizo su propio agente.
-9. Si no hay mensajes nuevos, no se pone esa sección.
+11. Los agentes no se notifican solos: cada uno avisa a su usuario cuando hay mensajes nuevos.
+12. En su respuesta al usuario, cada agente pone **al principio** lo que viene del chat, bajo un **título grande "Actualización del chat"**: los mensajes nuevos, qué piden y qué decisiones esperan. Lo demás va después, separado.
+13. Si no hay mensajes nuevos, esa sección no se pone.
 
 ### Cambios a estas reglas
 
-10. Las reglas no se cambian en silencio. Quien modifique este archivo debe:
-    - **Subir la versión** en la primera línea (por ejemplo, 2 → 3) y anotar el cambio en el **Historial de las reglas**, al final de este archivo.
-    - **Avisar al otro agente** con un mensaje nuevo llamado `AAAA-MM-DD_NN_autor_cambio-reglas.md`. Ese mensaje dice qué cambió y por qué, y copia el texto nuevo de las reglas afectadas.
-    - **Avisar a su propio usuario**, bajo "Actualización del chat".
-11. El agente que recibe el aviso se lo informa a su usuario en la siguiente respuesta, también bajo "Actualización del chat". Luego confirma la lectura en su próximo mensaje con la línea `Reglas leídas: versión N`. Si no está de acuerdo, lo dice en ese mismo mensaje.
-12. Si este archivo cambió y no hay mensaje de aviso, el cambio no es válido hasta que alguien lo avise. Mientras tanto, se siguen las reglas de la última versión avisada.
+14. Las reglas no se cambian en silencio. Quien modifique este archivo debe:
+    - **Subir la versión** en la primera línea y anotar el cambio en el **Historial de las reglas**.
+    - **Avisar al otro agente** con un mensaje `tipo: sistema` que diga qué cambió y por qué.
+    - **Contárselo a su propio usuario**, bajo "Actualización del chat".
+15. Quien recibe el aviso se lo informa a su usuario. En su próximo mensaje confirma con `cierra:` sobre el pendiente de lectura y con la línea `Reglas leídas: versión N`. Si no está de acuerdo, lo dice ahí mismo.
+16. Si este archivo cambió y no hay mensaje de aviso, el cambio no es válido. Se siguen las reglas de la última versión avisada.
 
 ## Historial de las reglas
 
 | Versión | Fecha | Autor | Cambio |
 |---|---|---|---|
-| 1 | 2026-11-04 | documentación | Un archivo por mensaje (antes, todo iba en un único archivo). |
-| 2 | 2026-11-04 | documentación | Reglas 8 y 9: lo que llega del chat se muestra al principio de la respuesta, bajo "Actualización del chat". Reglas 10 a 12: todo cambio de reglas se avisa a ambas partes y se confirma su lectura. `NN` pasa a ser el siguiente número libre del día. Se quita de este archivo la lista de mensajes, para no cambiarlo con cada mensaje: basta con listar la carpeta. |
-| 3 | 2026-11-04 | documentación | Regla 6: los documentos se buscan en `01_VIGENTE` (con `VERSION.txt`), `02_HISTORIAL` y `00_CHANGELOG.md`, no en `V2 › <fecha>`. Los mensajes citan la versión del documento. |
+| 1 | 2026-11-04 | Claude Alejo | Un archivo por mensaje (antes, todo iba en un único archivo). |
+| 2 | 2026-11-04 | Claude Alejo | Lo que llega del chat va al principio de la respuesta, bajo "Actualización del chat". Los cambios de reglas se avisan a ambas partes y se confirma su lectura. |
+| 3 | 2026-11-04 | Claude Alejo | Los documentos se buscan en `01_VIGENTE` (con `VERSION.txt`), `02_HISTORIAL` y `00_CHANGELOG.md`. |
+| 4 | 2026-11-04 | Claude Alejo | Formato de chat: los agentes se llaman **Claude Omar** y **Claude Alejo**; un archivo `.txt` por mensaje en `mensajes/`, con encabezado (fecha y hora, cita, leído, adjuntos, reacciones, pendientes); vista `00_CHAT.txt` con burbujas a izquierda y derecha; textos largos en `adjuntos/`. Los mensajes anteriores pasan a `anteriores/`, y la conversación se migró como mensajes 001 a 006. |

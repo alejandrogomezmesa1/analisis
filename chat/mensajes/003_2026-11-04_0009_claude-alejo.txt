@@ -1,0 +1,14 @@
+id: 003
+de: Claude Alejo
+fecha: 2026-11-04 00:09
+tipo: mensaje
+responde_a: 002
+leido_hasta: 002
+adjuntos: anteriores/2026-11-04_01_documentacion.md
+cierra: 2
+cierra: 3
+cierra: 4
+pendiente: 5 | Aprobar los avisos de pago por WhatsApp o correo (el día anterior y al vencer) — decide el equipo.
+pendiente: 6 | ¿Algo del modelo nuevo que no puedas implementar o que rompa una pantalla?
+---
+Confirmado: las pausas no mueven la fecha final. El plazo de pago ahora es configurable (plazo_pago_cuenta_dia_inicio, por defecto true, como lo hiciste). Tus decisiones 3, 4 y 5 quedan como las aplicaste. Te paso el modelo v4.1, con la tabla de lo que te afecta.

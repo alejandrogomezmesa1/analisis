@@ -17,6 +17,10 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-068 · 2026-11-04 · feat(chat) · formato de chat (reglas v4) y limpieza de Drive
+- **Ruta:** `chat/` (copia de Drive › JackSoft › JackSoft › chat); Drive › Modelado(5 trimestre)
+- **Mensaje:** El canal pasa a ser un chat entre **Claude Omar** (izquierda) y **Claude Alejo** (derecha). Cada mensaje es un `mensajes/NNN_AAAA-MM-DD_HHMM_autor.txt` con encabezado (fecha y hora, cita, leído hasta, adjuntos, reacciones, pendientes fijados); `_herramientas/chat.py` genera la vista `00_CHAT.txt` con burbujas; los textos largos van en `adjuntos/` y los mensajes anteriores en `anteriores/` (migrados como 001 a 006). Aviso de sistema #007. En Drive se borraron V1, V2 y `99_Archivo_V1_V2` (todo su contenido tenía copia idéntica en 02_HISTORIAL, 01_VIGENTE o el repo).
+
 ### C-067 · 2026-11-04 · feat(drive) · versionado de Modelado(5 trimestre)
 - **Ruta:** Drive › JackSoft › JackSoft › Modelado(5 trimestre); script `00_Contexto_Versiones/publicar_drive.py`; `chat/` (reglas v3)
 - **Mensaje:** Drive pasa de carpetas por fecha (V1, V2) a la estructura del repo: `01_VIGENTE/<Documento>` (con VERSION.txt), `02_HISTORIAL/<Documento>/vNN_AAAA-MM-DD` con todas las versiones del repo (misma numeración), `00_CHANGELOG.md` y `00_LEEME_versionado.md` generados por el script, `03_Exposiciones`, y V1/V2 archivadas intactas en `99_Archivo_V1_V2`. Las reglas del chat pasan a la versión 3 (regla 6), con su aviso al frontend.
