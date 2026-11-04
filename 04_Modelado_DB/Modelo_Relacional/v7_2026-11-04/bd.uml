@@ -12,6 +12,8 @@
 //     recipientes.categoria_producto_id reemplaza a tipo_recipiente_id; menu_items ya no lo guarda.
 //  3. Menú en 3 tablas: menu_alternativas se integra en menu_items (restriccion + reemplaza_item_id).
 //  4. Se mantienen juegos_cocas y recipientes para la trazabilidad de cocas por cliente.
+//  5. Nueva configuración plazo_pago_cuenta_dia_inicio: si el día de inicio cuenta como día 1 del plazo de pago.
+//     Las pausas (suspensiones_entrega) no mueven la fecha de vencimiento.
 //  Resultado: 38 tablas.
 //
 // CAMBIOS EN v4.0 — MODELO ENTREGABLE (2026-11-04):
@@ -718,7 +720,7 @@ Table suscripciones {
   descuento_festivos decimal [not null, default: 0]
   valor_plan decimal [not null]
   cobro_cocas decimal [not null, default: 0, note: 'Valor de cobro_cocas vigente (80.000) en venta nueva; 0 en renovación o reingreso']
-  fecha_limite_pago date [note: 'fecha_inicio + dias_habiles_plazo_pago; si vence, el administrador decide']
+  fecha_limite_pago date [note: 'Se calcula con dias_habiles_plazo_pago y plazo_pago_cuenta_dia_inicio; si vence, el administrador decide']
   estado estado_suscripcion [not null, default: 'pendiente_pago']
 
   indexes {
@@ -1105,6 +1107,7 @@ Records configuraciones_sistema(id, clave, nombre, categoria, tipo_valor, valor,
   5, 'hora_corte_suscripcion', 'Hora del corte (HH:MM)', 'suscripciones', 'hora', '12:00', '12:00'
   6, 'inicio_sin_pago_activo', 'Renovación y reingreso pueden iniciar sin haber pagado', 'suscripciones', 'booleano', 'true', 'true'
   7, 'dias_habiles_plazo_pago', 'Días hábiles para pagar cuando se inicia sin pago', 'suscripciones', 'numero', '3', '3'
+  8, 'plazo_pago_cuenta_dia_inicio', 'El día de inicio cuenta como día 1 del plazo de pago (true: inicia lunes, vence miércoles; false: vence jueves)', 'suscripciones', 'booleano', 'true', 'true'
 }
 
 Records categorias_productos(id, nombre, estado) {

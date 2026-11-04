@@ -21,6 +21,14 @@ Resultado: **38 tablas, 55 relaciones**, máximo 12 columnas por tabla.
 | `menu_items` | `tipo_recipiente_id` | Se elimina: la coca sale de la categoría del producto. |
 | `menu_items` | — | `restriccion` (vacío = plato base) y `reemplaza_item_id` (plato base que reemplaza la alternativa). |
 
+## Configuración nueva
+
+| Clave | Tipo | Por defecto | Uso |
+| :--- | :--- | :--- | :--- |
+| `plazo_pago_cuenta_dia_inicio` | booleano | true | true: el día de inicio cuenta como día 1 del plazo (inicia lunes, con 3 días vence miércoles). false: el plazo empieza al día hábil siguiente (vence jueves). |
+
+Las pausas (`suspensiones_entrega`) no mueven la fecha de vencimiento: el día pausado no se devuelve ni se corre.
+
 ## Se mantiene
 
 - `juegos_cocas` y `recipientes`, para la trazabilidad de cocas por cliente.
