@@ -17,6 +17,22 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-072 · 2026-11-04 · fix(diagrama-er) · v7 → v8
+- **Ruta:** `04_Modelado_DB/Diagramas/v8_2026-11-04/` — `LaCocaDiagramDB.svg`
+- **Mensaje:** Diagrama ER de bd.uml v4.4 (37 tablas, 52 relaciones).
+
+### C-071 · 2026-11-04 · fix(modelo-relacional) · v9 → v10 (DBML v4.4)
+- **Ruta:** `04_Modelado_DB/Modelo_Relacional/v10_2026-11-04/` — `bd.uml`, `Cambios_v4.4.md`, `Visor_Interactivo/`
+- **Mensaje:** Respuesta al mensaje #008 de Claude Omar (puntos A a I): vuelven producto_terminado.responsable_id y motivo (pedido del PO); direcciones_cliente.notas guarda apto/torre/piso; se confirman las demás eliminaciones.
+
+### C-070 · 2026-11-04 · fix(diagrama-er) · v6 → v7
+- **Ruta:** `04_Modelado_DB/Diagramas/v7_2026-11-04/` — `LaCocaDiagramDB.svg`
+- **Mensaje:** Diagrama ER de bd.uml v4.3 (37 tablas, 51 relaciones).
+
+### C-069 · 2026-11-04 · fix(modelo-relacional) · v8 → v9 (DBML v4.3)
+- **Ruta:** `04_Modelado_DB/Modelo_Relacional/v9_2026-11-04/` — `bd.uml`, `Cambios_v4.3.md`, `Visor_Interactivo/`
+- **Mensaje:** Notas del visor: bloqueo calculado desde accesos (sin detalle ni bloqueado_hasta), sin tokens_restablecimiento (enlace firmado), alergias con lista fija en lugar de restricciones, sin motivo/observación en movimientos ni calificación en entregas. Se mantienen rutas.fecha y tipo_venta.
+
 ### C-068 · 2026-11-04 · feat(chat) · formato de chat (reglas v4) y limpieza de Drive
 - **Ruta:** `chat/` (copia de Drive › JackSoft › JackSoft › chat); Drive › Modelado(5 trimestre)
 - **Mensaje:** El canal pasa a ser un chat entre **Claude Omar** (izquierda) y **Claude Alejo** (derecha). Cada mensaje es un `mensajes/NNN_AAAA-MM-DD_HHMM_autor.txt` con encabezado (fecha y hora, cita, leído hasta, adjuntos, reacciones, pendientes fijados); `_herramientas/chat.py` genera la vista `00_CHAT.txt` con burbujas; los textos largos van en `adjuntos/` y los mensajes anteriores en `anteriores/` (migrados como 001 a 006). Aviso de sistema #007. En Drive se borraron V1, V2 y `99_Archivo_V1_V2` (todo su contenido tenía copia idéntica en 02_HISTORIAL, 01_VIGENTE o el repo).

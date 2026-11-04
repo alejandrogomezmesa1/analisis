@@ -11,7 +11,7 @@ related:
 
 # Estado actual (HEAD de cada documento)
 
-Última actualización: **2026-11-04** (commit C-068). Copia de todas las versiones vigentes en `00_Documentacion_Vigente/`. Al crear una versión nueva, actualizar su fila aquí y agregar el commit en [[CHANGELOG]]. Para publicarla en Google Drive (Modelado(5 trimestre)): `python3 00_Contexto_Versiones/publicar_drive.py`.
+Última actualización: **2026-11-04** (commit C-072). Copia de todas las versiones vigentes en `00_Documentacion_Vigente/`. Al crear una versión nueva, actualizar su fila aquí y agregar el commit en [[CHANGELOG]]. Para publicarla en Google Drive (Modelado(5 trimestre)): `python3 00_Contexto_Versiones/publicar_drive.py`.
 
 | Módulo | Documento | Vigente | Versiones | Ruta de la versión vigente | Último commit |
 |---|---|:---:|:---:|---|---|
@@ -20,8 +20,8 @@ related:
 | 01 Investigación | Mapa mental | **v2** | 2 | `01_Investigacion_y_Analisis/Diagramas/Mapa_Mental/v2_2026-08-25/` | C-024 |
 | 01 Investigación | Análisis 5W1H (slide) | **v2** | 2 | `01_Investigacion_y_Analisis/Diagramas/Analisis_5W1H/v2_2026-08-11/` | C-014 |
 | 03 Procesos | Aplicativo web mapa de procesos | **v2** | 2 | `03_Procesos/App_Mapa_Procesos/v2_2026-09-28/` | C-035 |
-| 04 Modelo BD | Modelo relacional (DBML) | **v8** (DBML v4.2, entregable) | 8 | `04_Modelado_DB/Modelo_Relacional/v8_2026-11-04/bd.uml` | C-065 |
-| 04 Modelo BD | Diagrama ER (SVG) | **v6** | 6 | `04_Modelado_DB/Diagramas/v6_2026-11-04/` | C-066 |
+| 04 Modelo BD | Modelo relacional (DBML) | **v10** (DBML v4.4, entregable) | 10 | `04_Modelado_DB/Modelo_Relacional/v10_2026-11-04/bd.uml` | C-071 |
+| 04 Modelo BD | Diagrama ER (SVG) | **v8** | 8 | `04_Modelado_DB/Diagramas/v8_2026-11-04/` | C-072 |
 | 05 Casos de uso | Arquitectura C4 | **v4** | 4 | `05_Casos_de_Uso/Arquitectura_C4/v4_2026-11-03/` | C-054 |
 | 05 Casos de uso | Documentación de casos de uso (Word) | **v4** | 4 | `05_Casos_de_Uso/Especificaciones/Documentacion_Word/v4_2026-11-03/` | C-057 |
 | 05 Casos de uso | Diagramas, visor y scripts (sistema generado) | 23 subprocesos | repo git | `05_Casos_de_Uso/` (repo `CasosDeUsoJackSoft`) | C-045 |
