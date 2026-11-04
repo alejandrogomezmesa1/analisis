@@ -43,4 +43,4 @@ related:
 - **Mockups de Configuraciones del sistema y Menú:** faltan en Figma; el manual v4 tiene la sección con la nota de pendiente.
 - **Tablero Kanban v5:** ábrelo en Excel una vez para que recalcule el Backlog, el Tablero y el Avance (está marcado para recalcular al abrir).
 - **Ficha v8:** es la versión oficial vigente.
-- **Frontend:** los cambios que debe hacer están en `chat/chat_documentacion_frontend.md (copia oficial en Google Drive › JackSoft › JackSoft › chat)` (checklist y preguntas abiertas).
+- **Frontend:** los cambios que debe hacer están en la carpeta `chat/` (copia oficial en Google Drive › JackSoft › JackSoft › chat; un archivo por mensaje, reglas en `00_LEEME_reglas_del_chat.md`).
