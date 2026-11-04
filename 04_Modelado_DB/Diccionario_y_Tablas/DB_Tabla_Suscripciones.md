@@ -57,12 +57,13 @@ Ref: suscripciones.servicio_id > servicios.id
 * Mantiene los campos exigidos por [[RN_Suscripciones_y_Menus]] y [[RN_Logistica_Cocas]].
 * Es actualizada por [[PROC_Validacion_de_Pagos]] cuando pasa de `'pendiente'` a `'activa'`.
 
-## 🔄 Cierre semanal de suscripciones (bd.uml v3.6)
+## 🔄 Ajuste con el frontend 2026-11-03 (bd.uml v3.7)
 | Campo | Tipo | Descripción |
 | :--- | :--- | :--- |
-| `fecha_solicitud` | timestamp | Fecha y hora de la solicitud; se compara con el límite semanal. |
-| `fuera_de_limite` | boolean | `true` si llegó después del límite o si el pago llegó después del plazo de gracia. |
-| `aprobacion_fuera_limite` | estado_registro | pendiente · aprobado · rechazado (solo con la opción de solicitudes fuera del límite activa). |
-| `aprobada_por_usuario_id` | FK usuarios | Administrador que decidió. |
+| `estado` | estado_suscripcion | pendiente_pago · verificando · activa · finalizada · rechazada · cancelada |
+| `fecha_solicitud` | timestamp | Se compara con el corte semanal (sábado 12:00 m). |
+| `inicio_sin_pago` | boolean | Renovación o reingreso que inició sin pagar. |
+| `pago_pendiente` | boolean | `true` mientras no se valide el pago. |
+| `fecha_limite_pago` | date | Inicio + 3 días hábiles; si vence, decide el administrador. |
 
-Regla: [[RN_Limite_Suscripcion_Semanal]].
+Se eliminaron `tipo_menu`, `recargo_menu_personalizado`, `fuera_de_limite`, `aprobacion_fuera_limite` y `aprobada_por_usuario_id`. Precios: planes de 75/150/300 mil y kit de 80 mil. Regla: [[RN_Limite_Suscripcion_Semanal]].

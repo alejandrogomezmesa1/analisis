@@ -11,7 +11,7 @@ related:
 
 # Estado actual (HEAD de cada documento)
 
-Última actualización: **2026-11-02** (commit C-050). Copia de todas las versiones vigentes en `00_Documentacion_Vigente/`. Al crear una versión nueva, actualizar su fila aquí y agregar el commit en [[CHANGELOG]].
+Última actualización: **2026-11-03** (commit C-059). Copia de todas las versiones vigentes en `00_Documentacion_Vigente/`. Al crear una versión nueva, actualizar su fila aquí y agregar el commit en [[CHANGELOG]].
 
 | Módulo | Documento | Vigente | Versiones | Ruta de la versión vigente | Último commit |
 |---|---|:---:|:---:|---|---|
@@ -20,13 +20,13 @@ related:
 | 01 Investigación | Mapa mental | **v2** | 2 | `01_Investigacion_y_Analisis/Diagramas/Mapa_Mental/v2_2026-08-25/` | C-024 |
 | 01 Investigación | Análisis 5W1H (slide) | **v2** | 2 | `01_Investigacion_y_Analisis/Diagramas/Analisis_5W1H/v2_2026-08-11/` | C-014 |
 | 03 Procesos | Aplicativo web mapa de procesos | **v2** | 2 | `03_Procesos/App_Mapa_Procesos/v2_2026-09-28/` | C-035 |
-| 04 Modelo BD | Modelo relacional (DBML) | **v4** (DBML v3.6) | 4 | `04_Modelado_DB/Modelo_Relacional/v4_2026-11-02/bd.uml` | C-043 |
-| 04 Modelo BD | Diagrama ER (SVG) | **v2** | 2 | `04_Modelado_DB/Diagramas/v2_2026-11-02/` | C-044 |
-| 05 Casos de uso | Arquitectura C4 | **v3** | 3 | `05_Casos_de_Uso/Arquitectura_C4/v3_2026-11-02/` | C-047 |
-| 05 Casos de uso | Documentación de casos de uso (Word) | **v3** | 3 | `05_Casos_de_Uso/Especificaciones/Documentacion_Word/v3_2026-11-02/` | C-046 |
+| 04 Modelo BD | Modelo relacional (DBML) | **v5** (DBML v3.7) | 5 | `04_Modelado_DB/Modelo_Relacional/v5_2026-11-03/bd.uml` | C-052 |
+| 04 Modelo BD | Diagrama ER (SVG) | **v3** | 3 | `04_Modelado_DB/Diagramas/v3_2026-11-03/` | C-053 |
+| 05 Casos de uso | Arquitectura C4 | **v4** | 4 | `05_Casos_de_Uso/Arquitectura_C4/v4_2026-11-03/` | C-054 |
+| 05 Casos de uso | Documentación de casos de uso (Word) | **v4** | 4 | `05_Casos_de_Uso/Especificaciones/Documentacion_Word/v4_2026-11-03/` | C-057 |
 | 05 Casos de uso | Diagramas, visor y scripts (sistema generado) | 23 subprocesos | repo git | `05_Casos_de_Uso/` (repo `CasosDeUsoJackSoft`) | C-045 |
-| 06 Scrum | Ficha de proyecto | **v8** (oficial) | 8 | `06_Gestion_de_Proyecto_Scrum/Fichas_Tecnicas/v8_2026-11-02/` | C-041 |
-| 06 Scrum | Tablero Kanban + Story Mapping + Matriz HU | **v5** | 5 | `06_Gestion_de_Proyecto_Scrum/Historias_de_Usuario_y_Kanban/Tablero_Kanban/v5_2026-11-02/` | C-042 |
+| 06 Scrum | Ficha de proyecto | **v9** (oficial) | 9 | `06_Gestion_de_Proyecto_Scrum/Fichas_Tecnicas/v9_2026-11-03/` | C-055 |
+| 06 Scrum | Tablero Kanban + Story Mapping + Matriz HU | **v7** | 7 | `06_Gestion_de_Proyecto_Scrum/Historias_de_Usuario_y_Kanban/Tablero_Kanban/v7_2026-11-03/` | C-056 |
 | 06 Scrum | Matriz HU (independiente) | **v1** — superada por el Tablero Kanban v3+ | 1 | `06_Gestion_de_Proyecto_Scrum/Historias_de_Usuario_y_Kanban/Matriz_HU/v1_2026-08-12/` | C-016 |
 | 06 Scrum | Presentación de artefactos Scrum | **v1** | 1 | `06_Gestion_de_Proyecto_Scrum/Presentacion_Artefactos/v1_2026-07-27/` | C-006 |
 | 07 Diseño | Mockups | **v1** | 1 | `07_Diseno_y_Mockups/Mockups/v1_2026-08-09/` | C-010 |
@@ -35,7 +35,7 @@ related:
 | 08 Entregables | Rúbrica de investigación | **v1** | 1 | `08_Entregables_e_Informes/Informes_Academicos/Rubrica_Investigacion/v1_2026-08-25/` | C-025 |
 | 08 Entregables | Ensayo: Por qué es importante conocer en detalle | **v1** | 1 | `08_Entregables_e_Informes/Ensayos_y_Monografias/Importancia_Conocer_en_Detalle/v1_2026-06-16/` | C-002 |
 | 08 Entregables | Ensayo: ¿Qué son los requisitos? | **v1** | 1 | `08_Entregables_e_Informes/Ensayos_y_Monografias/Que_Son_Los_Requisitos/v1_2026-06-16/` | C-003 |
-| 10 Manual técnico | Manual técnico (Word) | **v4** (archivo "v2.2") ⭐ fuente de verdad | 4 | `10_Manual_Tecnico/Documentos_Word/v4_2026-11-02/` | C-048 |
+| 10 Manual técnico | Manual técnico (Word) | **v5** (archivo "v2.3") ⭐ fuente de verdad | 5 | `10_Manual_Tecnico/Documentos_Word/v5_2026-11-03/` | C-058 |
 
 ## Pendientes detectados al reorganizar
 
@@ -43,3 +43,4 @@ related:
 - **Mockups de Configuraciones del sistema y Menú:** faltan en Figma; el manual v4 tiene la sección con la nota de pendiente.
 - **Tablero Kanban v5:** ábrelo en Excel una vez para que recalcule el Backlog, el Tablero y el Avance (está marcado para recalcular al abrir).
 - **Ficha v8:** es la versión oficial vigente.
+- **Frontend:** los cambios que debe hacer están en `chat/2026-11-03_modelo-v3.7_para_frontend.md` (checklist y preguntas abiertas).

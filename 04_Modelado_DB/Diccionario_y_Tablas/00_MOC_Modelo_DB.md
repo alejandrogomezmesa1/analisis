@@ -67,9 +67,10 @@ graph TD
 ## 🗃️ Archivos de Esquema y Diagramas
 
 - **Esquemas DBML (`04_Modelado_DB/Modelo_Relacional/vN_fecha/`):**
-  - `v4_2026-11-02/bd.uml`: ⭐ Versión vigente, DBML v3.6 (2 de noviembre, 36 tablas, 56 relaciones, 23 subprocesos). Sin `empleados`; nuevas [[DB_Tabla_Configuraciones_Sistema]] y menús en [[DB_Tablas_Menu]].
+  - `v5_2026-11-03/bd.uml`: ⭐ Versión vigente, DBML v3.7 (3 de noviembre, 41 tablas, 68 relaciones): ajuste con el frontend.
+  - `v4_2026-11-02/bd.uml`: DBML v3.6 (2 de noviembre, 36 tablas, 56 relaciones, 23 subprocesos). Sin `empleados`; nuevas [[DB_Tabla_Configuraciones_Sistema]] y menús en [[DB_Tablas_Menu]].
   - `v3_2026-10-30/bd.uml`: DBML v3.5 (30 de octubre, 35 tablas, 53 relaciones, 22 TableGroups).
   - `v1_2026-08-13/jacksoft_modelo_relacional_v1.dbml`: Versión inicial (13 de agosto, 33 tablas).
   - `v2_2026-08-24/jacksoft_modelo_relacional_v2.dbml`: Versión consolidada (24 de agosto, 33 tablas adaptadas a los módulos vigentes).
-- **Diagrama Relacional Vectorial:** ⭐ `04_Modelado_DB/Diagramas/v2_2026-11-02/LaCocaDiagramDB.svg` (generado desde bd.uml v3.6, agrupado por subproceso). Histórico en `v1_2026-08-21/`:
+- **Diagrama Relacional Vectorial:** ⭐ `04_Modelado_DB/Diagramas/v3_2026-11-03/LaCocaDiagramDB.svg` (generado desde bd.uml v3.7). Anteriores: `v2_2026-11-02/` (v3.6). Histórico en `v1_2026-08-21/`:
   - `LaCocaDiagramDB.svg`: Diagrama conceptual y físico completo de la base de datos (37 tablas con relaciones foráneas).

@@ -81,3 +81,6 @@ erDiagram
 * Se elimina la tabla `empleados`: el personal interno es un usuario con rol (Administrador, Cocina, Domiciliario). Las FK de producción, rutas, entregas, geolocalización e incidencias apuntan a `usuarios.id`.
 * Nuevas tablas [[DB_Tabla_Configuraciones_Sistema]] (`configuraciones_sistema`, `historial_configuraciones`).
 * `menus_diarios` y `menu_items` pasan al subproceso **Menú** del proceso de Ventas: ver [[DB_Tablas_Menu]].
+
+## 🔄 Ajuste con el frontend 2026-11-03 (bd.uml v3.7)
+41 tablas y 68 relaciones. Nuevas: `consentimientos` (Ley 1581), `tokens_restablecimiento`, `proveedor_categorias` (reemplaza a `insumo_proveedores`), `menus_semana`, `menu_alternativas` y `direccion_dias`. La producción se registra por líneas (`producto_terminado`). Diagrama: `04_Modelado_DB/Diagramas/v3_2026-11-03/LaCocaDiagramDB.svg`.

@@ -17,20 +17,20 @@ related:
 
 # 🗄️ Tablas del subproceso Menú
 
-Desde `bd.uml` **v3.6** (Cambio de alcance 2026-11-02) estas tablas pertenecen al subproceso **Menú** del proceso de Ventas (antes estaban en Producción).
+Subproceso **Menú** del proceso de Ventas. Actualizado en `bd.uml` **v3.7** (2026-11-03): publicación por semana y alternativas por restricción; ya no hay variantes de pollo o cerdo.
+
+## 📐 `menus_semana`
+`semana_inicio` (lunes, única), `estado` (borrador · publicado), `publicado_por_usuario_id`, `publicado_en`. Solo los menús de una semana publicada se muestran a los clientes y generan órdenes.
 
 ## 📐 `menus_diarios`
-| Campo | Tipo | Descripción |
-| :--- | :--- | :--- |
-| `id` | integer PK | |
-| `calendario_id` | FK calendario, UNIQUE | Día hábil del menú (un menú por día). |
-| `semana_inicio` | date | Lunes de la semana; agrupa la programación semanal (nuevo en v3.6). |
-| `nombre`, `descripcion` | varchar, text | |
-| `estado` | estado_general | Un menú inactivo no se muestra al cliente ni genera orden de producción. |
+`menu_semana_id`, `calendario_id` (día hábil, uno por día), `nombre` (plato del día), `descripcion`.
 
 ## 📐 `menu_items`
-Platos del menú: `menu_id` (FK), `tipo_recipiente_id` (coca), `producto_id`, `variante` (común, proteína estándar, pollo, cerdo).
+Platos del día: `menu_id`, `tipo_recipiente_id` (coca), `producto_id`.
+
+## 📐 `menu_alternativas`
+`menu_item_id`, `restriccion` (carne · cerdo · mariscos · gluten · lacteos), `producto_alternativo_id`, `orden`. Si el cliente no puede comer lo que contiene el plato, recibe la alternativa.
 
 ## 🔗 Relaciones
-* `ordenes_produccion.menu_id` → 1 menú del día = 1 orden de producción.
-* El cliente consulta el menú de la semana desde la app móvil con la variante de su suscripción.
+* `ordenes_produccion.menu_id` → 1 menú del día = 1 orden; sus líneas están en `producto_terminado`.
+* El cliente consulta el menú de la semana desde la app con el plato o la alternativa que le corresponde.

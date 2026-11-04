@@ -192,3 +192,7 @@ Decisión **D-F** (equipo, 2026-11-02): se elimina el subproceso **Empleados** (
 Pendientes: mockups en Figma de Configuraciones del sistema y Menú; las incongruencias I-31 y la fila 10 (Empleados) de la sección 2 quedan cerradas por esta decisión.
 
 Ajustes del 2026-11-03 (mismas versiones): códigos renumerados (Matriz HU y fichas `HU_###`); se retira también "Asignar permisos"; el actor "Empleado" pasa a su rol; nueva regla [[RN_Limite_Suscripcion_Semanal]]; la ficha v8 queda como **oficial**. El manual numera sus fichas con los mismos números del Word de CU (la ficha "Generar reporte de clientes", que solo estaba en el manual, se agregó al Word).
+
+## 10. Ajuste con el frontend 2026-11-03 (bd.uml v3.7)
+
+Decisiones tomadas con el equipo a partir de `Analisis_Modelo_vs_Frontend_La_Coca.docx` (ver el resumen para el frontend en `chat/`). Cascada: bd.uml v5 (DBML v3.7, 41 tablas y 68 relaciones) → ER v3 → C4 v4 → RN → ficha v9 → Tablero Kanban v7 → casos de uso (Word v4, 245 fichas) → manual v5 (archivo v2.3).

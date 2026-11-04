@@ -83,3 +83,6 @@ Desarrollar un sistema web y móvil que gestione los procesos de configuración,
 
 **Retirados:** Empleados (el personal es un usuario con rol), Permisos y Categoría de proveedor (decisión D-E).
 Archivo: `Fichas_Tecnicas/v8_2026-11-02/Ficha_Jacksoft_CF_v8_alcance.docx`. Es la versión oficial vigente (la v6 tuvo el VoBo de requisitos del 10/09/2026).
+
+## 🔄 Ficha v9 (Ajuste con el frontend 2026-11-03 (bd.uml v3.7))
+Archivo: `Fichas_Tecnicas/v9_2026-11-03/Ficha_Jacksoft_CF_v9.docx` (oficial vigente). Cambios frente a la v8: kit de cocas $80.000 (configurable); sin menú personalizado (alternativas por restricción); menú publicado por semana; corte semanal sábado 12:00 m; renovación y reingreso pueden iniciar sin pagar (plazo 3 días hábiles); estados de la suscripción pendiente de pago, verificando, activa, finalizada, rechazada y cancelada; capacidad de producción sin límite por ahora.

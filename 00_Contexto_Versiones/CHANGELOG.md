@@ -17,6 +17,48 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-059 · 2026-11-03 · docs(notas+chat) · ajuste con el frontend
+- **Ruta:** notas de Obsidian (RN, diccionario, MOC, índice) y `chat/2026-11-03_modelo-v3.7_para_frontend.md`
+- **Mensaje:** RN-05 y RN de corte semanal reescritas; precios, kit, pagos, pausas y zonas actualizados. Nueva carpeta `chat/` con el mensaje para el agente del frontend: decisiones, estados, campos nuevos, claves de configuración y checklist de cambios.
+
+### C-058 · 2026-11-03 · fix(manual-tecnico) · v4 → v5
+- **Ruta:** `10_Manual_Tecnico/Documentos_Word/v5_2026-11-03/` — `Manual_Tecnico_v2.3_Jacksoft.docx`
+- **Mensaje:** Portada 2.3 y fila en control de cambios. Sin fichas de menú personalizado; "Gestionar suscripciones con pago vencido" y "Publicar menú semanal"; estados Pendiente de pago y Finalizada; C4 v4; numeración igual a la Documentación de CU v4 (229 fichas).
+
+### C-057 · 2026-11-03 · fix(documentacion-casos-uso) · v3 → v4
+- **Ruta:** `05_Casos_de_Uso/Especificaciones/Documentacion_Word/v4_2026-11-03/`
+- **Mensaje:** 245 fichas renumeradas HU_001–HU_245. Se retiran Seleccionar menú personalizado, Aplicar recargo por menú personalizado y Consultar impacto del menú personalizado; renombres por las reglas nuevas. Repo 05: canónicos, SVG/PNG, MD, visor y draw.io actualizados.
+
+### C-056 · 2026-11-03 · fix(tablero-kanban) · v6 → v7
+- **Ruta:** `06_Gestion_de_Proyecto_Scrum/Historias_de_Usuario_y_Kanban/Tablero_Kanban/v7_2026-11-03/` — `Tablero Kanban 03_11 v7.xlsx`
+- **Mensaje:** "Gestionar suscripciones con pago vencido" (reemplaza Aprobar solicitud fuera de límite) y "Publicar menú semanal". Matriz HU sin menú personalizado, kit de $80.000 y estados nuevos. Responsables y carga equitativa sin cambios (97–98 pts).
+
+### C-055 · 2026-11-03 · fix(ficha-proyecto) · v8 → v9
+- **Ruta:** `06_Gestion_de_Proyecto_Scrum/Fichas_Tecnicas/v9_2026-11-03/` — `Ficha_Jacksoft_CF_v9.docx`
+- **Mensaje:** Kit $80.000 configurable; sin menú personalizado (alternativas por restricción); menú publicado por semana; corte sábado 12:00 m; inicio sin pago para renovación y reingreso (3 días hábiles); estados nuevos de la suscripción; capacidad sin límite por ahora.
+
+### C-054 · 2026-11-03 · fix(arquitectura-c4) · v3 → v4
+- **Ruta:** `05_Casos_de_Uso/Arquitectura_C4/v4_2026-11-03/`
+- **Mensaje:** Alineado con bd.uml v3.7 (41 clases en el Nivel 4). Módulos 1 y 5 y detalle de suscripciones actualizados (consentimientos, menú semanal y alternativas, corte e inicio sin pago).
+
+### C-053 · 2026-11-03 · fix(diagrama-er) · v2 → v3
+- **Ruta:** `04_Modelado_DB/Diagramas/v3_2026-11-03/LaCocaDiagramDB.svg`
+- **Mensaje:** Regenerado desde bd.uml v3.7 (41 tablas, 68 relaciones).
+
+### C-052 · 2026-11-03 · fix(modelo-relacional) · v4 → v5
+- **Ruta:** `04_Modelado_DB/Modelo_Relacional/v5_2026-11-03/bd.uml` (DBML v3.7)
+- **Mensaje:** Ajuste con el frontend según `Analisis_Modelo_vs_Frontend_La_Coca.docx` y las decisiones del equipo: reglas (festivos, corte, inicio sin pago, pausas, precios, sin menú personalizado, capacidad opcional, proveedores por categoría), estados alineados, producción por líneas, publicación semanal del menú y tablas nuevas (consentimientos, tokens_restablecimiento, proveedor_categorias, menus_semana, menu_alternativas, direccion_dias). 41 tablas y 68 relaciones; validado con @dbml/core.
+
+### C-051 · 2026-11-03 · fix(tablero-kanban) · v5 → v6
+- **Ruta:** `06_Gestion_de_Proyecto_Scrum/Historias_de_Usuario_y_Kanban/Tablero_Kanban/v6_2026-11-03/`
+- **Archivos:** `Tablero Kanban 03_11.xlsx`
+- **Mensaje:** Responsable por módulo con carga equitativa (97–98 puntos y 31–32 historias por integrante), en la fila 21 del Story Mapping, con un cuadro "Carga por integrante" calculado en vivo (filas 27–34). La columna Responsable del Backlog se llena sola desde esa fila.
+  - Alejandro Gómez: Usuarios, Clientes, Suscripciones, Incidencias (4 módulos · 31 historias · 98 pts)
+  - Omar Meneses: Producción (orden), Ficha técnica, Servicio, Menú (4 · 31 · 98)
+  - Erick Camargo: Roles, Configuraciones del sistema, Insumos, Producto terminado, Dashboard (5 · 32 · 98)
+  - Luis Gabriel Mesa: Categoría productos, Proveedores, Categoría de servicios, Domiciliarios, Monitoreo y rutas (5 · 32 · 97)
+  - Samuel Morales: Acceso, Categoría de insumos, Productos, Compras, Calendario (5 · 31 · 97)
+
 ### C-050 · 2026-11-02 · feat(documentacion-vigente) · v1
 - **Ruta:** `00_Documentacion_Vigente/` (generada) y `00_Contexto_Versiones/actualizar_vigente.py`
 - **Mensaje:** Carpeta con una copia de la última versión de cada documento (20 documentos más el draw.io y los PNG de casos de uso). Se regenera con `python3 00_Contexto_Versiones/actualizar_vigente.py` después de cada cambio.

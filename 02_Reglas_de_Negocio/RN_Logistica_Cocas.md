@@ -48,10 +48,10 @@ sequenceDiagram
 * **Juego B**: En poder de la cocina (en proceso de sanitización y empaque para mañana).
 * Durante la parada del repartidor, el intercambio es **sincrónico**: se entrega 1 juego lleno y se recoge 1 juego vacío.
 
-### 2. Cobro Inicial Obligatorio ($70.000 COP)
-* **Venta Nueva (Primer Registro)**: Si el cliente declara no poseer los dos juegos de recipientes oficiales, el sistema aplica automáticamente un **cobro único e inalterable de $70.000 COP** en su primera factura.
+### 2. Cobro Inicial Obligatorio ($80.000 COP)
+* **Venta Nueva (Primer Registro)**: Si el cliente declara no poseer los dos juegos de recipientes oficiales, el sistema aplica automáticamente un **cobro único e inalterable de $80.000 COP** en su primera factura.
 * **Renovaciones y Reingresos**: En contratos futuros o reactivaciones, **este cobro NO se vuelve a aplicar**, salvo que el cliente haya perdido los recipientes previa auditoría.
-* **Soporte en Base de Datos**: El campo `cobro_cocas` ($70.000) en la tabla [[DB_Tabla_Suscripciones]] suma directamente al `valor_total` de la venta inicial.
+* **Soporte en Base de Datos**: El campo `cobro_cocas` ($80.000) en la tabla [[DB_Tabla_Suscripciones]] suma directamente al `valor_total` de la venta inicial.
 
 ### 3. Trazabilidad por Parada y Domiciliario
 * En cada parada de la ruta, el repartidor debe confirmar en su App Móvil:
@@ -76,4 +76,7 @@ Si ocurre alguna de las siguientes novedades:
 * **Casos de Uso**: [[CU_05_Clientes_y_Ventas]], [[CU_06_Logistica_y_Domicilios]].
 
 ## 🔄 Cambio de alcance 2026-11-02
-El valor del cobro único del kit de cocas ($70.000 COP) es parametrizable en [[DB_Tabla_Configuraciones_Sistema]] (clave `cobro_cocas`); cada suscripción guarda el valor vigente al momento de la venta.
+El valor del cobro único del kit de cocas ($80.000 COP) es parametrizable en [[DB_Tabla_Configuraciones_Sistema]] (clave `cobro_cocas`); cada suscripción guarda el valor vigente al momento de la venta.
+
+## 🔄 Ajuste con el frontend 2026-11-03 (bd.uml v3.7)
+El kit de cocas vale **$80.000 COP** y es configurable (`cobro_cocas`). Lo paga solo la venta nueva, antes de iniciar.

@@ -68,3 +68,6 @@ graph TD
 
 ## 🔄 Cambio de alcance 2026-11-02
 El domiciliario es un usuario con rol Domiciliario (no existe módulo de empleados). La modalidad de dirección híbrida se puede activar o desactivar en [[DB_Tabla_Configuraciones_Sistema]] (`modalidad_hibrida_activa`).
+
+## 🔄 Ajuste con el frontend 2026-11-03 (bd.uml v3.7)
+Cada zona tiene un **domiciliario fijo** (`zonas_cobertura.domiciliario_id`); las rutas del día lo toman por defecto y se pueden reasignar ese día. Las entregas usan los estados programada, en_ruta, entregada, suspendida e incidencia, y el cliente puede calificar el almuerzo (1 a 5).

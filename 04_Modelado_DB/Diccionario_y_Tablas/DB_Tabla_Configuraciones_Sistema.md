@@ -41,16 +41,16 @@ Guardan los parámetros que el negocio puede ajustar sin cambiar el código: **v
 ## 📐 `historial_configuraciones`
 Bitácora de solo inserción: `configuracion_id` (FK), `valor_anterior`, `valor_nuevo`, `usuario_id` (FK), `fecha`.
 
-## 🧾 Valores iniciales
+## 🧾 Valores iniciales (bd.uml v3.7)
 
 | Clave | Valor | Regla relacionada |
 | :--- | :--- | :--- |
-| `cobro_cocas` | 70000 | [[RN_Logistica_Cocas]] |
-| `recargo_menu_personalizado` | 10000 | [[RN_Suscripciones_y_Menus]] |
+| `cobro_cocas` | 80000 | [[RN_Logistica_Cocas]] |
 | `hora_limite_suspension` | 17:00 | [[RN_Suspensiones_Voluntarias]] |
 | `modalidad_hibrida_activa` | true | [[RN_Domiciliarios_y_Rutas]] |
-| `menu_personalizado_activo` | true | [[RN_Suscripciones_y_Menus]] |
-| `dia_limite_suscripcion` | domingo | [[RN_Limite_Suscripcion_Semanal]] |
-| `hora_limite_suscripcion` | 17:00 | [[RN_Limite_Suscripcion_Semanal]] |
-| `horas_gracia_pago` | 15 | [[RN_Limite_Suscripcion_Semanal]] |
-| `solicitudes_fuera_limite_activas` | false | [[RN_Limite_Suscripcion_Semanal]] |
+| `dia_corte_suscripcion` | sabado | [[RN_Limite_Suscripcion_Semanal]] |
+| `hora_corte_suscripcion` | 12:00 | [[RN_Limite_Suscripcion_Semanal]] |
+| `inicio_sin_pago_activo` | true | [[RN_Limite_Suscripcion_Semanal]] |
+| `dias_habiles_plazo_pago` | 3 | [[RN_Limite_Suscripcion_Semanal]] |
+
+Se eliminaron en v3.7: `recargo_menu_personalizado`, `menu_personalizado_activo`, `dia_limite_suscripcion`, `hora_limite_suscripcion`, `horas_gracia_pago` y `solicitudes_fuera_limite_activas`.

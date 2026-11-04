@@ -32,10 +32,10 @@ flowchart TD
     SUB["Solicitud de Plan Semanal\n(5 Días Teóricos: Lunes a Viernes)"] --> CONSULTA["Consulta la tabla [[DB_Tabla_Agenda]]\nen el rango de fechas seleccionado"]
     CONSULTA --> CHECK{"¿Contiene día festivo?\n(es_festivo = true)"}
 
-    CHECK -- Sí (Ej: Miércoles Festivo) --> DESC["Calcula 4 Días Hábiles Reales\nDescuenta $13.000 COP (1 día)"]
-    CHECK -- No --> FULL["Calcula 5 Días Hábiles Reales\nCobro Total: $65.000 COP"]
+    CHECK -- Sí (Ej: Miércoles Festivo) --> DESC["Calcula 4 Días Hábiles Reales\nDescuenta $15.000 COP (1 día)"]
+    CHECK -- No --> FULL["Calcula 5 Días Hábiles Reales\nCobro Total: $75.000 COP"]
 
-    DESC --> LIQ["Valor Total = 4 * $13.000 = $52.000 COP\nVencimiento Estricto: Viernes de esa semana"]
+    DESC --> LIQ["Valor Total = 4 * $15.000 = $60.000 COP\nVencimiento Estricto: Viernes de esa semana"]
     FULL --> LIQ
 ```
 
@@ -49,10 +49,10 @@ flowchart TD
 * La tarifa diaria base del plan se obtiene mediante: 
   $$\text{Tarifa Diaria} = \frac{\text{Precio del Plan Base}}{\text{Días Hábiles Teóricos}}$$
 * **Ejemplo Práctico**:
-  * Plan Semanal Base (5 días): **$65.000 COP** ($\text{Tarifa Diaria} = \$13.000 \text{ COP}$).
+  * Plan Semanal Base (5 días): **$75.000 COP** ($\text{Tarifa Diaria} = \$15.000 \text{ COP}$).
   * Si la semana incluye 1 festivo, el sistema calcula:
     $$\text{Días A Pagar} = 5 - 1 = 4 \text{ días}$$
-    $$\text{Total A Cobrar} = 4 \times \$13.000 = \$52.000 \text{ COP}$$
+    $$\text{Total A Cobrar} = 4 \times \$15.000 = \$60.000 \text{ COP}$$
 
 ### 3. Parametrización en la Tabla Agenda
 * El administrador configura anualmente el calendario en la tabla [[DB_Tabla_Agenda]].

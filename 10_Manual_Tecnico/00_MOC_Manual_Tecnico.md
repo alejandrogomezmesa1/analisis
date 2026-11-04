@@ -45,7 +45,7 @@ graph TD
 
 ## 📑 1. Documentos Maestros (Versiones Word)
 
-Ubicación: `10_Manual_Tecnico/Documentos_Word/` — v1 en `v1_2026-09-23/`, v2 en `v2_2026-09-25/`, v2.1 en `v3_2026-09-25/`, v2.2 (⭐ vigente, cambio de alcance del 2026-11-02) en `v4_2026-11-02/`
+Ubicación: `10_Manual_Tecnico/Documentos_Word/` — v1 en `v1_2026-09-23/`, v2 en `v2_2026-09-25/`, v2.1 en `v3_2026-09-25/`, v2.2 en `v4_2026-11-02/`, v2.3 (⭐ vigente, alineado con bd.uml v3.7) en `v5_2026-11-03/`
 
 1. **`Manual_Tecnico_v1_Jacksoft.docx` (33.1 MB)**:
    - Versión original entregada con observaciones y comentarios directos de la instructora Liliana Galeano y la evaluadora técnica (`isabel0540`).

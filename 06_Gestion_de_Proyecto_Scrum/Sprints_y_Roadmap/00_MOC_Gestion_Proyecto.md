@@ -52,7 +52,7 @@ graph TD
    - Incluye la definición de Producto (DoD), acuerdos de equipo y entregables por iteración.
 
 3. **[[Matriz_Historias_de_Usuario]]**: Matriz consolidada de Historias de Usuario (HU), Story Mapping, priorización del Product Backlog y tablero Kanban de seguimiento.
-   - **Tablero Vigente:** `Historias_de_Usuario_y_Kanban/Tablero_Kanban/v5_2026-11-02/Tablero Kanban 02_11.xlsx` (23 subprocesos, 158 historias, Matriz HU con 194 HU). Anterior: `v4_2026-10-23/Tablero Kanban 13_09.xlsx` (edición del 23 oct del tablero 13_09: Story Mapping v03 con 22 módulos/135 historias y Matriz HU con 22 subprocesos/186 HU).
+   - **Tablero Vigente:** `Historias_de_Usuario_y_Kanban/Tablero_Kanban/v6_2026-11-03/Tablero Kanban 03_11.xlsx` (responsable por módulo con carga equitativa; 23 subprocesos, 158 historias, Matriz HU con 194 HU). Anterior: `v4_2026-10-23/Tablero Kanban 13_09.xlsx` (edición del 23 oct del tablero 13_09: Story Mapping v03 con 22 módulos/135 historias y Matriz HU con 22 subprocesos/186 HU).
    - **Archivos Históricos:** `Tablero_Kanban/v3_2026-09-13/`, `v2_2026-08-21/` (`.xlsx`, `.numbers`, `.csv`), `v1_2026-08-10/`; `Matriz_HU/v1_2026-08-12/`.
 
 4. **Presentación Web Interactiva de Artefactos (`Presentacion_Artefactos/v1_2026-07-27/`):**

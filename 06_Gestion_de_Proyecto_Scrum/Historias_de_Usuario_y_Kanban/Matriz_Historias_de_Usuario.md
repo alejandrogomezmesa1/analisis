@@ -84,3 +84,18 @@ kanban
 * **Story Mapping:** 23 subprocesos y 157 historias (hasta 12 por subproceso, filas 7 a 18). Se quitó la columna EMPLEADOS; se agregaron CONFIGURACIONES DEL SISTEMA (8 historias, 24 puntos) y MENU (9 historias, 25 puntos); ROLES pierde "Asignar permisos"; SUSCRIPCIONES suma "Aprobar solicitud fuera de límite"; "No coincide con el MockUp" pasó a comentario en el encabezado de PRODUCCION. El Backlog, el Tablero y el Avance se recalculan solos.
 * **Matriz HU (hoja Formato Matriz HU):** 194 HU **renumeradas** (subprocesos consecutivos por proceso; Producción pasa a 04.1–04.3). Nuevas **01.2 Configuraciones del sistema** y **06.3 Gestión de menú**. Los actores "Empleado" se renombraron por su rol (Cocinero, Jefe de producción, Personal de cocina, Domiciliario).
 * Archivo: `Tablero_Kanban/v5_2026-11-02/Tablero Kanban 02_11.xlsx`.
+
+## 👥 Responsables por módulo (Tablero Kanban v6, 2026-11-03)
+Carga equitativa: 97–98 puntos y 31–32 historias por integrante. Se edita en la fila 21 del Story Mapping; el Backlog toma el responsable automáticamente.
+
+| Integrante | Módulos | Historias | Puntos |
+| :--- | :--- | :---: | :---: |
+| Alejandro Gómez | Usuarios · Clientes · Suscripciones · Incidencias | 31 | 98 |
+| Omar Meneses | Producción (orden) · Ficha técnica · Servicio · Menú | 31 | 98 |
+| Erick Camargo | Roles · Configuraciones del sistema · Insumos · Producto terminado · Dashboard | 32 | 98 |
+| Luis Gabriel Mesa | Categoría productos · Proveedores · Categoría de servicios · Domiciliarios · Monitoreo y rutas | 32 | 97 |
+| Samuel Morales | Acceso · Categoría de insumos · Productos · Compras · Calendario | 31 | 97 |
+
+## 🔄 Tablero Kanban v7 (Ajuste con el frontend 2026-11-03 (bd.uml v3.7))
+* SUSCRIPCIONES: "Aprobar solicitud fuera de límite" se reemplaza por **"Gestionar suscripciones con pago vencido"** (mismos 5 puntos). MENU: "Cambiar estado del menú" pasa a **"Publicar menú semanal"**. La carga por integrante no cambia (97–98 puntos).
+* Matriz HU: criterios con kit de $80.000, alternativas por restricción en lugar de menú personalizado y estados nuevos de la suscripción.

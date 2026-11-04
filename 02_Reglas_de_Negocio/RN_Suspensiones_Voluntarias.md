@@ -59,3 +59,6 @@ flowchart TD
 
 ## 🔄 Cambio de alcance 2026-11-02
 La hora límite de corte (5:00 PM) es parametrizable en [[DB_Tabla_Configuraciones_Sistema]] (`hora_limite_suspension`).
+
+## 🔄 Ajuste con el frontend 2026-11-03 (bd.uml v3.7)
+Se mantiene la hora límite del día anterior (5:00 PM, configurable). En el frontend la pausa debe validarse con esta regla y no con horas de anticipación.

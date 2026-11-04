@@ -42,7 +42,7 @@ stateDiagram-v2
 
 ### 1. Requisitos para la Aprobación del Pago
 El administrador valida desde el backoffice los siguientes campos obligatorios del comprobante:
-1. **Monto Exacto**: Coincidencia total con el `valor_total` de la suscripción (Plan + Menú Personalizado + Cocas si aplica).
+1. **Monto Exacto**: Coincidencia total con el `valor_total` de la suscripción (Plan − descuento por festivos + Cocas si aplica).
 2. **Número de Referencia/Comprobante**: Código único de la transacción bancaria.
 3. **Fecha y Hora de la Transferencia**: Coincidencia con la ventana de contratación.
 
@@ -58,3 +58,7 @@ El administrador valida desde el backoffice los siguientes campos obligatorios d
 * **Procesos**: [[PROC_Validacion_de_Pagos]], [[PROC_Registro_y_Venta]].
 * **Tablas de BD**: [[DB_Tabla_Suscripciones]].
 * **Casos de Uso**: [[CU_05_Clientes_y_Ventas]].
+
+## 🔄 Ajuste con el frontend 2026-11-03 (bd.uml v3.7)
+* El pago queda con canal (web, app, WhatsApp o panel), quién subió el comprobante y, si se rechaza, el **motivo de rechazo** que ve el cliente.
+* Renovación y reingreso pueden iniciar sin pagar y tienen 3 días hábiles para hacerlo ([[RN_Limite_Suscripcion_Semanal]]).
