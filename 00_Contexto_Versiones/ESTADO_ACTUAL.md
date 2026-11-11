@@ -11,7 +11,7 @@ related:
 
 # Estado actual (HEAD de cada documento)
 
-Última actualización: **2026-11-04** (commit C-076). Copia de todas las versiones vigentes en `00_Documentacion_Vigente/`. Al crear una versión nueva, actualizar su fila aquí y agregar el commit en [[CHANGELOG]]. Para publicarla en Google Drive (Modelado(5 trimestre)): `python3 00_Contexto_Versiones/publicar_drive.py`.
+Última actualización: **2026-11-04** (commit C-077). Copia de todas las versiones vigentes en `00_Documentacion_Vigente/`. Al crear una versión nueva, actualizar su fila aquí y agregar el commit en [[CHANGELOG]]. Para publicarla en Google Drive (Modelado(5 trimestre)): `python3 00_Contexto_Versiones/publicar_drive.py`.
 
 | Módulo | Documento | Vigente | Versiones | Ruta de la versión vigente | Último commit |
 |---|---|:---:|:---:|---|---|

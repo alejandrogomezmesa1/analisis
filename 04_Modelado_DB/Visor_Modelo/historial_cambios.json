@@ -1,0 +1,110 @@
+{
+ "_LEEME": "Una entrada por versión del modelo, la más reciente primero. Se agrega una entrada en cada revisión o corrección (regla del proyecto). 'drive' es la carpeta de 02_HISTORIAL/06_Modelo_BD en Drive. 'estado': vigente | anterior | en_revision.",
+ "versiones": [
+  {
+   "version": "4.6",
+   "drive": "pendiente",
+   "fecha": "2026-11-11",
+   "estado": "en_revision",
+   "titulo": "Grills G1 y G2 con Claude Omar (en curso)",
+   "origen": "G1: Alejandro respondió las 7 preguntas de Claude Omar (ronda G1-1). G2: 6 notas de Alejandro en este visor (11-nov). Se aplica cuando Claude Omar confirme los dos acuerdos.",
+   "cambios": [
+    "Permisos de vuelta: tablas permisos (módulo + acción) y rol_permisos (rol + permiso) para roles.",
+    "productos gana imagen_url, y 'contiene' pasa a llamarse alergenos.",
+    "cantidad_planificada pasa a ordenes_produccion (almuerzos del día) y sale de producto_terminado (se calcula por línea).",
+    "movimientos_inventario pasa a llamarse movimientos_insumos.",
+    "Alergias: la lista fija suma frutos_secos y huevo, y \"bajo en sal\" sale (componente_alimento).",
+    "Varias alergias: el cliente recibe la primera alternativa del plato que no tenga ninguna de sus alergias (menu_items, que mantiene reemplaza_item_id).",
+    "Bloqueo de acceso solo en el backend: salen de configuraciones_sistema las claves intentos_maximos_acceso y minutos_bloqueo_acceso.",
+    "Sin cambios tras revisarlo: la trazabilidad de precios ya la dan suscripciones (precio de venta) y pagos (lo pagado)."
+   ],
+   "resultado": "Se aplica cuando Claude Omar confirme los acuerdos G1 y G2."
+  },
+  {
+   "version": "4.5",
+   "drive": "v11_2026-11-04",
+   "fecha": "2026-11-04",
+   "estado": "vigente",
+   "titulo": "Sin responsable en producción",
+   "origen": "Revisión de Alejandro: el responsable es innecesario.",
+   "cambios": [
+    "Sale producto_terminado.responsable_id: la cocina trabaja en equipo y ningún reporte lo usa (regla Q1: solo se guarda quién hizo algo en pagos e incidencias).",
+    "Se mantiene producto_terminado.motivo, obligatorio al anular una línea (pedido del PO)."
+   ],
+   "resultado": "37 tablas · 51 relaciones"
+  },
+  {
+   "version": "4.4",
+   "drive": "v10_2026-11-04",
+   "fecha": "2026-11-04",
+   "estado": "anterior",
+   "titulo": "Respuesta al mensaje #008 de Claude Omar",
+   "origen": "Puntos A a I del frontend, decididos por Alejandro.",
+   "cambios": [
+    "Vuelven responsable y motivo en producto_terminado (pedido del PO). El responsable volvió a salir en la v4.5.",
+    "El apartamento, la torre o el piso van en direcciones_cliente.notas.",
+    "Se confirman: barrio en vez de etiqueta, sin porción servida, precio del insumo de la última compra, nombre del almuerzo según los platos del menú, ingresos por pagos.fecha_pago, cliente nuevo según su primera suscripción y una alternativa por alergia."
+   ],
+   "resultado": "37 tablas · 52 relaciones"
+  },
+  {
+   "version": "4.3",
+   "drive": "v09_2026-11-04",
+   "fecha": "2026-11-04",
+   "estado": "anterior",
+   "titulo": "Notas del visor",
+   "origen": "9 notas de Alejandro en este visor.",
+   "cambios": [
+    "Acceso: salen accesos.detalle y usuarios.bloqueado_hasta; el bloqueo se calcula con los fallos recientes.",
+    "Sale la tabla tokens_restablecimiento: el restablecimiento de contraseña usa un enlace firmado.",
+    "Alergias con lista fija: clientes.alergias reemplaza a restricciones y al texto libre; menu_items.alergia.",
+    "Salen movimientos_inventario.motivo y observacion, y la calificación de ruta_clientes.",
+    "Se mantienen rutas.fecha y suscripciones.tipo_venta."
+   ],
+   "resultado": "37 tablas · 51 relaciones"
+  },
+  {
+   "version": "4.2",
+   "drive": "v08_2026-11-04",
+   "fecha": "2026-11-04",
+   "estado": "anterior",
+   "titulo": "Grilling del flujo de datos",
+   "origen": "19 decisiones de Alejandro (Q1 a Q19): un campo se queda solo si lo usa un paso posterior del flujo o una pantalla.",
+   "cambios": [
+    "Salen 22 campos: autoría y fechas sin uso, estado en rutas, pausas y fichas, y textos libres que nadie lee.",
+    "Nuevo suspensiones_entrega.origen (cliente | pago_vencido).",
+    "La capacidad diaria pasa a Configuración; los avisos por WhatsApp y correo pasan a consentimientos.",
+    "Se calculan la modalidad de entrega, los intentos fallidos y el precio del insumo."
+   ],
+   "resultado": "38 tablas · 52 relaciones"
+  },
+  {
+   "version": "4.1",
+   "drive": "v07_2026-11-04",
+   "fecha": "2026-11-04",
+   "estado": "anterior",
+   "titulo": "Primeras notas del visor",
+   "origen": "3 notas de Alejandro y la respuesta del frontend.",
+   "cambios": [
+    "Salen historial_configuraciones, tipos_recipiente (la categoría del producto es la coca) y menu_alternativas (integrada en menu_items).",
+    "El menú queda en 3 tablas: menus_semana, menus_diarios y menu_items.",
+    "Nueva clave plazo_pago_cuenta_dia_inicio en configuraciones_sistema."
+   ],
+   "resultado": "38 tablas · 55 relaciones"
+  },
+  {
+   "version": "4.0",
+   "drive": "v06_2026-11-04",
+   "fecha": "2026-11-04",
+   "estado": "anterior",
+   "titulo": "Modelo entregable",
+   "origen": "Pedido de Alejandro: máximo 12 columnas y procesos en orden del flujo.",
+   "cambios": [
+    "Máximo 12 columnas por tabla: salen 46 campos técnicos, redundantes o calculados.",
+    "Las tablas se agrupan en 11 procesos, en el orden real del flujo de trabajo.",
+    "incidencias usa un solo reportado_por_usuario_id."
+   ],
+   "resultado": "41 tablas · 60 relaciones"
+  }
+ ]
+}

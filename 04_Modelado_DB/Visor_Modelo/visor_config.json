@@ -1,0 +1,489 @@
+{
+ "_LEEME": "Datos del visor que no salen del bd.uml. Al crear una versión del modelo: agrega aquí los campos eliminados (con su motivo) y en historial_cambios.json la entrada de la versión. Luego: python3 04_Modelado_DB/Visor_Modelo/construir_visor.py",
+ "procesos": [
+  {
+   "code": "P1",
+   "name": "Acceso y seguridad",
+   "desc": "Antes de operar: quién entra y con qué rol."
+  },
+  {
+   "code": "P2",
+   "name": "Configuración y calendario",
+   "desc": "Reglas del negocio y días hábiles que usan todos los procesos."
+  },
+  {
+   "code": "P3",
+   "name": "Abastecimiento",
+   "desc": "Insumos, proveedores y compras que alimentan el inventario."
+  },
+  {
+   "code": "P4",
+   "name": "Catálogo de cocina",
+   "desc": "Categorías (= tipo de coca), platos y recetas (fichas técnicas)."
+  },
+  {
+   "code": "P5",
+   "name": "Oferta de planes",
+   "desc": "Planes que se venden (semanal, quincenal, mensual)."
+  },
+  {
+   "code": "P6",
+   "name": "Registro de clientes",
+   "desc": "El cliente, sus direcciones por día y sus juegos de cocas."
+  },
+  {
+   "code": "P7",
+   "name": "Venta y pagos",
+   "desc": "Suscripción, comprobantes y pausas de entrega."
+  },
+  {
+   "code": "P8",
+   "name": "Menú semanal",
+   "desc": "Menú de la semana por día, con platos y alternativas por restricción."
+  },
+  {
+   "code": "P9",
+   "name": "Producción",
+   "desc": "Orden del día y líneas de producto terminado."
+  },
+  {
+   "code": "P10",
+   "name": "Despacho y rutas",
+   "desc": "Zonas, rutas del día, entregas y ubicación en tiempo real."
+  },
+  {
+   "code": "P11",
+   "name": "Incidencias",
+   "desc": "Novedades de la entrega y su solución."
+  }
+ ],
+ "subprocesos": {
+  "roles": "Roles",
+  "usuarios": "Usuarios",
+  "accesos": "Acceso",
+  "consentimientos": "Acceso",
+  "configuraciones_sistema": "Configuraciones del sistema",
+  "categorias_insumos": "Categoría de insumos",
+  "insumos": "Insumos",
+  "movimientos_inventario": "Insumos",
+  "categorias_productos": "Categoría productos",
+  "productos": "Productos",
+  "proveedores": "Proveedores",
+  "proveedor_categorias": "Proveedores",
+  "compras": "Compras",
+  "compra_detalle": "Compras",
+  "ordenes_produccion": "Producción (orden)",
+  "fichas_tecnicas": "Ficha técnica",
+  "ficha_tecnica_detalle": "Ficha técnica",
+  "producto_terminado": "Producto terminado",
+  "categorias_servicios": "Categoría de servicios",
+  "servicios": "Servicio",
+  "calendario": "Calendario",
+  "clientes": "Clientes",
+  "direcciones_cliente": "Clientes",
+  "direccion_dias": "Clientes",
+  "suscripciones": "Suscripciones",
+  "pagos": "Suscripciones",
+  "menus_semana": "Menú",
+  "menus_diarios": "Menú",
+  "menu_items": "Menú",
+  "juegos_cocas": "Clientes (cocas)",
+  "recipientes": "Clientes (cocas)",
+  "zonas_cobertura": "Monitoreo y rutas",
+  "rutas": "Monitoreo y rutas",
+  "ruta_clientes": "Monitoreo y rutas",
+  "geolocalizacion_domiciliarios": "Monitoreo y rutas",
+  "incidencias": "Incidencias",
+  "suspensiones_entrega": "Suscripciones (pausas)"
+ },
+ "campos_eliminados": {
+  "usuarios": [
+   {
+    "n": "creado_por_usuario_id",
+    "why": "Auditoría que ninguna HU consulta; el alta la hace siempre el administrador."
+   },
+   {
+    "n": "acceso_enviado_en",
+    "why": "Solo informativo; el envío del correo de acceso no cambia el estado de la cuenta."
+   },
+   {
+    "n": "created_at",
+    "why": "Campo técnico de auditoría; el ORM lo puede manejar sin estar en el modelo entregable."
+   },
+   {
+    "n": "intentos_fallidos_consecutivos",
+    "why": "v4.2 (Q5): los intentos fallidos se cuentan en 'accesos' desde el último ingreso exitoso."
+   },
+   {
+    "n": "bloqueado_hasta",
+    "why": "v4.3 (nota): el bloqueo se calcula con los fallos recientes en 'accesos' (claves intentos_maximos_acceso y minutos_bloqueo_acceso)."
+   }
+  ],
+  "accesos": [
+   {
+    "n": "ip",
+    "why": "Ninguna HU filtra ni reporta por IP; fecha_hora, resultado y detalle bastan para la bitácora."
+   },
+   {
+    "n": "detalle",
+    "why": "v4.3 (nota): nadie lo usa; el bloqueo solo necesita resultado."
+   }
+  ],
+  "consentimientos": [
+   {
+    "n": "ip",
+    "why": "Dato técnico; la evidencia de Ley 1581 queda con usuario, versión, fecha y canal."
+   },
+   {
+    "n": "navegador",
+    "why": "Dato técnico sin uso en HU."
+   }
+  ],
+  "configuraciones_sistema": [
+   {
+    "n": "valor_minimo",
+    "why": "La validación de rango vive en la aplicación por clave (son pocas claves)."
+   },
+   {
+    "n": "valor_maximo",
+    "why": "Ídem valor_minimo."
+   },
+   {
+    "n": "estado",
+    "why": "Una configuración no se desactiva: las funcionalidades se apagan con su propio valor booleano."
+   },
+   {
+    "n": "updated_at",
+    "why": "Redundante: el último cambio está en historial_configuraciones.fecha."
+   },
+   {
+    "n": "updated_by_usuario_id",
+    "why": "Redundante: el autor del cambio está en historial_configuraciones.usuario_id."
+   },
+   {
+    "n": "descripcion",
+    "why": "v4.2 (Q4): el nombre de la configuración basta."
+   }
+  ],
+  "insumos": [
+   {
+    "n": "created_at",
+    "why": "Campo técnico de auditoría."
+   },
+   {
+    "n": "updated_at",
+    "why": "Campo técnico; los cambios de existencia ya quedan en movimientos_inventario."
+   },
+   {
+    "n": "precio_unitario_referencia",
+    "why": "v4.2 (Q7/Q11): el precio sale de la última compra; sin compras, la receta muestra 'costo pendiente'."
+   }
+  ],
+  "movimientos_inventario": [
+   {
+    "n": "usuario_id",
+    "why": "Ninguna HU consulta quién registró el movimiento; el origen ya está en compra u orden de producción."
+   },
+   {
+    "n": "motivo",
+    "why": "v4.3 (nota): el origen ya lo dicen compra_detalle_id u orden_produccion_id; sin ninguno, es ajuste o merma."
+   },
+   {
+    "n": "observacion",
+    "why": "v4.3 (nota): nadie la lee."
+   }
+  ],
+  "categorias_productos": [
+   {
+    "n": "tipo_recipiente_id",
+    "why": "v4.1: la categoría ya es la coca; tipos_recipiente se eliminó."
+   }
+  ],
+  "proveedores": [
+   {
+    "n": "created_at",
+    "why": "Campo técnico de auditoría."
+   }
+  ],
+  "proveedor_categorias": [
+   {
+    "n": "id",
+    "why": "Tabla puente: la llave primaria es (proveedor_id, categoria_insumo_id)."
+   }
+  ],
+  "compras": [
+   {
+    "n": "created_at",
+    "why": "Redundante con fecha_compra."
+   },
+   {
+    "n": "fecha_recepcion",
+    "why": "v4.2 (Q2): la entrada al inventario ya tiene fecha en movimientos_inventario."
+   },
+   {
+    "n": "observacion",
+    "why": "v4.2 (Q4): nadie lo lee en el flujo."
+   }
+  ],
+  "compra_detalle": [
+   {
+    "n": "subtotal",
+    "why": "Calculado: cantidad × precio_unitario."
+   }
+  ],
+  "ordenes_produccion": [
+   {
+    "n": "created_at",
+    "why": "Redundante: la fecha de la orden es la del menú del día (calendario)."
+   },
+   {
+    "n": "usuario_responsable_id",
+    "why": "v4.2 (Q1): la cocina trabaja como equipo; no se piden cuentas por persona."
+   }
+  ],
+  "fichas_tecnicas": [
+   {
+    "n": "estado",
+    "why": "v4.2 (Q3): la ficha sigue el estado de su producto."
+   },
+   {
+    "n": "porcion_servida_g",
+    "why": "v4.2 (Q12): ningún cálculo de producción la usa."
+   }
+  ],
+  "producto_terminado": [
+   {
+    "n": "fecha_elaboracion",
+    "why": "v4.2 (Q2): el estado 'hecho' basta; ningún reporte usa la hora."
+   },
+   {
+    "n": "responsable_id",
+    "why": "v4.5: la cocina trabaja en equipo; ningún reporte necesita saber quién hizo cada línea (regla Q1: autoría solo en pagos e incidencias)."
+   }
+  ],
+  "servicios": [
+   {
+    "n": "duracion_dias",
+    "why": "Redundante con tipo_plan (semanal = 5, quincenal = 10, mensual = 20 días hábiles, RN)."
+   }
+  ],
+  "calendario": [
+   {
+    "n": "es_festivo",
+    "why": "Redundante con es_habil = false + descripcion (el festivo es un día no hábil)."
+   },
+   {
+    "n": "capacidad_maxima_diaria",
+    "why": "v4.2 (Q6): pasa a la clave capacidad_maxima_diaria de Configuración."
+   }
+  ],
+  "clientes": [
+   {
+    "n": "notas_entrega",
+    "why": "Redundante con direcciones_cliente.notas (las indicaciones dependen de la dirección)."
+   },
+   {
+    "n": "estado",
+    "why": "Redundante con usuarios.estado (la cuenta del cliente)."
+   },
+   {
+    "n": "modalidad_entrega",
+    "why": "v4.2 (Q13): se calcula: más de una dirección activa = híbrida."
+   },
+   {
+    "n": "aviso_whatsapp",
+    "why": "v4.2 (Q14): pasa a consentimientos (tipo 'aviso_whatsapp')."
+   },
+   {
+    "n": "aviso_correo",
+    "why": "v4.2 (Q14): pasa a consentimientos (tipo 'aviso_correo')."
+   },
+   {
+    "n": "alergias_alimentarias",
+    "why": "v4.3 (nota): un solo dato de alergias con lista fija (clientes.alergias)."
+   },
+   {
+    "n": "restricciones",
+    "why": "v4.3 (nota): renombrado a alergias (misma lista fija)."
+   }
+  ],
+  "direcciones_cliente": [
+   {
+    "n": "municipio",
+    "why": "Lo determina la zona de cobertura."
+   },
+   {
+    "n": "detalle",
+    "why": "Torre/apto se escribe en la misma dirección o en notas."
+   },
+   {
+    "n": "etiqueta",
+    "why": "v4.2 (Q4): nadie la lee en el flujo; el domiciliario usa dirección y notas."
+   }
+  ],
+  "direccion_dias": [
+   {
+    "n": "id",
+    "why": "Tabla puente: la llave primaria es (direccion_cliente_id, dia_semana)."
+   }
+  ],
+  "suscripciones": [
+   {
+    "n": "dias_facturables",
+    "why": "Calculado con el calendario entre fecha_inicio y fecha_vencimiento."
+   },
+   {
+    "n": "valor_total",
+    "why": "Calculado: valor_plan − descuento_festivos + cobro_cocas."
+   },
+   {
+    "n": "inicio_sin_pago",
+    "why": "Redundante: inició sin pagar ⇔ fecha_limite_pago tiene valor."
+   },
+   {
+    "n": "pago_pendiente",
+    "why": "Calculado: no existe un pago aprobado para la suscripción."
+   }
+  ],
+  "pagos": [
+   {
+    "n": "subido_por_usuario_id",
+    "why": "El canal ya dice si lo subió el cliente (web/app) o el administrador (panel_admin)."
+   },
+   {
+    "n": "fecha_validacion",
+    "why": "Sin uso en HU; el validador queda en validado_por_usuario_id."
+   }
+  ],
+  "menus_semana": [
+   {
+    "n": "created_at",
+    "why": "Campo técnico de auditoría."
+   },
+   {
+    "n": "publicado_por_usuario_id",
+    "why": "v4.2 (Q1): solo se guarda quién lo hizo en pagos e incidencias."
+   },
+   {
+    "n": "publicado_en",
+    "why": "v4.2 (Q2): ninguna regla ni reporte usa la fecha de publicación."
+   }
+  ],
+  "menus_diarios": [
+   {
+    "n": "nombre",
+    "why": "Redundante: el menú se identifica por su fecha (calendario)."
+   },
+   {
+    "n": "created_at",
+    "why": "Campo técnico de auditoría."
+   },
+   {
+    "n": "descripcion",
+    "why": "v4.2 (Q4): el menú son sus platos (menu_items)."
+   }
+  ],
+  "menu_items": [
+   {
+    "n": "tipo_recipiente_id",
+    "why": "v4.1: la coca sale de la categoría del producto."
+   },
+   {
+    "n": "restriccion",
+    "why": "v4.3 (nota): renombrado a alergia."
+   }
+  ],
+  "juegos_cocas": [
+   {
+    "n": "estado",
+    "why": "Redundante con ubicacion (extraviado) y con el estado de la suscripción."
+   }
+  ],
+  "recipientes": [
+   {
+    "n": "estado",
+    "why": "Redundante con estado_fisico (perdido / dañado)."
+   },
+   {
+    "n": "tipo_recipiente_id",
+    "why": "v4.1: reemplazado por categoria_producto_id."
+   }
+  ],
+  "rutas": [
+   {
+    "n": "estado",
+    "why": "v4.2 (Q3): una ruta es de un solo día; su avance está en ruta_clientes."
+   }
+  ],
+  "ruta_clientes": [
+   {
+    "n": "fecha",
+    "why": "Redundante: es rutas.fecha."
+   },
+   {
+    "n": "domiciliario_entrega_id",
+    "why": "Redundante: es rutas.domiciliario_id (si se reasigna, se actualiza la ruta)."
+   },
+   {
+    "n": "calificacion",
+    "why": "v4.3 (nota): la calificación del almuerzo sale del alcance."
+   },
+   {
+    "n": "comentario_calificacion",
+    "why": "v4.3 (nota): sale con la calificación."
+   }
+  ],
+  "geolocalizacion_domiciliarios": [
+   {
+    "n": "domiciliario_id",
+    "why": "Redundante: es rutas.domiciliario_id."
+   }
+  ],
+  "incidencias": [
+   {
+    "n": "tipo_reportante",
+    "why": "Se deduce del rol de reportado_por_usuario_id."
+   },
+   {
+    "n": "cliente_id",
+    "why": "Se obtiene de la entrega (ruta_cliente) o del usuario que reporta."
+   },
+   {
+    "n": "domiciliario_id",
+    "why": "Se obtiene de la ruta de la entrega."
+   },
+   {
+    "n": "registrada_por_usuario_id",
+    "why": "Reemplazado por reportado_por_usuario_id (un solo campo para quien reporta)."
+   }
+  ],
+  "suspensiones_entrega": [
+   {
+    "n": "estado",
+    "why": "v4.2 (Q3): una pausa cancelada antes de la hora límite se borra."
+   },
+   {
+    "n": "motivo",
+    "why": "v4.2 (Q4/Q9): reemplazado por 'origen' (cliente | pago_vencido)."
+   }
+  ]
+ },
+ "tablas_eliminadas": [
+  {
+   "n": "historial_configuraciones",
+   "why": "Solo servía para consultar el historial de cambios de configuración; ningún proceso la usa."
+  },
+  {
+   "n": "tipos_recipiente",
+   "why": "Repetía la categoría del producto: la categoría ya es la coca (Seco, Sopa, Ensalada, Bebida)."
+  },
+  {
+   "n": "menu_alternativas",
+   "why": "Integrada en menu_items con alergia y reemplaza_item_id."
+  },
+  {
+   "n": "tokens_restablecimiento",
+   "why": "v4.3: el restablecimiento de contraseña usa un enlace firmado con vencimiento y el hash de la contraseña actual (un solo uso), sin guardarlo en la base."
+  }
+ ]
+}
