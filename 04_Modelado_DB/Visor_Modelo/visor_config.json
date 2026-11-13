@@ -94,7 +94,9 @@
   "ruta_clientes": "Monitoreo y rutas",
   "geolocalizacion_domiciliarios": "Monitoreo y rutas",
   "incidencias": "Incidencias",
-  "suspensiones_entrega": "Suscripciones (pausas)"
+  "suspensiones_entrega": "Suscripciones (pausas)",
+  "permisos": "Roles",
+  "rol_permisos": "Roles"
  },
  "campos_eliminados": {
   "usuarios": [

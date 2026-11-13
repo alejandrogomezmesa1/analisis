@@ -17,6 +17,14 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-080 · 2026-11-13 · fix(diagrama-er) · v9 → v10
+- **Ruta:** `04_Modelado_DB/Diagramas/v10_2026-11-13/` — `LaCocaDiagramDB.svg`
+- **Mensaje:** Diagrama ER de bd.uml v4.6 (39 tablas, 53 relaciones), generado por `construir_visor.py` (regla de oro).
+
+### C-079 · 2026-11-13 · fix(modelo-relacional) · v11 → v12 (DBML v4.6)
+- **Ruta:** `04_Modelado_DB/Modelo_Relacional/v12_2026-11-13/` — `bd.uml`, `Cambios_v4.6.md`, `Visor_Interactivo/`
+- **Mensaje:** Vuelven los permisos: tablas permisos (módulo + acción, enum accion_permiso) y rol_permisos (llave compuesta), en P1. Se aplicó sin esperar el acuerdo G2 porque la respuesta del frontend no cambia las tablas. Lo demás de G1/G2 pasa a la v4.7. Nuevo `validar_dbml.mjs` en Visor_Modelo.
+
 ### C-078 · 2026-11-13 · feat(visor-modelo) · regla de oro: bd.uml → visor + diagrama ER; manual restaurado
 - **Ruta:** `04_Modelado_DB/Visor_Modelo/` (construir_visor.py, render_svg.mjs, package.json), `00_Contexto_Versiones/hooks/pre-commit`, `00_Contexto_Versiones/publicar_drive.py`
 - **Mensaje:** Regla de oro: siempre que se toca un bd.uml se regeneran el visor y el diagrama ER. `construir_visor.py` crea una versión nueva de `04_Modelado_DB/Diagramas` cuando el SVG no corresponde a la versión del bd.uml. `publicar_drive.py` lo corre antes de publicar, y el hook `pre-commit` (para instalar en `.git/hooks`) lo corre en cada commit que toca un bd.uml. Drive: alguien re-guardó el manual vigente desde Drive el 12-nov (mismo texto y figuras, imágenes recomprimidas, 3 con menos resolución). Se restauró la v5 en `01_VIGENTE` desde `02_HISTORIAL`, y la copia re-guardada quedó en la papelera de Drive.

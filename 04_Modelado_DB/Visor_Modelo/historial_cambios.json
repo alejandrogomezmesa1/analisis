@@ -2,14 +2,13 @@
  "_LEEME": "Una entrada por versión del modelo, la más reciente primero. Se agrega una entrada en cada revisión o corrección (regla del proyecto). 'drive' es la carpeta de 02_HISTORIAL/06_Modelo_BD en Drive. 'estado': vigente | anterior | en_revision.",
  "versiones": [
   {
-   "version": "4.6",
+   "version": "4.7",
    "drive": "pendiente",
    "fecha": "2026-11-11",
    "estado": "en_revision",
    "titulo": "Grills G1 y G2 con Claude Omar (en curso)",
-   "origen": "G1: Alejandro respondió las 7 preguntas de Claude Omar (ronda G1-1). G2: 6 notas de Alejandro en este visor (11-nov). Se aplica cuando Claude Omar confirme los dos acuerdos.",
+   "origen": "G1: Alejandro respondió las 7 preguntas de Claude Omar (ronda G1-1). G2: 6 notas de Alejandro en este visor (11-nov). Se aplica cuando Claude Omar confirme los dos acuerdos (los permisos ya salieron en la v4.6).",
    "cambios": [
-    "Permisos de vuelta: tablas permisos (módulo + acción) y rol_permisos (rol + permiso) para roles.",
     "productos gana imagen_url, y 'contiene' pasa a llamarse alergenos.",
     "cantidad_planificada pasa a ordenes_produccion (almuerzos del día) y sale de producto_terminado (se calcula por línea).",
     "movimientos_inventario pasa a llamarse movimientos_insumos.",
@@ -21,10 +20,24 @@
    "resultado": "Se aplica cuando Claude Omar confirme los acuerdos G1 y G2."
   },
   {
+   "version": "4.6",
+   "drive": "v12_2026-11-13",
+   "fecha": "2026-11-13",
+   "estado": "vigente",
+   "titulo": "Permisos de vuelta",
+   "origen": "Nota de Alejandro en roles (11-nov). Se aplicó el 13-nov sin esperar el acuerdo G2, porque la respuesta del frontend no cambia las tablas.",
+   "cambios": [
+    "Nueva tabla permisos: una acción (ver, crear, editar, cambiar estado) sobre un módulo del Story Mapping.",
+    "Nueva tabla rol_permisos (rol + permiso, llave compuesta): qué puede hacer cada rol de roles.",
+    "Vuelven las HU 'Asignar permisos al rol' y 'Consultar permisos del rol'."
+   ],
+   "resultado": "39 tablas · 53 relaciones"
+  },
+  {
    "version": "4.5",
    "drive": "v11_2026-11-04",
    "fecha": "2026-11-04",
-   "estado": "vigente",
+   "estado": "anterior",
    "titulo": "Sin responsable en producción",
    "origen": "Revisión de Alejandro: el responsable es innecesario.",
    "cambios": [

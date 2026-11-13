@@ -365,7 +365,7 @@ function openTable(t) {
     ${T.note ? `<section><h3>Descripción</h3><p>${esc(T.note)}</p></section>` : ''}
     <section><h3>Campos (${T.cols.length})</h3><table class="ftab">${T.cols.map(c => `<tr><td>${c.pk ? '<span class="tag pk">PK</span> ' : ''}${c.fk ? '<span class="tag fk">FK</span> ' : ''}${c.n}</td><td><div class="tyc">${esc(c.t)}${c.nn && !c.pk ? ' · obligatorio' : ''}${c.u ? ' · único' : ''}</div>${M.enums[c.t] ? `<div class="nt">${M.enums[c.t].join(' · ')}</div>` : ''}${c.note ? `<div class="nt">${esc(c.note)}</div>` : ''}</td></tr>`).join('')}</table></section>
     <section><h3>Relaciones</h3>${relList(t)}</section>
-    <section><h3>Eliminados en v4.0 (${T.removed.length})</h3>${T.removed.length ? `<ul class="removed">${T.removed.map(r => `<li><code>${r.n}</code> ${esc(r.why)}</li>`).join('')}</ul>` : '<p class="empty">No se eliminó ningún campo: todos se usan.</p>'}</section>
+    <section><h3>Campos eliminados del modelo (${T.removed.length})</h3>${T.removed.length ? `<ul class="removed">${T.removed.map(r => `<li><code>${r.n}</code> ${esc(r.why)}</li>`).join('')}</ul>` : '<p class="empty">No se eliminó ningún campo: todos se usan.</p>'}</section>
   </div>`;
   panel.classList.add('open');
   panel.querySelector('.x').onclick = () => { sel = null; applyState(); closePanel(); };
