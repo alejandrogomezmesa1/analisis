@@ -109,6 +109,9 @@ def changelog_repo():
     return out
 
 def main():
+    # Regla de oro: el visor y el diagrama ER se regeneran desde el bd.uml vigente antes de publicar.
+    import subprocess
+    subprocess.run([sys.executable, os.path.join(ROOT, "04_Modelado_DB", "Visor_Modelo", "construir_visor.py")], check=True)
     if not os.path.isdir(DRIVE):
         raise SystemExit(f"No encuentro la carpeta de Drive: {DRIVE}\n¿Está abierto Google Drive para escritorio?")
     hoy = datetime.date.today().isoformat()

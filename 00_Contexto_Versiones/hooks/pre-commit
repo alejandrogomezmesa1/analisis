@@ -1,0 +1,10 @@
+#!/bin/sh
+# REGLA DE ORO: si el commit toca un bd.uml, se regeneran el visor y el diagrama ER y entran en el mismo commit.
+# Instalar (una vez, desde la raiz del repo):
+#   cp 00_Contexto_Versiones/hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+if git diff --cached --name-only | grep -q "^04_Modelado_DB/Modelo_Relacional/.*/bd\.uml$"; then
+  echo "bd.uml modificado: regenerando visor y diagrama ER (regla de oro)..."
+  python3 04_Modelado_DB/Visor_Modelo/construir_visor.py || { echo "Fallo construir_visor.py: commit cancelado."; exit 1; }
+  git add 04_Modelado_DB/Modelo_Relacional/*/Visor_Interactivo 04_Modelado_DB/Visor_Modelo/salida 04_Modelado_DB/Diagramas
+  echo "Recuerda: publicar el artifact del visor (mismo link) y correr publicar_drive.py."
+fi

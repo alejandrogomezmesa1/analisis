@@ -1,4 +1,7 @@
-"""Arma el visor interactivo del modelo (diagrama animado por procesos, notas y últimos cambios).
+"""Arma el visor interactivo del modelo y el diagrama ER (SVG) a partir del bd.uml.
+
+REGLA DE ORO: cada vez que se toca un bd.uml se corre este script. Así el visor y el diagrama ER
+nunca quedan desactualizados (el hook pre-commit del repo lo corre solo).
 
 Uso (desde la raíz del vault):
     python3 04_Modelado_DB/Visor_Modelo/construir_visor.py            # usa el bd.uml de la versión vigente
@@ -11,8 +14,10 @@ Entradas (todas en esta carpeta, salvo el bd.uml):
 Salidas:
     salida/modelo_la_coca.html                     contenido para publicar el artifact (sin <html>/<head>)
     <versión vigente>/Visor_Interactivo/modelo_la_coca_v4.html   página completa para abrir sin conexión
+    04_Modelado_DB/Diagramas/vN_AAAA-MM-DD/LaCocaDiagramDB.svg      diagrama ER: versión nueva si el bd.uml cambió
+Requisito para el SVG: `npm install` una vez en esta carpeta (instala @viz-js/viz).
 """
-import json, os, re, sys
+import datetime, html as H, json, os, re, subprocess, sys
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(AQUI))
@@ -61,6 +66,50 @@ def parsear(uml):
     return (ver.group(1) if ver else "?"), tablas, refs, enums, grupos
 
 
+DG = os.path.join(ROOT, "04_Modelado_DB", "Diagramas")
+COLORES = ["#EEF2FA", "#F1ECF8", "#E6F4F1", "#FBF3E4", "#FBEFF0", "#F0F5F2", "#FBEDE8", "#EAF3FB", "#F6F1E7", "#EEF6EC", "#F8ECF3"]
+
+
+def dot_er(version, tablas, refs, procesos):
+    fk = {(r["from"], r["fc"]) for r in refs}
+    L = ['digraph ER {', 'graph [rankdir=LR, newrank=true, splines=true, fontname="Helvetica", fontsize=22, labelloc=t, '
+         'nodesep=0.3, ranksep=1.0, pad=0.4,',
+         f' label=<<B>JackSoft - Modelo Relacional bd.uml v{version} ({len(tablas)} tablas, {len(refs)} relaciones, '
+         f'{len(procesos)} procesos en orden del flujo)</B><BR/> >];',
+         'node [shape=plain, fontname="Helvetica"]; edge [fontname="Helvetica", fontsize=8, color="#6B7280", arrowtail=tee, dir=both];']
+    for k, p in enumerate(procesos):
+        L.append(f'subgraph cluster_{k} {{ label=<<B>{H.escape(p["code"] + ". " + p["name"])}</B>>; style="rounded,filled"; '
+                 f'fillcolor="{COLORES[k % len(COLORES)]}"; color="#B8C0CC"; fontsize=13;')
+        for t in p["tables"]:
+            filas = "".join(
+                f'<TR><TD ALIGN="LEFT"><FONT POINT-SIZE="9">{"<B>PK</B>&#160;" if c["pk"] else ("<I>FK</I>&#160;" if (t, c["n"]) in fk else "")}'
+                f'{H.escape(c["n"])}</FONT></TD><TD ALIGN="LEFT"><FONT POINT-SIZE="9" COLOR="#6B7280">{H.escape(c["t"])}</FONT></TD></TR>'
+                for c in tablas[t]["cols"])
+            L.append(f'{t} [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="2" BGCOLOR="#FFFFFF" COLOR="#5B6573">'
+                     f'<TR><TD COLSPAN="2" BGCOLOR="#1E293B"><FONT COLOR="#FFFFFF"><B>{t}</B></FONT></TD></TR>{filas}</TABLE>>];')
+        L.append("}")
+    for r in refs:
+        L.append(f'{r["to"]} -> {r["from"]} [label="{r["fc"]}", arrowhead={"tee" if r["k"] == "-" else "crow"}];')
+    L.append("}")
+    return "\n".join(L)
+
+
+def diagrama_er(version, tablas, refs, procesos):
+    """Crea una versión nueva del diagrama ER si la última no corresponde a esta versión del bd.uml."""
+    vs = sorted((int(m.group(1)), d) for d in os.listdir(DG) if (m := VER.match(d)))
+    ultima = os.path.join(DG, vs[-1][1], "LaCocaDiagramDB.svg") if vs else None
+    if ultima and os.path.exists(ultima) and f"bd.uml v{version} (" in open(ultima, encoding="utf-8").read():
+        return f"Diagrama ER: {vs[-1][1]} ya es de bd.uml v{version}"
+    if not os.path.isdir(os.path.join(AQUI, "node_modules", "@viz-js")):
+        return "Diagrama ER: falta 'npm install' en 04_Modelado_DB/Visor_Modelo (no se generó el SVG)"
+    destino = os.path.join(DG, f"v{(vs[-1][0] if vs else 0) + 1}_{datetime.date.today().isoformat()}")
+    os.makedirs(destino, exist_ok=True)
+    dot = os.path.join(AQUI, "salida", "er.dot")
+    open(dot, "w", encoding="utf-8").write(dot_er(version, tablas, refs, procesos))
+    subprocess.run(["node", os.path.join(AQUI, "render_svg.mjs"), dot, os.path.join(destino, "LaCocaDiagramDB.svg")], check=True)
+    return f"Diagrama ER: versión nueva {os.path.basename(destino)} (bd.uml v{version}) — anótala en el CHANGELOG"
+
+
 def main():
     uml = sys.argv[1] if len(sys.argv) > 1 else os.path.join(vigente(), "bd.uml")
     version, tablas, refs, enums, grupos = parsear(uml)
@@ -89,6 +138,9 @@ def main():
     open(os.path.join(destino, "modelo_la_coca_v4.html"), "w", encoding="utf-8").write(ESQ + html + "</body></html>")
     print(f"Visor v{version}: {len(tablas)} tablas, {len(refs)} relaciones, {len(procesos)} procesos, "
           f"{len(hist['versiones'])} versiones en el historial de cambios.")
+    if not any(v.get("version") == version for v in hist["versiones"]):
+        print(f"AVISO: historial_cambios.json no tiene una entrada para la v{version}: agrégala (versión, fecha y cambios).")
+    print(diagrama_er(version, tablas, refs, procesos))
 
 
 if __name__ == "__main__":

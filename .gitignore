@@ -11,3 +11,7 @@
 
 # Archivos temporales de herramientas
 .playwright-mcp/
+
+# Dependencias de herramientas (se instalan con npm install)
+node_modules/
+04_Modelado_DB/Visor_Modelo/salida/er.dot

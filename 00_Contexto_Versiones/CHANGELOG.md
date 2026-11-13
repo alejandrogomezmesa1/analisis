@@ -17,6 +17,10 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-078 · 2026-11-13 · feat(visor-modelo) · regla de oro: bd.uml → visor + diagrama ER; manual restaurado
+- **Ruta:** `04_Modelado_DB/Visor_Modelo/` (construir_visor.py, render_svg.mjs, package.json), `00_Contexto_Versiones/hooks/pre-commit`, `00_Contexto_Versiones/publicar_drive.py`
+- **Mensaje:** Regla de oro: siempre que se toca un bd.uml se regeneran el visor y el diagrama ER. `construir_visor.py` crea una versión nueva de `04_Modelado_DB/Diagramas` cuando el SVG no corresponde a la versión del bd.uml. `publicar_drive.py` lo corre antes de publicar, y el hook `pre-commit` (para instalar en `.git/hooks`) lo corre en cada commit que toca un bd.uml. Drive: alguien re-guardó el manual vigente desde Drive el 12-nov (mismo texto y figuras, imágenes recomprimidas, 3 con menos resolución). Se restauró la v5 en `01_VIGENTE` desde `02_HISTORIAL`, y la copia re-guardada quedó en la papelera de Drive.
+
 ### C-077 · 2026-11-11 · feat(visor-modelo) · resumen de últimos cambios y grills G1/G2
 - **Ruta:** `04_Modelado_DB/Visor_Modelo/` (template.html, construir_visor.py, visor_config.json, historial_cambios.json); `chat/` (#013 a #017)
 - **Mensaje:** El visor muestra "Últimos cambios": cada versión del modelo con su fecha, su estado (vigente, anterior, en revisión), su origen y sus cambios, con enlaces a las tablas. El visor ahora se arma desde el bd.uml con `construir_visor.py`, que está en el repo (antes dependía de scripts temporales). En el chat: respuesta al grill G1 de Claude Omar (#015, decisiones de Alejandro por cuestionario interactivo), grill G1-2 de vuelta (#016) y grill G2 con 6 notas nuevas del visor (#017). La v4.6 queda en revisión hasta los acuerdos.
