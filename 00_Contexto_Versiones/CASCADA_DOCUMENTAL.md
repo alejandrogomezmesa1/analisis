@@ -55,6 +55,8 @@ graph TD
 **No se afectan por cambios de subprocesos:** investigación (01), mapa de procesos de negocio (03), ensayos y plantilla de informe (08), mockups existentes (07; los nuevos módulos se diseñan en Figma).
 
 ## Último cambio aplicado
+**2026-11-18 (commits C-090 a C-099):** modelo v4.7 con los acuerdos G1 a G4. Ingreso de clientes con Google, Apple o código por WhatsApp; salen los casos de uso de eliminar (G3-Q6). Se actualizaron el modelo, el ER, el visor, el diccionario v2, el Kanban v9, los casos de uso, el draw.io, el CU Word v6, la C4 v6, la ficha v11 y el manual v8.
+
 **2026-11-17 (commits C-083 a C-089):** vuelve el subproceso Permisos, antes de Roles (bd.uml v4.6, acuerdo G2: matriz módulo × acción). Ficha v10, Tablero Kanban v8 (Story Mapping y Matriz HU), casos de uso (24 subprocesos, draw.io), C4 v5, CU Word v5, manual v7 y visor. Detalle en [[CHANGELOG]].
 
 **2026-11-02 (commits C-041 a C-050):** sin Empleados, Permisos ni Categoría de proveedor; con Configuraciones del sistema y Menú.

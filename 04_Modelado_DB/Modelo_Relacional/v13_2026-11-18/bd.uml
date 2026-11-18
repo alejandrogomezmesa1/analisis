@@ -1,0 +1,1511 @@
+// ============================================================================
+// JACKSOFT — Modelo Relacional (v4.7 — entregable)
+// Cliente: La Coca de Jacks SAS
+// Proyecto: Sistema de Gestión de Alimentación por Suscripción
+// Programa: ADSO — Ficha SENA 3312824
+// Fuente: Ficha de Proyecto (AMS-STMA-01) + Story Mapping (24 Subprocesos)
+// ============================================================================
+//
+// CAMBIOS EN v4.7 (2026-11-18) — ACUERDOS G1, G2, G3 Y G4 CON CLAUDE OMAR (FRONTEND):
+//  1. G1: componente_alimento suma frutos_secos y huevo. El bloqueo de acceso queda solo en el backend:
+//     salen las claves intentos_maximos_acceso y minutos_bloqueo_acceso de configuraciones_sistema.
+//  2. G2: productos gana imagen_url y 'contiene' pasa a llamarse alergenos. cantidad_planificada pasa a
+//     ordenes_produccion (almuerzos del día) y sale de producto_terminado (cada línea se calcula).
+//     movimientos_insumos pasa a llamarse movimientos_insumos.
+//  3. G3: usuarios.tipo_documento (enum) con único (tipo_documento, documento) y password opcional;
+//     direcciones_cliente.municipio; servicios.dias_habiles y beneficios; fichas_tecnicas.rendimiento_porciones;
+//     zonas_cobertura.nombre_publico y municipio; claves de pago (banco, tipo de cuenta, número, titular) y
+//     horario_entrega en configuraciones_sistema; sale clientes.franja_horaria. Solo 4 acciones por permiso
+//     (no se elimina: se inactiva). Nueva tabla identidades_externas (Google y Apple, solo clientes).
+//  4. G4: nueva tabla codigos_acceso (código por WhatsApp con hash), usuarios.telefono único (+57) y
+//     accesos.metodo (enum metodo_acceso).
+//  5. menus_diarios.foto_url (si el día no tiene foto, se usa la imagen_url del seco del menú).
+//  6. La nota de roles ya no lista las HU de permisos: están en el subproceso Permisos.
+//  Resultado: 41 tablas.
+//
+// CAMBIOS EN v4.6 (2026-11-13):
+//  1. Vuelven los permisos por rol (nota de Alejandro en el visor, 11-nov; aplicado el 13-nov sin esperar
+//     el acuerdo G2 porque la respuesta del frontend no cambia las tablas): permisos (módulo + acción) y
+//     rol_permisos (rol + permiso, llave compuesta). Nuevo enum accion_permiso.
+//  Resultado: 39 tablas.
+//
+// CAMBIOS EN v4.5 (2026-11-04):
+//  1. Sale otra vez producto_terminado.responsable_id: la cocina trabaja en equipo y ningún reporte lo usa
+//     (regla Q1: autoría solo en pagos e incidencias). Se mantiene motivo para anular una línea.
+//
+// CAMBIOS EN v4.4 — RESPUESTA AL MENSAJE #008 DE CLAUDE OMAR (2026-11-04):
+//  1. producto_terminado recupera responsable_id y motivo (pedido del PO del 2-nov: "Marcar hecho" con
+//     quién lo hizo y "Anular" con motivo). La orden sigue sin responsable.
+//  2. direcciones_cliente.notas guarda apartamento, torre o piso (no se crea un campo nuevo).
+//  3. Se confirman: sin etiqueta de dirección (se muestra el barrio), sin porción servida, precio del insumo
+//     = última compra, nombre del almuerzo = producto principal del menú, ingresos del dashboard por
+//     pagos.fecha_pago, cliente nuevo = fecha de su primera suscripción, una alternativa por alergia.
+//
+// CAMBIOS EN v4.3 — NOTAS DEL VISOR (2026-11-04):
+//  1. Acceso: salen accesos.detalle, usuarios.bloqueado_hasta y la tabla tokens_restablecimiento.
+//     El bloqueo se calcula con los fallos recientes en accesos (claves intentos_maximos_acceso y
+//     minutos_bloqueo_acceso); el restablecimiento usa un enlace firmado con vencimiento y el hash de la
+//     contraseña actual (de un solo uso), sin guardarlo en la base.
+//  2. Alergias en lugar de restricciones: clientes.alergias (lista fija componente_alimento) reemplaza a
+//     restricciones y al texto libre alergias_alimentarias; menu_items.alergia; incidencia alergia_no_atendida.
+//  3. Salen movimientos_insumos.motivo (y su enum) y observacion, y la calificación de la entrega.
+//  4. Se mantienen rutas.fecha (la fecha de las entregas sale de la ruta) y suscripciones.tipo_venta.
+//  Resultado: 37 tablas.
+//
+// CAMBIOS EN v4.2 — GRILLING DEL FLUJO DE DATOS (2026-11-04):
+//  Regla: un campo se queda solo si un paso posterior del flujo o una pantalla lo usa.
+//  1. Autoría solo en pagos (validado_por) e incidencias (gestionada_por).
+//  2. Fechas solo si las usa una regla o un reporte.
+//  3. Sin estado en rutas, pausas y fichas técnicas.
+//  4. Sin textos libres que nadie lee (descripción del menú y de la configuración, observación de compras,
+//     etiqueta de dirección, motivos de pausa y de línea de producción).
+//  5. Calculados: intentos fallidos (desde accesos), modalidad de entrega (desde las direcciones) y precio
+//     del insumo (última compra; sin compras = costo pendiente).
+//  6. Movidos: capacidad máxima diaria → Configuración; avisos por WhatsApp/correo → consentimientos.
+//  7. Nuevo: suspensiones_entrega.origen (cliente | pago_vencido).
+//  Resultado: 38 tablas, 22 campos menos.
+//
+// CAMBIOS EN v4.1 — NOTAS DE REVISIÓN EN EL VISOR (2026-11-04):
+//  1. Se elimina historial_configuraciones (y la HU "Consultar historial de cambios").
+//  2. Se elimina tipos_recipiente: la categoría del producto es la coca (Seco, Sopa, Ensalada, Bebida).
+//     recipientes.categoria_producto_id reemplaza a tipo_recipiente_id; menu_items ya no lo guarda.
+//  3. Menú en 3 tablas: menu_alternativas se integra en menu_items (restriccion + reemplaza_item_id).
+//  4. Se mantienen juegos_cocas y recipientes para la trazabilidad de cocas por cliente.
+//  5. Nueva configuración plazo_pago_cuenta_dia_inicio: si el día de inicio cuenta como día 1 del plazo de pago.
+//     Las pausas (suspensiones_entrega) no mueven la fecha de vencimiento.
+//  Resultado: 38 tablas.
+//
+// CAMBIOS EN v4.0 — MODELO ENTREGABLE (2026-11-04):
+//  1. Máximo 12 columnas por tabla. Se revisó cada campo y se eliminaron 46 campos técnicos,
+//     redundantes o calculados (created_at/updated_at, copias de otra tabla, totales que se calculan).
+//     La lista completa con el motivo de cada campo está en Cambios_v4.0.md.
+//  2. Suscripciones: valor_total, dias_facturables y pago_pendiente se calculan; "inició sin pagar"
+//     se reconoce porque fecha_limite_pago tiene valor.
+//  3. Incidencias: un solo campo reportado_por_usuario_id (su rol dice si es cliente, domiciliario
+//     o administrador); cliente y domiciliario salen de la entrega. Se elimina el enum tipo_reportante.
+//  4. Entregas y geolocalización toman la fecha y el domiciliario de la ruta.
+//  5. Tablas puente con llave compuesta: proveedor_categorias y direccion_dias.
+//  6. TableGroups por proceso (11), en el orden real del flujo: Acceso → Configuración → Abastecimiento
+//     → Catálogo de cocina → Planes → Clientes → Venta y pagos → Menú → Producción → Despacho → Incidencias.
+//
+// CAMBIOS EN v3.7 — AJUSTE CON EL FRONTEND (2026-11-03, Análisis Modelo vs Frontend):
+//  1. Reglas: festivos se descuentan (RN-02, sin cambio); corte semanal sábado 12:00 m (configurable);
+//     renovación y reingreso pueden iniciar sin pagar (configurable) con plazo de 3 días hábiles
+//     (suscripciones.pago_pendiente / fecha_limite_pago; si vence, decide el administrador). Se eliminan
+//     la gracia de pago y las solicitudes fuera de límite. Pausas: 5:00 PM del día anterior.
+//     Precios: planes 75/150/300 mil; kit de cocas 80 mil (configurable). Sin menú personalizado
+//     (se quitan tipo_menu, recargo y variantes); en su lugar menu_alternativas por restricción.
+//     calendario.capacidad_maxima_diaria es opcional (NULL = sin límite).
+//  2. Estados alineados con el frontend: suscripción, compra, entrega, incidencia (y 8 tipos), menú
+//     publicado por semana (menus_semana) y producción por líneas (producto_terminado = línea de la orden).
+//  3. Proveedores por categoría (proveedor_categorias); se elimina insumo_proveedores.
+//  4. Nuevas tablas: consentimientos (Ley 1581), tokens_restablecimiento, menus_semana, menu_alternativas,
+//     direccion_dias. Campos nuevos en usuarios, accesos, productos, categorías, fichas, clientes,
+//     direcciones, pagos, zonas, entregas, incidencias, proveedores y compras.
+//
+// CAMBIOS EN v3.6 — CAMBIO DE ALCANCE (2026-11-02, Ficha v8):
+//  1. Se elimina el subproceso Empleados y la tabla empleados. El personal interno (Administrador,
+//     Cocina, Domiciliario) es solo un usuario con su rol. Las FK que apuntaban a empleados.id ahora
+//     apuntan a usuarios.id: ordenes_produccion.usuario_responsable_id (antes empleado_responsable_id),
+//     rutas.domiciliario_id, ruta_clientes.domiciliario_entrega_id,
+//     geolocalizacion_domiciliarios.domiciliario_id e incidencias.domiciliario_id.
+//  2. Nuevo subproceso Configuraciones del sistema (proceso Configuración): tablas
+//     configuraciones_sistema e historial_configuraciones. Guarda los valores del negocio (cobro de
+//     cocas, recargo por menú personalizado, hora límite de suspensión) y las funcionalidades que se
+//     activan o desactivan (dirección híbrida, menú personalizado). Se pueden agregar nuevas.
+//  3. Nuevo subproceso Menú (proceso Ventas): menus_diarios y menu_items pasan del grupo Producción
+//     al grupo Menú. menus_diarios agrega semana_inicio para la programación semanal.
+//  4. Cierre semanal de suscripciones: configuraciones dia_limite_suscripcion, hora_limite_suscripcion,
+//     horas_gracia_pago y solicitudes_fuera_limite_activas. suscripciones agrega fecha_solicitud,
+//     fuera_de_limite, aprobacion_fuera_limite y aprobada_por_usuario_id (ver RN de límite semanal).
+//  5. TableGroups = 23 subprocesos (sin Empleados; con Configuraciones del sistema y Menú).
+//
+// CAMBIOS EN v3.5 — FESTIVOS SEGÚN RN-02 (2026-10-30):
+//  1. El festivo se descuenta del precio y el vencimiento no se mueve (corrige el punto 4 de v3.4).
+//  2. suscripciones agrega dias_facturables y descuento_festivos para auditar el total.
+//
+// CAMBIOS EN v3.4 — DECISIONES DE REVISIÓN (2026-10-30):
+//  1. Permisos y Categoría de proveedor salen del alcance por ahora: se elimina rol_permisos.
+//     Lo que puede hacer cada rol se define en la aplicación.
+//  2. El domiciliario es un rol (sin tabla propia): la aplicación valida que rutas, entregas,
+//     geolocalización e incidencias usen empleados cuyo usuario tenga rol Domiciliario.
+//     empleados.cargo pasa a ser el puesto de trabajo (texto libre).
+//  3. 1 menú del día = 1 orden de producción (menu_id único); la fecha de la orden es la del menú.
+//  4. El calendario manda: menus_diarios y suspensiones_entrega se enlazan con calendario_id y solo
+//     aceptan días hábiles. (El cálculo de festivos de suscripciones se corrigió en v3.5).
+//  5. Direcciones: una dirección base por cliente (dia_semana NULL) + excepciones por día para híbridos.
+//  6. ruta_clientes guarda fecha, dirección usada y domiciliario que entregó; una entrega por suscripción
+//     por día. La ruta puede reasignarse a mitad del recorrido.
+//  7. Kardex con motivo controlado (compra / produccion / merma / ajuste); compras con estado 'recibida'.
+//  8. Valores calculados: se fijan los precios del momento (compra_detalle, suscripciones) y la existencia
+//     del insumo; compras.valor_total y el costo por porción de la ficha técnica se calculan con vistas.
+//  9. Incidencias con tipo controlado, usuario que gestiona y validación según quien reporta.
+// 09. Solo cambio de estado (no se elimina); las compras se anulan. TableGroups = 22 subprocesos.
+//
+// CAMBIOS EN v3.3 — ACCESO ÚNICO POR USUARIOS:
+//  1. Todo inicio de sesión pasa por "usuarios": accesos → usuarios → clientes | empleados.
+//     clientes.usuario_id y empleados.usuario_id son FK obligatorias y únicas (1:1).
+//  2. Se eliminan clientes.password y accesos.cliente_id (ya no hay un login paralelo para clientes).
+//  3. Los datos de la persona (nombre, documento, correo, teléfono) viven solo en usuarios;
+//     clientes y empleados conservan únicamente sus datos propios.
+//  4. intentos_fallidos_consecutivos pasa de accesos a usuarios (es estado de la cuenta) y se agrega bloqueado_hasta.
+//  5. Se agrega el rol "Cliente".
+//
+// CAMBIOS Y REFINAMIENTOS EN v3.2:
+//  1. PROGRAMACIÓN DE MENÚS DIARIOS Y SEMANALES:
+//     Se agregan "menus_diarios" y "menu_items", conectando la carta gastronómica
+//     con las cocas físicas (tipos_recipiente: seco, sopa, ensalada, frasco_bebida)
+//     y las variantes de proteína (común, proteína estándar, opción pollo, opción cerdo).
+//     Esto separa la visualización previa de la carta para el cliente (App Móvil)
+//     de la ejecución operativa de la cocina (ordenes_produccion).
+//  2. INTEGRACIÓN CON ORDEN DE PRODUCCIÓN:
+//     ordenes_produccion se enlaza con menus_diarios para generar automáticamente
+//     el cálculo de almuerzos a producir, insumos requeridos y producto terminado
+//     según los clientes activos y sus restricciones alimentarias.
+//  3. REGLAS DE NEGOCIO PREVIAS REAFIRMADAS:
+//     - Eliminado el concepto de "congelamiento". Solo existe "suspensiones_entrega" puntual de 1 día.
+//     - Corregido usuarios.estado con default: 'activo'.
+//     - Vinculado empleados.usuario_id con usuarios.id para login operativo.
+//     - Adicionado producto_terminado.cantidad_planificada vs cantidad_producida.
+//     - Kardex transaccional completo en movimientos_insumos.
+//     - Inventario y rotación de 2 juegos de cocas (4 recipientes por juego) por cliente.
+// ============================================================================
+
+
+// ---------------------------------------------------------------------------
+// ENUMS (Tipos de Datos Enumerados)
+// ---------------------------------------------------------------------------
+
+Enum tipo_valor_configuracion {
+  numero
+  moneda
+  texto
+  hora
+  dia_semana
+  booleano
+}
+
+Enum componente_alimento {
+  carne
+  cerdo
+  mariscos
+  gluten
+  lacteos
+  frutos_secos
+  huevo
+}
+
+Enum tipo_documento {
+  CC
+  CE
+  NIT
+  PA
+  PPT
+}
+
+Enum proveedor_identidad {
+  google
+  apple
+}
+
+Enum metodo_acceso {
+  password
+  codigo
+  google
+  apple
+}
+
+Enum origen_suspension {
+  cliente
+  pago_vencido
+}
+
+Enum estado_menu_semana {
+  borrador
+  publicado
+}
+
+Enum tipo_consentimiento {
+  terminos
+  privacidad
+  whatsapp_promocional
+  aviso_whatsapp
+  aviso_correo
+}
+
+Enum canal_registro {
+  web
+  app_movil
+  whatsapp
+  panel_admin
+}
+
+Enum accion_permiso {
+  ver
+  crear
+  editar
+  cambiar_estado
+}
+
+Enum estado_general {
+  activo
+  inactivo
+}
+
+Enum estado_registro {
+  pendiente
+  aprobado
+  rechazado
+}
+
+Enum estado_linea_produccion {
+  por_hacer
+  haciendo
+  hecho
+  anulado
+}
+
+Enum estado_suscripcion {
+  pendiente_pago
+  verificando
+  activa
+  finalizada
+  rechazada
+  cancelada
+}
+
+Enum tipo_venta {
+  nueva
+  renovacion
+  reingreso
+}
+
+Enum tipo_plan {
+  semanal
+  quincenal
+  mensual
+}
+
+Enum estado_compra {
+  solicitada
+  recibida
+  anulada
+}
+
+Enum estado_entrega {
+  programada
+  en_ruta
+  entregada
+  suspendida
+  incidencia
+}
+
+Enum estado_incidencia {
+  abierta
+  en_revision
+  resuelta
+}
+
+Enum dia_semana {
+  lunes
+  martes
+  miercoles
+  jueves
+  viernes
+  sabado
+  domingo
+}
+
+Enum tipo_movimiento_insumo {
+  entrada
+  salida
+}
+
+Enum tipo_incidencia {
+  coca_defectuosa
+  ausencia_cliente
+  direccion_incorrecta
+  calidad_almuerzo
+  coca_no_devuelta
+  retraso
+  alergia_no_atendida
+  otro
+}
+
+Enum resultado_acceso {
+  exitoso
+  fallido
+}
+
+Enum ubicacion_juego_cocas {
+  en_cliente
+  en_cocina
+  extraviado
+}
+
+Enum estado_fisico_recipiente {
+  bueno
+  danado
+  perdido
+}
+
+
+// ============================================================================
+// 01. ROLES
+// ============================================================================
+
+Table roles {
+  id integer [pk, increment]
+  nombre varchar [not null, unique]
+  estado estado_general [not null, default: 'activo']
+
+  Note: 'HU: Crear rol, Listar roles, Ver detalle del rol, Editar rol, Cambiar estado del rol. Lo que puede hacer cada rol está en rol_permisos y se gestiona en el subproceso Permisos.'
+}
+
+Table permisos {
+  id integer [pk, increment]
+  modulo varchar [not null, note: 'Subproceso del Story Mapping al que da acceso (ej. Suscripciones, Compras)']
+  accion accion_permiso [not null]
+  estado estado_general [not null, default: 'activo']
+
+  indexes {
+    (modulo, accion) [unique]
+  }
+
+  Note: 'HU (subproceso Permisos): Listar permisos, Ver detalle del permiso, Asignar permisos a un rol, Consultar permisos del rol, Quitar permisos a un rol, Cambiar estado del permiso, Buscar/Filtrar permisos, Generar reporte de permisos por rol. Catálogo de permisos: una acción sobre un módulo (ver, crear, editar, cambiar_estado; no hay eliminar: se inactiva). El nombre que se muestra se arma con módulo + acción (ej. "Suscripciones: editar"). El menú y los botones del panel salen de estos permisos (user.permissions).'
+}
+
+Table rol_permisos {
+  rol_id integer [not null]
+  permiso_id integer [not null]
+
+  indexes {
+    (rol_id, permiso_id) [pk]
+  }
+
+  Note: 'Permisos asignados a cada rol (tabla puente con llave compuesta). El administrador los asigna con la matriz módulo × acción del subproceso Permisos.'
+}
+
+
+// ============================================================================
+// 02. USUARIOS
+// ============================================================================
+
+Table usuarios {
+  id integer [pk, increment]
+  rol_id integer [not null]
+  nombre_completo varchar [not null]
+  tipo_documento tipo_documento [not null, default: 'CC']
+  documento varchar [not null]
+  correo varchar [not null, unique]
+  password varchar [note: 'Hash; vacío si la cuenta entra solo con Google o Apple (solo clientes)']
+  telefono varchar [unique, note: 'Celular normalizado +57XXXXXXXXXX; con él se entra por código de WhatsApp. El personal sin celular lo deja vacío']
+  estado estado_general [not null, default: 'activo']
+
+  indexes {
+    (tipo_documento, documento) [unique]
+    correo
+  }
+
+  Note: 'Cuenta única de acceso y datos de la persona. Según su rol es un cliente (clientes.usuario_id) o personal interno (Administrador, Cocina, Domiciliario), que no tiene tabla propia: el rol define lo que hace en el sistema. HU: Crear usuario, Consultar usuarios, Ver detalle de usuario, Editar usuario, Cambiar estado de usuario, Generar reportes de usuarios activos e inactivos.'
+}
+
+
+// ============================================================================
+// 03. ACCESO
+// ============================================================================
+
+Table accesos {
+  id integer [pk, increment]
+  usuario_id integer [note: 'NULL si el correo intentado no existe']
+  correo_intentado varchar [not null, note: 'Correo o celular con el que intentó entrar']
+  metodo metodo_acceso [not null, default: 'password', note: 'Cómo entró: contraseña, código por WhatsApp, Google o Apple']
+  fecha_hora timestamp [default: `now()`]
+  resultado resultado_acceso [not null]
+
+  indexes {
+    usuario_id
+    correo_intentado
+  }
+
+  Note: 'HU: Iniciar sesión, Validar credenciales, Recuperar / restablecer contraseña, Consultar estado de la cuenta, Cerrar sesión. Bitácora de auditoría de accesos web y móviles. Clientes y personal interno entran con su usuario; el perfil del cliente se obtiene por usuarios → clientes y el del personal interno por su rol. El personal entra solo con correo y contraseña; los clientes también con código por WhatsApp, Google o Apple. El bloqueo por intentos fallidos lo hace el backend.'
+}
+
+Table identidades_externas {
+  id integer [pk, increment]
+  usuario_id integer [not null]
+  proveedor proveedor_identidad [not null]
+  sub varchar [not null, note: 'Identificador de la cuenta en Google o Apple (claim sub de OpenID Connect)']
+  correo varchar [note: 'Correo que confirmó el proveedor']
+  fecha_vinculo timestamp [not null, default: `now()`]
+
+  indexes {
+    (proveedor, sub) [unique]
+    usuario_id
+  }
+
+  Note: 'HU: Iniciar sesión con Google o Apple. Solo clientes. Si el proveedor confirma el correo y ya hay una cuenta con ese correo, se vincula; si no lo confirma, se pide la contraseña antes de vincular.'
+}
+
+Table codigos_acceso {
+  id integer [pk, increment]
+  usuario_id integer [not null]
+  codigo_hash varchar [not null, note: 'Código de 6 dígitos enviado por WhatsApp; se guarda con hash, nunca en claro']
+  expira_en timestamp [not null, note: '10 minutos después de enviarlo']
+  intentos integer [not null, default: 0, note: 'Máximo 5']
+  usado_en timestamp [note: 'Vacío mientras no se use; un código sirve una sola vez']
+
+  indexes {
+    usuario_id
+  }
+
+  Note: 'HU: Iniciar sesión con código por WhatsApp. El límite de consultas de /auth/lookup por IP lo hace el backend en memoria (sin tabla ni IP en la base).'
+}
+
+Table consentimientos {
+  id integer [pk, increment]
+  usuario_id integer [not null]
+  tipo tipo_consentimiento [not null]
+  version varchar [not null, note: 'Versión del texto aceptado']
+  aceptado boolean [not null, default: true, note: 'false = retiró el consentimiento']
+  fecha timestamp [not null, default: `now()`]
+  canal canal_registro [not null]
+
+  indexes {
+    (usuario_id, tipo)
+  }
+
+  Note: 'Evidencia de autorizaciones (Ley 1581 de 2012): términos, política de privacidad y WhatsApp promocional. Solo inserción.'
+}
+
+
+// ============================================================================
+// 03b. CONFIGURACIONES DEL SISTEMA
+// ============================================================================
+
+Table configuraciones_sistema {
+  id integer [pk, increment]
+  clave varchar [not null, unique, note: 'Identificador que usa la aplicación (ej. cobro_cocas, hora_limite_suspension, dia_corte_suscripcion, inicio_sin_pago_activo)']
+  nombre varchar [not null]
+  categoria varchar [not null, note: 'Agrupación en pantalla: valores_negocio | funcionalidades | suscripciones | pagos (abierta a nuevas categorías)']
+  tipo_valor tipo_valor_configuracion [not null]
+  valor varchar [not null, note: 'Valor actual; se guarda como texto y la aplicación lo valida según tipo_valor y el rango']
+  valor_por_defecto varchar [not null]
+
+  indexes {
+    categoria
+  }
+
+  Note: 'HU: Registrar configuración, Listar configuraciones, Ver detalle de la configuración, Editar valor de configuración, Activar/desactivar funcionalidad, Restablecer valor por defecto, Buscar/Filtrar configuraciones. Los valores que se cobran (kit de cocas) se copian a la suscripción al venderla, así un cambio posterior no altera ventas ya registradas.'
+}
+
+
+// ============================================================================
+// 04. CATEGORIA DE INSUMOS
+// ============================================================================
+
+Table categorias_insumos {
+  id integer [pk, increment]
+  nombre varchar [not null, unique]
+  estado estado_general [not null, default: 'activo']
+
+  Note: 'HU: Crear categoría de insumo, Consultar categorías de insumos, Ver detalle de la categoría, Editar categoría, Cambiar estado de la categoría.'
+}
+
+
+// ============================================================================
+// 05. INSUMOS
+// ============================================================================
+
+Table insumos {
+  id integer [pk, increment]
+  categoria_id integer [not null]
+  nombre varchar [not null]
+  unidad_medida varchar [not null, note: 'kg, gr, lt, ml, unidad']
+  cantidad_disponible decimal [not null, default: 0, note: 'Existencia actual; la actualiza el trigger del kardex (movimientos_insumos). Si se edita a mano, se registra un movimiento de ajuste por la diferencia']
+  stock_minimo decimal [not null, default: 0]
+  estado estado_general [not null, default: 'activo']
+
+  indexes {
+    nombre
+    categoria_id
+  }
+
+  Note: 'HU: Crear insumo, Consultar insumos, Ver detalle del insumo, Editar insumo, Cambiar estado del insumo, Consultar existencias, Consultar alertas de stock mínimo, Generar reporte de inventario, Generar reporte de consumo por período, Generar reporte de alertas de reabastecimiento.'
+}
+
+// Kardex de movimientos de insumos
+Table movimientos_insumos {
+  id integer [pk, increment]
+  insumo_id integer [not null]
+  tipo_movimiento tipo_movimiento_insumo [not null]
+  cantidad decimal [not null]
+  fecha timestamp [default: `now()`]
+  compra_detalle_id integer [note: 'Obligatorio si motivo = compra (entra al marcar la compra como recibida)']
+  orden_produccion_id integer [note: 'Obligatorio si motivo = produccion']
+
+  indexes {
+    insumo_id
+    fecha
+  }
+
+  Note: 'HU: Registrar entradas y salidas de inventario, Registrar salida de inventario, Consultar movimientos de inventario. Origen: compra_detalle_id (entrada por compra) u orden_produccion_id (salida por producción); sin ninguno, es un ajuste o una merma.'
+}
+
+
+// ============================================================================
+// 06. CATEGORIA PRODUCTOS
+// ============================================================================
+
+Table categorias_productos {
+  id integer [pk, increment]
+  nombre varchar [not null, unique]
+  estado estado_general [not null, default: 'activo']
+
+  Note: 'HU: Crear categoría de producto, Consultar categorías de productos, Ver detalle de categoría, Editar categoría, Cambiar estado de la categoría del producto, Filtrar categoría por nombre y estado. La categoría es la coca en la que se sirve el producto (Seco, Sopa, Ensalada, Bebida): también clasifica las piezas de cada juego de cocas.'
+}
+
+
+// ============================================================================
+// 07. PRODUCTOS (PREPARACIONES Y PLATOS)
+// ============================================================================
+
+Table productos {
+  id integer [pk, increment]
+  categoria_id integer [not null]
+  nombre varchar [not null]
+  descripcion varchar
+  alergenos "componente_alimento[]" [note: 'Componentes del plato (carne, cerdo, mariscos, gluten, lácteos, frutos secos, huevo) para cruzarlos con las alergias del cliente']
+  imagen_url varchar [note: 'Foto del plato; el archivo se guarda en el mismo almacenamiento que los comprobantes']
+  estado estado_general [not null, default: 'activo']
+
+  indexes {
+    nombre
+    categoria_id
+  }
+
+  Note: 'HU: Crear producto, Consultar productos, Ver detalle del producto, Editar producto, Cambiar estado del producto, Filtrar por nombre, categoría y estado, Consultar insumos requeridos, Consultar especificaciones de preparación, Generar reporte de productos activos, Consultar costo unitario estimado.'
+}
+
+
+// ============================================================================
+// 08. PROVEEDORES
+// ============================================================================
+
+Table proveedores {
+  id integer [pk, increment]
+  nombre varchar [not null]
+  documento varchar [not null, unique]
+  telefono varchar
+  correo varchar
+  direccion varchar
+  estado estado_general [not null, default: 'activo']
+
+  indexes {
+    documento
+    nombre
+  }
+
+  Note: 'HU: Crear proveedor, Consultar proveedores, Ver detalle del proveedor, Editar proveedor, Cambiar estado del proveedor, Filtrar por nombre, estado e insumos, Consultar productos o insumos suministrados, Consultar historial de compras, Generar reporte de historial de compras.'
+}
+
+Table proveedor_categorias {
+  proveedor_id integer [not null]
+  categoria_insumo_id integer [not null]
+
+  indexes {
+    (proveedor_id, categoria_insumo_id) [pk]
+  }
+
+  Note: 'Categorías de insumos que surte cada proveedor (filtra los proveedores al crear una compra).'
+}
+
+
+
+// ============================================================================
+// 09. COMPRAS
+// ============================================================================
+
+Table compras {
+  id integer [pk, increment]
+  proveedor_id integer [not null]
+  fecha_compra date [not null]
+  estado estado_compra [not null, default: 'solicitada', note: 'solicitada → recibida | anulada (sin paso de aprobación)']
+
+  indexes {
+    fecha_compra
+    proveedor_id
+  }
+
+  Note: 'HU: Crear compra, Consultar compras, Ver detalle de compra, Editar compra, Cambiar estado de compra, Anular compra, Filtrar compra por proveedor, fecha, insumo, estado, Generar reporte de compras por período, Generar reporte de compras por proveedor, Generar reporte de compras por insumo. El valor total se calcula con la vista v_compras_total (suma de cantidad × precio_unitario de compra_detalle).'
+}
+
+Table compra_detalle {
+  id integer [pk, increment]
+  compra_id integer [not null]
+  insumo_id integer [not null]
+  cantidad decimal [not null]
+  precio_unitario decimal [not null]
+
+  indexes {
+    (compra_id, insumo_id) [unique]
+  }
+
+  Note: 'Detalle de insumos comprados por orden de compra. precio_unitario queda fijo con el valor del momento de la compra; el subtotal se calcula.'
+}
+
+
+
+// ============================================================================
+// 11. PRODUCCION (ORDEN)
+// ============================================================================
+
+
+
+// Orden de Trabajo Diaria en Cocina
+Table ordenes_produccion {
+  id integer [pk, increment]
+  menu_id integer [not null, unique, note: 'Menú del día que se cocina: 1 menú = 1 orden. La fecha es la del menú']
+  cantidad_planificada integer [not null, default: 0, note: 'Total de almuerzos del día, calculado con las suscripciones activas y las pausas. La cantidad de cada línea se calcula con las alternativas']
+
+  Note: 'HU: Crear orden de producción, Consultar órdenes, Ver detalle, Editar, Cambiar estado (de sus líneas), Programar producción, Buscar. El estado del día se calcula con sus líneas en producto_terminado: por hacer si ninguna empezó, en preparación si alguna está haciendo, finalizada si todas están hechas o anuladas.'
+}
+
+
+// ============================================================================
+// 12. FICHA TECNICA "PRODUCTO" (RECETA ESTÁNDAR)
+// ============================================================================
+
+Table fichas_tecnicas {
+  id integer [pk, increment]
+  producto_id integer [not null, unique, note: 'Una ficha por producto']
+  tiempo_preparacion_min integer [note: 'Tiempo por tanda']
+  procedimiento text
+  rendimiento_porciones integer [not null, default: 1, note: 'Para cuántas porciones son las cantidades de ficha_tecnica_detalle']
+  porciones_por_tanda integer [not null, default: 1, note: 'Tope de la olla: cuántas porciones caben en una tanda']
+
+  Note: 'HU: Crear ficha técnica, Consultar fichas técnicas, Ver detalle de ficha técnica, Editar ficha técnica, Registrar insumos requeridos, Registrar cantidades exactas de insumos, Registrar tiempo estimado de preparación, Registrar procedimiento de elaboración, Registrar número de porciones, Consultar costo unitario estimado, Buscar fichas por producto, Buscar fichas por insumo, Buscar fichas por estado del producto, Generar reporte de fichas técnicas, Generar reporte de costo unitario estimado. El costo por porción se calcula con la vista v_costo_ficha_tecnica: suma(cantidad_requerida × precio_unitario de la última compra del insumo) ÷ rendimiento_porciones. Si un insumo no tiene compras, el costo queda pendiente. La ficha no tiene estado propio: sigue el de su producto.'
+}
+
+Table ficha_tecnica_detalle {
+  id integer [pk, increment]
+  ficha_tecnica_id integer [not null]
+  insumo_id integer [not null]
+  cantidad_requerida decimal [not null]
+
+  indexes {
+    (ficha_tecnica_id, insumo_id) [unique]
+  }
+
+  Note: 'Insumos y cantidades exactas de la receta (para rendimiento_porciones porciones).'
+}
+
+
+// ============================================================================
+// 13. PRODUCTO TERMINADO (CUMPLIMIENTO DE PRODUCCIÓN)
+// ============================================================================
+
+Table producto_terminado {
+  id integer [pk, increment]
+  orden_produccion_id integer [not null]
+  producto_id integer [not null]
+  cantidad_producida integer [not null, default: 0]
+  estado estado_linea_produccion [not null, default: 'por_hacer']
+  motivo varchar [note: 'Obligatorio al anular la línea (pedido del PO, 2-nov)']
+
+  indexes {
+    (orden_produccion_id, producto_id) [unique]
+    estado
+  }
+
+  Note: 'Línea de la orden de producción (un producto por orden). La cantidad a preparar de cada línea se calcula con el total de la orden y las alternativas por alergia. El historial de producto terminado son las líneas en estado hecho.'
+}
+
+
+// ============================================================================
+// 14. CATEGORIA DE SERVICIOS
+// ============================================================================
+
+Table categorias_servicios {
+  id integer [pk, increment]
+  nombre varchar [not null, unique]
+  estado estado_general [not null, default: 'activo']
+
+  Note: 'HU: Crear categoría de servicio, Consultar categorías de servicios, Ver detalle de categoría, Editar categoría, Cambiar el estado de la categoría, Buscar categorías por nombre, Buscar categorías por estado.'
+}
+
+
+// ============================================================================
+// 15. SERVICIO (PLANES DE SUSCRIPCIÓN)
+// ============================================================================
+
+Table servicios {
+  id integer [pk, increment]
+  categoria_id integer [not null]
+  nombre varchar [not null]
+  tipo_plan tipo_plan [not null]
+  descripcion varchar [note: 'Resumen corto del plan']
+  beneficios text [note: 'Qué incluye el plan: una línea por beneficio (hasta 6)']
+  dias_habiles integer [not null, note: 'Duración del plan en días hábiles (5, 10, 20); editable en el panel']
+  valor decimal [not null]
+  estado estado_general [not null, default: 'activo']
+
+  Note: 'HU: Crear servicio, Consultar servicios, Ver detalle del servicio, Editar servicio, Cambiar el estado del servicio, Registrar nombre del plan, Registrar tipo de plan, Registrar descripción, Registrar valor, Registrar duración en días, Filtrar servicios por nombre, tipo y estado.'
+}
+
+
+// ============================================================================
+// 16. CALENDARIO (AGENDA OPERATIVA)
+// ============================================================================
+
+Table calendario {
+  id integer [pk, increment]
+  fecha date [not null, unique]
+  es_habil boolean [not null, default: true]
+  descripcion varchar
+
+  indexes {
+    fecha
+  }
+
+  Note: 'HU: Parametrizar calendario operativo, Consultar calendario operativo, Identificar días hábiles, Registrar días festivos nacionales, Identificar jornadas no operativas, Cruzar agenda con suscripciones activas, Programar producción diaria, Calcular días de servicio, Calcular fechas de vencimiento, Generar información para liquidación proporcional. Festivos no se cobran ni se trasladan.'
+}
+
+
+// ============================================================================
+// 17. CLIENTES
+// ============================================================================
+
+Table clientes {
+  id integer [pk, increment]
+  usuario_id integer [not null, unique, note: 'Cuenta en usuarios (rol Cliente)']
+  alergias "componente_alimento[]" [note: 'Lista cerrada de alergias del cliente; se cruza con productos.alergenos. Recibe la primera alternativa (por orden de creación) que no tenga ninguna de sus alergias']
+
+  Note: 'HU: Crear cliente, Consultar clientes, Ver detalle del cliente, Editar cliente, Registrar dirección de entrega, Registrar modalidad de entrega, Registrar teléfono, Registrar correo electrónico, Registrar alergias alimentarias, Consultar suscripciones asociadas, Consultar historial de pagos, Buscar clientes por nombre, Buscar clientes por documento, Buscar clientes por dirección, Buscar clientes por estado, Generar reporte de clientes activos, Generar reporte por zona de cobertura, Generar reporte por tipo de plan.'
+}
+
+Table direcciones_cliente {
+  id integer [pk, increment]
+  cliente_id integer [not null]
+  zona_cobertura_id integer [not null]
+  direccion varchar [not null]
+  barrio varchar [not null]
+  municipio varchar [not null, note: 'Medellín, Bello, Envigado, Itagüí o Sabaneta. La zona sigue saliendo del polígono']
+  notas text [note: 'Apartamento, torre o piso e indicaciones para el domiciliario (obligatorio en edificios)']
+  latitud decimal [note: 'Calculada por el backend con un servicio que permita guardarla (no el punto de Mapbox)']
+  longitud decimal
+  estado estado_general [not null, default: 'activo']
+
+  indexes {
+    cliente_id
+  }
+
+  Note: 'Direcciones del cliente. Los días en que se usa cada una están en direccion_dias (fija: una dirección para todos los días; híbrida: varias).'
+}
+
+Table direccion_dias {
+  direccion_cliente_id integer [not null]
+  dia_semana dia_semana [not null]
+
+  indexes {
+    (direccion_cliente_id, dia_semana) [pk]
+  }
+
+  Note: 'Días hábiles en que se entrega en cada dirección. La aplicación valida que un cliente no tenga dos direcciones el mismo día.'
+}
+
+
+// ============================================================================
+// 18. SUSCRIPCIONES (VENTAS)
+// ============================================================================
+
+Table suscripciones {
+  id integer [pk, increment]
+  cliente_id integer [not null]
+  servicio_id integer [not null]
+  tipo_venta tipo_venta [not null]
+  fecha_solicitud timestamp [not null, default: `now()`, note: 'Se compara con el corte semanal (sábado 12:00 m por defecto)']
+  fecha_inicio date [note: 'Lunes de inicio; si es festivo, ese día se descuenta y no se traslada']
+  fecha_vencimiento date [note: 'Viernes final del ciclo; los festivos no la mueven (RN-02)']
+  descuento_festivos decimal [not null, default: 0]
+  valor_plan decimal [not null]
+  cobro_cocas decimal [not null, default: 0, note: 'Valor de cobro_cocas vigente (80.000) en venta nueva; 0 en renovación o reingreso']
+  fecha_limite_pago date [note: 'Se calcula con dias_habiles_plazo_pago y plazo_pago_cuenta_dia_inicio; si vence, el administrador decide']
+  estado estado_suscripcion [not null, default: 'pendiente_pago']
+
+  indexes {
+    estado
+    cliente_id
+    fecha_vencimiento
+    fecha_limite_pago
+  }
+
+  Note: 'HU: Cotizar, Registrar, Consultar, Ver detalle, Editar, Cambiar estado, Subir comprobante, Consultar comprobante, Buscar/Filtrar, Gestionar suscripciones con pago vencido. Estados: pendiente_pago → verificando → activa → finalizada | rechazada | cancelada. Una renovación o reingreso con inicio sin pago queda activa con fecha_limite_pago. Calculados: valor_total = valor_plan − descuento_festivos + cobro_cocas; pago pendiente = sin pago aprobado; días facturables según el calendario.'
+}
+
+Table pagos {
+  id integer [pk, increment]
+  suscripcion_id integer [not null]
+  valor decimal [not null]
+  comprobante_url varchar [not null]
+  canal canal_registro [not null, default: 'web']
+  estado estado_registro [not null, default: 'pendiente']
+  motivo_rechazo text [note: 'Lo ve el cliente si se rechaza']
+  fecha_pago timestamp [not null]
+  validado_por_usuario_id integer
+
+  indexes {
+    estado
+    suscripcion_id
+  }
+
+  Note: 'Comprobantes de pago por transferencia bancaria. Al validarse, la suscripción pasa a Activa.'
+}
+
+
+// ============================================================================
+// 19. MENÚ (PROCESO DE VENTAS)
+// ============================================================================
+
+// Programación de la Carta del Día (Visible para clientes en la App Móvil)
+Table menus_semana {
+  id integer [pk, increment]
+  semana_inicio date [not null, unique, note: 'Lunes de la semana']
+  estado estado_menu_semana [not null, default: 'borrador', note: 'Solo los menús de una semana publicada se muestran a los clientes y generan órdenes']
+
+  Note: 'Publicación semanal del menú (borrador → publicado).'
+}
+
+Table menus_diarios {
+  id integer [pk, increment]
+  menu_semana_id integer [not null]
+  calendario_id integer [not null, unique, note: 'Día del menú; debe ser un día hábil del calendario']
+  foto_url varchar [note: 'Foto del día. Si no hay, la API usa la imagen_url del seco del menú y, si tampoco hay, la foto de referencia']
+
+  indexes {
+    menu_semana_id
+  }
+
+  Note: 'HU: Crear menú, Listar menús, Ver detalle del menú, Editar menú, Publicar menú semanal, Programar menú semanal, Buscar/Filtrar menús, Consultar menú de la semana (app móvil), Ver detalle del almuerzo del día (app móvil). Un menú por día hábil; la publicación es por semana (menus_semana).'
+}
+
+// Detalle de platos y recipientes del menú del día
+Table menu_items {
+  id integer [pk, increment]
+  menu_id integer [not null]
+  producto_id integer [not null, note: 'La coca en que se sirve sale de la categoría del producto']
+  alergia componente_alimento [note: 'Vacío = plato base. Con valor = alternativa para clientes con esa alergia']
+  reemplaza_item_id integer [note: 'Plato base que reemplaza la alternativa (obligatorio si hay alergia)']
+
+  indexes {
+    (menu_id, producto_id, alergia) [unique]
+  }
+
+  Note: 'Platos del menú del día y sus alternativas por alergia (reemplazan al menú personalizado). Un cliente con una alergia recibe la alternativa en lugar del plato base que la contiene.'
+}
+
+
+// ============================================================================
+// INVENTARIO DE COCAS (SOPORTE FÍSICO DE ROTACIÓN Y CUSTODIA)
+// ============================================================================
+
+Table juegos_cocas {
+  id integer [pk, increment]
+  cliente_id integer [not null]
+  numero_juego integer [not null, note: '1 o 2 — cada cliente activo tiene 2 juegos en rotación diaria']
+  ubicacion ubicacion_juego_cocas [not null, default: 'en_cliente']
+  fecha_asignacion date [not null]
+
+  indexes {
+    (cliente_id, numero_juego) [unique]
+  }
+
+  Note: 'Custodia y rotación física: un juego permanece en poder del cliente y el otro en cocina para lavado y alistamiento.'
+}
+
+Table recipientes {
+  id integer [pk, increment]
+  juego_id integer [not null]
+  categoria_producto_id integer [not null, note: 'Tipo de pieza = categoría (Seco, Sopa, Ensalada, Bebida)']
+  estado_fisico estado_fisico_recipiente [not null, default: 'bueno']
+
+  indexes {
+    (juego_id, categoria_producto_id) [unique]
+  }
+
+  Note: 'Control individual de cada una de las 4 piezas de un juego de cocas.'
+}
+
+
+// ============================================================================
+// 20/21. DOMICILIARIOS (ROL) · MONITOREO DE ENTREGA Y RUTAS
+// ============================================================================
+
+Table zonas_cobertura {
+  id integer [pk, increment]
+  nombre varchar [not null, unique, note: 'Nombre interno (ej. Norte 1)']
+  nombre_publico varchar [not null, note: 'Nombre para clientes (ej. Robledo y Castilla)']
+  municipio varchar [not null]
+  poligono text [not null, note: 'GeoJSON del polígono trazado por el administrador']
+  domiciliario_id integer [note: 'Asignación fija de la zona (usuario con rol Domiciliario); las rutas del día lo toman por defecto']
+  estado estado_general [not null, default: 'activo']
+
+  Note: 'HU: Visualizar zonas de cobertura, Agrupar clientes por zona. Soporta validación de cobertura geográfica.'
+}
+
+Table rutas {
+  id integer [pk, increment]
+  zona_cobertura_id integer [not null]
+  domiciliario_id integer [not null, note: 'Domiciliario actual: usuario con rol Domiciliario (lo valida la aplicación). Puede reasignarse a mitad de la ruta']
+  fecha date [not null]
+
+  indexes {
+    (fecha, domiciliario_id)
+  }
+
+  Note: 'HU: Crear ruta, Consultar rutas, Ver detalle de ruta, Asignar domiciliario a ruta, Reasignar domiciliario, Consultar clientes asociados a ruta, Consultar domiciliario asociado, Buscar rutas por zona, Buscar rutas por domiciliario, Buscar rutas por estado.'
+}
+
+Table ruta_clientes {
+  id integer [pk, increment]
+  ruta_id integer [not null]
+  suscripcion_id integer [not null]
+  direccion_cliente_id integer [not null, note: 'Dirección usada ese día: la excepción del día si existe; si no, la base']
+  orden_entrega integer
+  estado_entrega estado_entrega [not null, default: 'programada']
+  hora_entrega timestamp
+  juego_entregado_id integer [note: 'FK a juegos_cocas: juego lleno entregado hoy']
+  juego_recogido_id integer [note: 'FK a juegos_cocas: juego vacío recogido hoy (utilizado el día anterior)']
+
+  indexes {
+    (ruta_id, suscripcion_id) [unique]
+  }
+
+  Note: 'HU: Consultar entregas por ruta, Consultar clientes asociados a ruta, Consultar estado de rotación de cocas, Consultar registro de cocas recogidas.'
+}
+
+
+// ============================================================================
+// 21. MONITOREO DE ENTREGA "TIEMPO REAL" (continuación)
+// ============================================================================
+
+Table geolocalizacion_domiciliarios {
+  id integer [pk, increment]
+  ruta_id integer [not null]
+  latitud decimal [not null]
+  longitud decimal [not null]
+  hora_ubicacion timestamp [default: `now()`]
+
+  indexes {
+    ruta_id
+    hora_ubicacion
+  }
+
+  Note: 'HU: Consultar clientes activos georreferenciados, Consultar ubicación de domiciliarios, Visualizar domiciliarios en mapa, Monitorear ubicación en tiempo real, Consultar avance de entregas, Buscar por ruta, Buscar por domiciliario, Buscar por fecha, Generar reporte de entregas completadas, Generar reporte de entregas pendientes.'
+}
+
+
+// ============================================================================
+// 22. INCIDENCIAS Y SUSPENSIONES
+// ============================================================================
+
+Table incidencias {
+  id integer [pk, increment]
+  ruta_cliente_id integer
+  recipiente_id integer [note: 'Opcional: si la novedad refiere a una pieza física averiada o faltante']
+  reportado_por_usuario_id integer [not null, note: 'Quién reporta: cliente, domiciliario o administrador (su rol dice el tipo de reportante)']
+  tipo_incidencia tipo_incidencia [not null]
+  descripcion text
+  foto_url varchar
+  estado estado_incidencia [not null, default: 'abierta']
+  respuesta text
+  gestionada_por_usuario_id integer [note: 'Usuario del equipo que gestionó y respondió la incidencia']
+  fecha_creacion timestamp [default: `now()`]
+  fecha_resolucion timestamp
+
+  indexes {
+    estado
+    tipo_incidencia
+  }
+
+  Note: 'HU: Registrar incidencia, Consultar incidencias, Ver detalle de incidencia, Gestionar incidencia, Dar solución a incidencia, Registrar respuesta al usuario, Consultar estado de solución, Consultar incidencias por tipo, Consultar incidencias por cliente, Consultar incidencias por domiciliario, Consultar incidencias por estado, Consultar incidencias de ruta. El cliente y el domiciliario se obtienen de la entrega (ruta_cliente_id) o del rol de quien reporta.'
+}
+
+// Suspensión de entrega diaria puntual (Regla estricta de negocio: sin devolución ni prórroga)
+Table suspensiones_entrega {
+  id integer [pk, increment]
+  suscripcion_id integer [not null]
+  calendario_id integer [not null, note: 'Día suspendido; solo días hábiles del calendario']
+  origen origen_suspension [not null, default: 'cliente', note: 'cliente: la pide y la puede quitar el cliente (hasta la hora límite). pago_vencido: la pone y la quita solo el administrador']
+  fecha_notificacion timestamp [default: `now()`]
+
+  indexes {
+    (suscripcion_id, calendario_id) [unique]
+  }
+
+  Note: 'HU: Gestionar suspensión de entrega. Notificación con anticipación para no preparar el almuerzo de un día específico. No genera devolución de dinero ni aplaza la fecha de vencimiento.'
+}
+
+
+// ============================================================================
+// 23. DASHBOARD (MÉTRICAS Y ANALÍTICA EN TIEMPO REAL)
+// ============================================================================
+// 100% de lectura y analítica consolidada. No requiere tablas transaccionales propias.
+// Se implementa mediante vistas y consultas agregadas en base de datos.
+// Cubre las HU:
+//  - Consultar indicadores de ventas, Consultar ingresos por tipo de plan, Consultar conversión por modalidad de venta, Consultar uso de alternativas por restricción, Consultar estado de comprobantes de transferencia.
+//  - Consultar proyección diaria de almuerzos, Consultar restricciones alimentarias, Consultar consumo de insumos.
+//  - Consultar entregas completadas, Consultar entregas pendientes, Consultar desempeño de domiciliarios, Consultar inventario de cocas en rotación.
+//  - Consultar margen de rentabilidad por tipo de plan, Consultar tasa de retención de clientes, Consultar tasa de deserción de clientes (churn rate), Consultar costo-beneficio logístico por zona, Consultar proyección de crecimiento, Consultar capacidad máxima de producción.
+//  - Visualizar gráficos dinámicos, Visualizar tarjetas de métricas, Filtrar por rango de fechas/zona/plan, Exportar informes estratégicos.
+
+
+// ============================================================================
+// RELACIONES (REFERENCIAS / FOREIGN KEYS)
+// ============================================================================
+
+
+// --- 02/03. Usuarios, Acceso y Clientes ---
+Ref: usuarios.rol_id > roles.id
+Ref: rol_permisos.rol_id > roles.id
+Ref: rol_permisos.permiso_id > permisos.id
+Ref: accesos.usuario_id > usuarios.id
+Ref: consentimientos.usuario_id > usuarios.id
+Ref: identidades_externas.usuario_id > usuarios.id
+Ref: codigos_acceso.usuario_id > usuarios.id
+Ref: clientes.usuario_id - usuarios.id
+
+// --- 04. Configuraciones del sistema ---
+
+// --- 04/05. Insumos y Kardex ---
+Ref: insumos.categoria_id > categorias_insumos.id
+Ref: movimientos_insumos.insumo_id > insumos.id
+Ref: movimientos_insumos.compra_detalle_id > compra_detalle.id
+Ref: movimientos_insumos.orden_produccion_id > ordenes_produccion.id
+
+// --- 06/07. Productos y Categorías ---
+Ref: productos.categoria_id > categorias_productos.id
+
+// --- 08/09. Proveedores y Compras ---
+Ref: proveedor_categorias.proveedor_id > proveedores.id
+Ref: proveedor_categorias.categoria_insumo_id > categorias_insumos.id
+Ref: compras.proveedor_id > proveedores.id
+Ref: compra_detalle.compra_id > compras.id
+Ref: compra_detalle.insumo_id > insumos.id
+
+// --- 19. Menú y 11. Orden de Producción ---
+Ref: menus_diarios.calendario_id - calendario.id
+Ref: menus_diarios.menu_semana_id > menus_semana.id
+Ref: menu_items.menu_id > menus_diarios.id
+Ref: menu_items.producto_id > productos.id
+Ref: menu_items.reemplaza_item_id > menu_items.id
+Ref: ordenes_produccion.menu_id > menus_diarios.id
+
+// --- 12/13. Ficha Técnica y Producto Terminado ---
+Ref: fichas_tecnicas.producto_id - productos.id
+Ref: ficha_tecnica_detalle.ficha_tecnica_id > fichas_tecnicas.id
+Ref: ficha_tecnica_detalle.insumo_id > insumos.id
+Ref: producto_terminado.orden_produccion_id > ordenes_produccion.id
+Ref: producto_terminado.producto_id > productos.id
+
+// --- 14/15. Servicios ---
+Ref: servicios.categoria_id > categorias_servicios.id
+
+// --- 17/18. Clientes y Suscripciones ---
+Ref: direcciones_cliente.cliente_id > clientes.id
+Ref: direcciones_cliente.zona_cobertura_id > zonas_cobertura.id
+Ref: direccion_dias.direccion_cliente_id > direcciones_cliente.id
+Ref: suscripciones.cliente_id > clientes.id
+Ref: suscripciones.servicio_id > servicios.id
+Ref: pagos.suscripcion_id > suscripciones.id
+Ref: pagos.validado_por_usuario_id > usuarios.id
+
+// --- Inventario de Cocas ---
+Ref: juegos_cocas.cliente_id > clientes.id
+Ref: recipientes.juego_id > juegos_cocas.id
+Ref: recipientes.categoria_producto_id > categorias_productos.id
+
+// --- 20/21. Domiciliarios (usuarios con rol Domiciliario), Monitoreo y Rutas ---
+Ref: rutas.zona_cobertura_id > zonas_cobertura.id
+Ref: zonas_cobertura.domiciliario_id > usuarios.id
+Ref: rutas.domiciliario_id > usuarios.id
+Ref: ruta_clientes.ruta_id > rutas.id
+Ref: ruta_clientes.suscripcion_id > suscripciones.id
+Ref: ruta_clientes.direccion_cliente_id > direcciones_cliente.id
+Ref: ruta_clientes.juego_entregado_id > juegos_cocas.id
+Ref: ruta_clientes.juego_recogido_id > juegos_cocas.id
+Ref: geolocalizacion_domiciliarios.ruta_id > rutas.id
+
+// --- 22. Incidencias y Suspensiones ---
+Ref: incidencias.ruta_cliente_id > ruta_clientes.id
+Ref: incidencias.recipiente_id > recipientes.id
+Ref: incidencias.reportado_por_usuario_id > usuarios.id
+Ref: incidencias.gestionada_por_usuario_id > usuarios.id
+Ref: suspensiones_entrega.suscripcion_id > suscripciones.id
+Ref: suspensiones_entrega.calendario_id > calendario.id
+
+
+// ============================================================================
+// DATOS DE EJEMPLO (RECORDS)
+// ============================================================================
+
+Records roles(id, nombre, estado) {
+  1, 'Administrador', 'activo'
+  2, 'Cocina', 'activo'
+  3, 'Domiciliario', 'activo'
+  4, 'Cliente', 'activo'
+}
+
+Records permisos(id, modulo, accion, estado) {
+  1, 'Suscripciones', 'ver', 'activo'
+  2, 'Suscripciones', 'crear', 'activo'
+  3, 'Suscripciones', 'editar', 'activo'
+  4, 'Producción (orden)', 'ver', 'activo'
+  5, 'Producción (orden)', 'editar', 'activo'
+  6, 'Monitoreo y rutas', 'ver', 'activo'
+}
+
+Records rol_permisos(rol_id, permiso_id) {
+  1, 1 // Administrador: todo
+  1, 2
+  1, 3
+  1, 4
+  1, 5
+  1, 6
+  2, 4 // Cocina: ve y actualiza la producción
+  2, 5
+  3, 6 // Domiciliario: ve sus rutas
+}
+
+Records usuarios(id, rol_id, nombre_completo, tipo_documento, documento, correo, password, telefono, estado) {
+  1, 1, 'Laura Restrepo', 'CC', '1000111222', 'laura@lacocadejacks.com', '$2b$10$hash_demo_1', '+573000001111', 'activo'
+  2, 2, 'Andrés Zapata', 'CC', '1000333444', 'andres@lacocadejacks.com', '$2b$10$hash_demo_2', '+573011112222', 'activo'
+  3, 3, 'Jhon Alexander Ruiz', 'CC', '1020202020', 'jhon@lacocadejacks.com', '$2b$10$hash_demo_3', '+573022223333', 'activo'
+  4, 4, 'Mariana Vélez', 'CC', '1030303030', 'mariana@example.com', null, '+573033334444', 'activo' // Entra con Google
+  5, 4, 'Carlos Herrera', 'CE', '1040404040', 'carlos@example.com', '$2b$10$hash_demo_5', '+573044445555', 'activo'
+}
+
+Records identidades_externas(id, usuario_id, proveedor, sub, correo, fecha_vinculo) {
+  1, 4, 'google', '108234567890123456789', 'mariana@example.com', '2026-08-09 18:20:00'
+}
+
+Records codigos_acceso(id, usuario_id, codigo_hash, expira_en, intentos, usado_en) {
+  1, 5, '$2b$10$hash_codigo_demo', '2026-08-10 08:10:00', 1, '2026-08-10 08:02:00'
+}
+
+Records accesos(id, usuario_id, correo_intentado, metodo, fecha_hora, resultado) {
+  1, 1, 'laura@lacocadejacks.com', 'password', '2026-08-10 08:00:00', 'exitoso'
+  2, 2, 'andres@lacocadejacks.com', 'password', '2026-08-10 06:30:00', 'exitoso'
+  3, 3, 'jhon@lacocadejacks.com', 'password', '2026-08-10 11:00:00', 'exitoso'
+  4, 4, 'mariana@example.com', 'google', '2026-08-09 18:25:00', 'exitoso'
+  5, 5, 'carlos@example.com', 'password', '2026-08-10 07:58:00', 'fallido'
+  6, null, 'desconocido@example.com', 'password', '2026-08-10 07:59:00', 'fallido'
+  7, 5, '+573044445555', 'codigo', '2026-08-10 08:02:00', 'exitoso'
+}
+
+Records categorias_insumos(id, nombre, estado) {
+  1, 'Proteínas', 'activo'
+  2, 'Verduras', 'activo'
+  3, 'Lácteos y Abarrotes', 'activo'
+}
+
+Records insumos(id, categoria_id, nombre, unidad_medida, cantidad_disponible, stock_minimo, estado) {
+  1, 1, 'Pollo', 'kg', 50, 10, 'activo'
+  2, 1, 'Cerdo (Tocino/Panceta)', 'kg', 40, 10, 'activo'
+  3, 2, 'Cebolla', 'kg', 30, 5, 'activo'
+  4, 3, 'Bocadillo Veleño', 'unidad', 100, 20, 'activo'
+}
+
+Records proveedores(id, nombre, documento, telefono, correo, direccion, estado) {
+  1, 'Carnes El Rancho', '900111222-1', '3001112233', 'ventas@elrancho.co', 'Cra 50 #10-20', 'activo'
+  2, 'Distribuidora Avícola JR', '900333444-2', '3002223344', 'pedidos@avicolajr.co', 'Cra 60 #15-30', 'activo'
+  3, 'Central Mayorista Verde', '900555666-3', '3003334455', 'contacto@mayoristaverde.co', 'Cll 80 #40-10', 'activo'
+}
+
+Records compras(id, proveedor_id, fecha_compra, estado) {
+  1, 2, '2026-08-01', 'recibida'
+}
+
+Records compra_detalle(id, compra_id, insumo_id, cantidad, precio_unitario) {
+  1, 1, 1, 50, 9000
+}
+
+Records movimientos_insumos(id, insumo_id, tipo_movimiento, cantidad, fecha, compra_detalle_id, orden_produccion_id) {
+  1, 1, 'entrada', 50, '2026-08-01 09:00:00', 1, null
+  2, 1, 'salida', 2.5, '2026-08-10 07:00:00', null, 1
+}
+
+Records configuraciones_sistema(id, clave, nombre, categoria, tipo_valor, valor, valor_por_defecto) {
+  1, 'cobro_cocas', 'Cobro único del kit de cocas', 'valores_negocio', 'moneda', '80000', '80000'
+  2, 'hora_limite_suspension', 'Hora límite para pausar la entrega del día siguiente', 'valores_negocio', 'hora', '17:00', '17:00'
+  3, 'modalidad_hibrida_activa', 'Permitir dos o más direcciones (modalidad híbrida)', 'funcionalidades', 'booleano', 'true', 'true'
+  4, 'dia_corte_suscripcion', 'Día del corte para entrar a la semana siguiente', 'suscripciones', 'dia_semana', 'sabado', 'sabado'
+  5, 'hora_corte_suscripcion', 'Hora del corte (HH:MM)', 'suscripciones', 'hora', '12:00', '12:00'
+  6, 'inicio_sin_pago_activo', 'Renovación y reingreso pueden iniciar sin haber pagado', 'suscripciones', 'booleano', 'true', 'true'
+  7, 'dias_habiles_plazo_pago', 'Días hábiles para pagar cuando se inicia sin pago', 'suscripciones', 'numero', '3', '3'
+  8, 'plazo_pago_cuenta_dia_inicio', 'El día de inicio cuenta como día 1 del plazo de pago (true: inicia lunes, vence miércoles; false: vence jueves)', 'suscripciones', 'booleano', 'true', 'true'
+  9, 'capacidad_maxima_diaria', 'Almuerzos máximos por día (vacío = sin límite)', 'valores_negocio', 'numero', '', ''
+  10, 'banco_pago', 'Banco para la transferencia', 'pagos', 'texto', 'Bancolombia', 'Bancolombia'
+  11, 'tipo_cuenta_pago', 'Tipo de cuenta', 'pagos', 'texto', 'Ahorros', 'Ahorros'
+  12, 'numero_cuenta_pago', 'Número de cuenta', 'pagos', 'texto', '000-000000-00', '000-000000-00'
+  13, 'titular_cuenta_pago', 'Titular de la cuenta', 'pagos', 'texto', 'La Coca de Jacks SAS', 'La Coca de Jacks SAS'
+  14, 'horario_entrega', 'Horario de entrega de los almuerzos', 'valores_negocio', 'texto', '8:00 a. m. a 12:00 m.', '8:00 a. m. a 12:00 m.'
+}
+
+Records categorias_productos(id, nombre, estado) {
+  1, 'Seco', 'activo'
+  2, 'Sopa', 'activo'
+  3, 'Ensalada', 'activo'
+  4, 'Bebida', 'activo'
+}
+
+Records productos(id, categoria_id, nombre, descripcion, alergenos, estado) {
+  1, 1, 'Arroz Blanco', 'Porción estándar de arroz', '{}', 'activo'
+  2, 2, 'Sopa de Fríjoles', 'Fríjoles tradicionales antioqueños', '{cerdo}', 'activo'
+  3, 1, 'Pollo a la plancha', 'Filete de pechuga adobado', '{carne}', 'activo'
+  4, 1, 'Chicharrón crocante', 'Panceta frita crocante', '{carne,cerdo}', 'activo'
+  5, 4, 'Mazamorra con Bocadillo', 'Mazamorra de maíz con leche y bocadillo', '{lacteos}', 'activo'
+}
+
+Records calendario(id, fecha, es_habil, descripcion) {
+  1, '2026-08-10', true, 'Lunes hábil regular'
+  2, '2026-08-17', false, 'Traslado Batalla de Boyacá (No cobrable)'
+  3, '2026-08-11', true, 'Martes hábil regular'
+  4, '2026-08-12', true, 'Miércoles hábil regular'
+  5, '2026-08-13', true, 'Jueves hábil regular'
+  6, '2026-08-14', true, 'Viernes hábil regular'
+}
+
+Records menus_diarios(id, menu_semana_id, calendario_id) {
+  1, 1, 1
+}
+
+Records menu_items(id, menu_id, producto_id, alergia, reemplaza_item_id) {
+  1, 1, 1, null, null // Seco: Arroz Blanco
+  2, 1, 4, null, null // Seco: Chicharrón crocante
+  3, 1, 2, null, null // Sopa: Sopa de Fríjoles
+  4, 1, 5, null, null // Bebida: Mazamorra con Bocadillo
+  5, 1, 3, 'cerdo', 2 // Sin cerdo: pollo a la plancha en lugar del chicharrón
+}
+
+Records fichas_tecnicas(id, producto_id, tiempo_preparacion_min, rendimiento_porciones, porciones_por_tanda) {
+  1, 3, 40, 10, 10 // Costo por porción (vista): (2,5 × 9.000 + 0,5 × 2.500) ÷ 10 = 2.375
+  2, 4, 50, 10, 10 // Costo por porción (vista): (3 × 11.000) ÷ 10 = 3.300
+}
+
+Records ficha_tecnica_detalle(id, ficha_tecnica_id, insumo_id, cantidad_requerida) {
+  1, 1, 1, 2.5
+  2, 1, 3, 0.5
+  3, 2, 2, 3.0
+}
+
+Records ordenes_produccion(id, menu_id, cantidad_planificada) {
+  1, 1, 85
+}
+
+Records producto_terminado(id, orden_produccion_id, producto_id, cantidad_producida, estado) {
+  1, 1, 1, 85, 'hecho' // Arroz
+  2, 1, 2, 85, 'hecho' // Sopa de fríjoles
+  3, 1, 4, 60, 'hecho' // Chicharrón
+  4, 1, 3, 25, 'hecho' // Pollo (alternativa sin cerdo)
+  5, 1, 5, 85, 'hecho' // Mazamorra
+}
+
+Records categorias_servicios(id, nombre, estado) {
+  1, 'Planes de suscripción', 'activo'
+}
+
+Records servicios(id, categoria_id, nombre, tipo_plan, dias_habiles, valor, estado) {
+  1, 1, 'Plan Semanal', 'semanal', 5, 75000, 'activo'
+  2, 1, 'Plan Quincenal', 'quincenal', 10, 150000, 'activo'
+  3, 1, 'Plan Mensual', 'mensual', 20, 300000, 'activo'
+}
+
+Records clientes(id, usuario_id, alergias) {
+  1, 4, '{}'
+  2, 5, '{cerdo}'
+}
+
+Records zonas_cobertura(id, nombre, nombre_publico, municipio, poligono, domiciliario_id, estado) {
+  1, 'Sur 1', 'El Poblado', 'Medellín', '{"type":"Polygon","coordinates":[[[-75.575,6.215],[-75.555,6.215],[-75.555,6.195],[-75.575,6.195],[-75.575,6.215]]]}', 3, 'activo'
+  2, 'Occidente 1', 'Laureles', 'Medellín', '{"type":"Polygon","coordinates":[[[-75.600,6.250],[-75.585,6.250],[-75.585,6.235],[-75.600,6.235],[-75.600,6.250]]]}', 3, 'activo'
+}
+
+Records direcciones_cliente(id, cliente_id, zona_cobertura_id, direccion, barrio, municipio, estado) {
+  1, 1, 1, 'Cra 43A #10-20', 'El Poblado', 'Medellín', 'activo'
+  2, 2, 2, 'Cll 70 #65-10', 'Laureles', 'Medellín', 'activo'
+  3, 2, 1, 'Cra 43A #5-40', 'El Poblado', 'Medellín', 'activo'
+}
+
+Records suscripciones(id, cliente_id, servicio_id, tipo_venta, fecha_solicitud, fecha_inicio, fecha_vencimiento, descuento_festivos, valor_plan, cobro_cocas, fecha_limite_pago, estado) {
+  1, 1, 1, 'nueva', '2026-08-08 10:00:00', '2026-08-10', '2026-08-14', 0, 75000, 80000, null, 'activa'
+  2, 2, 3, 'nueva', '2026-08-09 09:00:00', null, null, 0, 300000, 80000, null, 'verificando'
+}
+
+Records pagos(id, suscripcion_id, valor, comprobante_url, canal, estado, fecha_pago, validado_por_usuario_id) {
+  1, 1, 155000, 'https://storage.jacksoft.com/comprobantes/1.jpg', 'app_movil', 'aprobado', '2026-08-09 18:30:00', 1
+  2, 2, 380000, 'https://storage.jacksoft.com/comprobantes/2.jpg', 'whatsapp', 'pendiente', '2026-08-10 08:00:00', null
+}
+
+Records juegos_cocas(id, cliente_id, numero_juego, ubicacion, fecha_asignacion) {
+  1, 1, 1, 'en_cliente', '2026-08-10'
+  2, 1, 2, 'en_cocina', '2026-08-10'
+}
+
+Records recipientes(id, juego_id, categoria_producto_id, estado_fisico) {
+  1, 1, 1, 'bueno'
+  2, 1, 2, 'bueno'
+  3, 1, 3, 'bueno'
+  4, 1, 4, 'bueno'
+  5, 2, 1, 'bueno'
+  6, 2, 2, 'bueno'
+  7, 2, 3, 'bueno'
+  8, 2, 4, 'bueno'
+}
+
+Records rutas(id, zona_cobertura_id, domiciliario_id, fecha) {
+  1, 1, 3, '2026-08-10'
+}
+
+Records ruta_clientes(id, ruta_id, suscripcion_id, direccion_cliente_id, orden_entrega, estado_entrega, hora_entrega, juego_entregado_id, juego_recogido_id) {
+  1, 1, 1, 1, 1, 'entregada', '2026-08-10 12:15:00', 1, 2
+}
+
+Records geolocalizacion_domiciliarios(id, ruta_id, latitud, longitud, hora_ubicacion) {
+  1, 1, 6.2087, -75.5679, '2026-08-10 11:50:00'
+  2, 1, 6.2090, -75.5650, '2026-08-10 12:00:00'
+}
+
+Records incidencias(id, reportado_por_usuario_id, tipo_incidencia, descripcion, estado) {
+  1, 5, 'direccion_incorrecta', 'La dirección registrada requiere timbre directo en portería', 'abierta'
+}
+
+Records suspensiones_entrega(id, suscripcion_id, calendario_id, origen) {
+  1, 1, 4, 'cliente'
+}
+
+
+Records consentimientos(id, usuario_id, tipo, version, aceptado, fecha, canal) {
+  1, 4, 'terminos', '1.0', true, '2026-08-09 18:20:00', 'app_movil'
+  2, 4, 'privacidad', '1.0', true, '2026-08-09 18:20:00', 'app_movil'
+  3, 4, 'whatsapp_promocional', '1.0', false, '2026-08-09 18:20:00', 'app_movil'
+  4, 4, 'aviso_whatsapp', '1.0', true, '2026-08-09 18:20:00', 'app_movil'
+  5, 4, 'aviso_correo', '1.0', true, '2026-08-09 18:20:00', 'app_movil'
+  6, 5, 'aviso_whatsapp', '1.0', true, '2026-08-09 09:00:00', 'web'
+  7, 5, 'aviso_correo', '1.0', false, '2026-08-09 09:00:00', 'web'
+}
+
+Records proveedor_categorias(proveedor_id, categoria_insumo_id) {
+  1, 1
+  2, 1
+  3, 2
+  3, 3
+}
+
+Records menus_semana(id, semana_inicio, estado) {
+  1, '2026-08-10', 'publicado'
+}
+
+Records direccion_dias(direccion_cliente_id, dia_semana) {
+  1, 'lunes'
+  1, 'martes'
+  1, 'miercoles'
+  1, 'jueves'
+  1, 'viernes'
+  2, 'lunes'
+  2, 'miercoles'
+  2, 'jueves'
+  2, 'viernes'
+  3, 'martes' // Carlos: los martes en la oficina
+}
+
+// ============================================================================
+// AGRUPACIONES (TABLEGROUPS) — 11 PROCESOS EN ORDEN DEL FLUJO DE TRABAJO
+// Domiciliarios: sin tabla propia (usuario con rol Domiciliario).
+// Dashboard: sin tablas propias (vistas y consultas de agregación).
+// ============================================================================
+
+// P1. Acceso y seguridad: Antes de operar: quién entra y con qué rol.
+TableGroup P1_AccesoYSeguridad {
+  roles
+  permisos
+  rol_permisos
+  usuarios
+  accesos
+  identidades_externas
+  codigos_acceso
+  consentimientos
+}
+
+// P2. Configuración y calendario: Reglas del negocio y días hábiles que usan todos los procesos.
+TableGroup P2_ConfiguracionYCalendario {
+  configuraciones_sistema
+  calendario
+}
+
+// P3. Abastecimiento: Insumos, proveedores y compras que alimentan el inventario.
+TableGroup P3_Abastecimiento {
+  categorias_insumos
+  insumos
+  proveedores
+  proveedor_categorias
+  compras
+  compra_detalle
+  movimientos_insumos
+}
+
+// P4. Catálogo de cocina: Platos, recetas (fichas técnicas) y tipos de coca.
+TableGroup P4_CatalogoDeCocina {
+  categorias_productos
+  productos
+  fichas_tecnicas
+  ficha_tecnica_detalle
+}
+
+// P5. Oferta de planes: Planes que se venden (semanal, quincenal, mensual).
+TableGroup P5_OfertaDePlanes {
+  categorias_servicios
+  servicios
+}
+
+// P6. Registro de clientes: El cliente, sus direcciones por día y sus juegos de cocas.
+TableGroup P6_RegistroDeClientes {
+  clientes
+  direcciones_cliente
+  direccion_dias
+  juegos_cocas
+  recipientes
+}
+
+// P7. Venta y pagos: Suscripción, comprobantes y pausas de entrega.
+TableGroup P7_VentaYPagos {
+  suscripciones
+  pagos
+  suspensiones_entrega
+}
+
+// P8. Menú semanal: Se publica el menú de la semana con alternativas por alergia.
+TableGroup P8_MenuSemanal {
+  menus_semana
+  menus_diarios
+  menu_items
+}
+
+// P9. Producción: Orden del día y líneas de producto terminado.
+TableGroup P9_Produccion {
+  ordenes_produccion
+  producto_terminado
+}
+
+// P10. Despacho y rutas: Zonas, rutas del día, entregas y ubicación en tiempo real.
+TableGroup P10_DespachoYRutas {
+  zonas_cobertura
+  rutas
+  ruta_clientes
+  geolocalizacion_domiciliarios
+}
+
+// P11. Incidencias: Novedades de la entrega y su solución.
+TableGroup P11_Incidencias {
+  incidencias
+}

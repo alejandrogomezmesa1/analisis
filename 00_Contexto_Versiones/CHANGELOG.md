@@ -17,6 +17,46 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-099 · 2026-11-18 · fix(manual-tecnico) · v7 → v8 (archivo "v2.5")
+- **Ruta:** `10_Manual_Tecnico/Documentos_Word/v8_2026-11-18/` — `Manual_Tecnico_v2.5_Jacksoft.docx`
+- **Mensaje:** Modelo v4.7 en todo el manual. El diccionario de datos queda con 41 tablas (identidades_externas, codigos_acceso, movimientos_insumos y los campos nuevos). Mockup de Permisos (antes estaba pendiente). Los 12 diagramas de casos de uso que cambiaron se redibujaron desde el draw.io: sin "Eliminar", y Acceso con Google/Apple y WhatsApp. C4 v6. Fichas: salen las 4 de eliminar y entran HU_254 y HU_255 (235 fichas). Portada "Versión 2.5" y fila nueva en el control de cambios.
+
+### C-098 · 2026-11-18 · fix(diccionario-datos) · v1 → v2 (v4.7)
+- **Ruta:** `04_Modelado_DB/Diccionario_y_Tablas/Documento_Word/v2_2026-11-18/` — `Diccionario_de_Datos_JackSoft_v4.7.docx`
+- **Mensaje:** Sobre el diccionario de Omar (mismo formato): tablas nuevas identidades_externas y codigos_acceso, renombres (movimientos_insumos, alergenos) y los campos de G1 a G4. Se verificó tabla por tabla contra bd.uml v4.7: 41 de 41 iguales.
+
+### C-097 · 2026-11-18 · fix(ficha-proyecto) · v10 → v11
+- **Ruta:** `06_Gestion_de_Proyecto_Scrum/Fichas_Tecnicas/v11_2026-11-18/` — `Ficha_Jacksoft_CF_v11.docx`
+- **Mensaje:** Acceso web y móvil: el personal entra solo con correo y contraseña; los clientes también con Google, Apple o un código por WhatsApp. La bitácora registra el método de ingreso.
+
+### C-096 · 2026-11-18 · fix(arquitectura-c4) · v5 → v6 (repo 05)
+- **Ruta:** `05_Casos_de_Uso/Arquitectura_C4/v6_2026-11-18/`
+- **Mensaje:** Sistemas externos nuevos en N1, N2 y N3: Google y Apple (OpenID Connect + PKCE) y WhatsApp Business API (código de acceso). La BD pasa a bd.uml v4.7 con 41 tablas. N4 regenerado: 41 clases (con IdentidadExterna, CodigoAcceso y MovimientoInsumo), 55 relaciones.
+
+### C-095 · 2026-11-18 · fix(documentacion-cu) · v5 → v6 (repo 05)
+- **Ruta:** `05_Casos_de_Uso/Especificaciones/Documentacion_Word/v6_2026-11-18/`
+- **Mensaje:** Salen las 4 fichas de eliminar (rol, usuario, categoría de insumos y ruta: G3-Q6). En Acceso entran HU_254 "Iniciar sesión con Google o Apple" y HU_255 "Iniciar sesión con código por WhatsApp". Quedan 251 fichas.
+
+### C-094 · 2026-11-18 · feat(casos-uso) · sin "Eliminar"; Acceso con Google, Apple y WhatsApp (repo 05)
+- **Ruta:** `05_Casos_de_Uso/scripts/actualizar_casos_uso_canonicos.py`, diagramas PUML/SVG/PNG, MD, visor y `Diagramas_DrawIO/Casos_de_usos.drawio`
+- **Mensaje:** Salen los 10 casos de uso "Eliminar …" de la lista canónica (G3-Q6). Acceso suma "Iniciar sesión con Google o Apple" e "Iniciar sesión con código por WhatsApp" (extienden "Iniciar sesión"). En el draw.io salen 11 elipses de eliminar con sus conectores (33 celdas), y el carril de Acceso suma al actor Cliente con las dos formas nuevas de ingreso.
+
+### C-093 · 2026-11-18 · fix(tablero-kanban) · v8 → v9
+- **Ruta:** `06_Gestion_de_Proyecto_Scrum/Historias_de_Usuario_y_Kanban/Tablero_Kanban/v9_2026-11-18/` — `Tablero Kanban 18_11 v9.xlsx`
+- **Mensaje:** Story Mapping: salen las 10 historias "Eliminar …" (20 puntos) y ACCESO suma "Iniciar sesión con Google o Apple" y "Iniciar sesión con código por WhatsApp" (5 puntos cada una): quedan 157 historias y 500 puntos. Matriz HU: salen 12 HU de eliminar (26 filas) y entran HU02.2_11 y HU02.2_12 (6 criterios). Los códigos existentes no se renumeran. Recalcula al abrir en Excel.
+
+### C-092 · 2026-11-18 · docs(chat) · acuerdo G3 confirmado; aviso del modelo v4.7 y de Permisos
+- **Ruta:** `chat/` (#031 a #033)
+- **Mensaje:** Omar confirmó G2 y respondió G4 (#031, modelado delegado) y publicó el acuerdo G3 (#032). Claude Alejo confirmó G3 en el #033, que cierra los pendientes 20, 22 y 23, y avisó del modelo v4.7 y de que Permisos volvió a ser un subproceso.
+
+### C-091 · 2026-11-18 · fix(diagrama-er) · v10 → v11
+- **Ruta:** `04_Modelado_DB/Diagramas/v11_2026-11-18/` — `LaCocaDiagramDB.svg`
+- **Mensaje:** Diagrama ER de bd.uml v4.7 (41 tablas, 55 relaciones), generado por `construir_visor.py` (regla de oro). El visor se republicó en el mismo enlace.
+
+### C-090 · 2026-11-18 · fix(modelo-relacional) · v12 → v13 (DBML v4.7)
+- **Ruta:** `04_Modelado_DB/Modelo_Relacional/v13_2026-11-18/` — `bd.uml`, `Cambios_v4.7.md`, `Visor_Interactivo/`
+- **Mensaje:** Aplica los acuerdos G1, G2, G3 y G4 con Claude Omar y la foto del menú. Tablas nuevas identidades_externas y codigos_acceso. Renombres: movimientos_insumos y productos.alergenos. Campos nuevos: tipo_documento, telefono único, password opcional, accesos.metodo, imagen_url, cantidad_planificada en la orden, rendimiento_porciones, dias_habiles, beneficios, municipio, nombre_publico y foto_url. Claves nuevas de pago y de horario. Salen clientes.franja_horaria y las claves de bloqueo. La nota de roles se corrige. Quedan 41 tablas y 55 relaciones.
+
 ### C-089 · 2026-11-17 · feat(visor-modelo) · Permisos como proceso propio en el visor
 - **Ruta:** `04_Modelado_DB/Visor_Modelo/visor_config.json`, `salida/modelo_la_coca.html`, `Modelo_Relacional/v12_2026-11-13/Visor_Interactivo/`
 - **Mensaje:** `permisos` y `rol_permisos` quedan en el subproceso Permisos (antes Roles). Visor regenerado con `construir_visor.py` y republicado en el mismo enlace. El bd.uml no cambia: la nota de `roles` que aún dice "Asignar permisos al rol" se corrige en la v4.7.

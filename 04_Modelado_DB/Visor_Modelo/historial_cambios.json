@@ -3,27 +3,33 @@
  "versiones": [
   {
    "version": "4.7",
-   "drive": "pendiente",
-   "fecha": "2026-11-11",
-   "estado": "en_revision",
-   "titulo": "Grills G1 y G2 con Claude Omar (en curso)",
-   "origen": "G1: Alejandro respondió las 7 preguntas de Claude Omar (ronda G1-1). G2: 6 notas de Alejandro en este visor (11-nov). Se aplica cuando Claude Omar confirme los dos acuerdos (los permisos ya salieron en la v4.6).",
+   "drive": "v13_2026-11-18",
+   "fecha": "2026-11-18",
+   "estado": "vigente",
+   "titulo": "Acuerdos G1, G2, G3 y G4 con Claude Omar",
+   "origen": "G1 (14-nov), G2 y G3 (17-nov) y G4 (17-nov, modelado delegado por Omar) confirmados en el chat; foto del menú (#029/#031). Decisiones de Alejandro y Omar en cuestionarios interactivos.",
    "cambios": [
-    "productos gana imagen_url, y 'contiene' pasa a llamarse alergenos.",
-    "cantidad_planificada pasa a ordenes_produccion (almuerzos del día) y sale de producto_terminado (se calcula por línea).",
-    "movimientos_inventario pasa a llamarse movimientos_insumos.",
-    "Alergias: la lista fija suma frutos_secos y huevo, y \"bajo en sal\" sale (componente_alimento).",
-    "Varias alergias: el cliente recibe la primera alternativa del plato que no tenga ninguna de sus alergias (menu_items, que mantiene reemplaza_item_id).",
-    "Bloqueo de acceso solo en el backend: salen de configuraciones_sistema las claves intentos_maximos_acceso y minutos_bloqueo_acceso.",
-    "Sin cambios tras revisarlo: la trazabilidad de precios ya la dan suscripciones (precio de venta) y pagos (lo pagado)."
+    "componente_alimento suma frutos_secos y huevo (G1).",
+    "Salen de configuraciones_sistema las claves de bloqueo de acceso: el bloqueo es solo del backend (G1).",
+    "productos gana imagen_url, y 'contiene' pasa a llamarse alergenos (G2).",
+    "cantidad_planificada pasa a ordenes_produccion (total del día) y sale de producto_terminado (G2).",
+    "movimientos_inventario pasa a llamarse movimientos_insumos (G2).",
+    "usuarios: tipo_documento (CC, CE, NIT, PA, PPT) con único (tipo, documento), password opcional y teléfono único +57 (G3, G4).",
+    "Nuevas tablas identidades_externas (Google y Apple, solo clientes) y codigos_acceso (código por WhatsApp con hash) (G3, G4).",
+    "accesos.metodo: password, codigo, google o apple (G4).",
+    "direcciones_cliente.municipio; zonas_cobertura.nombre_publico y municipio (G3).",
+    "servicios.dias_habiles y beneficios; fichas_tecnicas.rendimiento_porciones (G3).",
+    "Claves de pago (banco, tipo de cuenta, número, titular) y horario_entrega en configuraciones_sistema; sale clientes.franja_horaria (G3).",
+    "menus_diarios.foto_url; sin foto, se usa la imagen del seco (#029/#031).",
+    "La nota de roles ya no lista las HU de permisos: están en el subproceso Permisos."
    ],
-   "resultado": "Se aplica cuando Claude Omar confirme los acuerdos G1 y G2."
+   "resultado": "41 tablas · 55 relaciones"
   },
   {
    "version": "4.6",
    "drive": "v12_2026-11-13",
    "fecha": "2026-11-13",
-   "estado": "vigente",
+   "estado": "anterior",
    "titulo": "Permisos de vuelta",
    "origen": "Nota de Alejandro en roles (11-nov). Se aplicó el 13-nov sin esperar el acuerdo G2, porque la respuesta del frontend no cambia las tablas.",
    "cambios": [

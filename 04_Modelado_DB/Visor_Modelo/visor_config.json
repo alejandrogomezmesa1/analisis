@@ -65,7 +65,6 @@
   "configuraciones_sistema": "Configuraciones del sistema",
   "categorias_insumos": "Categoría de insumos",
   "insumos": "Insumos",
-  "movimientos_inventario": "Insumos",
   "categorias_productos": "Categoría productos",
   "productos": "Productos",
   "proveedores": "Proveedores",
@@ -96,7 +95,10 @@
   "incidencias": "Incidencias",
   "suspensiones_entrega": "Suscripciones (pausas)",
   "permisos": "Permisos",
-  "rol_permisos": "Permisos"
+  "rol_permisos": "Permisos",
+  "movimientos_insumos": "Insumos",
+  "identidades_externas": "Acceso",
+  "codigos_acceso": "Acceso"
  },
  "campos_eliminados": {
   "usuarios": [
@@ -181,20 +183,6 @@
     "why": "v4.2 (Q7/Q11): el precio sale de la última compra; sin compras, la receta muestra 'costo pendiente'."
    }
   ],
-  "movimientos_inventario": [
-   {
-    "n": "usuario_id",
-    "why": "Ninguna HU consulta quién registró el movimiento; el origen ya está en compra u orden de producción."
-   },
-   {
-    "n": "motivo",
-    "why": "v4.3 (nota): el origen ya lo dicen compra_detalle_id u orden_produccion_id; sin ninguno, es ajuste o merma."
-   },
-   {
-    "n": "observacion",
-    "why": "v4.3 (nota): nadie la lee."
-   }
-  ],
   "categorias_productos": [
    {
     "n": "tipo_recipiente_id",
@@ -261,12 +249,16 @@
    {
     "n": "responsable_id",
     "why": "v4.5: la cocina trabaja en equipo; ningún reporte necesita saber quién hizo cada línea (regla Q1: autoría solo en pagos e incidencias)."
+   },
+   {
+    "n": "cantidad_planificada",
+    "why": "v4.7 (G2-Q3): el total va en ordenes_produccion.cantidad_planificada; la de cada línea se calcula."
    }
   ],
   "servicios": [
    {
     "n": "duracion_dias",
-    "why": "Redundante con tipo_plan (semanal = 5, quincenal = 10, mensual = 20 días hábiles, RN)."
+    "why": "Redundante con tipo_plan (semanal = 5, quincenal = 10, mensual = 20 días hábiles, RN). v4.7 (G3-Q3): vuelve como dias_habiles, editable en el panel."
    }
   ],
   "calendario": [
@@ -307,13 +299,13 @@
    {
     "n": "restricciones",
     "why": "v4.3 (nota): renombrado a alergias (misma lista fija)."
+   },
+   {
+    "n": "franja_horaria",
+    "why": "v4.7 (G3-Q8): la empresa entrega en un solo horario: clave horario_entrega de Configuración."
    }
   ],
   "direcciones_cliente": [
-   {
-    "n": "municipio",
-    "why": "Lo determina la zona de cobertura."
-   },
    {
     "n": "detalle",
     "why": "Torre/apto se escribe en la misma dirección o en notas."
@@ -467,6 +459,26 @@
    {
     "n": "motivo",
     "why": "v4.2 (Q4/Q9): reemplazado por 'origen' (cliente | pago_vencido)."
+   }
+  ],
+  "movimientos_insumos": [
+   {
+    "n": "usuario_id",
+    "why": "Ninguna HU consulta quién registró el movimiento; el origen ya está en compra u orden de producción."
+   },
+   {
+    "n": "motivo",
+    "why": "v4.3 (nota): el origen ya lo dicen compra_detalle_id u orden_produccion_id; sin ninguno, es ajuste o merma."
+   },
+   {
+    "n": "observacion",
+    "why": "v4.3 (nota): nadie la lee."
+   }
+  ],
+  "productos": [
+   {
+    "n": "contiene",
+    "why": "v4.7 (G2-Q4): renombrado a alergenos."
    }
   ]
  },
