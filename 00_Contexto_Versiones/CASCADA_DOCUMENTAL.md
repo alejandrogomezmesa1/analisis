@@ -14,6 +14,8 @@ related:
 
 # Cascada documental
 
+> **Regla permanente (2026-11-17, Alejandro):** cualquier cambio que se aplique, en cualquier documento, se propaga **en el mismo trabajo** a todos los documentos clave que afecte, sin esperar a que alguien lo pida. Los documentos clave son: **manual técnico**, **ficha técnica**, **modelado** (bd.uml + visor + diagrama ER), **Excel Tablero Kanban / Story Mapping / Matriz HU** y **casos de uso** (Word, sistema generado y draw.io). La C4 se deriva del modelo y también se revisa. Si el cambio afecta al frontend, primero se cierra el acuerdo del grill con Claude Omar y después se propaga. Faltantes conocidos del manual: [[Faltantes_Manual_v6]].
+
 La **ficha técnica** es el documento raíz: define el alcance (procesos y subprocesos). Cuando cambia, el resto se actualiza en este orden, porque cada paso usa el resultado del anterior.
 
 ```mermaid

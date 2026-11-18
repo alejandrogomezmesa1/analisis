@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz en grupo: De bocetos a código</title>
+<style>
+:root{
+  --bg:#10192B; --panel:#1B2842; --panel2:#233354; --line:#33456B;
+  --text:#F6F3EC; --muted:#B4BED2; --acc:#F0924A; --ok:#6BE08A; --bad:#FF9C94;
+  --c0:#F0924A; --c1:#6EA8FF; --c2:#E6C84F; --c3:#B28DFF;
+  --sans: "IBM Plex Sans","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  --disp: "Space Grotesk","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:var(--sans)}
+body{display:flex;flex-direction:column;min-height:100vh}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,textarea:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+#app{flex:1;display:flex;flex-direction:column;padding:clamp(16px,2.4vw,40px);gap:clamp(12px,1.8vw,28px);max-width:1600px;width:100%;margin:0 auto}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:clamp(14px,1.3vw,20px)}
+.brand{font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+.dots{display:flex;gap:8px}
+.dot{width:clamp(12px,1.2vw,18px);height:clamp(12px,1.2vw,18px);border-radius:50%;background:var(--line);border:2px solid var(--line)}
+.dot.done{background:var(--ok);border-color:var(--ok)}
+.dot.now{border-color:var(--acc);background:var(--acc)}
+
+h1,h2,h3{font-family:var(--disp);margin:0;line-height:1.12}
+.q{font-size:clamp(26px,3.4vw,56px);font-weight:600}
+.sub{font-size:clamp(16px,1.6vw,26px);color:var(--muted);line-height:1.4}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.4vw,22px)}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.opt{position:relative;display:flex;flex-direction:column;gap:12px;text-align:left;background:var(--panel);border:3px solid var(--line);border-radius:18px;padding:clamp(14px,1.6vw,26px);overflow:hidden;transition:transform .12s, border-color .2s, opacity .2s}
+.opt:hover:not(.locked){transform:translateY(-2px);border-color:var(--muted)}
+.opt .row{display:flex;align-items:flex-start;gap:clamp(12px,1.4vw,22px)}
+.rowbtn{display:flex;align-items:flex-start;gap:clamp(12px,1.4vw,22px);background:none;border:0;padding:0;text-align:left;width:100%;border-radius:12px}
+.rowbtn:disabled{cursor:default}
+.badge{flex:none;width:clamp(40px,4vw,64px);height:clamp(40px,4vw,64px);border-radius:14px;display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:clamp(22px,2.4vw,38px);color:#10192B}
+.opt[data-k="0"] .badge{background:var(--c0)} .opt[data-k="1"] .badge{background:var(--c1)}
+.opt[data-k="2"] .badge{background:var(--c2)} .opt[data-k="3"] .badge{background:var(--c3)}
+.txt{font-size:clamp(18px,2.1vw,34px);line-height:1.25;font-weight:500;flex:1}
+.meter{display:flex;align-items:center;gap:12px}
+.bar{flex:1;height:clamp(12px,1.2vw,18px);background:#0C1322;border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;border-radius:99px;transition:width .3s}
+.opt[data-k="0"] .fill{background:var(--c0)} .opt[data-k="1"] .fill{background:var(--c1)}
+.opt[data-k="2"] .fill{background:var(--c2)} .opt[data-k="3"] .fill{background:var(--c3)}
+.count{min-width:4.2em;text-align:right;font-variant-numeric:tabular-nums;font-size:clamp(16px,1.7vw,26px);font-weight:600}
+.minus{flex:none;width:clamp(36px,3.2vw,48px);height:clamp(36px,3.2vw,48px);border-radius:12px;border:2px solid var(--line);background:transparent;font-size:clamp(20px,2vw,28px);line-height:1}
+.minus:hover{border-color:var(--muted)}
+.tag{position:absolute;top:12px;right:14px;font-weight:700;font-size:clamp(14px,1.4vw,22px);padding:4px 12px;border-radius:99px}
+.opt.correct{border-color:var(--ok);background:#173A33}
+.opt.correct .tag{background:var(--ok);color:#0B2A1B}
+.opt.wrong{opacity:.55}
+.opt.wrong .tag{background:#3A2A3A;color:var(--bad)}
+.opt.locked{cursor:default}
+
+.bar-bottom{display:flex;align-items:center;gap:clamp(12px,1.6vw,24px);flex-wrap:wrap;background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:clamp(12px,1.4vw,20px) clamp(14px,1.8vw,28px)}
+.timer{display:flex;align-items:center;gap:12px;font-family:var(--disp);font-size:clamp(28px,3.2vw,52px);font-weight:700;font-variant-numeric:tabular-nums;min-width:3.6em}
+.timer.low{color:var(--bad)}
+.hint{flex:1;min-width:220px;font-size:clamp(14px,1.4vw,22px);color:var(--muted);line-height:1.35}
+.btn{border:2px solid var(--line);background:var(--panel2);border-radius:14px;padding:clamp(10px,1vw,16px) clamp(16px,1.8vw,28px);font-weight:600;font-size:clamp(15px,1.5vw,24px)}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--acc);border-color:var(--acc);color:#10192B}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+
+.result{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(12px,1.6vw,24px)}
+@media (max-width:900px){.result{grid-template-columns:1fr}}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:clamp(14px,1.6vw,26px);display:flex;flex-direction:column;gap:10px}
+.card h3{font-size:clamp(18px,1.9vw,30px);color:var(--acc)}
+.card p{margin:0;font-size:clamp(16px,1.7vw,27px);line-height:1.4}
+.big{font-family:var(--disp);font-size:clamp(34px,4.4vw,72px);font-weight:700;line-height:1}
+
+.center{flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(16px,2.4vw,36px)}
+.title{font-size:clamp(40px,6.4vw,104px);font-weight:700}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.rules{grid-template-columns:1fr}}
+.rule{background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:20px;font-size:clamp(16px,1.7vw,26px);line-height:1.4}
+.rule b{display:block;color:var(--acc);font-family:var(--disp);font-size:clamp(20px,2.2vw,34px);margin-bottom:6px}
+
+.rows{display:flex;flex-direction:column;gap:8px}
+.qrow{display:grid;grid-template-columns:2.2em 1fr 3.2em;gap:12px;align-items:center;font-size:clamp(14px,1.4vw,22px)}
+.qrow .bar{height:clamp(14px,1.4vw,22px)}
+.qrow .fill{background:var(--ok)}
+.qrow.low .fill{background:var(--acc)}
+.qrow .pct{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.topic{font-size:clamp(13px,1.2vw,18px);color:var(--muted)}
+textarea{width:100%;min-height:clamp(180px,22vh,300px);background:#0C1322;color:var(--text);border:2px solid var(--line);border-radius:14px;padding:16px;font:inherit;font-size:clamp(15px,1.5vw,24px);line-height:1.45;resize:vertical}
+.kbd{display:inline-block;padding:1px 8px;border:1.5px solid var(--line);border-radius:7px;font-weight:600;color:var(--text);background:#0C1322}
+.sr{position:absolute;left:-9999px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  body{background:#fff;color:#000} .top,.bar-bottom,.btn{display:none}
+  .card{border-color:#999;background:#fff} .card h3{color:#000} textarea{background:#fff;color:#000;border-color:#999}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="live" class="sr" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+const SECONDS = 20;
+const LETTERS = ["A","B","C","D"];
+const Q = [
+ {topic:"El problema del diseño al código", q:"¿Qué problema busca resolver la generación de interfaces desde mockups?",
+  o:["La fricción al pasar del diseño al código a mano","La falta de lenguajes de programación","El costo de los servidores en la nube","La lentitud de las bases de datos"], c:0,
+  e:"Diseñadores y programadores no se entienden y se pierden días o semanas implementando a mano.",
+  d:"¿Les ha pasado en un proyecto? ¿Cuánto tiempo perdieron entre el diseño y la implementación?"},
+ {topic:"Límites del low-code", q:"Según el artículo, ¿en qué se enfocan las herramientas low-code al generar la UI?",
+  o:["Videojuegos en 3D","Animaciones complejas","Formularios y grids de entrada de datos","Realidad aumentada"], c:2,
+  e:"Generan interfaces básicas, muy enfocadas a formularios y tablas; lo demás vuelve a requerir CSS a mano.",
+  d:"¿Para qué tipo de pantallas del proyecto bastaría low-code y para cuáles no?"},
+ {topic:"Herramientas design-to-code", q:"¿Qué hace la herramienta Supernova?",
+  o:["Genera bases de datos desde bocetos","Transforma diseños de Sketch en código nativo móvil","Reconoce voz para escribir código","Traduce HTML a Java"], c:1,
+  e:"Supernova toma un diseño hecho con Sketch y lo convierte en código nativo para apps móviles.",
+  d:"¿Qué diferencia hay entre partir de un diseño formal y partir de un dibujo a mano?"},
+ {topic:"Airbnb y el reconocimiento de componentes", q:"¿Cuántos componentes de UI reconoce aproximadamente el experimento de Airbnb?",
+  o:["Unos 15","Más de 5.000","Exactamente 2","Unos 150"], c:3,
+  e:"El sistema se entrenó con su catálogo de unos 150 componentes de interfaz.",
+  d:"¿Ayuda a la IA que una empresa tenga un catálogo de componentes consistente? ¿Por qué?"},
+ {topic:"Uizard y pix2code", q:"¿Cómo se llama la versión de software libre de la investigación de Uizard?",
+  o:["Zecoda","pix2code","Teleport","Sketch2Code"], c:1,
+  e:"pix2code es la versión libre, aunque el artículo indica que ya no se mantiene.",
+  d:"¿Qué riesgo hay en depender de un proyecto abierto que deja de mantenerse?"},
+ {topic:"Fases de Sketch2Code", q:"¿Cuántas fases tiene Sketch2Code de Microsoft?",
+  o:["Tres: visión, texto y layout","Una sola fase de texto","Dos: dibujo y pintura","Cinco: de diseño a despliegue"], c:0,
+  e:"Visión por computador, reconocimiento de texto y algoritmo de layout.",
+  d:"¿Por qué conviene combinar varios modelos especializados en vez de uno solo?"},
+ {topic:"El layout en Sketch2Code", q:"En Sketch2Code, ¿qué fase usa la información espacial para crear un grid?",
+  o:["El reconocimiento de texto","El modelo de visión por computador","El algoritmo de layout","La compilación del HTML"], c:2,
+  e:"El algoritmo de layout identifica las cajas de cada elemento y arma el grid.",
+  d:"¿Qué se pierde si el layout generado no es responsive?"},
+ {topic:"Revisión humana (Zecoda)", q:"¿Qué postura destaca Zecoda sobre el código generado por IA?",
+  o:["La IA reemplaza por completo a los programadores","El código no necesita revisión","Los diseñadores ya no son necesarios","La máquina genera el código y un humano lo revisa"], c:3,
+  e:"Zecoda reconoce las limitaciones de la IA: siempre debe haber revisión humana.",
+  d:"¿Quién del equipo debería revisar el código generado y con qué criterios?"},
+ {topic:"Por qué se estancó el sector", q:"Según el autor, ¿por qué se estancaron estas herramientas?",
+  o:["Nadie quiso invertir en ellas","Es más fácil hacer una demo chula que un producto real","Los bocetos a mano son ilegibles","La IA no sirve para interfaces"], c:1,
+  e:"Un producto real debe asegurar usabilidad; una demo llamativa es mucho más fácil.",
+  d:"¿Han visto demos de IA que lucen increíbles pero fallan en uso real?"},
+ {topic:"Generar modelos, no solo código", q:"¿Qué le gustaría a Cabot que generaran estas herramientas, además del código?",
+  o:["El modelo de la interfaz","Un manual de usuario","El logotipo de la marca","Las pruebas de carga"], c:0,
+  e:"Un modelo de la interfaz se integraría con los modelos de datos, comportamiento y despliegue.",
+  d:"¿Es mejor generar código directo (rápido) o un modelo intermedio (más mantenible)?"}
+];
+
+const S = {
+  screen:"start", i:0,
+  votes:Q.map(()=>[0,0,0,0]), log:Q.map(()=>[]), revealed:Q.map(()=>false),
+  t:SECONDS, timer:null, conclusion:null
+};
+const $ = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
+const app = $("#app");
+const esc = s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const total = i=>S.votes[i].reduce((a,b)=>a+b,0);
+const announce = m=>{$("#live").textContent=m};
+
+function dots(){
+  return `<div class="dots" aria-hidden="true">${Q.map((_,k)=>`<span class="dot ${S.revealed[k]?"done":""} ${S.screen==="q"&&k===S.i?"now":""}"></span>`).join("")}</div>`;
+}
+function header(label){
+  return `<div class="top"><span class="brand">De bocetos a código · Quiz en grupo</span>${dots()}<span>${label}</span></div>`;
+}
+
+/* ---------- Pantallas ---------- */
+function renderStart(){
+  app.innerHTML = `
+  ${header("10 preguntas")}
+  <div class="center">
+    <h1 class="title">¿Qué aprendimos?<br>Quiz en grupo</h1>
+    <p class="sub">Todo el salón responde junto. Después de cada pregunta conversamos y al final armamos la conclusión del grupo.</p>
+    <div class="rules">
+      <div class="rule"><b>1. Voten</b>Con la mano o con tarjetas A, B, C y D. Cada pregunta dura ${SECONDS} segundos.</div>
+      <div class="rule"><b>2. Cuenten</b>El presentador toca la opción (o pulsa <span class="kbd">A</span> <span class="kbd">B</span> <span class="kbd">C</span> <span class="kbd">D</span>) por cada voto.</div>
+      <div class="rule"><b>3. Revelen y debatan</b>Se muestra la respuesta, cuánto acertó el grupo y una pregunta para conversar.</div>
+    </div>
+    <div><button class="btn primary" id="go">Empezar quiz</button></div>
+  </div>`;
+  $("#go").onclick = ()=>{S.screen="q";S.i=0;render()};
+  $("#go").focus();
+}
+
+function optHTML(k){
+  const q=Q[S.i], rev=S.revealed[S.i];
+  let cls="opt", tag="";
+  if(rev){ if(k===q.c){cls+=" correct locked";tag='<span class="tag">✓ Correcta</span>'} else {cls+=" wrong locked";tag='<span class="tag">✗</span>'} }
+  return `<div class="${cls}" data-k="${k}">
+    ${tag}
+    <button class="rowbtn" data-vote="${k}" ${rev?"disabled":""} aria-label="Opción ${LETTERS[k]}: ${esc(q.o[k])}. Sumar un voto">
+      <span class="badge">${LETTERS[k]}</span><span class="txt">${esc(q.o[k])}</span>
+    </button>
+    <div class="meter">
+      <div class="bar"><div class="fill"></div></div>
+      <span class="count">0</span>
+      ${rev?"":`<button class="minus" data-minus="${k}" aria-label="Quitar un voto a ${LETTERS[k]}">−</button>`}
+    </div>
+  </div>`;
+}
+
+function renderQuestion(){
+  const q=Q[S.i], rev=S.revealed[S.i];
+  app.innerHTML = `
+  ${header(`Pregunta ${S.i+1} de ${Q.length}`)}
+  <h2 class="q">${esc(q.q)}</h2>
+  <div class="grid">${[0,1,2,3].map(optHTML).join("")}</div>
+  <div id="resultbox"></div>
+  <div class="bar-bottom">
+    ${rev?"":`<div class="timer" id="timer" aria-label="Tiempo restante">${S.t}</div>`}
+    <div class="hint" id="hint"></div>
+    ${rev?"":`<button class="btn" id="tpause">Pausar</button><button class="btn" id="treset">Reiniciar tiempo</button>`}
+    <button class="btn" id="prev" ${S.i===0?"disabled":""}>← Anterior</button>
+    ${rev
+      ? `<button class="btn primary" id="next">${S.i===Q.length-1?"Ver conclusión":"Siguiente →"}</button>`
+      : `<button class="btn primary" id="reveal">Revelar respuesta</button>`}
+  </div>`;
+  bindQuestion();
+  updateVotes();
+  if(rev){ showResult(); setHint("Conversen la pregunta y luego pasen a la siguiente."); }
+  else { setHint(`Voten con la mano o con tarjetas. Presentador: toque una opción o pulse <span class="kbd">A</span>–<span class="kbd">D</span> por cada voto; <span class="kbd">Retroceso</span> deshace; <span class="kbd">Enter</span> revela.`); startTimer(); }
+}
+function setHint(h){ const el=$("#hint"); if(el) el.innerHTML=h; }
+
+function bindQuestion(){
+  $$("[data-vote]").forEach(b=>b.onclick=()=>vote(+b.dataset.vote,1));
+  $$("[data-minus]").forEach(b=>b.onclick=e=>{e.stopPropagation();vote(+b.dataset.minus,-1)});
+  const r=$("#reveal"); if(r) r.onclick=reveal;
+  const n=$("#next"); if(n) n.onclick=next;
+  const p=$("#prev"); if(p) p.onclick=prev;
+  const tp=$("#tpause"); if(tp) tp.onclick=()=>{ if(S.timer){stopTimer();tp.textContent="Reanudar"} else {runTimer();tp.textContent="Pausar"} };
+  const tr=$("#treset"); if(tr) tr.onclick=()=>{S.t=SECONDS;startTimer();const t=$("#tpause");if(t)t.textContent="Pausar"};
+}
+
+function vote(k,d){
+  if(S.screen!=="q"||S.revealed[S.i])return;
+  const v=S.votes[S.i];
+  if(d>0){v[k]++;S.log[S.i].push(k)}
+  else if(v[k]>0){v[k]--;const idx=S.log[S.i].lastIndexOf(k);if(idx>-1)S.log[S.i].splice(idx,1)}
+  updateVotes();
+}
+function undo(){
+  if(S.screen!=="q"||S.revealed[S.i])return;
+  const k=S.log[S.i].pop(); if(k===undefined)return;
+  S.votes[S.i][k]--; updateVotes();
+}
+function updateVotes(){
+  const v=S.votes[S.i], tot=total(S.i), max=Math.max(1,...v);
+  $$(".opt").forEach(el=>{
+    const k=+el.dataset.k, pct=tot?Math.round(100*v[k]/tot):0;
+    $(".count",el).textContent = `${v[k]}${tot?` · ${pct}%`:""}`;
+    $(".fill",el).style.width = (tot? (100*v[k]/tot):0)+"%";
+  });
+}
+
+function reveal(){
+  stopTimer();
+  S.revealed[S.i]=true;
+  const q=Q[S.i], tot=total(S.i), ok=S.votes[S.i][q.c];
+  announce(`Respuesta correcta: ${LETTERS[q.c]}. ${q.o[q.c]}`);
+  renderQuestion();
+}
+function showResult(){
+  const q=Q[S.i], tot=total(S.i), ok=S.votes[S.i][q.c];
+  const pct=tot?Math.round(100*ok/tot):null;
+  $("#resultbox").innerHTML = `
+  <div class="result">
+    <div class="card">
+      <h3>Respuesta: ${LETTERS[q.c]}</h3>
+      <p>${esc(q.e)}</p>
+    </div>
+    <div class="card">
+      <h3>Para conversar</h3>
+      <p>${esc(q.d)}</p>
+      <p class="topic">${tot?`El grupo acertó ${ok} de ${tot} votos (<b>${pct}%</b>).`:"No se registraron votos en esta pregunta."}</p>
+    </div>
+  </div>`;
+}
+
+function next(){ if(S.i===Q.length-1){S.screen="final";render()} else {S.i++;S.t=SECONDS;render()} }
+function prev(){ if(S.i>0){S.i--;S.t=SECONDS;render()} }
+
+/* ---------- Temporizador ---------- */
+function stopTimer(){ if(S.timer){clearInterval(S.timer);S.timer=null} }
+function runTimer(){
+  stopTimer();
+  S.timer=setInterval(()=>{
+    S.t=Math.max(0,S.t-1);
+    const el=$("#timer"); if(el){el.textContent=S.t;el.classList.toggle("low",S.t<=5)}
+    if(S.t===0){stopTimer();setHint("<b>¡Tiempo!</b> Cuenten los votos y pulsen «Revelar respuesta».");announce("Tiempo terminado")}
+  },1000);
+}
+function startTimer(){ S.t=S.t>0&&S.t<=SECONDS?S.t:SECONDS; const el=$("#timer"); if(el){el.textContent=S.t;el.classList.toggle("low",S.t<=5)} runTimer(); }
+
+/* ---------- Final ---------- */
+function stats(){
+  let ok=0,all=0;
+  const rows=Q.map((q,i)=>{const t=total(i);ok+=S.votes[i][q.c];all+=t;return {i,t,pct:t?S.votes[i][q.c]/t:null}});
+  return {rows,ok,all,avg:all?ok/all:null};
+}
+function draftConclusion(st){
+  const answered=st.rows.filter(r=>r.pct!==null).sort((a,b)=>a.pct-b.pct);
+  const L=[];
+  if(st.avg===null){ L.push("No se registraron votos; completen la conclusión a mano."); }
+  else{
+    L.push(`El grupo acertó en promedio el ${Math.round(st.avg*100)}% de las respuestas (${st.ok} de ${st.all} votos).`);
+    const low=answered.filter(r=>r.pct<0.7).slice(0,3);
+    const high=answered.filter(r=>r.pct>=0.7).slice(-2).reverse();
+    if(high.length) L.push("Lo que quedó claro: "+high.map(r=>Q[r.i].topic).join("; ")+".");
+    if(low.length) L.push("Lo que hay que reforzar: "+low.map(r=>Q[r.i].topic+` (${Math.round(r.pct*100)}%)`).join("; ")+".");
+    else L.push("No hubo temas con menos del 70% de aciertos.");
+  }
+  L.push("Idea central del grupo: la IA ya puede pasar de un boceto o mockup a una interfaz, pero la usabilidad real y la revisión humana siguen siendo responsabilidad del equipo.");
+  L.push("Decisión para nuestro proyecto: [escribir aquí qué haremos, por ejemplo, probar una herramienta con un boceto propio y revisar el resultado en equipo].");
+  return L.join("\n\n");
+}
+function renderFinal(){
+  const st=stats();
+  if(S.conclusion===null) S.conclusion=draftConclusion(st);
+  const low=st.rows.filter(r=>r.pct!==null&&r.pct<0.7).sort((a,b)=>a.pct-b.pct).slice(0,3);
+  app.innerHTML = `
+  ${header("Conclusión")}
+  <h2 class="q">Conclusión del grupo</h2>
+  <div class="result">
+    <div class="card">
+      <h3>Aciertos del salón</h3>
+      <div class="big">${st.avg===null?"—":Math.round(st.avg*100)+"%"}</div>
+      <div class="rows">${st.rows.map(r=>`
+        <div class="qrow ${r.pct!==null&&r.pct<0.7?"low":""}">
+          <span>${r.i+1}</span>
+          <div class="bar" title="${esc(Q[r.i].topic)}"><div class="fill" style="width:${r.pct===null?0:Math.round(r.pct*100)}%"></div></div>
+          <span class="pct">${r.pct===null?"—":Math.round(r.pct*100)+"%"}</span>
+        </div>`).join("")}
+      </div>
+      <p class="topic">Naranja: menos del 70% de aciertos.</p>
+    </div>
+    <div class="card">
+      <h3>Para reforzar</h3>
+      ${low.length?low.map(r=>`<p><b>${r.i+1}. ${esc(Q[r.i].topic)}</b> (${Math.round(r.pct*100)}%)<br><span class="topic">${esc(Q[r.i].e)}</span></p>`).join(""):`<p>Ninguna pregunta quedó por debajo del 70%. ¡Buen trabajo, grupo!</p>`}
+    </div>
+  </div>
+  <div class="card">
+    <h3>Redactemos la conclusión juntos (editable)</h3>
+    <textarea id="concl" aria-label="Conclusión del grupo">${esc(S.conclusion)}</textarea>
+  </div>
+  <div class="bar-bottom">
+    <div class="hint" id="hint">Editen el texto entre todos y luego cópienlo o imprímanlo.</div>
+    <button class="btn" id="prevq">← Volver a las preguntas</button>
+    <button class="btn" id="copy">Copiar conclusión</button>
+    <button class="btn" id="print">Imprimir</button>
+    <button class="btn primary" id="again">Reiniciar quiz</button>
+  </div>`;
+  $("#concl").oninput=e=>{S.conclusion=e.target.value};
+  $("#prevq").onclick=()=>{S.screen="q";S.i=Q.length-1;render()};
+  $("#print").onclick=()=>window.print();
+  $("#again").onclick=()=>{ if(confirm("¿Borrar los votos y empezar de nuevo?")){ S.votes=Q.map(()=>[0,0,0,0]);S.log=Q.map(()=>[]);S.revealed=Q.map(()=>false);S.conclusion=null;S.screen="start";S.i=0;render() } };
+  $("#copy").onclick=async()=>{
+    const txt=$("#concl").value;
+    try{ await navigator.clipboard.writeText(txt); setHint("Conclusión copiada."); }
+    catch(e){ $("#concl").select(); document.execCommand("copy"); setHint("Conclusión copiada."); }
+  };
+}
+
+function render(){
+  stopTimer();
+  if(S.screen==="start") renderStart();
+  else if(S.screen==="q") renderQuestion();
+  else renderFinal();
+  window.scrollTo(0,0);
+}
+
+/* ---------- Teclado ---------- */
+document.addEventListener("keydown",e=>{
+  if(e.target.tagName==="TEXTAREA"||e.ctrlKey||e.metaKey||e.altKey)return;
+  if(S.screen!=="q")return;
+  const key=e.key.toLowerCase();
+  const map={a:0,b:1,c:2,d:3,"1":0,"2":1,"3":2,"4":3};
+  if(key in map){ vote(map[key],1); e.preventDefault(); }
+  else if(key==="backspace"){ undo(); e.preventDefault(); }
+  else if(key==="enter"){ if(e.target.tagName==="BUTTON")return; S.revealed[S.i]?next():reveal(); e.preventDefault(); }
+  else if(key==="arrowright"&&S.revealed[S.i]){ next(); }
+  else if(key==="arrowleft"){ prev(); }
+});
+
+render();
+})();
+</script>
+</body>
+</html>

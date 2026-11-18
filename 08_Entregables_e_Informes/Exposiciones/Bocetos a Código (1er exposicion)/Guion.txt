@@ -1,0 +1,532 @@
+GUION DE LA EXPOSICIÓN · DE BOCETOS A CÓDIGO
+Proyecto JackSoft (La Coca) · Tema D · 5 integrantes · 20 minutos + Kahoot (10 min)
+==============================================================================
+Cómo leer este guion:
+  · CONTENIDO DE LA DIAPOSITIVA: lo que aparece proyectado, en orden de lectura.
+  · QUÉ DECIR: las notas del orador, con el minuto exacto.
+
+
+##############################################################################
+APERTURA · Integrante 1
+##############################################################################
+
+--- DIAPOSITIVA 1 -----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  PROYECTO JACKSOFT (LA COCA) · TEMA D
+  De bocetos a código
+  Generación de interfaces de usuario a partir de mockups con IA
+  JackSoft · Octubre 2026
+
+QUÉ DECIR:
+  Integrante 1 · 0:00–0:15. Saludo y presentación del equipo: decir el nombre de los cinco integrantes y el tema D del proyecto JackSoft. Anunciar que la exposición dura 20 minutos y que al final hay un Kahoot.
+
+##############################################################################
+INTEGRANTE 1 · Contexto de la industria · minutos 0:00 a 4:00
+##############################################################################
+
+--- DIAPOSITIVA 2 -----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  Ruta de la exposición
+  1. Contexto: cómo se diseñan y construyen interfaces hoy  ·  Integrante 1  ·  4 min
+  2. El problema: del diseño al HTML y CSS  ·  Integrante 2  ·  4 min
+  3. Cómo la IA convierte un boceto en interfaz: Teleport, Airbnb, Uizard  ·  Integrante 3  ·  4 min
+  4. Screenshot to Code, Sketch2Code y más; estancamiento y modelos  ·  Integrante 4  ·  4 min
+  5. Actualización 2026, flujo práctico, riesgos y conclusiones  ·  Integrante 5  ·  4 min
+  6. Kahoot de 10 preguntas  ·  Todo el grupo  ·  +10 min
+
+QUÉ DECIR:
+  Integrante 1 · 0:15–0:45. Mostrar la ruta: cinco bloques de cuatro minutos, uno por integrante, y el Kahoot al final. Explicar que primero vamos a dar contexto de la industria para que todos entiendan los términos (boceto, wireframe, mockup, prototipo, handoff) antes de entrar al artículo de Jordi Cabot.
+
+--- DIAPOSITIVA 3 -----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  CONTEXTO DE LA INDUSTRIA
+  Tres conceptos base: interfaz, experiencia y front-end
+  UI · Interfaz de usuario
+     - Todo lo que la persona ve y toca: botones, formularios, menús, colores y tipografía.
+  UX · Experiencia de usuario
+     - Qué tan fácil, claro y agradable resulta usar el producto. Se piensa antes de dibujar pantallas.
+  Front-end
+     - La parte del software que hace realidad la interfaz en el navegador o en la app.
+  HTML  =  estructura
+  CSS  =  estilo y posición
+  JavaScript  =  comportamiento
+  El artículo habla del paso más doloroso: convertir la UI diseñada en HTML y CSS.
+  (Contexto agregado por el equipo)
+
+QUÉ DECIR:
+  Integrante 1 · 0:45–1:30. Definir UI, UX y front-end con palabras simples. Ejemplo: en la app de pedidos de La Coca, la UI es el botón «Agregar al carrito»; la UX es que el cliente pida en tres toques sin perderse; el front-end es el código que pinta ese botón. Cerrar con HTML, CSS y JavaScript: el artículo se centra en HTML y CSS, que es donde más tiempo se pierde.
+
+--- DIAPOSITIVA 4 -----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  CONTEXTO DE LA INDUSTRIA
+  Del boceto al producto: cinco niveles de fidelidad
+  1. Boceto
+     - Papel o pizarra. Minutos. Solo ideas y bloques
+  2. Wireframe
+     - Estructura en grises, sin colores ni estilo
+  3. Mockup
+     - Diseño visual estático: colores, tipografía, imágenes
+  4. Prototipo
+     - Interactivo: simula la navegación entre pantallas
+  5. Código
+     - La interfaz real, conectada a datos
+  Las herramientas con IA del artículo intentan saltar del nivel 1 o 2 directamente al nivel 5.
+  (Contexto agregado por el equipo)
+
+QUÉ DECIR:
+  Integrante 1 · 1:30–2:20. Esta diapositiva resuelve una duda que el propio artículo deja abierta: boceto, mockup y sketch no son lo mismo. Recorrer los cinco niveles: a más fidelidad, más tiempo cuesta hacerlo y más se parece al producto final. Remarcar la idea clave: las herramientas que vamos a ver quieren pasar del boceto o del wireframe directo al código, saltándose los pasos intermedios.
+
+--- DIAPOSITIVA 5 -----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  CONTEXTO DE LA INDUSTRIA
+  Cómo trabajan hoy diseño y desarrollo: el handoff
+  1. Investigación UX
+  2. Diseño en Figma
+  3. Handoff
+  4. Desarrollo front-end
+  5. Revisión visual
+  Handoff: la entrega del diseño al programador: medidas, colores, tipografías, imágenes e íconos.
+  Dónde se pierde tiempo
+     - Estados que nadie dibujó: errores, carga, pantallas vacías
+     - Cada programador interpreta el diseño a su manera
+     - Un cambio de diseño obliga a rehacer el código
+  Para reducirlo, la industria usa sistemas de diseño (componentes reutilizables) y modos de inspección como Figma Dev Mode.
+  (Contexto agregado por el equipo)
+
+QUÉ DECIR:
+  Integrante 1 · 2:20–3:10. Explicar el flujo normal en una empresa de software. El handoff es el momento en que el diseñador entrega su trabajo al programador; ahí aparecen las fricciones que el artículo llama «círculo vicioso». Dar un ejemplo: el diseño muestra la lista de pedidos llena, pero nadie dibujó cómo se ve cuando no hay pedidos; el programador lo inventa. Mencionar que los sistemas de diseño ayudan, pero el paso a HTML y CSS sigue siendo manual.
+
+--- DIAPOSITIVA 6 -----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  CONTEXTO DE LA INDUSTRIA
+  Las herramientas base del diseño de interfaces
+  Figma
+     - El estándar actual: diseño colaborativo en el navegador, prototipos y modo para desarrolladores
+  Sketch
+     - App de macOS que dominó la década de 2010; Supernova, del artículo, parte de diseños de Sketch
+  Adobe XD
+     - La alternativa de Adobe; hoy en modo mantenimiento, sin nuevas funciones
+  Balsamiq
+     - Wireframes de baja fidelidad con aspecto de dibujo a mano
+  Penpot
+     - Alternativa open source basada en estándares web (SVG y CSS)
+  Papel y pizarra
+     - Siguen siendo el inicio más rápido, y es justo la entrada que quiere aprovechar la IA
+  (Contexto agregado por el equipo)
+
+QUÉ DECIR:
+  Integrante 1 · 3:10–4:00. Presentar las herramientas con las que se diseña hoy. Ninguna de ellas, por sí sola, genera un front-end listo para producción: por eso existe el problema que va a contar el integrante 2. Cerrar señalando la última tarjeta: el papel y la pizarra son la forma más rápida de diseñar, y la IA quiere convertir justamente eso en código. Dar paso al integrante 2.
+
+##############################################################################
+INTEGRANTE 2 · El problema: del diseño al HTML y CSS · minutos 4:00 a 8:00
+##############################################################################
+
+--- DIAPOSITIVA 7 -----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  1 · EL PROBLEMA
+  Nadie quiere pasar horas alineando HTML y CSS
+  Revisar que cada elemento esté bien alineado o cazar el estilo que se sobreescribe es trabajo que ningún programador disfruta.
+
+QUÉ DECIR:
+  Integrante 2 · 4:00–4:40 (tiempo ajustado; antes: minuto 2–3).
+  [Minuto 2–3 · 1 min] Abrir con la idea central del artículo: a ningún programador le gusta pelearse con el HTML y el CSS. Es el punto de dolor que motiva todas las herramientas que veremos hoy. Preguntar al público por una anécdota: un estilo que no aparecía porque otra regla lo sobreescribía. Dejar que respondan 20 o 30 segundos y continuar.
+
+--- DIAPOSITIVA 8 -----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  ANTES DE LA SIGUIENTE DIAPOSITIVA
+  Contexto: ¿qué son low-code y no-code?
+  Low-code
+     - Se arma la aplicación con componentes visuales y se programa solo lo específico.
+     - Ejemplos: OutSystems, Mendix, Microsoft Power Apps.
+  No-code
+     - Cero programación; pensadas para personas no técnicas.
+     - Ejemplos: Bubble, Webflow, Glide.
+  ¿Por qué su interfaz queda básica? Generan las pantallas a partir del modelo de datos (una tabla → un formulario y un grid), no a partir de un diseño visual.
+  (Contexto agregado por el equipo)
+
+QUÉ DECIR:
+  Integrante 2 · 4:40–5:20. Explicar los términos antes de la diapositiva del artículo. Low-code: plataformas para construir apps rápido con poco código, muy usadas en empresas para aplicaciones internas. No-code: para quien no sabe programar. La explicación del recuadro oscuro es nuestra: como parten de las tablas de la base de datos, generan formularios y grids, y por eso el artículo dice que su interfaz es básica.
+
+--- DIAPOSITIVA 9 -----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  Low-code genera la interfaz, pero se queda corto
+  Lo que sí resuelve
+     - Genera la interfaz como parte de la generación automática de código
+     - Formularios de entrada de datos
+     - Grids que presentan tablas
+  Dónde falla
+     - El resultado es bastante básico
+     - Está muy enfocado a aplicaciones de entrada de datos
+     - Todo lo que sale de ahí vuelve a exigir tocar el CSS a mano
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 2 · 5:20–5:55. Según el artículo, el low-code sí genera interfaces, pero sirve sobre todo para formularios y tablas. En cuanto la pantalla necesita un diseño propio, hay que volver al CSS manual.
+
+--- DIAPOSITIVA 10 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  El círculo vicioso entre diseño y programación
+  Diseñadores
+     - Crean el mockup, el boceto o el sketch con herramientas visuales que no generan código
+  Programadores
+     - Intentan implementarlo a mano en la aplicación
+  Resultado
+     - Unos no entienden a los otros: días, incluso semanas de discusión
+  Mockup, boceto y sketch no son lo mismo: el artículo remite a una guía que explica la diferencia entre ellos.
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 2 · 5:55–6:35. Conectar con el handoff que explicó el integrante 1: esto es lo que pasa cuando falla. Señalar la nota inferior y recordar la diapositiva de los cinco niveles de fidelidad.
+
+--- DIAPOSITIVA 11 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  Primera respuesta: herramientas design-to-code
+  Generan el HTML/CSS de la interfaz a partir de un diseño ya hecho.
+  Supernova
+     - Toma un diseño de Sketch y lo transforma en código nativo para apps móviles
+  Yotako
+     - Otra herramienta que intenta facilitar la transición entre el diseño y el código
+  Anima
+     - Una de las grandes del sector, con 10 millones de dólares de financiación
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 2 · 6:35–7:15. Presentar las tres herramientas design-to-code del artículo. Aclarar la diferencia con lo que viene: aquí el punto de partida es un diseño digital ya terminado, no un boceto a mano.
+
+--- DIAPOSITIVA 12 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  CÓMO FUNCIONA
+  Design-to-code por dentro: el diseño ya es un dato
+  Archivo de diseño
+     - Sketch o Figma: capas, grupos, medidas y colores exactos
+  Lectura del árbol de capas
+     - La herramienta recorre cada capa y sus propiedades
+  Traducción
+     - Capa → elemento HTML · estilos → CSS · auto layout → flexbox
+  Código
+     - HTML/CSS o código nativo para móvil
+  Ventaja
+     - No hay que adivinar nada: la información ya existe en el archivo.
+  Límite
+     - Si las capas están desordenadas o mal nombradas, el código también. Y un boceto a mano no tiene capas: hay que «ver» la imagen.
+  (Contexto agregado por el equipo)
+
+QUÉ DECIR:
+  Integrante 2 · 7:15–8:00. Explicación agregada por el equipo para entender por qué design-to-code funciona: el archivo de Figma o Sketch ya es información estructurada, así que traducirlo es casi mecánico. El gran problema aparece con un dibujo en papel: es solo una imagen, no tiene capas. Para entenderla hace falta inteligencia artificial, y ese es el tema del integrante 3.
+
+##############################################################################
+INTEGRANTE 3 · La IA entra en escena · minutos 8:00 a 12:00
+##############################################################################
+
+--- DIAPOSITIVA 13 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  2 · LA IA ENTRA EN ESCENA
+  Código a partir de un boceto hecho a mano
+  Con deep learning, el sistema reconoce los componentes de UI del dibujo y genera de golpe una interfaz funcional.
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 3 · 8:00–8:25. Enlazar con la última idea del integrante 2: si el boceto es solo una imagen, la máquina tiene que aprender a verla. Eso lo hace el deep learning.
+
+--- DIAPOSITIVA 14 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  CÓMO FUNCIONA
+  Cuatro conceptos de IA para entender estas herramientas
+  1. Deep learning
+     - Redes neuronales que aprenden patrones a partir de miles de ejemplos etiquetados.
+  2. Visión por computador
+     - Detecta objetos en una imagen y los ubica con una caja: botón, campo de texto, imagen.
+  3. OCR
+     - Reconocimiento óptico de caracteres: lee el texto escrito o impreso dentro de la imagen.
+  4. Modelos multimodales
+     - Entienden imagen y texto a la vez y escriben el código directamente (GPT-4V, Gemini, Claude).
+  Las herramientas del artículo (2017–2019) combinan los tres primeros; las de 2026 usan el cuarto.
+  (Contexto agregado por el equipo)
+
+QUÉ DECIR:
+  Integrante 3 · 8:25–9:20. Explicar los cuatro conceptos con ejemplos cotidianos: el desbloqueo facial del celular es visión por computador; escanear un documento y copiar el texto es OCR. Los modelos multimodales son los más recientes: les das una foto y responden con código. Esta distinción ayuda a entender por qué muchas herramientas del artículo murieron: la tecnología cambió.
+
+--- DIAPOSITIVA 15 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  Mapa de herramientas del artículo
+  | Enfoque               | Entrada                               | Ejemplos                              |
+  |-----------------------|---------------------------------------|---------------------------------------|
+  | Arrastrar componentes | Diseño visual con piezas predefinidas | Teleport                              |
+  | Reconocer bocetos     | Dibujo a mano o wireframe             | Airbnb, Sketch2Code, Viz2Code, Uizard |
+  | Partir de una captura | Imagen de una interfaz                | pix2code, Screenshot to Code          |
+  | Describir con texto   | Descripción textual de la interfaz    | Experimentos con GPT en Teleport      |
+  | Revisión humana       | Código generado por la máquina        | Zecoda                                |
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 3 · 9:20–10:00. Usar la tabla como mapa: las herramientas se diferencian por lo que reciben como entrada. Señalar que «describir con texto» era apenas un experimento en 2022 y hoy es la forma principal de trabajar.
+
+--- DIAPOSITIVA 16 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  HERRAMIENTA 1
+  Teleport (teleportHQ)
+  Qué hace
+     - Generador de código para el front-end: se diseña arrastrando componentes predefinidos y genera HTML, CSS y JS
+  Qué experimenta
+     - Generadores basados en GPT que derivan una interfaz posible a partir de una descripción textual
+  Ojo
+     - Todo lo basado en IA sigue a nivel experimental, no forma parte del núcleo de la herramienta
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 3 · 10:00–10:40. Teleport es el ejemplo de «arrastrar componentes»: no parte de un boceto, sino de piezas ya hechas. Lo interesante es que en 2022 ya probaba GPT para generar interfaces desde texto, lo que hoy hacen v0 o Lovable.
+
+--- DIAPOSITIVA 17 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  HERRAMIENTA 2
+  Airbnb: Sketching Interfaces
+  ≈150
+  componentes de interfaz que usa Airbnb y que el sistema aprende a reconocer
+     - Reconoce los elementos de una interfaz a partir de un bosquejo manual bastante primitivo
+     - Razón: si hay algoritmos que reconocen miles de caracteres de escritura, reconocer 150 componentes no debería ser tan difícil
+     - Entrenado con su catálogo de componentes hasta lograr un reconocimiento muy alto
+     - Se quedó en experimento, sin continuidad pública
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 3 · 10:40–11:20. Airbnb es el ejemplo de visión por computador: cada dibujo se compara con su catálogo de unos 150 componentes, igual que un lector de escritura reconoce letras. Funcionaba porque Airbnb ya tenía un sistema de diseño ordenado. Quedó como experimento.
+
+--- DIAPOSITIVA 18 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  HERRAMIENTA 3
+  Uizard y pix2code
+  2,8 M€
+  de financiación semilla para transformar sketches manuales en prototipos
+     - Meta: mejorar el flujo entre diseñadores y programadores, con menos frustración y más innovación
+     - Parten de dibujos toscos en una pizarra, tal como se diseña en muchas reuniones
+     - pix2code, su versión libre, ya no se mantiene; solo ofrecen la versión comercial
+     - Hoy ponen más énfasis en facilitar la vida a diseñadores (“no-design”)
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 3 · 11:20–12:00. Uizard nació de pix2code, un trabajo de investigación de 2017 que convertía capturas de interfaz en código usando deep learning. La empresa luego cambió de rumbo hacia herramientas para diseñadores. Dar paso al integrante 4.
+
+##############################################################################
+INTEGRANTE 4 · Más herramientas, estancamiento y modelos · minutos 12:00 a 16:00
+##############################################################################
+
+--- DIAPOSITIVA 19 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  HERRAMIENTA 4
+  Screenshot to Code
+  Qué es
+     - Un proyecto open source que reutiliza modelos anteriores, sobre todo pix2code
+  Para qué sirve
+     - Un tutorial para entender y probar las técnicas de aprendizaje automático de una solución wireframe-to-code
+  Valor
+     - Es sobre todo educativo: ideal para quien quiera construir su propia solución
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 4 · 12:00–12:30. Screenshot to Code es educativo: sirve para aprender cómo funciona por dentro una solución de este tipo. Para estudiantes de software como nosotros, es el punto de entrada si quisiéramos construir una.
+
+--- DIAPOSITIVA 20 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  HERRAMIENTA 5
+  Sketch2Code de Microsoft: tres fases
+  1. Visión
+     - Un modelo predice qué elementos hay en el boceto, su tamaño y su posición
+  2. Texto
+     - Un modelo de reconocimiento de texto lee títulos, descripciones y valores
+  3. Layout
+     - Un algoritmo usa la información espacial para crear un grid que acomode todo
+  Salida: código HTML. Microsoft también probó antes con Ink to Code, un intento mucho más preliminar.
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 4 · 12:30–13:15. Relacionar cada fase con los conceptos del integrante 3: la fase 1 es visión por computador, la fase 2 es OCR y la fase 3 es un algoritmo que ordena todo en un grid. Es el ejemplo más claro de cómo funcionaba el proceso completo antes de los modelos multimodales.
+
+--- DIAPOSITIVA 21 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  HERRAMIENTAS 6 Y 7
+  Zecoda y Viz2Code
+  Zecoda
+     - Más una promesa de herramienta que una herramienta real
+     - Reconoce las limitaciones de la IA
+     - La máquina genera el código, pero siempre lo revisa un humano
+  Viz2Code (descontinuada)
+     - Entrada: wireframe bien hecho o boceto a mano
+     - Salida: diseño formal en Sketch o web lista para desplegar
+     - Prometía código para conectar con el backend
+     - Usaba redes neuronales para entender el rol de cada componente
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 4 · 13:15–13:50. Dos casos opuestos: Zecoda acepta que la IA se equivoca y pone a una persona a revisar; Viz2Code prometía todo, hasta conectar con el backend, y desapareció. Esa idea de «humano en el circuito» vuelve en las conclusiones.
+
+--- DIAPOSITIVA 22 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  Estado de cada herramienta según el artículo
+  | Herramienta        | Entrada                 | Estado                               |
+  |--------------------|-------------------------|--------------------------------------|
+  | Teleport           | Componentes arrastrados | Activa; IA aún experimental          |
+  | Airbnb             | Boceto a mano           | Experimento sin continuidad pública  |
+  | Uizard / pix2code  | Boceto o captura        | Comercial; pix2code sin mantener     |
+  | Screenshot to Code | Captura de pantalla     | Tutorial open source                 |
+  | Sketch2Code        | Boceto a mano           | Alternativa de Microsoft, tres fases |
+  | Zecoda             | Diseño                  | Más promesa que herramienta          |
+  | Viz2Code           | Wireframe o boceto      | Parece haber muerto                  |
+  (Fuente: Ingeniería de Software (artículo de 2022))
+
+QUÉ DECIR:
+  Integrante 4 · 13:50–14:20. Resumen rápido: de siete herramientas, casi ninguna llegó a ser un producto estable. Esto prepara la siguiente diapositiva: ¿por qué se estancaron?
+
+--- DIAPOSITIVA 23 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  3 · EL ESTANCAMIENTO
+  Es más fácil crear una demo perfecta que un producto de verdad
+  Asegurar la usabilidad en un entorno real es otro cantar, aunque haya modelos cada vez más útiles, como DALL·E para generar imágenes del diseño.
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 4 · 14:20–14:45. Explicar la frase: en una demo se elige el boceto que funciona bien; en la vida real los bocetos son desordenados, hay casos raros y la interfaz tiene que ser usable.
+
+--- DIAPOSITIVA 24 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  Lo que falta: generar el modelo de la interfaz, no solo su código
+  Modelo de datos
+  Modelo de comportamiento
+  Modelo de despliegue
+  Modelo de interfaz
+  Sistema completo
+     - Generado conectando la interfaz con el resto de modelos
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 4 · 14:45–15:20. Esta es la propuesta del autor: no basta con generar el código de una pantalla suelta; hay que generar un modelo de la interfaz que se conecte con los datos, el comportamiento y el despliegue. La siguiente diapositiva lo explica con nuestro propio proyecto.
+
+--- DIAPOSITIVA 25 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  DESARROLLO DIRIGIDO POR MODELOS
+  La idea de Cabot, aplicada a JackSoft
+  Jordi Cabot, autor del artículo, investiga la ingeniería dirigida por modelos: describir el sistema con modelos y generar el código a partir de ellos.
+  Modelo de datos
+     - Nuestro modelo relacional de 36 tablas
+  Modelo de comportamiento
+     - Los casos de uso de cada subproceso
+  Modelo de interfaz
+     - Las pantallas y la navegación de cada app
+  Si la IA generara el modelo de interfaz, podría conectarlo con los otros dos y producir una app que funciona, no solo una pantalla bonita.
+  (Contexto agregado por el equipo)
+
+QUÉ DECIR:
+  Integrante 4 · 15:20–16:00. Ejemplo propio del equipo: en JackSoft ya tenemos un modelo de datos (las 36 tablas) y un modelo de comportamiento (los casos de uso). Lo que haría falta es el modelo de interfaz. Si la IA lo generara a partir de un boceto, podría conectarlo con los otros modelos y el resultado sería una aplicación funcional, no una maqueta. Dar paso al integrante 5.
+
+##############################################################################
+INTEGRANTE 5 · Actualización 2026, flujo práctico y conclusiones · minutos 16:00 a 20:00
+##############################################################################
+
+--- DIAPOSITIVA 26 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  4 · ACTUALIZACIÓN A 2026
+  La historia continuó después del artículo
+  Claude Design
+     - Lanzado el 17 de abril de 2026 por Anthropic Labs; convierte prompts e imágenes en prototipos y los pasa a Claude Code
+  Anima y Uizard
+     - Siguen vivos: Anima ofrece imagen a código y Uizard convierte capturas en mockups editables
+  Nuevos rivales
+     - Figma Make, v0, Lovable, Stitch y bolt.new compiten en el carril de describir y prototipar
+  (Fuentes externas al artículo: ver diapositiva final)
+
+QUÉ DECIR:
+  Integrante 5 · 16:00–16:40. El artículo es de 2022. Desde entonces llegaron los modelos multimodales y el panorama cambió: algunas herramientas del artículo siguen vivas y aparecieron muchas nuevas. La siguiente diapositiva detalla qué hace cada una.
+
+--- DIAPOSITIVA 27 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  4 · ACTUALIZACIÓN A 2026
+  Qué reciben y qué entregan en 2026
+  | Herramienta   | Empresa        | Entrada                                         | Salida                                             |
+  |---------------|----------------|-------------------------------------------------|----------------------------------------------------|
+  | Google Stitch | Google         | Texto, bocetos de pizarra, capturas, wireframes | Diseños de UI, código front-end, paso a Figma      |
+  | Claude Design | Anthropic Labs | Prompts e imágenes                              | Prototipos que pasan a Claude Code                 |
+  | Figma Make    | Figma          | Prompts dentro de Figma                         | Prototipos funcionales en Figma                    |
+  | v0            | Vercel         | Prompts                                         | Componentes React (Next.js, Tailwind)              |
+  | Lovable       | Lovable        | Prompts                                         | App completa: React, base de datos, login, hosting |
+  | bolt.new      | StackBlitz     | Prompts                                         | App web completa que corre en el navegador         |
+  (Fuentes externas al artículo: ver diapositiva final)
+
+QUÉ DECIR:
+  Integrante 5 · 16:40–17:35. Destacar Google Stitch: recibe exactamente lo que soñaban Airbnb y Sketch2Code, un boceto de pizarra, y lo convierte en diseño y código usando un modelo multimodal (Gemini 2.5 Pro). Explicar la diferencia: Stitch y Figma Make se quedan en el diseño y el prototipo; v0 genera componentes para programadores; Lovable y bolt.new intentan crear la app completa.
+
+--- DIAPOSITIVA 28 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  Un flujo práctico de boceto a código
+  1. Dibujar
+     - Boceto en papel o pizarra con los bloques de cada pantalla
+  2. Describir
+     - Subir la foto y explicar propósito, usuarios y reglas
+  3. Generar
+     - Obtener un prototipo o HTML/CSS inicial
+  4. Revisar
+     - Una persona corrige diseño, accesibilidad y código
+  5. Integrar
+     - Conectar con backend y probar con usuarios
+  Propuesta del expositor, no del artículo; encaja con la idea de Zecoda: la máquina genera, el humano revisa.
+
+QUÉ DECIR:
+  Integrante 5 · 17:35–18:25. Aplicarlo a JackSoft: dibujamos en papel la pantalla de pedidos de la App Cliente, subimos la foto a una herramienta como Stitch con una descripción («cliente de un restaurante pide comida a domicilio»), obtenemos un primer diseño y código, lo revisamos nosotros y luego lo conectamos con nuestra base de datos.
+
+--- DIAPOSITIVA 29 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  Límites y riesgos que hay que gestionar
+  Usabilidad
+     - Una demo bonita no asegura que funcione en un entorno real (Cabot)
+  Revisión humana
+     - El código lo genera la máquina, pero siempre debe revisarlo una persona (Zecoda)
+  Sostenibilidad
+     - Varias herramientas murieron o cambiaron de rumbo: depender de una es arriesgado
+  Para debatir: accesibilidad, mantenimiento del código generado y conexión con el backend.
+  (Fuente: Ingeniería de Software)
+
+QUÉ DECIR:
+  Integrante 5 · 18:25–19:10. Repasar los tres riesgos y lanzar la pregunta de debate al público si hay tiempo (máximo 20 segundos).
+
+--- DIAPOSITIVA 30 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  Conclusiones
+  El dolor es real
+     - Pasar del diseño al HTML y CSS consume tiempo y genera fricción entre equipos
+  La IA reconoce y compone
+     - Detecta componentes, lee texto y organiza el layout para producir una interfaz
+  Demo no es producto
+     - El reto está en la usabilidad real y en sostener la herramienta en el tiempo
+  Humano en el circuito
+     - La máquina genera, la persona revisa y decide
+
+QUÉ DECIR:
+  Integrante 5 · 19:10–20:00. Cerrar con las cuatro ideas. Frase final sugerida: «La IA ya puede pasar de un boceto a código; nuestro trabajo como desarrolladores es revisar, decidir y conectar ese código con el resto del sistema». Dar paso al Kahoot.
+
+##############################################################################
+CIERRE · Todo el grupo
+##############################################################################
+
+--- DIAPOSITIVA 31 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  HORA DEL KAHOOT
+  10 preguntas, 20 segundos cada una
+  1. Entra a kahoot.it desde el celular
+  2. Escribe el PIN: [PIN que muestra Kahoot]
+  3. Elige un apodo y responde rápido: la velocidad suma puntos
+
+QUÉ DECIR:
+  Todo el grupo · +10 min (fuera de los 20 minutos de exposición). Proyectar el PIN real de Kahoot en lugar del texto entre corchetes.
+
+--- DIAPOSITIVA 32 ----------------------------------------------------------
+CONTENIDO DE LA DIAPOSITIVA:
+  Fuentes y gracias
+     - Jordi Cabot, “De bocetos a código – Generación de interfaces de usuario a partir de mockups con IA”, Ingeniería de Software (25 enero 2022): ingenieriadesoftware.es
+     - Actualización 2026: reseñas y noticias sobre el lanzamiento de Claude Design (17 abril 2026), p. ej. tinycorestudios.uk y konigi.com
+     - Anima Blog, “Image to code” (julio 2026) y reseña de Uizard 2026 en aiindigo.com
+     - Kahoot: guía de importación desde hoja de cálculo, support.kahoot.com
+     - Contexto agregado: Google Developers Blog, “From idea to app: Introducing Stitch” (mayo 2025), developers.googleblog.com
+     - Comparativa 2026 de Claude Design, Stitch, v0, Lovable y Figma Make: mcp.directory
+  ¿Preguntas?
+
+QUÉ DECIR:
+  Mostrar al cierre. Las dos últimas fuentes respaldan las diapositivas de contexto 2026 agregadas.
+

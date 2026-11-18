@@ -17,6 +17,14 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-082 · 2026-11-17 · docs(drive) · se publican en Drive todos los vigentes
+- **Ruta:** `00_Contexto_Versiones/publicar_drive.py`, `00_Contexto_Versiones/ESTADO_ACTUAL.md`
+- **Mensaje:** `publicar_drive.py` ahora también publica `09_Diagrama_Despliegue` y `10_Diccionario_Datos` (mismos nombres de carpeta que usó Omar en 01_VIGENTE). Se publicó el manual v6 como vigente; la v5, con las imágenes en buena calidad, queda en 02_HISTORIAL. ESTADO_ACTUAL al día con el manual v6, el diccionario y el despliegue.
+
+### C-081 · 2026-11-17 · docs(drive) · se baja lo nuevo de Drive (manual v6, diccionario, despliegue, exposiciones)
+- **Ruta:** `10_Manual_Tecnico/Documentos_Word/v6_2026-11-17/`, `04_Modelado_DB/Diccionario_y_Tablas/Documento_Word/v1_2026-11-13/`, `05_Casos_de_Uso/Diagrama_Despliegue/v1_2026-11-10/` (repo propio de 05), `08_Entregables_e_Informes/Exposiciones/`, `09_Backups_y_Archivos_Zips/Drive_GoogleSheets/`
+- **Mensaje:** Se comparó Drive contra el repo por contenido (hash) y en el servidor por fecha y autor. Se bajó lo que el equipo subió o editó y el repo no tenía: (1) el manual vigente que Omar re-guardó el 17-nov, con el diccionario de datos v4.6 en lugar del ejemplo "IdVenta" y el diagrama de despliegue. El texto restante es igual a la v5, pero las imágenes quedaron recomprimidas: la mayor bajó de 11,7 a 2,3 MP (mismo problema del 12-nov, ver C-078). (2) `Diccionario_de_Datos_JackSoft_v4.6.docx` (Omar, 13-nov, carpeta 10_Diccionario_Datos de Drive, que no bajó al Drive local). (3) `Diagrama De Despliegue.jpg` (Omar, 10-nov, 01_VIGENTE/09_Diagrama_Despliegue). (4) Las exposiciones "Bocetos a Código" y "Topologías de Redes" de 03_Exposiciones. (5) Una exportación del Google Sheets "Tablero Kanban + Matriz HU (Agosto 21))" que mega2808 editó el 21-oct; es la línea vieja del tablero (la vigente es la v7), por eso va a backups.
+
 ### C-080 · 2026-11-13 · fix(diagrama-er) · v9 → v10
 - **Ruta:** `04_Modelado_DB/Diagramas/v10_2026-11-13/` — `LaCocaDiagramDB.svg`
 - **Mensaje:** Diagrama ER de bd.uml v4.6 (39 tablas, 53 relaciones), generado por `construir_visor.py` (regla de oro).

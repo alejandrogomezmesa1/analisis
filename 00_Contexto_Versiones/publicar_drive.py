@@ -36,6 +36,8 @@ DOCS = [
     ("06_Modelo_BD",              "04_Modelado_DB/Modelo_Relacional"),
     ("07_Diagrama_ER",            "04_Modelado_DB/Diagramas"),
     ("08_Manual_Tecnico",         "10_Manual_Tecnico/Documentos_Word"),
+    ("09_Diagrama_Despliegue",    "05_Casos_de_Uso/Diagrama_Despliegue"),
+    ("10_Diccionario_Datos",      "04_Modelado_DB/Diccionario_y_Tablas/Documento_Word"),
 ]
 # Sin carpetas de versión en el repo (sistema generado): solo van a 01_VIGENTE.
 SIN_VERSION = [
@@ -177,7 +179,8 @@ def escribir_leeme():
 ## Documentos (en el orden en que se actualizan: la ficha manda)
 
 1. Ficha técnica → 2. Story Mapping / Kanban → 3. Documentación de casos de uso → 4. Diagramas de casos de uso →
-5. Arquitectura C4 → 6. Modelo de base de datos → 7. Diagrama ER → 8. Manual técnico
+5. Arquitectura C4 → 6. Modelo de base de datos → 7. Diagrama ER → 8. Manual técnico →
+9. Diagrama de despliegue → 10. Diccionario de datos
 
 ## Reglas del versionado
 
