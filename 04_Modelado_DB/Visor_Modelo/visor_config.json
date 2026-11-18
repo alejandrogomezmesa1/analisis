@@ -95,8 +95,8 @@
   "geolocalizacion_domiciliarios": "Monitoreo y rutas",
   "incidencias": "Incidencias",
   "suspensiones_entrega": "Suscripciones (pausas)",
-  "permisos": "Roles",
-  "rol_permisos": "Roles"
+  "permisos": "Permisos",
+  "rol_permisos": "Permisos"
  },
  "campos_eliminados": {
   "usuarios": [

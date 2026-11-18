@@ -40,7 +40,7 @@ graph TD
 | # | Documento | Dónde | Qué revisar | Automático |
 |---|---|---|---|---|
 | 1 | Ficha técnica | `06_.../Fichas_Tecnicas/` | Objetivos, alcance web y mobile | — |
-| 2 | Story Mapping | Tablero Kanban, hoja *Story Mapping* | Una columna por subproceso (historia + puntos). Si cambia el número de columnas, ampliar el rango `D:AU…` de las fórmulas del Backlog y de `B5`, `B6` y `B7` | Backlog, Tablero Kanban y Avance |
+| 2 | Story Mapping | Tablero Kanban, hoja *Story Mapping* | Una columna por subproceso (historia + puntos). Si cambia el número de columnas, ampliar el rango `D:AY…` de las fórmulas del Backlog y de `B5`, `B6` y `B7` | Backlog, Tablero Kanban y Avance |
 | 3 | Matriz HU | Tablero Kanban, hoja *Formato Matriz HU* | **No se actualiza sola**: HU y criterios por subproceso. No renumerar códigos existentes | Resumen automático (columnas R–T) |
 | 4 | Modelo relacional | `04_Modelado_DB/Modelo_Relacional/` | Tablas, FK, TableGroups (1 por subproceso), Records | — |
 | 5 | Diagrama ER | `04_Modelado_DB/Diagramas/` | Regenerar desde el `bd.uml` vigente | — |
@@ -55,4 +55,6 @@ graph TD
 **No se afectan por cambios de subprocesos:** investigación (01), mapa de procesos de negocio (03), ensayos y plantilla de informe (08), mockups existentes (07; los nuevos módulos se diseñan en Figma).
 
 ## Último cambio aplicado
-**2026-11-02 (commits C-041 a C-050):** sin Empleados, Permisos ni Categoría de proveedor; con Configuraciones del sistema y Menú. Detalle en [[CHANGELOG]].
+**2026-11-17 (commits C-083 a C-089):** vuelve el subproceso Permisos, antes de Roles (bd.uml v4.6, acuerdo G2: matriz módulo × acción). Ficha v10, Tablero Kanban v8 (Story Mapping y Matriz HU), casos de uso (24 subprocesos, draw.io), C4 v5, CU Word v5, manual v7 y visor. Detalle en [[CHANGELOG]].
+
+**2026-11-02 (commits C-041 a C-050):** sin Empleados, Permisos ni Categoría de proveedor; con Configuraciones del sistema y Menú.

@@ -17,6 +17,34 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-089 · 2026-11-17 · feat(visor-modelo) · Permisos como proceso propio en el visor
+- **Ruta:** `04_Modelado_DB/Visor_Modelo/visor_config.json`, `salida/modelo_la_coca.html`, `Modelo_Relacional/v12_2026-11-13/Visor_Interactivo/`
+- **Mensaje:** `permisos` y `rol_permisos` quedan en el subproceso Permisos (antes Roles). Visor regenerado con `construir_visor.py` y republicado en el mismo enlace. El bd.uml no cambia: la nota de `roles` que aún dice "Asignar permisos al rol" se corrige en la v4.7.
+
+### C-088 · 2026-11-17 · fix(manual-tecnico) · v6 → v7 (archivo "v2.4")
+- **Ruta:** `10_Manual_Tecnico/Documentos_Word/v7_2026-11-17/` — `Manual_Tecnico_v2.4_Jacksoft.docx`
+- **Mensaje:** Parte de la v6 de Omar (diccionario v4.6 y despliegue) y recupera las imágenes originales de la v5. Agrega Permisos antes de Roles: mockup (pendiente en Figma), diagrama de casos de uso y fichas HU_246 a HU_253 (237 fichas). C4 v5 en contenedores, componentes y clases. Portada "Versión 2.4" y fila nueva en el control de cambios.
+
+### C-087 · 2026-11-17 · fix(documentacion-cu) · v4 → v5 (repo 05)
+- **Ruta:** `05_Casos_de_Uso/Especificaciones/Documentacion_Word/v5_2026-11-17/`
+- **Mensaje:** Sección "Permisos:" antes de Roles con 8 fichas HU_246 a HU_253 (253 fichas): listar, ver detalle, asignar, consultar los del rol, quitar, cambiar estado, buscar/filtrar y reporte por rol.
+
+### C-086 · 2026-11-17 · fix(arquitectura-c4) · v4 → v5 (repo 05)
+- **Ruta:** `05_Casos_de_Uso/Arquitectura_C4/v5_2026-11-17/`
+- **Mensaje:** Nivel 2: la BD es bd.uml v4.6 (39 tablas) y la web arma menú y botones con los permisos. Nivel 3: el componente de acceso cubre la matriz módulo × acción y envía `user.permissions`. Nivel 4 regenerado desde bd.uml v4.6: 39 clases con Permiso y RolPermiso, 53 relaciones. PNG nuevos de N2, N3 y N4.
+
+### C-085 · 2026-11-17 · feat(casos-uso) · vuelve el subproceso Permisos (repo 05)
+- **Ruta:** `05_Casos_de_Uso/scripts/`, `Diagramas_PUML|SVG|PNG/PERMISOS.*`, `Diagramas_DrawIO/Casos_de_usos.drawio`, MD y visor
+- **Mensaje:** Permisos entra en la lista canónica antes de Roles (Configuración y Seguridad, 8 casos de uso): 24 subprocesos, 163 CU. Carril nuevo en el draw.io.
+
+### C-084 · 2026-11-17 · fix(tablero-kanban) · v7 → v8
+- **Ruta:** `06_Gestion_de_Proyecto_Scrum/Historias_de_Usuario_y_Kanban/Tablero_Kanban/v8_2026-11-17/` — `Tablero Kanban 17_11 v8.xlsx`
+- **Mensaje:** Story Mapping: columna PERMISOS (D:E) antes de ROLES, 8 historias y 22 puntos; las columnas siguientes se corren 2 (hasta AY) y las fórmulas del Backlog, B5:B7 y las filas 19 y 20 se ampliaron a `D:AY` (24 subprocesos, 165 historias, 510 puntos). Matriz HU: bloque "01.3 Gestión de permisos" (HU01.3_01 a HU01.3_08, 21 criterios) antes de Usuarios. Recalcula al abrir en Excel.
+
+### C-083 · 2026-11-17 · fix(ficha-proyecto) · v9 → v10
+- **Ruta:** `06_Gestion_de_Proyecto_Scrum/Fichas_Tecnicas/v10_2026-11-17/` — `Ficha_Jacksoft_CF_v10.docx`
+- **Mensaje:** Vuelve el subproceso de permisos (antes de roles): el rol se define con los permisos que se le asignan, y el acceso web y móvil depende del rol y sus permisos.
+
 ### C-082 · 2026-11-17 · docs(drive) · se publican en Drive todos los vigentes
 - **Ruta:** `00_Contexto_Versiones/publicar_drive.py`, `00_Contexto_Versiones/ESTADO_ACTUAL.md`
 - **Mensaje:** `publicar_drive.py` ahora también publica `09_Diagrama_Despliegue` y `10_Diccionario_Datos` (mismos nombres de carpeta que usó Omar en 01_VIGENTE). Se publicó el manual v6 como vigente; la v5, con las imágenes en buena calidad, queda en 02_HISTORIAL. ESTADO_ACTUAL al día con el manual v6, el diccionario y el despliegue.
