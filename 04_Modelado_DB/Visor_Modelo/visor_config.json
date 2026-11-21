@@ -98,7 +98,9 @@
   "rol_permisos": "Permisos",
   "movimientos_insumos": "Insumos",
   "identidades_externas": "Acceso",
-  "codigos_acceso": "Acceso"
+  "codigos_acceso": "Acceso",
+  "faltantes_insumos": "Producción (orden)",
+  "dispositivos_push": "Acceso"
  },
  "campos_eliminados": {
   "usuarios": [

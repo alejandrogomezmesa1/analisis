@@ -67,7 +67,8 @@ graph TD
 ## 🗃️ Archivos de Esquema y Diagramas
 
 - **Esquemas DBML (`04_Modelado_DB/Modelo_Relacional/vN_fecha/`):**
-  - `v5_2026-11-03/bd.uml`: ⭐ Versión vigente, DBML v3.7 (3 de noviembre, 41 tablas, 68 relaciones): ajuste con el frontend.
+  - `v14_2026-11-20/bd.uml`: ⭐ Versión vigente, DBML v4.8 (20 de noviembre, 43 tablas, 59 relaciones): conciliación con el frontend ([Cambios_v4.8](../Modelo_Relacional/v14_2026-11-20/Cambios_v4.8.md)).
+  - `v5_2026-11-03/bd.uml`: DBML v3.7 (3 de noviembre, 41 tablas, 68 relaciones): ajuste con el frontend.
   - `v4_2026-11-02/bd.uml`: DBML v3.6 (2 de noviembre, 36 tablas, 56 relaciones, 23 subprocesos). Sin `empleados`; nuevas [[DB_Tabla_Configuraciones_Sistema]] y menús en [[DB_Tablas_Menu]].
   - `v3_2026-10-30/bd.uml`: DBML v3.5 (30 de octubre, 35 tablas, 53 relaciones, 22 TableGroups).
   - `v1_2026-08-13/jacksoft_modelo_relacional_v1.dbml`: Versión inicial (13 de agosto, 33 tablas).

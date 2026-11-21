@@ -30,7 +30,7 @@ Revisión de `Documentos_Word/v6_2026-11-17/Manual_Tecnico_v2.3_Jacksoft.docx`, 
 | 5 | Prototipo (React) | Vacío: tiene solo el texto de la plantilla. Faltan pantallazos o el enlace del frontend y la página de aterrizaje. | Frontend de Omar |
 | 6 | Seguridad (5 subsecciones) | Vacías: encriptación, tokens, OAuth 2, CSP/XSS, inyección SQL. Ya hay decisiones para llenarlas: bloqueo por intentos en el backend (G1), ingreso con Google y Apple por OpenID Connect + PKCE (G3-Q11 a Q13), código por WhatsApp (G4). | Chat G1, G3, G4 |
 | 7 | Requerimientos mínimos (hardware, software, configuraciones) | Vacíos. | Diagrama de despliegue, stack del frontend y backend |
-| 8 | Mockups de Configuraciones del sistema y Menú (✅ Permisos agregado en la v8) | Siguen con "Pendiente: agregar la vista del mockup en Figma". | Figma |
+| 8 | Mockups de Configuraciones del sistema y Menú (✅ Permisos agregado en la v8; en la v11 se rehízo como "Editar rol" con la matriz, porque Permisos va dentro de Roles) | Siguen con "Pendiente: agregar la vista del mockup en Figma". | Figma |
 | 9 | Diagrama de despliegue | Solo está la imagen, sin descripción ni figura numerada. | — |
 | 10 | Bibliografía | Solo el texto de la plantilla ("<Colocar la referencia…>"). | — |
 | 11 | Anexos › Actas de reunión | Vacío. | — |

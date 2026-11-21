@@ -7,10 +7,10 @@
 **¿Cómo funciona la logística física de las cocas para el negocio?**
 El núcleo logístico se basa en un sistema de rotación de dos juegos de cocas por cliente (para no depender de desechables).
 * Cuando se entrega el almuerzo del día en un juego lleno, el domiciliario debe recoger inmediatamente el juego vacío del día anterior.
-* Si el cliente es nuevo y no tiene sus propios recipientes, el sistema le realiza un **cobro único y obligatorio de $70.000 COP** en su primera factura. En renovaciones futuras, este cobro no se vuelve a aplicar.
+* Si el cliente es nuevo y no tiene sus propios recipientes, el sistema le realiza un **cobro único y obligatorio de $80.000 COP** en su primera factura. En renovaciones futuras, este cobro no se vuelve a aplicar.
 
 **¿Cómo gestiona la base de datos esta rotación e incidencias de cocas?**
-* **Cobro Inicial:** Se gestiona en la tabla `suscripciones` mediante el campo `cobro_cocas` ($70.000), sumándose al `valor_total`.
+* **Cobro Inicial:** Se gestiona en la tabla `suscripciones` mediante el campo `cobro_cocas` ($80.000), sumándose al `valor_total`.
 * **Rotación Diaria:** En la tabla `ruta_clientes` (que representa las paradas del domiciliario) existen los campos `cocas_entregadas` y `cocas_recogidas` para llevar el inventario físico en cada visita.
 * **Incidencias:** Si un cliente daña una coca, la devuelve sucia o no la entrega, el domiciliario crea un reporte inmediato desde su App. Esto viaja a la tabla `incidencias`, levantando un ticket al administrador para cobrar la reposición o tomar medidas.
 

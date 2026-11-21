@@ -79,13 +79,13 @@ Estudios de diagnóstico operativo, metodología de marco lógico y referentes c
 
 ### 2. ⚖️ [[00_MOC_Reglas_Negocio|02. Reglas de Negocio (RN)]]
 Políticas, restricciones y comportamiento lógico del sistema de información.
-* [[RN_Logistica_Cocas]] — Cobro de $70.000 COP, rotación de 2 juegos de recipientes e incidencias.
+* [[RN_Logistica_Cocas]] — Cobro de $80.000 COP, rotación de 2 juegos de recipientes e incidencias.
 * [[RN_Festivos_y_Agenda]] — Días no hábiles, descuento automático y no desplazamiento de fechas.
 * [[RN_Limite_Suscripcion_Semanal]] — Cierre semanal de suscripciones (domingo 5:00 PM por defecto), gracia de pago y solicitudes fuera del límite.
 * [[RN_Suspensiones_Voluntarias]] — Notificaciones de ausencia, pérdida asumida por cliente, sin devoluciones.
 * [[RN_Domiciliarios_y_Rutas]] — Geofencing por zonas, paradas optimizadas y rastreo GPS en vivo.
 * [[RN_Suscripciones_y_Menus]] — Planes (Semanal, Quincenal, Mensual), menús personalizados (+$10.000 COP).
-* [[RN_Pagos_y_Comprobantes]] — Validación manual de transferencias (Nequi/Bancolombia) y estado Pendiente/Activa.
+* [[RN_Pagos_y_Comprobantes]] — Validación manual de transferencias (solo Bancolombia) y estado Pendiente/Activa.
 * [[RN_QA_y_Auditoria]] — Trazabilidad, borrado lógico con campo `estado` e integridad relacional.
 * [[Documentacion_Reglas_Negocio_QA]] — Compendio y matriz de auditoría de reglas de negocio.
 
@@ -115,12 +115,12 @@ Diseño relacional, tablas, tipos de datos, enums y claves foráneas.
 * [[DB_Tablas_Usuarios_Permisos]] — Control de acceso por roles (RBAC).
 * [[DB_Tablas_Inventario_Compras]] — Insumos, proveedores, compras y fichas técnicas.
 * **Modelo relacional (`Modelo_Relacional/`):**
-  * `v5_2026-11-03/bd.uml` (⭐ vigente, DBML v3.7: 41 tablas, 68 relaciones; alineado con el frontend).
+  * `v15_2026-11-20/bd.uml` (⭐ vigente, DBML v4.8: 43 tablas, 59 relaciones; conciliado con el frontend el 2026-11-20; la v15 solo corrige la nota de incidencias: "Responder incidencia"). `v14_2026-11-20/bd.uml`: misma v4.8 con la nota anterior. `v5_2026-11-03/bd.uml`: DBML v3.7 (histórico).
   * `v4_2026-11-02/bd.uml` (DBML v3.6: 36 tablas, 56 relaciones; sin `empleados`, con `configuraciones_sistema` e `historial_configuraciones`).
   * `v3_2026-10-30/bd.uml` (DBML v3.5: 35 tablas, 53 relaciones).
   * `v2_2026-08-24/jacksoft_modelo_relacional_v2.dbml` (33 tablas, vigente hasta el 30 oct).
   * `v1_2026-08-13/jacksoft_modelo_relacional_v1.dbml` (versión inicial).
-* **Diagramas Relacionales:** `Diagramas/v3_2026-11-03/LaCocaDiagramDB.svg` (⭐ generado desde bd.uml v3.7) · `v2_2026-11-02/` (v3.6) · `v1_2026-08-21/` (37 tablas, histórico).
+* **Diagramas Relacionales:** `Diagramas/v12_2026-11-20/LaCocaDiagramDB.svg` (⭐ generado desde bd.uml v4.8) · `v3_2026-11-03/` (v3.7) · `v2_2026-11-02/` (v3.6) · `v1_2026-08-21/` (37 tablas, histórico).
 
 ---
 
@@ -135,7 +135,8 @@ Especificación funcional detallada por macro-procesos del sistema y arquitectur
 * [[CU_07_Analitica_y_Metricas]] — Dashboard gerencial, KPIs operativos y reporte financiero.
 * **Documentación Detallada v3:** `05_Casos_de_Uso/casos_de_uso_v3/` (243 casos de uso documentados por subproceso).
 * **Documentos Oficiales (`Especificaciones/Documentacion_Word/`):**
-  * `v4_2026-11-03/Documentacion_Casos_de_Uso_JackSoft.docx` (⭐ vigente, 245 fichas: sin menú personalizado; con Gestionar suscripciones con pago vencido y Publicar menú semanal).
+  * `v9_2026-11-20/Documentacion_Casos_de_Uso_JackSoft.docx` (⭐ vigente, 250 fichas: configuraciones fijas, HU_256 a HU_259, HU_218 "Responder incidencia" y Permisos en Roles). Versiones v5 a v8 en el [[CHANGELOG]].
+  * `v4_2026-11-03/Documentacion_Casos_de_Uso_JackSoft.docx` (245 fichas: sin menú personalizado; con Gestionar suscripciones con pago vencido y Publicar menú semanal).
   * `v3_2026-11-02/Documentacion_Casos_de_Uso_JackSoft.docx` ( 248 fichas renumeradas HU_001–HU_248 en orden del documento: sin Permisos, Asignar permisos ni Empleados; con Configuraciones del sistema, Menú y Aprobar solicitud fuera de límite).
   * `v2_2026-09-14/Documentacion_Casos_de_Uso_JackSoft.docx` (243 fichas).
   * `v1_2026-08-31/Documentacion_Casos_de_Uso_JackSoft_31ago.docx` (versión histórica).
@@ -147,7 +148,8 @@ Especificación funcional detallada por macro-procesos del sistema y arquitectur
 * **Visor Interactivo:** Aplicativo web independiente (`index.html` y `mapa_interactivo.html`; el SVG multifase anterior quedó obsoleto en `_Historial/Obsoletos/`).
 * **Scripts de Generación:** Automatización en Python (`generar_casos_uso.py`, `generar_svg_casos_uso.py`, `generar_mapa_interactivo.py`, `generar_svg_interactivo_multifase.py`).
 * **🏛️ Arquitectura de Software C4 (Niveles 1 al 4):** `05_Casos_de_Uso/Arquitectura_C4/`
-  * `v4_2026-11-03/` (⭐ vigente): alineado con `bd.uml` v3.7.
+  * `v7_2026-11-20/` (⭐ vigente): alineado con `bd.uml` v4.8 (web push, app móvil pendiente). Versiones v5 y v6 en el [[CHANGELOG]].
+  * `v4_2026-11-03/`: alineado con `bd.uml` v3.7.
   * `v3_2026-11-02/`: alineado con `bd.uml` v3.6 (módulos 1. Acceso y configuración y 5. Clientes, suscripciones y menú).
   * `v2_2026-10-30/`: alineado con `bd.uml` v3.5.
   * `v1_2026-09-14/`: primera versión basada en el modelo V2 (`.png`, `.svg`, `.puml`).
@@ -161,13 +163,15 @@ Ficha técnica del proyecto SENA ADSO, roadmap, matriz de historias de usuario y
 * [[Scrum_Artefactos_y_Sprints]] — Roadmap por Sprints (01 al 11) de Requisitos a Implantación.
 * [[Matriz_Historias_de_Usuario]] — Consolidado de Historias de Usuario (HU), Story Mapping y Kanban.
 * **Fichas Técnicas (`Fichas_Tecnicas/vN_fecha/`):**
-  * `v9_2026-11-03/Ficha_Jacksoft_CF_v9.docx` (⭐ vigente: precios 75/150/300 mil, kit 80 mil, sin menú personalizado, corte sábado 12:00 m e inicio sin pago).
+  * `v12_2026-11-20/Ficha_Jacksoft_CF_v12.docx` (⭐ vigente: app móvil pendiente, cupo y proteína, configuraciones fijas). Versiones v10 y v11 en el [[CHANGELOG]].
+  * `v9_2026-11-03/Ficha_Jacksoft_CF_v9.docx` ( precios 75/150/300 mil, kit 80 mil, sin menú personalizado, corte sábado 12:00 m e inicio sin pago).
   * `v8_2026-11-02/Ficha_Jacksoft_CF_v8_alcance.docx` ( sin Empleados, Permisos ni Categoría de proveedor; con Configuraciones del sistema y Menú).
   * `v7_2026-10-30/Ficha_3agosto Jacksoft CF_v2_festivos.docx` (corrige festivos según RN-02).
   * `v6_2026-09-13/Ficha_3agosto Jacksoft CF.docx` y `.pdf` (versión con VoBo de Requisitos del instructor Newton Pomare, 10 de septiembre).
   * Historial: `v1` 16 jun (formato inicial), `v2` 24 jul, `v3` 30 jul, `v4` 3 ago, `v5` 14 ago.
 * **Hojas de Cálculo y Tableros (`Historias_de_Usuario_y_Kanban/`):**
-  * `Tablero_Kanban/v7_2026-11-03/Tablero Kanban 03_11 v7.xlsx` (⭐ vigente: reglas del 3-nov y responsables por módulo).
+  * `Tablero_Kanban/v12_2026-11-20/Tablero Kanban 20_11 v12.xlsx` (⭐ vigente: 24 subprocesos, 159 historias, 515 puntos; responsables reasignados por el equipo, "Responder incidencia" y Permisos en Roles). Versiones v8 a v11 en el [[CHANGELOG]].
+  * `Tablero_Kanban/v7_2026-11-03/Tablero Kanban 03_11 v7.xlsx` ( reglas del 3-nov y responsables por módulo).
   * `Tablero_Kanban/v6_2026-11-03/Tablero Kanban 03_11.xlsx` ( con responsable por módulo y carga equitativa; 23 subprocesos, 157 historias, hasta 12 por subproceso; Matriz HU con 194 HU renumeradas).
   * `Tablero_Kanban/v4_2026-10-23/Tablero Kanban 13_09.xlsx` (edición del 23 oct del tablero 13_09).
   * `Tablero_Kanban/v3_2026-09-13/` (Story Mapping v03 y 186 HU) · `v2_2026-08-21/` (`.xlsx`, `.numbers`, `.csv`) · `v1_2026-08-10/`.
@@ -208,7 +212,8 @@ Documentos maestros del Manual Técnico oficial de JackSoft, bitácoras de cambi
 * **Documentos Maestros Word (`Documentos_Word/vN_fecha/`):**
   * `v1_2026-09-23/Manual_Tecnico_v1_Jacksoft.docx` (33.1 MB — versión evaluada con comentarios C4, C9–C14, C40, C41).
   * `v2_2026-09-25/Manual_Tecnico_v2_septiembre_25.docx` (16.7 MB — versión con 22 diagramas rehechos en Draw.io y figuras numeradas).
-  * `v5_2026-11-03/Manual_Tecnico_v2.3_Jacksoft.docx` (⭐ vigente: alineado con bd.uml v3.7).
+  * `v11_2026-11-20/Manual_Tecnico_v2.8_Jacksoft.docx` (⭐ vigente: modelo v4.8, diccionario de 43 tablas, C4 v7, 234 fichas, "Responder incidencia" y Permisos en Roles). Versiones v6 a v10 en el [[CHANGELOG]].
+  * `v5_2026-11-03/Manual_Tecnico_v2.3_Jacksoft.docx` (alineado con bd.uml v3.7).
   * `v4_2026-11-02/Manual_Tecnico_v2.2_Jacksoft.docx` ( cambio de alcance aplicado — mockups, diagramas de CU, C4 y fichas).
   * `v3_2026-09-25/Manual_Tecnico_v2.1_Jacksoft.docx` (16.7 MB — antes Fuente de verdad con depuración de fichas de casos de uso y armonización con las reglas de negocio).
 * **Auditoría y Control de Calidad (`Auditoria_y_Control_Calidad/`):**

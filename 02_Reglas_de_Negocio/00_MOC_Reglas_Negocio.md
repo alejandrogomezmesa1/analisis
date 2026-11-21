@@ -48,7 +48,7 @@ graph TD
 
 ## 📋 Catálogo de Reglas de Negocio
 
-1. **[[RN_Logistica_Cocas]]**: Política de rotación de recipientes reutilizables, cobro único inicial de $70.000 COP, control de cocas entregadas/recogidas y reporte de incidencias por rotura o extravío.
+1. **[[RN_Logistica_Cocas]]**: Política de rotación de recipientes reutilizables, cobro único inicial de $80.000 COP, control de cocas entregadas/recogidas y reporte de incidencias por rotura o extravío.
 2. **[[RN_Festivos_y_Agenda]]**: Gestión del calendario operativo, días no laborables, liquidación proporcional con descuento automático de festivos y principio de no desplazamiento del vencimiento semanal.
 3. **[[RN_Suspensiones_Voluntarias]]**: Tratamiento de ausencias notificadas por el cliente, supresión de orden de producción sin devoluciones de dinero ni extensión de vigencia.
 4. **[[RN_Domiciliarios_y_Rutas]]**: Geofencing por polígonos, asignación de rutas por zona de cobertura, rastreo GPS en tiempo real y flujo de entregas.

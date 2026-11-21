@@ -40,3 +40,10 @@ Actualizada el 2026-11-03 (bd.uml v3.7). Reemplaza la versión del 2026-11-02, q
 
 ## Datos ([[DB_Tabla_Suscripciones]])
 `fecha_solicitud`, `inicio_sin_pago`, `pago_pendiente`, `fecha_limite_pago`.
+
+## Cupo semanal y lista de espera (2026-11-20, bd.uml v4.8)
+1. La capacidad de la cocina se mide en **suscripciones nuevas por semana** (clave `cupo_suscripciones_nuevas_semana`, 40 por defecto).
+2. Si la semana de inicio ya llenó el cupo, la **venta nueva** queda en estado `en_espera`, **sin pago**, y no bloquea la venta.
+3. El **administrador decide**: asigna una semana con cupo (caso de uso *Gestionar lista de espera por cupo*); la suscripción pasa a `pendiente_pago` y el cliente paga entonces.
+4. Las **renovaciones y los reingresos** no ocupan cupo ni entran en la lista de espera.
+5. El dashboard muestra la proyección de demanda frente al cupo.

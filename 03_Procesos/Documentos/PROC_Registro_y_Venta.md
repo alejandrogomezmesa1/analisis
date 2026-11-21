@@ -43,7 +43,7 @@ flowchart TD
     H --> J{"¿Es Venta Nueva y no posee cocas?"}
     I --> J
 
-    J -- Sí --> K["Añade cobro único de cocas:\n$70.000 COP"]
+    J -- Sí --> K["Añade cobro único de cocas:\n$80.000 COP"]
     J -- No --> L["Exonera cobro de cocas\n(Renovación / Reingreso)"]
 
     K --> M["Sistema calcula Total A Pagar\ny muestra datos de transferencia bancaria"]
@@ -70,6 +70,6 @@ flowchart TD
 ---
 
 ## 🔗 Vinculación con Reglas y Base de Datos
-* Aplicación estricta de [[RN_Logistica_Cocas]] ($70.000 COP) y [[RN_Suscripciones_y_Menus]] (+$10.000 COP recargo).
+* Aplicación estricta de [[RN_Logistica_Cocas]] ($80.000 COP) y [[RN_Suscripciones_y_Menus]] (+$10.000 COP por plan si el cliente elige preferencia de proteína).
 * Verificación geográfica mediante polígonos descritos en [[RN_Domiciliarios_y_Rutas]].
 * Mapeo de la entidad en [[DB_Tabla_Suscripciones]].

@@ -84,3 +84,6 @@ erDiagram
 
 ## 🔄 Ajuste con el frontend 2026-11-03 (bd.uml v3.7)
 41 tablas y 68 relaciones. Nuevas: `consentimientos` (Ley 1581), `tokens_restablecimiento`, `proveedor_categorias` (reemplaza a `insumo_proveedores`), `menus_semana`, `menu_alternativas` y `direccion_dias`. La producción se registra por líneas (`producto_terminado`). Diagrama: `04_Modelado_DB/Diagramas/v3_2026-11-03/LaCocaDiagramDB.svg`.
+
+## 🔄 Conciliación con el frontend 2026-11-20 (bd.uml v4.8)
+43 tablas y 59 relaciones. Nuevas: `faltantes_insumos` (la cocina reporta faltantes desde la orden) y `dispositivos_push` (notificaciones web push). `clientes.preferencia_proteina` y `menu_items.proteina` (solo pollo o solo cerdo, +$10.000 por plan). `estado_suscripcion` suma `en_espera` (cupo semanal de ventas nuevas). Configuraciones fijas y codificadas. Ruta = zona + domiciliario. Detalle: [Cambios_v4.8](../Modelo_Relacional/v14_2026-11-20/Cambios_v4.8.md). Diagrama: `04_Modelado_DB/Diagramas/v12_2026-11-20/LaCocaDiagramDB.svg`. Diccionario: `Documento_Word/v3_2026-11-20/Diccionario_de_Datos_JackSoft_v4.8.docx`.

@@ -2,10 +2,28 @@
  "_LEEME": "Una entrada por versión del modelo, la más reciente primero. Se agrega una entrada en cada revisión o corrección (regla del proyecto). 'drive' es la carpeta de 02_HISTORIAL/06_Modelo_BD en Drive. 'estado': vigente | anterior | en_revision.",
  "versiones": [
   {
+   "version": "4.8",
+   "drive": "v14_2026-11-20",
+   "fecha": "2026-11-20",
+   "estado": "vigente",
+   "titulo": "Conciliación con el frontend",
+   "origen": "Grill de Alejandro del 20-nov (cuestionarios interactivos) para corregir las discrepancias entre la documentación y el frontend.",
+   "cambios": [
+    "Cupo semanal de ventas nuevas: la clave capacidad_maxima_diaria pasa a cupo_suscripciones_nuevas_semana y estado_suscripcion suma en_espera (lista de espera sin pago; renovaciones y reingresos no ocupan cupo).",
+    "Preferencia de proteína (solo pollo o solo cerdo): enum preferencia_proteina, clientes.preferencia_proteina y menu_items.proteina; recargo_preferencia_proteina ($10.000 por plan) se suma a valor_plan.",
+    "Configuraciones fijas y codificadas: el administrador no crea claves; nueva clave costo_diario_domiciliario para el costo-beneficio por zona.",
+    "Nueva tabla faltantes_insumos: la cocina reporta faltantes desde la orden del día.",
+    "La orden de producción queda anulada si todas sus líneas están anuladas; el producto terminado se registra al marcar la línea como hecha.",
+    "Rutas = zona de cobertura activa + domiciliario: las rutas del día se generan solas.",
+    "Nueva tabla dispositivos_push para las notificaciones web push."
+   ],
+   "resultado": "43 tablas · 59 relaciones"
+  },
+  {
    "version": "4.7",
    "drive": "v13_2026-11-18",
    "fecha": "2026-11-18",
-   "estado": "vigente",
+   "estado": "anterior",
    "titulo": "Acuerdos G1, G2, G3 y G4 con Claude Omar",
    "origen": "G1 (14-nov), G2 y G3 (17-nov) y G4 (17-nov, modelado delegado por Omar) confirmados en el chat; foto del menú (#029/#031). Decisiones de Alejandro y Omar en cuestionarios interactivos.",
    "cambios": [

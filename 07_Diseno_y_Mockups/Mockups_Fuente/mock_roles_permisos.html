@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Editar rol</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1024px;height:482px;overflow:hidden}
+body{zoom:2;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:#1f1a17;background:#f8f4ef;display:flex}
+.side{width:216px;height:482px;background:#2a211d;color:#f3ebe4;padding:12px 8px;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;gap:8px;padding:2px 4px 12px;border-bottom:1px solid #3b302a}
+.logo{width:30px;height:30px;border-radius:7px;background:#e8601c;color:#fff;font-size:7px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.brand b{font-size:11.5px}.brand b span{color:#f08a3c}.brand small{display:block;font-size:7.5px;color:#cbbfb5;margin-top:2px}
+.nav{margin-top:10px;font-size:9.5px}
+.it{padding:7px 8px;font-weight:700;display:flex;justify-content:space-between}
+.grp{background:#352a24;border-radius:7px;margin:4px 0 6px;padding-bottom:4px}
+.sub{padding:5px 8px 5px 28px;color:#d9cec5;font-weight:400}
+.sub.on{background:#7b3a14;color:#fff;font-weight:700;border-radius:5px;margin:0 3px;padding-left:25px;position:relative}
+.sub.on:before{content:"";position:absolute;left:13px;top:9px;width:4px;height:4px;border-radius:2px;background:#f08a3c}
+.car{color:#bdb0a6;font-size:7px}
+.foot{margin-top:auto;display:flex;justify-content:space-between;font-size:7px;color:#bdb0a6;padding:0 4px}
+.main{flex:1;display:flex;flex-direction:column}
+.top{height:40px;border-bottom:1px solid #e9e0d7;display:flex;align-items:center;padding:0 12px;gap:12px}
+.crumb{font-size:7.5px;color:#6b625b}.crumb b{display:block;font-size:10.5px;color:#1f1a17;margin-top:1px}
+.search{width:194px;height:24px;border:1px solid #ddd3ca;border-radius:6px;background:#fff;font-size:8.5px;color:#9a8f86;display:flex;align-items:center;padding:0 9px}
+.pill{border:1px solid #f2b48e;background:#fdf0e7;color:#d4561a;border-radius:12px;padding:5px 9px;font-size:8.5px;font-weight:700}
+.user{margin-left:auto;display:flex;align-items:center;gap:7px}.av{width:24px;height:24px;border-radius:12px;background:#2a211d;color:#fff;font-size:7.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.user b{font-size:9.5px;display:block}.user small{font-size:7.5px;color:#6b625b}
+.body{padding:10px 12px}
+.head{display:flex;align-items:flex-start;justify-content:space-between}
+h1{font-size:16px}.hint{font-size:7.5px;color:#6b625b;margin-top:3px}
+.btns{display:flex;gap:6px}.b1{border:1px solid #ddd3ca;background:#fff;border-radius:6px;padding:6px 9px;font-size:8.5px;font-weight:700}.b2{background:#e8601c;color:#fff;border-radius:6px;padding:6px 11px;font-size:8.5px;font-weight:700}
+.form{display:flex;gap:10px;margin:8px 0 7px;align-items:flex-end}
+.fld label{display:block;font-size:7px;font-weight:700;color:#6b625b;margin-bottom:3px}
+.inp{height:22px;border:1px solid #ddd3ca;border-radius:6px;background:#f1ebe5;font-size:9px;display:flex;align-items:center;padding:0 8px;color:#6b625b}
+.tag{font-size:7px;color:#8a5a3a;background:#fbeee3;border-radius:10px;padding:4px 8px}
+.card{background:#fff;border:1px solid #e9e0d7;border-radius:8px;overflow:hidden}
+.ct{font-size:8.5px;font-weight:700;padding:6px 10px;border-bottom:1px solid #eee6de;display:flex;justify-content:space-between}
+.ct span{font-weight:400;color:#6b625b;font-size:7.5px}
+table{width:100%;border-collapse:collapse;font-size:8.5px}
+th{font-weight:700;text-align:center;padding:5px 4px;border-bottom:1px solid #eee6de;font-size:8.5px}
+th:first-child,td:first-child{text-align:left;padding-left:10px;width:42%}
+th:last-child,td:last-child{text-align:right;padding-right:10px;color:#6b625b;font-weight:400;font-size:7.5px}
+td{padding:3.2px 4px;border-bottom:1px solid #f3ede7;text-align:center}
+td small{color:#8f857c;font-size:7px;margin-left:4px}
+.c{display:inline-block;width:11px;height:11px;border-radius:3px;border:1px solid #cfc5bc;vertical-align:middle}
+.c.on{background:#e8601c;border-color:#e8601c;position:relative}
+.c.on:after{content:"";position:absolute;left:3.3px;top:1px;width:3px;height:6px;border:solid #fff;border-width:0 1.5px 1.5px 0;transform:rotate(45deg)}
+.c.off{background:#ece7e2;border-color:#e2dbd4}
+.tf{display:flex;justify-content:space-between;font-size:7.5px;color:#6b625b;padding:5px 10px}
+</style></head><body>
+<aside class="side">
+ <div class="brand"><div class="logo">La Coca</div><div><b>La Coca <span>de Jacks</span></b><small>JackSoft · Almuerzos a domicilio</small></div></div>
+ <div class="nav">
+  <div class="it">⌂&nbsp; Dashboard principal</div>
+  <div class="grp"><div class="it">◇&nbsp; Seguridad y acceso <span class="car">▲</span></div>
+   <div class="sub on">Roles</div><div class="sub">Usuarios</div><div class="sub">Acceso</div></div>
+  <div class="it">Abastecimiento y compras <span class="car">▼</span></div>
+  <div class="it">Cocina y producción <span class="car">▼</span></div>
+  <div class="it">Planes y calendario <span class="car">▼</span></div>
+  <div class="it">Comercial y clientes <span class="car">▼</span></div>
+  <div class="it">Logística y entregas <span class="car">▼</span></div>
+ </div>
+ <div class="foot"><span>JackSoft v1.0</span><span>24 subprocesos</span></div>
+</aside>
+<div class="main">
+ <div class="top">
+  <div class="crumb">Inicio / Seguridad y acceso / Roles<b>Editar rol</b></div>
+  <div class="search">⌕&nbsp; Buscar módulo o acción</div>
+  <div class="pill">● Administrador general</div>
+  <div class="user"><div class="av">MJ</div><div><b>Marta Gómez</b><small>Administradora</small></div></div>
+ </div>
+ <div class="body">
+  <div class="head"><div><h1>Editar rol: Cocina</h1><div class="hint">El nombre y los permisos del rol se guardan juntos. Al marcar crear, editar o cambiar estado se marca también ver.</div></div>
+   <div class="btns"><div class="b1">↓ Reporte de permisos</div><div class="b2">Guardar rol</div></div></div>
+  <div class="form">
+   <div class="fld"><label>Nombre del rol</label><div class="inp" style="width:180px">Cocina</div></div>
+   <div class="fld"><label>Estado</label><div class="inp" style="width:80px">Activo</div></div>
+   <div class="tag">Rol del sistema: solo cambian sus permisos</div>
+  </div>
+  <div class="card">
+   <div class="ct">Permisos del rol <span>Sin pantalla aparte: los permisos se asignan aquí</span></div>
+   <table>
+    <tr><th>Módulo</th><th>Ver</th><th>Crear</th><th>Editar</th><th>Cambiar estado</th><th>Permisos</th></tr>
+    <tr><td>Insumos<small>Abastecimiento</small></td><td><i class="c on"></i></td><td><i class="c"></i></td><td><i class="c on"></i></td><td><i class="c"></i></td><td>2 de 4</td></tr>
+    <tr><td>Productos<small>Cocina</small></td><td><i class="c on"></i></td><td><i class="c"></i></td><td><i class="c"></i></td><td><i class="c"></i></td><td>1 de 4</td></tr>
+    <tr><td>Ficha técnica<small>Cocina</small></td><td><i class="c on"></i></td><td><i class="c on"></i></td><td><i class="c on"></i></td><td><i class="c"></i></td><td>3 de 4</td></tr>
+    <tr><td>Producción (orden)<small>Cocina</small></td><td><i class="c on"></i></td><td><i class="c on"></i></td><td><i class="c on"></i></td><td><i class="c on"></i></td><td>4 de 4</td></tr>
+    <tr><td>Producto terminado<small>Cocina</small></td><td><i class="c on"></i></td><td><i class="c"></i></td><td><i class="c on"></i></td><td><i class="c"></i></td><td>2 de 4</td></tr>
+    <tr><td>Menú semanal<small>Comercial</small></td><td><i class="c on"></i></td><td><i class="c"></i></td><td><i class="c on"></i></td><td><i class="c"></i></td><td>2 de 4</td></tr>
+    <tr><td>Dashboard<small>Analítica</small></td><td><i class="c on"></i></td><td><i class="c off"></i></td><td><i class="c off"></i></td><td><i class="c off"></i></td><td>solo ver</td></tr>
+    <tr><td>Roles<small>Seguridad</small></td><td><i class="c off"></i></td><td><i class="c off"></i></td><td><i class="c off"></i></td><td><i class="c off"></i></td><td>solo Administrador</td></tr>
+   </table>
+   <div class="tf"><span>Mostrando 8 de 24 módulos · El menú y los botones de cada usuario salen de estos permisos</span><span>Cambios sin guardar: 1</span></div>
+  </div>
+ </div>
+</div>
+</body></html>

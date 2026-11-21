@@ -19,7 +19,7 @@ related:
 # 💳 RN-06: Pagos, Comprobantes Bancarios y Estados de Transacción
 
 ## 📌 Declaración de la Regla
-El flujo transaccional de **La Coca de Jacks S.A.S.** se realiza mediante **transferencia bancaria directa** (Bancolombia, Nequi u otras entidades). Para evitar fraudes y pérdidas financieras, **ninguna suscripción genera entregas de almuerzo ni órdenes a cocina mientras permanezca en estado `pendiente`**.
+El flujo transaccional de **La Coca de Jacks S.A.S.** se realiza mediante **transferencia bancaria directa** a la cuenta de **Bancolombia** (único medio de pago; Nequi salió el 2026-11-20). Para evitar fraudes y pérdidas financieras, **ninguna suscripción genera entregas de almuerzo ni órdenes a cocina mientras permanezca en estado `pendiente`**.
 
 ---
 

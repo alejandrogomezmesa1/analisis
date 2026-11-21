@@ -34,7 +34,7 @@ La tabla `suscripciones` representa el contrato comercial entre el cliente y La 
 | `tipo_venta` | `Enum` | `tipo_venta` | `'nueva'`, `'renovacion'`, `'reingreso'`. |
 | `tipo_menu` | `Enum` | `tipo_menu` | `'estandar'`, `'pollo'`, `'cerdo'`. |
 | `modalidad_entrega` | `Enum` | `modalidad_entrega` | `'fija'`, `'hibrida'`. |
-| `cobro_cocas` | `DECIMAL(10,2)` | Default `0.00` | Cobro inicial de $70.000 COP si aplica ([[RN_Logistica_Cocas]]). |
+| `cobro_cocas` | `DECIMAL(10,2)` | Default `0.00` | Cobro inicial de $80.000 COP si aplica ([[RN_Logistica_Cocas]]). |
 | `recargo_menu` | `DECIMAL(10,2)` | Default `0.00` | Recargo de $10.000 COP si el menú es personalizado. |
 | `valor_total` | `DECIMAL(10,2)` | `NOT NULL` | Liquidación final pagada por el cliente. |
 | `comprobante_pago_url` | `VARCHAR(255)` | `NULLABLE` | URL del archivo de transferencia subido. |

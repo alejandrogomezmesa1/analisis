@@ -55,6 +55,12 @@ graph TD
 **No se afectan por cambios de subprocesos:** investigación (01), mapa de procesos de negocio (03), ensayos y plantilla de informe (08), mockups existentes (07; los nuevos módulos se diseñan en Figma).
 
 ## Último cambio aplicado
+**2026-11-20 (commits C-120 a C-124):** Permisos dentro de Roles (acuerdo con Claude Omar). Se aplicó en el Kanban v12, los casos de uso y el draw.io, el CU Word v9 y el manual v11 ("v2.8", con el mockup nuevo de Editar rol). El modelo, la ficha y la C4 no cambian.
+
+**2026-11-20 (commits C-112 a C-118):** cambios del equipo en Drive sobre el Kanban v9: responsables reasignados y "Registrar incidencia" → "Responder incidencia". Se aplicaron en el Kanban v11 (Story Mapping y Matriz HU), los casos de uso (script, diagramas, visor y draw.io), el CU Word v8, el manual v10 ("v2.7"), la nota del modelo (v15) y el índice; después se publicó en Drive.
+
+**2026-11-20 (commits C-100 a C-111):** grill de discrepancias con el frontend. Modelo v4.8 (cupo semanal con lista de espera, preferencia de proteína, configuraciones fijas, faltantes de insumos, web push, rutas = zonas); app móvil pendiente y todo en la web. Se actualizaron el modelo, el ER, el visor, el diccionario v3, el Kanban v10, los casos de uso, el draw.io, el CU Word v7, la C4 v7, la ficha v12, el manual v9 y las notas; los cambios del frontend van en el grill G5 (chat #035; era #034 antes de renumerarlo, ver C-119).
+
 **2026-11-18 (commits C-090 a C-099):** modelo v4.7 con los acuerdos G1 a G4. Ingreso de clientes con Google, Apple o código por WhatsApp; salen los casos de uso de eliminar (G3-Q6). Se actualizaron el modelo, el ER, el visor, el diccionario v2, el Kanban v9, los casos de uso, el draw.io, el CU Word v6, la C4 v6, la ficha v11 y el manual v8.
 
 **2026-11-17 (commits C-083 a C-089):** vuelve el subproceso Permisos, antes de Roles (bd.uml v4.6, acuerdo G2: matriz módulo × acción). Ficha v10, Tablero Kanban v8 (Story Mapping y Matriz HU), casos de uso (24 subprocesos, draw.io), C4 v5, CU Word v5, manual v7 y visor. Detalle en [[CHANGELOG]].

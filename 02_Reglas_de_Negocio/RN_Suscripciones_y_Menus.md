@@ -22,6 +22,8 @@ related:
 # 📜 RN-05: Suscripciones, Tipos de Venta y Menú con Alternativas
 
 > Actualizada el 2026-11-03 (bd.uml v3.7): ya **no existe el menú personalizado** ni su recargo. Los clientes con restricciones reciben **alternativas** definidas en el menú de cada día.
+>
+> Actualizada el 2026-11-20 (bd.uml v4.8): vuelve un recargo de **$10.000 COP por plan** (clave `recargo_preferencia_proteina`) para la **preferencia de proteína** (solo pollo o solo cerdo). El menú es el mismo; solo cambia la proteína del seco (por ejemplo, arroz con pollo pasa a arroz con cerdo, en `menu_items.proteina`). Se elige en venta nueva, renovación o reingreso.
 
 ## 📌 Declaración de la Regla
 La entidad **Suscripción** es el contrato entre el cliente y el negocio. Define el plan (Semanal, Quincenal o Mensual), la condición del cliente (**Venta Nueva, Renovación o Reingreso**) y su ciclo de estados.

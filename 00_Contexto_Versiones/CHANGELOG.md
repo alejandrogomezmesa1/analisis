@@ -17,6 +17,106 @@ Un commit por cambio, **el más reciente arriba**. Convención y plantilla en [[
 
 ---
 
+### C-124 · 2026-11-20 · docs(drive+chat) · publicación y aviso #037 a Claude Omar
+- **Ruta:** `00_Contexto_Versiones/publicar_drive.py`, `chat/mensajes/037_…`, carpeta chat de Drive
+- **Mensaje:** Se publican el Kanban v12, el CU Word v9, el manual v11 y los diagramas de casos de uso. El #037 le avisa a Omar que la documentación de Permisos dentro de Roles quedó lista y cierra su pendiente 24.
+
+### C-123 · 2026-11-20 · docs(notas) · Permisos dentro de Roles en estado, índice y cascada
+- **Ruta:** `00_Contexto_Versiones/ESTADO_ACTUAL.md`, `CASCADA_DOCUMENTAL.md`, `00_INDICE_GENERAL.md`, `10_Manual_Tecnico/Auditoria_y_Control_Calidad/Faltantes_Manual_v6.md`
+- **Mensaje:** Vigentes al día (Kanban v12, CU Word v9, manual v11) y se cierra el pendiente de Permisos.
+
+### C-122 · 2026-11-20 · fix(manual-tecnico) · v10 → v11 (archivo "v2.8")
+- **Ruta:** `10_Manual_Tecnico/Documentos_Word/v11_2026-11-20/` — `Manual_Tecnico_v2.8_Jacksoft.docx`; fuente del mockup en `07_Diseno_y_Mockups/Mockups_Fuente/mock_roles_permisos.html`
+- **Mensaje:** Mockup nuevo de Permisos: pantalla "Editar rol: Cocina" con el nombre, el estado y la matriz de permisos en el mismo formulario, sin ítem Permisos en el menú, y botón "Guardar rol" (mismo estilo y tamaño, 2048×964). Sección "Permisos (dentro de Roles)" y pie de figura reescritos. Diagrama de casos de uso de Permisos: el caso central pasa a "Permisos en Roles". Las mismas fichas que el CU Word v9. Portada "Versión 2.8" y fila nueva en el control de cambios.
+
+### C-121 · 2026-11-20 · fix(documentacion-cu) · v8 → v9 (repo 05)
+- **Ruta:** `05_Casos_de_Uso/Especificaciones/Documentacion_Word/v9_2026-11-20/`
+- **Mensaje:** Las fichas HU_246 a HU_253 se usan desde el formulario de crear o editar rol (ya no desde la opción "Permisos" del menú). La precondición pide el permiso sobre el módulo Roles. El rol Administrador no se edita, y Guardar rol guarda el nombre y los permisos juntos. HU_001 (Crear rol) y HU_004 (Editar rol) incluyen la matriz. La sección pasa a llamarse "Permisos (en Roles)". Siguen siendo 250 fichas.
+
+### C-120 · 2026-11-20 · fix(tablero-kanban + casos-uso) · Kanban v11 → v12 y diagrama de Permisos
+- **Ruta:** `06_Gestion_de_Proyecto_Scrum/Historias_de_Usuario_y_Kanban/Tablero_Kanban/v12_2026-11-20/`, `05_Casos_de_Uso/scripts/actualizar_casos_uso_canonicos.py`, diagramas PUML/SVG/PNG de PERMISOS, visor y `Diagramas_DrawIO/Casos_de_usos.drawio`
+- **Mensaje:** Acuerdo con Claude Omar (#034/#036): Permisos se gestiona dentro de Roles, sin pantalla propia. En el Story Mapping, la columna pasa a "PERMISOS (EN ROLES)", con las mismas 8 historias. En la Matriz HU, la épica 01.3 y 11 criterios dicen "en el formulario de crear y editar rol", y HU01.1_01 y HU01.1_03 incluyen la matriz. Los conteos no cambian. En los casos de uso, el caso central pasa de "Gestión de permisos" a "Permisos en Roles" (también en el draw.io).
+
+### C-119 · 2026-11-20 · docs(chat) · G5 pasa a #035; reporte #036 a Claude Omar
+- **Ruta:** `chat/` (#034 de Claude Omar, #035, #036, `adjuntos/035_grill-G5.md`, `adjuntos/036_ajustes-20nov-incidencias-y-kanban.md`) y la carpeta chat de Drive
+- **Mensaje:** El #034 de Claude Omar (19-nov: Permisos se gestiona dentro de Roles) estaba en Drive y no en el repo, y el grill G5 había salido local con el mismo número sin llegar a Drive. Se trajo su #034, el G5 pasó a #035 (pendiente 25) y su punto 1 dice ahora que Alejandro acepta Permisos dentro de Roles. El #036 le informa a Omar los ajustes C-112 a C-118 (Responder incidencia, responsables, versiones vigentes) y le pregunta Q7 a Q9 (dónde va "Responder", estados de incidencia y fecha de respuesta). Chat sincronizado con Drive. **Pendiente:** ajustar la documentación de Permisos "en Roles" (Kanban, casos de uso, draw.io, CU Word, mockup del manual).
+
+### C-118 · 2026-11-20 · docs(drive) · se publican en Drive los vigentes del 20-nov
+- **Ruta:** `00_Contexto_Versiones/publicar_drive.py` → Drive › JackSoft › JackSoft › Modelado(5 trimestre)
+- **Mensaje:** Antes de publicar se revisó `01_VIGENTE`: el equipo había editado en Drive el `Tablero Kanban 18_11 v9.xlsx` el 19-nov (responsables y "Responder incidencia"). Esos cambios se pasaron al repo (C-112 a C-117) y luego se publicaron la ficha v12, el Kanban v11, el CU Word v8, la C4 v7, el modelo v15, el ER v12, el manual v10 y el diccionario v3. La copia editada de la v9 sale de `01_VIGENTE` (Drive la guarda en la papelera); su contenido quedó en la v11 y el archivo original en `09_Backups_y_Archivos_Zips/Drive_GoogleSheets/Tablero Kanban 18_11 v9 (editado en Drive 2026-11-19).xlsx`.
+
+### C-117 · 2026-11-20 · docs(notas) · índice general al día
+- **Ruta:** `00_INDICE_GENERAL.md`
+- **Mensaje:** Las líneas "⭐ vigente" del modelo, el ER, el CU Word, la C4, la ficha, el Kanban y el manual estaban atrasadas (algunas seguían en las versiones del 3-nov). Ahora apuntan a las vigentes de [[ESTADO_ACTUAL]].
+
+### C-116 · 2026-11-20 · fix(modelo-relacional) · v14 → v15 (sigue siendo DBML v4.8)
+- **Ruta:** `04_Modelado_DB/Modelo_Relacional/v15_2026-11-20/` — `bd.uml`, `Cambios_v4.8.md`, `Visor_Interactivo/`
+- **Mensaje:** Sin cambios de estructura. La nota de `incidencias` dice "Responder incidencia" en lugar de "Registrar incidencia" (la reportan el cliente y el domiciliario). Se conserva la etiqueta v4.8 para no mover las referencias del diccionario, la C4 y el manual; el ER v12 sigue siendo válido (no muestra notas). Visor regenerado.
+
+### C-115 · 2026-11-20 · fix(manual-tecnico) · v9 → v10 (archivo "v2.7")
+- **Ruta:** `10_Manual_Tecnico/Documentos_Word/v10_2026-11-20/` — `Manual_Tecnico_v2.7_Jacksoft.docx`
+- **Mensaje:** Ficha HU_218 reescrita como "Responder incidencia" (objetivo, precondiciones, flujo, excepciones; incluye Ver detalle de incidencia). En el diagrama de casos de uso de Incidencias, "Crear incidencias" pasa a "Responder incidencia" (se corrigió el texto en la imagen, igual al draw.io). Descripción del módulo: consultar, clasificar, responder y resolver; reportan el cliente y el domiciliario. Portada "Versión 2.7" y fila nueva en el control de cambios.
+
+### C-114 · 2026-11-20 · fix(documentacion-cu) · v7 → v8 (repo 05)
+- **Ruta:** `05_Casos_de_Uso/Especificaciones/Documentacion_Word/v8_2026-11-20/`
+- **Mensaje:** HU_218 "Registrar incidencia" → "Responder incidencia", con la ficha reescrita (el administrador responde la incidencia que reportó un cliente o un domiciliario; se guarda quién respondió y se notifica por web push). Siguen siendo 250 fichas.
+
+### C-113 · 2026-11-20 · fix(casos-uso) · Incidencias: Responder incidencia (repo 05)
+- **Ruta:** `05_Casos_de_Uso/scripts/actualizar_casos_uso_canonicos.py`, `Diagramas_PUML/INCIDENCIAS.puml`, `Diagramas_SVG/INCIDENCIAS.svg`, `Diagramas_PNG/INCIDENCIAS.png`, MD, visor y `Diagramas_DrawIO/Casos_de_usos.drawio`
+- **Mensaje:** Lista canónica igual al Story Mapping v11. "Responder incidencia" queda como extensión de Listar incidencias. En el draw.io, la elipse "Crear incidencias" pasa a "Responder incidencia". PNG capturado del SVG a 1050×750.
+
+### C-112 · 2026-11-20 · fix(tablero-kanban) · v10 → v11
+- **Ruta:** `06_Gestion_de_Proyecto_Scrum/Historias_de_Usuario_y_Kanban/Tablero_Kanban/v11_2026-11-20/` — `Tablero Kanban 20_11 v11.xlsx`
+- **Mensaje:** Se pasan al repo los cambios que el equipo hizo en Drive el 19-nov sobre la v9: responsables reasignados en 17 de los 24 subprocesos (fila 21 del Story Mapping) y "Registrar incidencia" → "Responder incidencia". En la Matriz HU, HU07.3_06 se reescribe como responder incidencia (CA07.3_06_01 y _02) y CA07.3_03_02 pide una respuesta antes de marcar Resuelta. Mismos conteos (159 historias, 515 puntos, 190 HU, 500 criterios). Editado sobre el XML para conservar los gráficos; recalcula al abrir en Excel.
+
+### C-111 · 2026-11-20 · docs(chat) · grill G5 a Claude Omar: cambios del frontend
+- **Ruta:** `chat/` (#034 y `adjuntos/034_grill-G5.md`)
+- **Mensaje:** Lista de los cambios que el frontend debe hacer tras el grill de discrepancias del 20-nov, y aviso del modelo v4.8 (reemplazar su `docs/bd.uml` v3.6).
+
+### C-110 · 2026-11-20 · docs(notas) · reglas, índice y DB al día con la v4.8
+- **Ruta:** `00_INDICE_GENERAL.md`, `02_Reglas_de_Negocio/` (RN_Limite_Suscripcion_Semanal, RN_Suscripciones_y_Menus, RN_Domiciliarios_y_Rutas, RN_Pagos_y_Comprobantes, MOC, QA), `03_Procesos/Documentos/`, `01_Investigacion_y_Analisis/Documentos/` (requisitos), `04_Modelado_DB/Diccionario_y_Tablas/` (Esquema, Configuraciones, Suscripciones, MOC)
+- **Mensaje:** Kit de cocas $70.000 → $80.000 donde quedaba. Solo Bancolombia (sale Nequi). Cupo semanal con lista de espera, preferencia de proteína (+$10.000 por plan), rutas = zonas y configuraciones fijas. El índice y el MOC del modelo apuntan a bd.uml v4.8. El "157 vs 192" no se cambia: son historias del Story Mapping frente a filas de la matriz.
+
+### C-109 · 2026-11-20 · fix(manual-tecnico) · v8 → v9 (archivo "v2.6")
+- **Ruta:** `10_Manual_Tecnico/Documentos_Word/v9_2026-11-20/` — `Manual_Tecnico_v2.6_Jacksoft.docx`
+- **Mensaje:** Modelo v4.8 y diccionario de 43 tablas. Los 6 diagramas de casos de uso que cambiaron se redibujaron desde el draw.io (Configuraciones, Producción, Producto terminado, Suscripciones, Menú y Dashboard); en el lugar de Producción había por error un diagrama viejo de ficha técnica. C4 v7 (contexto, contenedores, componentes y clases). Fichas: salen HU_019, 021, 024, 025 y 026; se reescriben 10 y entran HU_256 a HU_259 (234 fichas). Textos de los módulos al día. Portada "Versión 2.6" y fila nueva en el control de cambios.
+
+### C-108 · 2026-11-20 · fix(diccionario-datos) · v2 → v3 (v4.8)
+- **Ruta:** `04_Modelado_DB/Diccionario_y_Tablas/Documento_Word/v3_2026-11-20/` — `Diccionario_de_Datos_JackSoft_v4.8.docx`
+- **Mensaje:** Tablas nuevas faltantes_insumos y dispositivos_push (43 tablas). Campos clientes.preferencia_proteina y menu_items.proteina; estado en_espera; valor_plan con el recargo. Descripciones de configuraciones (fijas), ordenes_produccion (generada desde el menú, anulada), producto_terminado y rutas (= zonas). Relaciones nuevas en usuarios, insumos y ordenes_produccion.
+
+### C-107 · 2026-11-20 · fix(arquitectura-c4) · v6 → v7 (repo 05)
+- **Ruta:** `05_Casos_de_Uso/Arquitectura_C4/v7_2026-11-20/`
+- **Mensaje:** App móvil pendiente: el domiciliario y el cliente usan la web (GPS desde el navegador). Sistema externo nuevo: Servicios Web Push (VAPID); Firebase queda para la app. BD bd.uml v4.8 con 43 tablas. N3: producción generada desde el menú con faltantes, cupo semanal y lista de espera, proteína, rutas = zonas, dashboard con proyección y costo por zona. N4: 43 clases (FaltanteInsumo, DispositivoPush). PNG redibujados con Graphviz.
+
+### C-106 · 2026-11-20 · fix(documentacion-cu) · v6 → v7 (repo 05)
+- **Ruta:** `05_Casos_de_Uso/Especificaciones/Documentacion_Word/v7_2026-11-20/`
+- **Mensaje:** Salen 5 fichas de Configuraciones (HU_019, 021, 024, 025 y 026). Se reescriben HU_081 (orden desde el menú publicado), 084, 102, 165, 183 (cupo semanal), 197 (rutas desde las zonas), 200, 241, 242 y 243. Entran HU_256 Gestionar lista de espera por cupo, HU_257 Elegir preferencia de proteína, HU_258 Definir proteína alterna del seco y HU_259 Reportar faltantes de insumos. Quedan 250 fichas.
+
+### C-105 · 2026-11-20 · feat(casos-uso) · conciliación con el frontend (repo 05)
+- **Ruta:** `05_Casos_de_Uso/scripts/actualizar_casos_uso_canonicos.py`, diagramas PUML/SVG/PNG, MD, visor y `Diagramas_DrawIO/Casos_de_usos.drawio`
+- **Mensaje:** Lista canónica igual al Story Mapping v10. Configuraciones queda con Listar, Editar y Activar/desactivar. Producción suma Reportar faltantes y Reporte por período; Producto terminado se registra y corrige desde la orden; Suscripciones suma lista de espera y preferencia de proteína; Menú suma proteína alterna; Dashboard suma proyección y costo-beneficio por zona. En el draw.io salen 5 elipses de configuración con 7 conectores y entran 7 casos "Extends"; los 6 carriles se revisaron a ojo.
+
+### C-104 · 2026-11-20 · fix(tablero-kanban) · v9 → v10
+- **Ruta:** `06_Gestion_de_Proyecto_Scrum/Historias_de_Usuario_y_Kanban/Tablero_Kanban/v10_2026-11-20/` — `Tablero Kanban 20_11 v10.xlsx`
+- **Mensaje:** Matriz HU: salen HU01.2_01, 03, 06, 07 y 08; se reescriben las HU de producción, producto terminado, cupo, rutas y dashboard (cocina "desde el panel, también en el celular"); entran HU06.2_15 (lista de espera), HU06.2_16 (preferencia de proteína) y HU06.3_10 (proteína alterna del seco). Quedan 190 HU y 500 criterios. Story Mapping: 159 historias y 515 puntos. Recalcula al abrir en Excel.
+
+### C-103 · 2026-11-20 · fix(diagrama-er) · v11 → v12
+- **Ruta:** `04_Modelado_DB/Diagramas/v12_2026-11-20/` — `LaCocaDiagramDB.svg`
+- **Mensaje:** Diagrama ER de bd.uml v4.8 (43 tablas, 59 relaciones), generado por `construir_visor.py`. Visor v4.8 regenerado.
+
+### C-102 · 2026-11-20 · fix(modelo-relacional) · v13 → v14 (DBML v4.8)
+- **Ruta:** `04_Modelado_DB/Modelo_Relacional/v14_2026-11-20/` — `bd.uml`, `Cambios_v4.8.md`, `Visor_Interactivo/`
+- **Mensaje:** Decisiones del grill de discrepancias con el frontend: cupo semanal de ventas nuevas con estado en_espera, preferencia de proteína (enum, clientes y menu_items, recargo de $10.000), configuraciones fijas con claves nuevas (cupo, recargo, costo diario del domiciliario), tablas faltantes_insumos y dispositivos_push, notas de orden anulada, producto terminado, rutas = zonas y dashboard. 43 tablas y 59 relaciones, ninguna con más de 12 columnas.
+
+### C-101 · 2026-11-20 · fix(ficha-proyecto) · v11 → v12
+- **Ruta:** `06_Gestion_de_Proyecto_Scrum/Fichas_Tecnicas/v12_2026-11-20/` — `Ficha_Jacksoft_CF_v12.docx`
+- **Mensaje:** La app móvil queda pendiente y todo lo suyo también se ofrece en la web. Solo Bancolombia. Cupo semanal con lista de espera y preferencia de proteína. Configuraciones fijas (sin historial). Órdenes generadas desde el menú, sin personal asignado, faltantes y reportes por período. Rutas = zonas, dos juegos de cocas, dashboard con demanda frente al cupo y costo logístico. Fila nueva en el control de cambios.
+
+### C-100 · 2026-11-20 · docs(grill) · discrepancias documentación ↔ frontend
+- **Ruta:** (decisiones en cuestionarios interactivos con Alejandro)
+- **Mensaje:** Revisión de la documentación frente al frontend de Omar y grill para corregir las discrepancias: móvil pendiente (todo en la web), cupo semanal con lista de espera, proteína, configuraciones fijas, producción desde el menú, rutas = zonas, web push, GPS desde el navegador, novedades con foto y faltantes. Prioridad PO > modelo > Ficha. Lo del frontend va al chat (grill G5).
+
 ### C-099 · 2026-11-18 · fix(manual-tecnico) · v7 → v8 (archivo "v2.5")
 - **Ruta:** `10_Manual_Tecnico/Documentos_Word/v8_2026-11-18/` — `Manual_Tecnico_v2.5_Jacksoft.docx`
 - **Mensaje:** Modelo v4.7 en todo el manual. El diccionario de datos queda con 41 tablas (identidades_externas, codigos_acceso, movimientos_insumos y los campos nuevos). Mockup de Permisos (antes estaba pendiente). Los 12 diagramas de casos de uso que cambiaron se redibujaron desde el draw.io: sin "Eliminar", y Acceso con Google/Apple y WhatsApp. C4 v6. Fichas: salen las 4 de eliminar y entran HU_254 y HU_255 (235 fichas). Portada "Versión 2.5" y fila nueva en el control de cambios.

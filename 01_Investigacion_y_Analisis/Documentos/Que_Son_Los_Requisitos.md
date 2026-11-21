@@ -28,7 +28,7 @@ graph TD
     REQ --> RNF["Requisitos No Funcionales (RNF)\n'Cómo se comporta el sistema'"]
 
     RF --> RF1["Validar comprobante de pago"]
-    RF --> RF2["Calcular cobro de cocas ($70.000)"]
+    RF --> RF2["Calcular cobro de cocas ($80.000)"]
     RF --> RF3["Visualizar ubicación GPS en tiempo real"]
 
     RNF --> RNF1["Seguridad (RBAC y JWT)"]

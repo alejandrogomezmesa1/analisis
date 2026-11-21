@@ -71,3 +71,6 @@ El domiciliario es un usuario con rol Domiciliario (no existe módulo de emplead
 
 ## 🔄 Ajuste con el frontend 2026-11-03 (bd.uml v3.7)
 Cada zona tiene un **domiciliario fijo** (`zonas_cobertura.domiciliario_id`); las rutas del día lo toman por defecto y se pueden reasignar ese día. Las entregas usan los estados programada, en_ruta, entregada, suspendida e incidencia, y el cliente puede calificar el almuerzo (1 a 5).
+
+## Rutas = zonas (2026-11-20, bd.uml v4.8)
+Una ruta es una **zona de cobertura activa + su domiciliario**. Las rutas del día se **generan solas**, una por zona; no se crean a mano y el administrador solo cambia el domiciliario. El domiciliario envía su GPS desde el navegador (la app móvil queda pendiente), registra las cocas recogidas y consulta su historial de entregas; el administrador y el cliente ven la ubicación. El dashboard calcula el costo-beneficio por zona con el costo diario del domiciliario (`costo_diario_domiciliario`) repartido entre sus zonas según las entregas.

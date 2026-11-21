@@ -24,7 +24,7 @@ El análisis exhaustivo y la especificación detallada del dominio operativo con
 
 ### 1. Modelado Fiel de las Reglas de Negocio
 Un sistema de información no crea reglas por sí mismo; automatiza la lógica del negocio existente. Sin un conocimiento profundo, es imposible programar comportamientos complejos como:
-* El cobro inicial único de **$70.000 COP** por las cocas en la primera suscripción ([[RN_Logistica_Cocas]]).
+* El cobro inicial único de **$80.000 COP** por las cocas en la primera suscripción ([[RN_Logistica_Cocas]]).
 * El descuento automático de días festivos sin postergar el vencimiento del plan ([[RN_Festivos_y_Agenda]]).
 * La pérdida asumida por el cliente en caso de suspensiones voluntarias por viaje ([[RN_Suspensiones_Voluntarias]]).
 

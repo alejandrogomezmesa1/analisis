@@ -43,7 +43,7 @@ flowchart TD
     REG --> TICKET["Notificación en Backoffice del Administrador"]
     TICKET --> SOL{"Acción de Solución"}
 
-    SOL --> S1["Cobro de Reposición ($70.000) o Multa"]
+    SOL --> S1["Cobro de Reposición ($80.000) o Multa"]
     SOL --> S2["Reagendamiento / Contacto Telefónico"]
     SOL --> S3["Reposición de Almuerzo por Cocina"]
 
